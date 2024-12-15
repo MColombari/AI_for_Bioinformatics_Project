@@ -1,0 +1,32 @@
+GeneExpression:
+-Experimental Strategy: RNA-Seq
+-Data Category: transcriptome profiling
+-Data Type: Gene Expression Quantification
+-Tumor Descriptor: primary
+-Spcimen Type: solid tissue
+
+OverallSurvival:
+-Data Category: clinical
+-Data Type: clinical supplement
+-Data Format: BCR XML
+
+Methylation:
+-Experimental Strategy: Methylation Array
+-Data Type: Methylation Beta Value
+-Platform: illumina human methylation 27
+-Tumor Descriptor: primary
+
+CopyNumber:
+-Data Category: copy number variation
+-Data Type: Gene Level Copy Number
+-Platform: affymetrix snp 6.0
+-Tumor Descriptor: primary
+-Specimen Type: solid tissue
+
+
+Results:
+- CopyNumber.json: 26
+- GeneExpression.json: 21
+- Methylation.json: 569
+- OverallSurvival.json: 580
+->	Total intersection: 21

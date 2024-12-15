@@ -1,0 +1,419 @@
+[{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "19427350-619b-4b9c-a3ba-37f667bb2843", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "29d7b853-8865-4ac6-8640-701867c4ef6b.rna_seq.augmented_star_gene_counts.tsv", 
+  "file_id": "ff041649-5670-46ae-8679-1e14405fd1ce", 
+  "data_type": "Gene Expression Quantification", 
+  "data_category": "Transcriptome Profiling", 
+  "experimental_strategy": "RNA-Seq", 
+  "platform": "Illumina", 
+  "file_size": 4260438
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "e9483296-cb91-497a-b955-39a3c3289dac", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "87ba5532-0958-4480-9f81-c567430216f2.rna_seq.augmented_star_gene_counts.tsv", 
+  "file_id": "d5ab162f-87f9-4ea1-b5ba-ff448c21455c", 
+  "data_type": "Gene Expression Quantification", 
+  "data_category": "Transcriptome Profiling", 
+  "experimental_strategy": "RNA-Seq", 
+  "platform": "Illumina", 
+  "file_size": 4271838
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "1858b58f-fdf4-413c-9c29-96ae85b88a74", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "8e1e205e-342c-4434-a78d-fc206a85003d.rna_seq.augmented_star_gene_counts.tsv", 
+  "file_id": "8688ab2e-f57f-4dbf-ab4d-ea914814132e", 
+  "data_type": "Gene Expression Quantification", 
+  "data_category": "Transcriptome Profiling", 
+  "experimental_strategy": "RNA-Seq", 
+  "platform": "Illumina", 
+  "file_size": 4262914
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "42b3dfa3-152f-4ab7-ac9f-988c7f473bea", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "f691c28c-5b0d-4b28-8b05-030dd07a2b13.rna_seq.augmented_star_gene_counts.tsv", 
+  "file_id": "8df3d4bd-1ce7-4868-8f3e-e7582022ec6c", 
+  "data_type": "Gene Expression Quantification", 
+  "data_category": "Transcriptome Profiling", 
+  "annotations": [
+    {
+      "annotation_id": "a5da7b29-8821-5178-a3f5-4f7c5716ed63"
+    }, 
+    {
+      "annotation_id": "ab9af6b8-ce6d-5843-b620-aed63ee35cf0"
+    }
+  ], 
+  "experimental_strategy": "RNA-Seq", 
+  "platform": "Illumina", 
+  "file_size": 4239100
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "cd6e5d3d-1c86-40dd-9cb3-b2e2075dec56", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "fb2b534e-f659-4f1f-8f03-7be4818b3547.rna_seq.augmented_star_gene_counts.tsv", 
+  "file_id": "8c2b1628-dc9f-4ed3-a77e-87250870536f", 
+  "data_type": "Gene Expression Quantification", 
+  "data_category": "Transcriptome Profiling", 
+  "experimental_strategy": "RNA-Seq", 
+  "platform": "Illumina", 
+  "file_size": 4260145
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "d7b3156d-672a-4a55-868d-9ca6a09fcb0f", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "a235d4c4-13bf-4267-82b5-1a4c82d202b3.rna_seq.augmented_star_gene_counts.tsv", 
+  "file_id": "d4f9bcf0-56c7-4691-9f2b-e416870b5ddb", 
+  "data_type": "Gene Expression Quantification", 
+  "data_category": "Transcriptome Profiling", 
+  "experimental_strategy": "RNA-Seq", 
+  "platform": "Illumina", 
+  "file_size": 4256262
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "b120b701-c194-43d7-a491-3206fac38ec1", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "9ee6252a-3269-484d-9f09-9ea169ff9665.rna_seq.augmented_star_gene_counts.tsv", 
+  "file_id": "cd583b6f-8424-42d0-89a8-33f303d1b1af", 
+  "data_type": "Gene Expression Quantification", 
+  "data_category": "Transcriptome Profiling", 
+  "experimental_strategy": "RNA-Seq", 
+  "platform": "Illumina", 
+  "file_size": 4258510
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "0c1a2e7d-e7e4-481e-a012-ef214c444497", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "d779f8e6-b653-4d7e-bfa4-729b9caf329d.rna_seq.augmented_star_gene_counts.tsv", 
+  "file_id": "97f76d09-2471-43b9-99a4-2ef58caca5c9", 
+  "data_type": "Gene Expression Quantification", 
+  "data_category": "Transcriptome Profiling", 
+  "annotations": [
+    {
+      "annotation_id": "6b6d6b5c-61e4-5ce7-8597-fc3645663814"
+    }, 
+    {
+      "annotation_id": "7988dfcb-46e7-5fef-99a2-9fc609b1dc0d"
+    }
+  ], 
+  "experimental_strategy": "RNA-Seq", 
+  "platform": "Illumina", 
+  "file_size": 4223478
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "5d7027f5-60a0-47ab-a79d-667c9acc0e54", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "15083e68-c064-4f08-9cd8-61a25547f754.rna_seq.augmented_star_gene_counts.tsv", 
+  "file_id": "d6573147-752d-4b80-9e09-f10face6864f", 
+  "data_type": "Gene Expression Quantification", 
+  "data_category": "Transcriptome Profiling", 
+  "experimental_strategy": "RNA-Seq", 
+  "platform": "Illumina", 
+  "file_size": 4248480
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "5d36676e-4140-44b5-aa0e-b2af092b7dc0", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "9ae61124-172b-4d16-aadc-bc7c096002cf.rna_seq.augmented_star_gene_counts.tsv", 
+  "file_id": "760a21b6-9a22-487e-9a35-569c0065c1b4", 
+  "data_type": "Gene Expression Quantification", 
+  "data_category": "Transcriptome Profiling", 
+  "experimental_strategy": "RNA-Seq", 
+  "platform": "Illumina", 
+  "file_size": 4259535
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "cf1e86ec-4bcb-403c-831b-d67bddef14eb", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "d90d2b4f-8865-440d-a8b7-e0b7c947e095.rna_seq.augmented_star_gene_counts.tsv", 
+  "file_id": "0b52237e-f467-420a-b7b2-952c0004efc9", 
+  "data_type": "Gene Expression Quantification", 
+  "data_category": "Transcriptome Profiling", 
+  "annotations": [
+    {
+      "annotation_id": "1bc99a0a-74e2-5271-b9bb-8bc1565394f7"
+    }, 
+    {
+      "annotation_id": "40e562d2-f3a1-5229-80ce-581c86913730"
+    }
+  ], 
+  "experimental_strategy": "RNA-Seq", 
+  "platform": "Illumina", 
+  "file_size": 4252131
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "a3898640-0d85-441d-a000-b5b8ff857399", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "c3955ac8-3d67-448a-9cdd-683afd745ffa.rna_seq.augmented_star_gene_counts.tsv", 
+  "file_id": "6543646a-1b8c-439a-bc3a-76c5d9578f00", 
+  "data_type": "Gene Expression Quantification", 
+  "data_category": "Transcriptome Profiling", 
+  "annotations": [
+    {
+      "annotation_id": "203b2606-4653-58f2-89b7-4a151903ac38"
+    }, 
+    {
+      "annotation_id": "2bc252c1-7a3a-5788-8884-9a36d36b1a34"
+    }
+  ], 
+  "experimental_strategy": "RNA-Seq", 
+  "platform": "Illumina", 
+  "file_size": 4263469
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "08c64000-d320-4e4d-974b-da503d48890c", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "9502e51f-a360-4ca0-92fa-70f78ecf9b04.rna_seq.augmented_star_gene_counts.tsv", 
+  "file_id": "87e23867-ff88-4f4f-934c-a9c5904a78c2", 
+  "data_type": "Gene Expression Quantification", 
+  "data_category": "Transcriptome Profiling", 
+  "experimental_strategy": "RNA-Seq", 
+  "platform": "Illumina", 
+  "file_size": 4252994
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "499a9b57-ee1a-4012-bbab-c6ad955b5e0a", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "53eaeb7f-a3c6-46df-b1ff-fb40cb84912e.rna_seq.augmented_star_gene_counts.tsv", 
+  "file_id": "a9b08fb3-ec50-4c33-b2c7-828f4487e7af", 
+  "data_type": "Gene Expression Quantification", 
+  "data_category": "Transcriptome Profiling", 
+  "experimental_strategy": "RNA-Seq", 
+  "platform": "Illumina", 
+  "file_size": 4242729
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "4c18d9cf-4af4-4a86-8b1c-f78795fbbd7e", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "4d8ce68c-cba9-44e2-be95-477c938fdd73.rna_seq.augmented_star_gene_counts.tsv", 
+  "file_id": "7311e116-4104-4637-8c46-6689c6d55cfb", 
+  "data_type": "Gene Expression Quantification", 
+  "data_category": "Transcriptome Profiling", 
+  "experimental_strategy": "RNA-Seq", 
+  "platform": "Illumina", 
+  "file_size": 4255201
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "ceb19678-b453-4529-b6cb-d02f9cb101b4", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "a08f5098-e161-40dd-b807-216cf71ebcce.rna_seq.augmented_star_gene_counts.tsv", 
+  "file_id": "5e173afc-9eaa-49a3-9803-ced9d1e6617d", 
+  "data_type": "Gene Expression Quantification", 
+  "data_category": "Transcriptome Profiling", 
+  "annotations": [
+    {
+      "annotation_id": "8f400c47-069f-5c0b-8fb7-d4506de5c883"
+    }, 
+    {
+      "annotation_id": "fd35613f-b23c-5b16-a2c5-43d0fa4526d4"
+    }
+  ], 
+  "experimental_strategy": "RNA-Seq", 
+  "platform": "Illumina", 
+  "file_size": 4254848
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "52386f66-2877-4c75-894e-5c1dc03e6ef4", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "80422946-6ccc-40bd-bf90-e2b9a159a826.rna_seq.augmented_star_gene_counts.tsv", 
+  "file_id": "d4295353-5ebb-49d5-afad-8be7a8a43f35", 
+  "data_type": "Gene Expression Quantification", 
+  "data_category": "Transcriptome Profiling", 
+  "experimental_strategy": "RNA-Seq", 
+  "platform": "Illumina", 
+  "file_size": 4244699
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "3b81ec7c-0934-4649-9231-9919dd26dd15", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "2e676476-647d-4f26-ab87-d4892fe59dd2.rna_seq.augmented_star_gene_counts.tsv", 
+  "file_id": "0e125e0e-56d1-4868-9f8d-2195c853f787", 
+  "data_type": "Gene Expression Quantification", 
+  "data_category": "Transcriptome Profiling", 
+  "experimental_strategy": "RNA-Seq", 
+  "platform": "Illumina", 
+  "file_size": 4253950
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "62379be5-13f0-474b-94d3-6f944ec4ee96", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "5d9a6911-c16e-4b16-8d56-2b99a9fbce3f.rna_seq.augmented_star_gene_counts.tsv", 
+  "file_id": "7eb8afbf-c5e7-48e6-87ec-a9fe92e48cad", 
+  "data_type": "Gene Expression Quantification", 
+  "data_category": "Transcriptome Profiling", 
+  "experimental_strategy": "RNA-Seq", 
+  "platform": "Illumina", 
+  "file_size": 4237487
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "65435f50-a35d-49e3-a36e-b95d9e274ca0", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "32c81ba3-dca1-4bbd-9e03-5899dc6e3b0b.rna_seq.augmented_star_gene_counts.tsv", 
+  "file_id": "d148916b-1a93-4d56-bfe5-dcb5c84be1c1", 
+  "data_type": "Gene Expression Quantification", 
+  "data_category": "Transcriptome Profiling", 
+  "experimental_strategy": "RNA-Seq", 
+  "platform": "Illumina", 
+  "file_size": 4258852
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "d77ef9cf-f8e6-4ee9-8d4f-1106885f6b06", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "05a9121e-555a-49ee-ad73-4d0bf8771a82.rna_seq.augmented_star_gene_counts.tsv", 
+  "file_id": "d9670c23-2601-4228-b069-638ae4d7e067", 
+  "data_type": "Gene Expression Quantification", 
+  "data_category": "Transcriptome Profiling", 
+  "experimental_strategy": "RNA-Seq", 
+  "platform": "Illumina", 
+  "file_size": 4253964
+}]

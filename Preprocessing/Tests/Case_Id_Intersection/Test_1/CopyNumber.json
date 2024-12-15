@@ -1,0 +1,1464 @@
+[{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "19427350-619b-4b9c-a3ba-37f667bb2843", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.3d33275f-9562-43c1-8f6b-1a5ace3895e8.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "16c8a411-9e2d-48fe-9f4e-0b88bda470c1", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3430175
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "19427350-619b-4b9c-a3ba-37f667bb2843", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.3d33275f-9562-43c1-8f6b-1a5ace3895e8.gene_level_copy_number.v36.tsv", 
+  "file_id": "3556c8f2-a63c-4ddb-be1b-cbde42a35a98", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3451964
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "82e96c6c-a88c-4e52-be56-7f24f6c7b835", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.5876f156-ec7c-496e-9b1d-97d3824a239f.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "6bb8ebc4-9213-4dc7-8b81-3ecbd2764851", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3445499
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "8e7f1c74-7cb3-43c0-b07c-bf69b780053f", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.eeb37d58-b09e-4a3b-a134-1f553c22127a.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "80ab2380-be70-4864-a420-d372eaf4807b", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3432329
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "8e7f1c74-7cb3-43c0-b07c-bf69b780053f", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.eeb37d58-b09e-4a3b-a134-1f553c22127a.gene_level_copy_number.v36.tsv", 
+  "file_id": "d5f82e05-6718-463d-8c5e-41782e2dc4d0", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446810
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "8e7f1c74-7cb3-43c0-b07c-bf69b780053f", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.eeb37d58-b09e-4a3b-a134-1f553c22127a.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "eb9a97f5-3812-4c4e-9056-c88efb3d8ca9", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3445490
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "e9483296-cb91-497a-b955-39a3c3289dac", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.a059d969-2eb2-44d5-93cd-ed88f5b61719.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "485fb295-4d7f-4a7c-a8fd-e77ad65877fe", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3431750
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "a3898640-0d85-441d-a000-b5b8ff857399", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.f5e1743a-9f6f-4dd5-9ff4-d87e87417699.gene_level_copy_number.v36.tsv", 
+  "file_id": "f83c147f-2b33-4d71-a7e8-66804917e7a7", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446828
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "a3898640-0d85-441d-a000-b5b8ff857399", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.f5e1743a-9f6f-4dd5-9ff4-d87e87417699.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "795e87c6-3776-4bc4-9043-10390e5a09b7", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3433025
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "a3898640-0d85-441d-a000-b5b8ff857399", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.f5e1743a-9f6f-4dd5-9ff4-d87e87417699.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "ab4f25bc-ee99-4c2d-b69c-f82239c2cf67", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3445499
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "cd6e5d3d-1c86-40dd-9cb3-b2e2075dec56", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.66ce7bbf-1056-41e4-afb5-2bd052df849e.gene_level_copy_number.v36.tsv", 
+  "file_id": "06b471a3-af74-4b17-a61f-52afc9dbb4db", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446592
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "1858b58f-fdf4-413c-9c29-96ae85b88a74", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.308919de-3238-4f7a-a68c-97bcae3252a9.gene_level_copy_number.v36.tsv", 
+  "file_id": "2fdfdac3-aba1-4466-94b4-183e8573063a", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446846
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "08c64000-d320-4e4d-974b-da503d48890c", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.70af5fdb-fd28-4671-9532-38438ac83d75.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "fa53ca49-0b5f-4c72-98f4-63b08adfbc3e", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3445475
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "1858b58f-fdf4-413c-9c29-96ae85b88a74", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.308919de-3238-4f7a-a68c-97bcae3252a9.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "3d5ba3a1-5370-40ff-92b1-c5eea8e1c376", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3445457
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "b120b701-c194-43d7-a491-3206fac38ec1", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.7fb66d68-7abc-4303-926a-8e6058705623.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "ebf09428-e9e9-4497-99f7-5a34f3ce7da6", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3445496
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "b120b701-c194-43d7-a491-3206fac38ec1", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.7fb66d68-7abc-4303-926a-8e6058705623.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "5a03709c-9953-4130-81bc-5c2dea43a406", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3432098
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "ceb19678-b453-4529-b6cb-d02f9cb101b4", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.20ca8b0a-b561-405f-89d4-5f12f40a5455.gene_level_copy_number.v36.tsv", 
+  "file_id": "f16041ca-62d8-445d-b834-e684cfc843e0", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446741
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "52386f66-2877-4c75-894e-5c1dc03e6ef4", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.ebfb5ea7-457c-49f1-830b-d2ec9e10d930.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "31c48203-572c-46eb-a947-958d89d36c09", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3432380
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "65435f50-a35d-49e3-a36e-b95d9e274ca0", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.644ce6b1-1823-4eb8-bc5d-029b3f51fe2f.gene_level_copy_number.v36.tsv", 
+  "file_id": "0733eb60-d499-4d02-8d3d-761af8c272d3", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446905
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "65435f50-a35d-49e3-a36e-b95d9e274ca0", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.644ce6b1-1823-4eb8-bc5d-029b3f51fe2f.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "713bd25c-28c8-453e-a48f-aa9826ed0233", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3431786
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "d77ef9cf-f8e6-4ee9-8d4f-1106885f6b06", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.eaf70996-ac08-4e56-8747-06a8af702dd5.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "0086a65a-3d6c-4c30-848b-9ed52eeb77e4", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3445712
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "82e96c6c-a88c-4e52-be56-7f24f6c7b835", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.5876f156-ec7c-496e-9b1d-97d3824a239f.gene_level_copy_number.v36.tsv", 
+  "file_id": "70f8849d-453b-47a7-8073-9bd17fbb10b3", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446846
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "82e96c6c-a88c-4e52-be56-7f24f6c7b835", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.d33a61ad-a3ee-486d-bfbd-22f812221a32.gene_level_copy_number.v36.tsv", 
+  "file_id": "0a694180-3706-4472-a390-a43a07c37cde", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446817
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "82e96c6c-a88c-4e52-be56-7f24f6c7b835", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.5876f156-ec7c-496e-9b1d-97d3824a239f.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "9ada56f4-2f9e-4600-addc-e15ac8260940", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3432734
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "cd6e5d3d-1c86-40dd-9cb3-b2e2075dec56", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.66ce7bbf-1056-41e4-afb5-2bd052df849e.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "363bb2f0-4bf3-4303-9c36-fbd8faaf8c0c", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3445442
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "cd6e5d3d-1c86-40dd-9cb3-b2e2075dec56", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.66ce7bbf-1056-41e4-afb5-2bd052df849e.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "f1da7e6e-8abc-4fa5-bca1-315f6ba7fbd4", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3428813
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "d7b3156d-672a-4a55-868d-9ca6a09fcb0f", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.17d5600b-8927-444b-96b2-82a3c8a81001.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "fd621c2c-8e57-4093-bc66-7f71352ef37c", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3430523
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "d7b3156d-672a-4a55-868d-9ca6a09fcb0f", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.17d5600b-8927-444b-96b2-82a3c8a81001.gene_level_copy_number.v36.tsv", 
+  "file_id": "f0eba881-4b60-4058-82dd-e676ee56a79b", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3449451
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "08c64000-d320-4e4d-974b-da503d48890c", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.70af5fdb-fd28-4671-9532-38438ac83d75.gene_level_copy_number.v36.tsv", 
+  "file_id": "ef129ee1-6237-42ad-b97c-18dd5c08a168", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446732
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "1858b58f-fdf4-413c-9c29-96ae85b88a74", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.308919de-3238-4f7a-a68c-97bcae3252a9.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "76cd89b5-e73a-4ef2-ad0b-65066bfbad42", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3430685
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "42b3dfa3-152f-4ab7-ac9f-988c7f473bea", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.bed7524f-5148-430a-8c10-deeefa3f408e.gene_level_copy_number.v36.tsv", 
+  "file_id": "1a3a5c5d-639a-4d49-a2d4-8ccf9976b2b5", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446979
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "42b3dfa3-152f-4ab7-ac9f-988c7f473bea", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.bed7524f-5148-430a-8c10-deeefa3f408e.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "8ebb10e6-8152-4a44-8d15-4d28b02b7843", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3445632
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "42b3dfa3-152f-4ab7-ac9f-988c7f473bea", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.bed7524f-5148-430a-8c10-deeefa3f408e.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "add5bc70-30f6-44b3-8e98-e412a4743daa", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3435792
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "b120b701-c194-43d7-a491-3206fac38ec1", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.7fb66d68-7abc-4303-926a-8e6058705623.gene_level_copy_number.v36.tsv", 
+  "file_id": "b6159aac-56e6-45ff-8c27-e7925be0491b", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446864
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "499a9b57-ee1a-4012-bbab-c6ad955b5e0a", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.2e61de9d-84bb-4b14-aa7c-17ad72c258db.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "4850b238-db0f-4468-a1f1-dc78b3fdd109", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3445457
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "499a9b57-ee1a-4012-bbab-c6ad955b5e0a", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.2e61de9d-84bb-4b14-aa7c-17ad72c258db.gene_level_copy_number.v36.tsv", 
+  "file_id": "f28420bc-b3b3-4269-a0b6-1a5e89261c27", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446766
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "0c1a2e7d-e7e4-481e-a012-ef214c444497", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.d346cd40-dcdc-4a57-8a9d-b20544c87d5f.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "dd15bf99-b6d9-4a3e-b66a-b6ce47fd6d08", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3445490
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "0c1a2e7d-e7e4-481e-a012-ef214c444497", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.d346cd40-dcdc-4a57-8a9d-b20544c87d5f.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "8c85fcfe-26c1-4277-a5a3-bafd916f9526", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3430697
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "4c18d9cf-4af4-4a86-8b1c-f78795fbbd7e", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.55792c9d-411b-4188-8681-7febc219f995.gene_level_copy_number.v36.tsv", 
+  "file_id": "f1091463-90b5-4cde-bff6-d24544f34ffa", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446720
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "d3164236-c14a-4230-b527-ecd1a3992f02", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.28fdfe2a-9e7e-465f-8d05-a232d01be466.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "5a2bc00e-e8d7-470e-8187-c71c4e97a203", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3432908
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "3b81ec7c-0934-4649-9231-9919dd26dd15", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.1b88b21c-f2cc-45aa-b55a-ad0cc299124f.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "9e34d1f9-3d17-4af5-8f9d-fe9ac396e011", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446349
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "3b81ec7c-0934-4649-9231-9919dd26dd15", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.1b88b21c-f2cc-45aa-b55a-ad0cc299124f.gene_level_copy_number.v36.tsv", 
+  "file_id": "da1291ac-a536-42fd-bd3e-e3ffb3f6de37", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3447779
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "5d7027f5-60a0-47ab-a79d-667c9acc0e54", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.9cfb8540-1bc2-479f-b408-d662cdb6b990.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "0c2c040e-1870-4e74-9d6e-9364b2cf6722", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3431642
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "5d36676e-4140-44b5-aa0e-b2af092b7dc0", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.7575e343-6f72-42a9-9011-2b7e02cf01cc.gene_level_copy_number.v36.tsv", 
+  "file_id": "6ab9f386-319a-4f70-a99d-86f23672d08a", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446837
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "5d36676e-4140-44b5-aa0e-b2af092b7dc0", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.7575e343-6f72-42a9-9011-2b7e02cf01cc.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "bdc731df-0d4d-4452-b20d-f4f0e4f07044", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3432686
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "62379be5-13f0-474b-94d3-6f944ec4ee96", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.ba336da3-a3ac-4707-a55b-71fa7068a4e4.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "1519b6e7-6670-4d08-917e-f96cad5d8b46", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446620
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "62379be5-13f0-474b-94d3-6f944ec4ee96", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.ba336da3-a3ac-4707-a55b-71fa7068a4e4.gene_level_copy_number.v36.tsv", 
+  "file_id": "34a19119-f2bf-4f3e-ac9f-2e6a56cbcb03", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3447628
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "cf1e86ec-4bcb-403c-831b-d67bddef14eb", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.ef759014-dfd0-4f35-ab00-20f9a884114f.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "91cb7c35-c12c-4acd-bfe6-91fb391934d0", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3445505
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "8ae56ffc-960c-46c2-bd6c-1dcff33875d0", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.2a4907d1-d41e-4fb0-875d-3d61448cf975.gene_level_copy_number.v36.tsv", 
+  "file_id": "24c460c5-95fe-428f-9ac3-a61ea366d52c", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "annotations": [
+    {
+      "annotation_id": "8cd04451-cb8d-52c4-a859-06c008b68de1"
+    }
+  ], 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446712
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "8ae56ffc-960c-46c2-bd6c-1dcff33875d0", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.a7cf51ba-a017-4de1-ad5f-021d1369eb80.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "9a8bdcbc-6aa3-4796-96e0-37f88912924e", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3445502
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "92960f76-0242-4a1c-bf7d-014c2f720219", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.a8a0d815-8d32-4735-a550-cac3a9bfc703.gene_level_copy_number.v36.tsv", 
+  "file_id": "80ccbd2a-d7b3-4a13-a0f3-ca6000b86d15", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446748
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "92960f76-0242-4a1c-bf7d-014c2f720219", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.a8a0d815-8d32-4735-a550-cac3a9bfc703.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "c2f5b9b5-b4f5-462e-89cd-e2fbb0a19c8f", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3432908
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "92960f76-0242-4a1c-bf7d-014c2f720219", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.e46e8032-51ae-43f3-b87d-b50ece857c96.gene_level_copy_number.v36.tsv", 
+  "file_id": "3b8e8159-b5ed-4321-b604-a7ae2ddb40a3", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446734
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "92960f76-0242-4a1c-bf7d-014c2f720219", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.a8a0d815-8d32-4735-a550-cac3a9bfc703.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "484dd9bd-b5c0-40ba-8a8d-d693d823aa8e", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3445484
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "8ae56ffc-960c-46c2-bd6c-1dcff33875d0", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.a7cf51ba-a017-4de1-ad5f-021d1369eb80.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "3f714e3e-0111-4614-a23f-fa6f14ad4cfd", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3431393
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "8ae56ffc-960c-46c2-bd6c-1dcff33875d0", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.a7cf51ba-a017-4de1-ad5f-021d1369eb80.gene_level_copy_number.v36.tsv", 
+  "file_id": "1cb2d109-a6ae-4949-bdbc-d14396371a86", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446831
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "19427350-619b-4b9c-a3ba-37f667bb2843", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.3d33275f-9562-43c1-8f6b-1a5ace3895e8.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "941b0fe1-42fc-4147-9211-aca8ccfb5a6c", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3449514
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "e9483296-cb91-497a-b955-39a3c3289dac", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.a059d969-2eb2-44d5-93cd-ed88f5b61719.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "1db8cc8c-189d-4c1f-a3eb-29ff17ce79cb", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3445842
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "e9483296-cb91-497a-b955-39a3c3289dac", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.a059d969-2eb2-44d5-93cd-ed88f5b61719.gene_level_copy_number.v36.tsv", 
+  "file_id": "590c26a8-117a-4ff6-b4c0-03b6a6f205b8", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3447095
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "d7b3156d-672a-4a55-868d-9ca6a09fcb0f", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.17d5600b-8927-444b-96b2-82a3c8a81001.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "e0aa25e2-f3f3-4aa6-9e5a-c32dbf04b634", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3448151
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "08c64000-d320-4e4d-974b-da503d48890c", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.70af5fdb-fd28-4671-9532-38438ac83d75.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "a37461d2-b379-4fb3-8fe1-58c1d1d5825f", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3430748
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "499a9b57-ee1a-4012-bbab-c6ad955b5e0a", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.2e61de9d-84bb-4b14-aa7c-17ad72c258db.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "23e0d1ff-cb21-485e-942e-999ceb29068b", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3429665
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "0c1a2e7d-e7e4-481e-a012-ef214c444497", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.d346cd40-dcdc-4a57-8a9d-b20544c87d5f.gene_level_copy_number.v36.tsv", 
+  "file_id": "44335aa3-469e-43e5-a385-6be6f5b21cf3", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446834
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "4c18d9cf-4af4-4a86-8b1c-f78795fbbd7e", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.55792c9d-411b-4188-8681-7febc219f995.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "c9f92491-1e78-44bc-8fbf-26bb0f6e0225", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3431282
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "4c18d9cf-4af4-4a86-8b1c-f78795fbbd7e", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.55792c9d-411b-4188-8681-7febc219f995.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "e7464498-c3c2-4891-9a42-6d10ce8ab050", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3447613
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "d3164236-c14a-4230-b527-ecd1a3992f02", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.28fdfe2a-9e7e-465f-8d05-a232d01be466.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "1bd5f891-b941-4a76-97cd-b3807a7c1eab", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446073
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "d3164236-c14a-4230-b527-ecd1a3992f02", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.28fdfe2a-9e7e-465f-8d05-a232d01be466.gene_level_copy_number.v36.tsv", 
+  "file_id": "4869bd5c-6336-474d-a7e4-d55263762f1c", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3447372
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "ceb19678-b453-4529-b6cb-d02f9cb101b4", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.20ca8b0a-b561-405f-89d4-5f12f40a5455.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "4d684bbb-45a4-4dd3-be6d-9df5837c8929", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3445490
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "ceb19678-b453-4529-b6cb-d02f9cb101b4", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.20ca8b0a-b561-405f-89d4-5f12f40a5455.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "a67874f5-bc5c-4a35-aadf-39178abbd3e3", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3431618
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "52386f66-2877-4c75-894e-5c1dc03e6ef4", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.ebfb5ea7-457c-49f1-830b-d2ec9e10d930.gene_level_copy_number.v36.tsv", 
+  "file_id": "a7180413-8e58-41ae-abc7-3cd73254af6a", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446861
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "52386f66-2877-4c75-894e-5c1dc03e6ef4", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.ebfb5ea7-457c-49f1-830b-d2ec9e10d930.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "b73503a8-33ae-441f-92f4-88717c83e0cb", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3445499
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "3b81ec7c-0934-4649-9231-9919dd26dd15", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.1b88b21c-f2cc-45aa-b55a-ad0cc299124f.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "db42475b-ee63-4855-95bc-814a18ddb01f", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3431219
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "5d7027f5-60a0-47ab-a79d-667c9acc0e54", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.9cfb8540-1bc2-479f-b408-d662cdb6b990.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "d3f1d4da-d0c4-4bae-97bc-d13f1c44f8c2", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446521
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "5d36676e-4140-44b5-aa0e-b2af092b7dc0", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.7575e343-6f72-42a9-9011-2b7e02cf01cc.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "624348d9-9600-4dc5-afaa-ad81fd9aba89", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3445502
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "5d7027f5-60a0-47ab-a79d-667c9acc0e54", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.9cfb8540-1bc2-479f-b408-d662cdb6b990.gene_level_copy_number.v36.tsv", 
+  "file_id": "185e26f5-d5c9-40d9-8d48-dfd6df6048b1", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3448209
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "62379be5-13f0-474b-94d3-6f944ec4ee96", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.ba336da3-a3ac-4707-a55b-71fa7068a4e4.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "5c579fbf-46b9-46ea-b704-427590c67d04", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3430586
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "65435f50-a35d-49e3-a36e-b95d9e274ca0", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.644ce6b1-1823-4eb8-bc5d-029b3f51fe2f.ascat3.gene_level_copy_number.v36.tsv", 
+  "file_id": "1ac117c4-7d99-490c-99a6-a15239ae18cc", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3445794
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "cf1e86ec-4bcb-403c-831b-d67bddef14eb", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.ef759014-dfd0-4f35-ab00-20f9a884114f.gene_level_copy_number.v36.tsv", 
+  "file_id": "dd1d2170-f665-4df9-b6b2-efec80cc7af8", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446720
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "cf1e86ec-4bcb-403c-831b-d67bddef14eb", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.ef759014-dfd0-4f35-ab00-20f9a884114f.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "58ff7efd-f862-4fc7-8a7b-bc69a4a392b5", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3432092
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "d77ef9cf-f8e6-4ee9-8d4f-1106885f6b06", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.eaf70996-ac08-4e56-8747-06a8af702dd5.absolute_liftover.gene_level_copy_number.v36.tsv", 
+  "file_id": "f44c09f4-b0ce-4efc-abcb-0af2841bce95", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3432434
+},{
+  "data_format": "TSV", 
+  "cases": [
+    {
+      "case_id": "d77ef9cf-f8e6-4ee9-8d4f-1106885f6b06", 
+      "project": {
+        "project_id": "TCGA-OV"
+      }
+    }
+  ], 
+  "access": "open", 
+  "file_name": "TCGA-OV.eaf70996-ac08-4e56-8747-06a8af702dd5.gene_level_copy_number.v36.tsv", 
+  "file_id": "aaca7955-dc02-4ceb-a2fd-c253e42cb615", 
+  "data_type": "Gene Level Copy Number", 
+  "data_category": "Copy Number Variation", 
+  "experimental_strategy": "Genotyping Array", 
+  "platform": "Affymetrix SNP 6.0", 
+  "file_size": 3446971
+}]
