@@ -1,0 +1,10 @@
+How to create the graph.
+
+For each node a Case ID, so each node is a person.
+
+How we connect them?
+-   Connection based on proximity on day of death or by beeing alive.
+
+
+We create for each user a graph, each node represent a propertie value,
+and we connect them based on the relationship between them, equal for each graph.
