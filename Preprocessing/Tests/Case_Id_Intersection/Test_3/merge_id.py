@@ -36,3 +36,6 @@ print(f"Total case written: {len(out_dict)}")
 # Save data
 with open('extended_white_list.json', 'w', encoding='utf-8') as f:
     json.dump(out_dict, f, ensure_ascii=False, indent=4)
+
+with open('white_list.json', 'w', encoding='utf-8') as f:
+    json.dump(out, f, ensure_ascii=False, indent=4)
