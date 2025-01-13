@@ -43,15 +43,32 @@ def load_data(path_white_list, path_gene_expression_json, path_data, path_relati
                         
                         case_id = dict_file_name_to_case_id_relation[file]
                         if dict_relation[case_id]['type'] == 'dead':
-                            list_value.append(dict_relation[dict_file_name_to_case_id_relation[file]]['value'])
+                            list_value.append(int(dict_relation[dict_file_name_to_case_id_relation[file]]['value']))
                             list_list_featurevectors.append(list(parsed_file['tpm_unstranded']))
                             count = count + 1
                             print(count)
                         # print(file_names)
+
+    x = list(zip(range(len(list_value)), list_value))
+
+    x = sorted(x, key=lambda x: x[1])
+    combinations = [[],[]]
+    print(x)
+
+    for i in range(len(x)):
+        for j in range(i+1, len(x)):
+            if(x[j][1] < x[i][1] + 3):
+                combinations[0].append(x[i][0])
+                combinations[0].append(x[j][0])
+                combinations[1].append(x[j][0])
+                combinations[1].append(x[i][0])
+            else:
+                break
                         
-    print(len(list_value))
-    print(len(list_list_featurevectors))
-    print(count)
+    edge_index = torch.tensor(combinations, dtype=torch.long)
+    x = torch.tensor([list(a) for a in x], dtype=torch.float)
+
+    data = Data(x=x, edge_index=edge_index)
     
 
 
