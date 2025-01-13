@@ -951,6 +951,10 @@
         "type": "dead",
         "value": "1442"
     },
+    "feda41d8-ca56-425d-b149-4d5485328107": {
+        "type": "nether",
+        "value": 0
+    },
     "05263959-c4f5-4540-b6d2-d8c8a128861f": {
         "type": "alive",
         "value": "2338"
@@ -1458,6 +1462,10 @@
     "eec69ea9-ceb8-456a-aff4-41fb8a261e36": {
         "type": "dead",
         "value": "24"
+    },
+    "e9b5336e-d724-4e7d-8c81-1147abd0a80d": {
+        "type": "nether",
+        "value": 0
     },
     "94030805-8beb-441a-af73-11a80768edb5": {
         "type": "alive",
