@@ -1,0 +1,2036 @@
+{
+    "b3511675-fd68-4745-8020-e290ca0fd115": {
+        "os": 1815,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-29-1703.xml",
+            "gene": "e8725b9d-f94d-4206-bb2b-4f67ad48487a.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "c0c6191b-f9c0-4e33-8a20-1684230f5182.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.0cf0722f-55bc-438b-92fd-d7f65d6b4ef4.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "4261267c-7042-4c6e-83ed-12fb401003fc": {
+        "os": 951,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-29-1710.xml",
+            "gene": "ad063208-3c51-45f6-88c8-0a802df75182.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "ae54509f-5df9-4bae-9d39-a03ca716968c.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.39807bf8-d0a9-4817-9094-2577dd21157b.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "b7715ff6-57a6-4513-9447-aa8bc93f16d4": {
+        "os": 361,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-04-1343.xml",
+            "gene": "2d7f98e2-8e4c-48aa-9c87-e9953e952689.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "fb6f82c3-82bd-4af1-9f37-2cf868a84017.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.2ea95bbb-00cd-491e-814e-25360d715683.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "5d7027f5-60a0-47ab-a79d-667c9acc0e54": {
+        "os": 1163,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1616.xml",
+            "gene": "15083e68-c064-4f08-9cd8-61a25547f754.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "5cf52e1d-a1df-4911-8496-6672232f43b0.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.9cfb8540-1bc2-479f-b408-d662cdb6b990.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "28ed2d42-5b4c-4bca-b2b2-6b2a6d3c42cf": {
+        "os": 25,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-2288.xml",
+            "gene": "b7b8a33a-46af-4ae9-aea3-a8d18d27c0ab.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "9855b9f1-6c59-4fe1-ba86-8fd94a95f63c.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.c5ca843c-5bcf-4d73-adba-4c40036f1c67.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "7dcc809b-e33a-4453-b92a-c00786f48cb0": {
+        "os": 1213,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1557.xml",
+            "gene": "8c985ded-ab7e-4792-b373-8670db4f2ed7.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "514cebe3-a634-4b78-9f46-09cd7e533de6.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.5cbc430f-495b-44e2-ac1c-5bcab1e43d22.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "611600a6-43ec-4029-9682-cd6d6a3312ec": {
+        "os": 895,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-13-1483.xml",
+            "gene": "808d8dcb-f3e5-4d7e-8b70-90a254ebc4e2.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "4825da66-2f6b-4ba4-ad21-70a31bbf181e.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.47e05fb0-cbc1-4edd-a8d6-ae4a20ceb7c2.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "f8a5547f-f1bc-4c01-8b68-25b5ee0caeab": {
+        "os": 1380,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-04-1655.xml",
+            "gene": "c133f156-8d5e-4072-a990-86ccb7db09c9.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "c55c3cf6-4566-4d65-a45d-3d4206c05de9.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.496e4773-961e-4a65-8f28-8997bde6290c.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "c9e28934-8379-4511-817c-d787f2c4ca3a": {
+        "os": 681,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-13-1487.xml",
+            "gene": "62bea110-bff8-4d67-a920-77d3f2d85d13.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "2a2d315e-15a8-468d-b6d9-b306f9d49dee.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.97311d8d-2d1e-4076-8e65-0039a0b7d473.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "19427350-619b-4b9c-a3ba-37f667bb2843": {
+        "os": 2742,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1603.xml",
+            "gene": "29d7b853-8865-4ac6-8640-701867c4ef6b.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "6f307ada-ba20-4225-81f6-3b16193bccbb.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.3d33275f-9562-43c1-8f6b-1a5ace3895e8.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "7d1e9451-7a6a-4086-af7f-3ed57505daf0": {
+        "os": 75,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-30-1855.xml",
+            "gene": "0b5a3a02-abbb-405e-b392-4944e778e2be.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "5fc6b1e1-8be1-4438-919b-a8d74d5a4889.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.de79be76-863b-4c72-ad38-06d081b65984.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "5503b3a1-7d03-41b2-9ec8-e478c5414d67": {
+        "os": 568,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1434.xml",
+            "gene": "e5122ef6-16e7-4c8b-882c-737ace21f6a1.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "eb745f13-fc56-40d2-92c5-cc131486f9e6.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.9b0d1252-3106-4bec-b8ff-35098deca4d5.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "ce871097-a6e9-4139-897e-642ee24ee123": {
+        "os": 1161,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-61-1919.xml",
+            "gene": "61eb62f8-cb54-47af-86e6-b256f6ebebfe.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "92db226f-82a9-40bc-8982-a21d40c26bd0.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.098abc3c-1001-415f-847a-53bfee74ab79.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "d73a0a33-e4e8-44bd-9580-2038ab06583a": {
+        "os": 820,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1313.xml",
+            "gene": "ad4b3bef-a8f4-47ca-b0a2-e7a7dbb0ecdc.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "e57fb6ec-3fcd-4be7-a17c-31ecd3054757.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.568acf95-5e03-406b-ac0d-4d0e7d6855eb.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "171f7917-69eb-4a3f-9cc0-0e1dffd412c1": {
+        "os": 2218,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1463.xml",
+            "gene": "ac2d95d8-5495-476e-860c-5c646b3b740e.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "beac68d2-fe80-4a24-9848-9dcac39c6e0f.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.e0743db2-35b3-4a03-ad31-c7851b495a23.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "08c64000-d320-4e4d-974b-da503d48890c": {
+        "os": 1767,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1553.xml",
+            "gene": "9502e51f-a360-4ca0-92fa-70f78ecf9b04.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "55904868-b373-4449-ac92-ce77820c4e37.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.70af5fdb-fd28-4671-9532-38438ac83d75.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "90f4b65c-cfd4-4066-a5b9-842885c172e2": {
+        "os": 462,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-13-0727.xml",
+            "gene": "d0cb6e31-ce63-4c74-ad17-b2bcc5bdc053.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "ba56e2b6-897d-4708-8d06-af3152fd0cdd.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.54cb8511-36a0-4af7-84eb-274263af1f05.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "1d0225b5-f515-4197-bba7-3dc17e502b88": {
+        "os": 11,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-2262.xml",
+            "gene": "d169e3da-0c53-4194-89c8-d5a87d4e9aa5.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "997fc42c-b829-4d60-8468-299e97c066b6.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.9c67fe94-0cb2-4fc5-8349-5fb77875ce28.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "563853a2-9ac2-48be-adf3-1e547ee2b274": {
+        "os": 1366,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-30-1860.xml",
+            "gene": "85b81e67-927d-43cd-b9d5-423aa7828e5a.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "f2a9c087-c417-4ca3-91c1-c49e01a453ef.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.e6d4da43-aa9e-4f0c-9cfd-c281e41ac0ea.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "499a9b57-ee1a-4012-bbab-c6ad955b5e0a": {
+        "os": 1579,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1551.xml",
+            "gene": "53eaeb7f-a3c6-46df-b1ff-fb40cb84912e.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "15d76ae8-4cda-4bd9-8b98-b710f914bb64.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.2e61de9d-84bb-4b14-aa7c-17ad72c258db.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "05019013-7ea5-4905-ac79-901146ba2ee2": {
+        "os": 2400,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-29-1688.xml",
+            "gene": "d6c55f59-f1cd-48bf-9628-94fcfb867bff.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "8a4b9a6e-43db-49a6-ba60-732021ee0e2e.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.1b084de1-516a-4f05-9153-47c54489b649.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "15170c7f-5880-4fb6-82ce-68d3df0dfb68": {
+        "os": 1319,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-13-0893.xml",
+            "gene": "ec34b3b2-e9d3-49bb-bc27-6a16103ad51a.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "85d001e8-a4ab-4f0a-8793-ce4f8f9cecda.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.1062384d-2437-4f50-9f5f-ec5630d1b710.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "71faa2c1-0d5b-4dcc-bdf9-f2405f29907c": {
+        "os": 676,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-61-2113.xml",
+            "gene": "e18acf1a-8d53-42a4-917c-1bc7e0a13888.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "ab406bd8-e457-478d-88cc-f66ff2b40302.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.3746895b-2ff1-4dcb-9001-6023ebe66a34.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "a9abe7a7-4126-414b-87d2-a6d25abcf1fa": {
+        "os": 83,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-13-0724.xml",
+            "gene": "7e2f7b6d-46d7-4b37-86d8-354da4408713.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "7415d95e-f0d2-4f43-a925-c1f20dce741c.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.f609b580-4ab3-4dc5-9636-f5562f2324e5.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "cbe3309e-9b7b-4f62-87b5-0f5ed4218ada": {
+        "os": 394,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1627.xml",
+            "gene": "a0ad9d21-e690-4d20-ab62-d31a3b8d28eb.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "585ed160-9380-4a24-a619-34aef417e0dd.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.1e7d7cbc-8e20-4f54-971d-09a1264d0401.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "49bfd0fe-48ce-49db-9f76-ce2310410950": {
+        "os": 629,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-13-1485.xml",
+            "gene": "04f0900d-efc7-498d-a8eb-aea677094877.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "3909d4a7-0582-4fbd-9eb9-61921cd5d1aa.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.04cab715-bbc8-48ab-b059-1ebcf740e3c3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "63a75e0b-9241-4f0e-9236-01a2e2c05b7e": {
+        "os": 3260,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-13-0884.xml",
+            "gene": "5c58a396-5f7b-4374-a6e7-09f381d945dd.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "b918ae7a-ed2e-43f3-808b-4c1a3b68532d.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.7de5c913-6a77-47fc-8cac-af0c89b34e81.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "3b81ec7c-0934-4649-9231-9919dd26dd15": {
+        "os": 1721,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1549.xml",
+            "gene": "2e676476-647d-4f26-ab87-d4892fe59dd2.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "7e7adb90-5e73-4ff8-846c-a8c12c997cdb.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.1b88b21c-f2cc-45aa-b55a-ad0cc299124f.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "a8c4a333-6b67-44c8-9000-516f8ccea788": {
+        "os": 962,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-2271.xml",
+            "gene": "61b94289-2f3d-45ab-94d9-80278e53da3b.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "6417d9b7-34c2-4e00-8ddb-e2cadb165dc0.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.256a9e3d-46f8-465f-8157-354e3b9e47b8.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "d1976840-35f7-4423-8458-12fb32a52b33": {
+        "os": 84,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-23-1032.xml",
+            "gene": "d9112d90-1e2f-4359-bf56-7ea55802a50f.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "4a7b899d-e876-466b-9a18-a13a864995e5.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.b16a8ed4-36b0-48b4-b5de-b48d6d4fb99d.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "2cb82948-7cbe-4b6c-8414-c02f662de2d0": {
+        "os": 1516,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-23-2084.xml",
+            "gene": "07742557-d413-4ab1-a624-6a003ba346be.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "c091f046-2ff4-46ac-babd-a9964b33564e.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.d92637ed-8213-4983-b661-16563f7ac3d6.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "ad2b1a0a-153f-483d-b228-5763eba3f6cc": {
+        "os": 608,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-2399.xml",
+            "gene": "dca2da37-67cd-408e-a2da-325550471381.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "6aa6f7de-f91b-4c13-95f0-b53e389c3e3d.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.bf4172d6-d044-4dca-9e8b-a44a7a24ab4a.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "42ebd30b-175e-4ece-a806-e55cb7e40e96": {
+        "os": 949,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-29-1697.xml",
+            "gene": "cfdb5780-7a6a-41ec-80f6-1405a06ba81d.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "8092800c-4797-46a5-b407-aaf7b59f49c6.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.1f92e42b-0684-4c2d-b4b4-353d83d7a891.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "7c466a5f-a6b4-4d1a-a0f5-ddcd7ef90ff1": {
+        "os": 1562,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-23-1109.xml",
+            "gene": "03752bc9-46d3-4f39-8313-3050134be0db.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "4143e717-7c77-4b8d-a66d-8002e40800cb.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.bbfeaa5c-22e3-4948-bcb9-db40a8e1f737.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "3f917550-89a6-404b-94df-938c99121411": {
+        "os": 627,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1628.xml",
+            "gene": "d936e585-e711-48ec-955f-ef3dc5ca7353.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "c733167a-2b9a-4f9c-8bb0-4642ff20a0ed.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.9b968b89-9c5c-47eb-8402-e33a4161f42e.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "644a88a7-dc56-468a-af5c-60278aab7642": {
+        "os": 304,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-09-1659.xml",
+            "gene": "bba445df-c6f7-4257-9093-d4ea69db84a3.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "ca5c461c-063d-4bde-8edd-9a068b861598.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.a3ec404c-0806-48eb-b3ac-2a5e759748b1.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "a5030259-cf9c-4a58-8710-b9da8ee59320": {
+        "os": 608,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-10-0937.xml",
+            "gene": "e945ff79-76d6-4466-a346-82305415a268.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "ffa726f4-48f9-447c-a4dc-8e8bee17d788.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.265af9ca-8abd-4c8a-b657-88ae76237368.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "cbc7f427-5f7b-4267-ad56-055d8880a4cc": {
+        "os": 1114,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-30-1866.xml",
+            "gene": "4f1e300b-a17e-4226-ab42-802c382ac826.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "cd061125-a85b-4741-83ff-e8adaa5c9b18.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.ba4acff6-1f39-4b71-9016-1138025e3165.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "c0c3caab-9277-4a31-a96c-c607e38d5ccc": {
+        "os": 2089,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-23-1114.xml",
+            "gene": "e11fea69-ccfa-4175-9184-bca06a4adbf8.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "74416368-cc9c-4534-8c47-5c6afb731f97.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.0f187781-18d6-4a79-8d57-e0076abf1440.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "c9226204-cb61-40b8-8a94-a7e71c14ea3a": {
+        "os": 1947,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-2036.xml",
+            "gene": "12966fcf-89f5-4e10-82fc-1ca4de192ca7.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "b32625c3-09ce-4ba6-849d-85f09d584fc4.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.8e634032-9206-4635-a1d9-faeaef6c3fbb.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "76cc2d21-eebc-4f09-9bc7-dbf7af0aafa8": {
+        "os": 346,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-57-1583.xml",
+            "gene": "24c88f11-3839-493f-9357-f8be5bbadaf6.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "c7f50df8-918a-49ac-9d94-16317fa4c884.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.f9fc5722-4216-43f8-b7bb-95752acc78f6.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "6e84e89d-4f35-43b8-b47d-b1343b8c1ab9": {
+        "os": 260,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1436.xml",
+            "gene": "e2282ea0-e21f-439d-899b-55a42119cd50.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "19f08c73-1d1f-46ca-bd9b-abdc2ca1c5ac.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.279a61c4-12e9-4a4f-88bd-2cd122c43dea.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "26558703-a659-43f2-86cb-0695989bc14e": {
+        "os": 919,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1924.xml",
+            "gene": "d6326578-95eb-4f9e-967c-47fb32c04166.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "b0096448-0bd2-428d-8f48-b9e94f7eeb71.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.77b5d8df-a1b5-4cb2-90aa-26878994b48d.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "838693d5-1ae0-4d75-834b-e1b89b96b0ed": {
+        "os": 952,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-29-1768.xml",
+            "gene": "36e1390b-65ee-499f-8247-df984c24547f.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "b199b8fd-2fba-4b04-92a1-a6c7bc907e2e.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.c71e4fb2-5a26-45eb-843f-dbe50191f3be.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "14c58def-60ee-48e0-a74b-da4eb77ef344": {
+        "os": 2028,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-13-0887.xml",
+            "gene": "c99daa88-5672-437c-af99-5b31f28ec087.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "5de7f2d4-00e7-4bbd-b212-37ff49591f55.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.616b58ea-28e5-4d0c-aa5f-0f08a0c587f3.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "49d2c0cf-a3f3-4519-a755-0a5f769df2ea": {
+        "os": 1324,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1435.xml",
+            "gene": "7c81d253-3d75-4f27-8cc1-b1ac20c77ff5.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "2ce97421-0b53-4e1d-98f7-5d8cdd9a7961.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.b3ea5fa8-61c8-462e-b013-0e4d44fec679.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "9bbc01b4-056c-4ddc-aca4-ff20718646d0": {
+        "os": 547,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-09-0367.xml",
+            "gene": "bd47a9d9-3e0e-4eef-ae47-887016a2df2d.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "98a60802-d820-4ad4-87a1-fa2cc43dbb39.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.41399846-fdce-43f6-80fa-25f214c43933.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "65ddccd2-70a7-48b3-88e1-9d6fd1dcd11b": {
+        "os": 204,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-10-0934.xml",
+            "gene": "d563b5ea-0724-4d07-9b31-9713d6edd332.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "f410b210-7aab-4290-a306-2094144c1a4b.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.afd657cb-1c27-4a3c-a8a6-9f5ccd3bb3d7.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "0d23fa5b-95f8-4626-a4d2-c72ad3cc553b": {
+        "os": 1355,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-13-0720.xml",
+            "gene": "d9d0bbf5-4b7e-471b-9481-fe3706d480ab.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "4a1e2d6a-51be-44f6-9b0b-e51da2d4de04.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.a1704a37-9809-4d75-97f0-97ecb2e298c6.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "0e1598d8-cbe5-4113-95f1-4bcda061239b": {
+        "os": 728,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-29-1702.xml",
+            "gene": "68021dd4-be26-40e0-b69d-de199b6ea838.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "d27ca2d8-1566-496c-afc9-fc4e0c175be5.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.5b8c15f0-5635-42d1-849d-66dacecfb6c0.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "d0673efd-3315-4dd5-8ab6-912bfa07dceb": {
+        "os": 1511,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-23-1022.xml",
+            "gene": "2fb7ad5a-0ef2-4524-9fa8-4d61d1bb04e1.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "0495b668-2c1f-4f93-9f7c-1c3a74d7192b.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.3a8b9a57-2f04-40bd-85e7-2385fa37a913.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "1d9893c8-0de3-4b07-b0ba-a53019b23eb4": {
+        "os": 1082,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-09-0369.xml",
+            "gene": "78c61237-b889-4cb8-bb8e-eacd33b3538f.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "6862e5f8-8773-42c0-9bb7-e175b6ee02f4.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.0ae9f973-4f93-48f0-a214-35d671d46fef.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "cbd87697-7708-4b69-9e50-9ee474feabe1": {
+        "os": 637,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-09-2054.xml",
+            "gene": "780b1500-7b9f-4d17-87ef-10bd6a8acbf2.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "abfd25db-2fe5-4765-be0d-94830c21c610.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.47e0a74c-6d83-40ba-8d6d-f04add97433b.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "4ea50685-3b63-440a-b037-597ef2529e7d": {
+        "os": 731,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-57-1582.xml",
+            "gene": "c99fbe90-c684-42dd-ba96-66aa1f1295d8.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "0aa30579-ed43-4d2e-9a22-6b56575e7056.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.e9a6932d-2457-47a1-92ef-db2d0c3638e4.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "184aac07-44c1-47f1-8adf-50acbcc1762c": {
+        "os": 138,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-09-2048.xml",
+            "gene": "1dfc59bb-c74b-485b-b1c6-b84fccd6bc12.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "a5a32254-9aa2-4e2b-afc4-cb0a04e9b6f8.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.c01b7017-c6c2-40d5-8e87-59d44c67459f.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "bdd792e7-d75f-4aa3-b38e-f0708e112075": {
+        "os": 506,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-2293.xml",
+            "gene": "f058a655-fcbb-43f8-9c1d-8a94e4625024.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "d38bf8c2-6041-4208-a293-dc79521280fe.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.a8a9d81b-94c8-47b7-a261-4611c6fbabe0.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "99a61986-7b23-46b5-99a4-efba6bad3766": {
+        "os": 1446,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-2267.xml",
+            "gene": "04eeb9f5-2fd6-4df3-ade8-cdb8d77f4273.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "d04094de-0118-4b92-9926-d23ff1210426.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.c908d760-4c66-4be4-9e87-66ab733a7be6.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "88d61634-913c-435a-8d25-e019c8dab7da": {
+        "os": 840,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1625.xml",
+            "gene": "3245bf16-6e24-4585-86c3-6eebac80d2c9.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "4208688b-8846-48cc-b03a-7ea56e467644.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.8fe6c12e-d500-468e-ae71-1ccbe71457a3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "219f54ef-4235-482d-b799-f2fa9930105c": {
+        "os": 3337,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-2027.xml",
+            "gene": "8ab508b9-2993-4e66-b8f9-81e32e936d4a.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "4a087fc2-60b1-46fc-98ff-e1bb1f7ad83f.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.e226211e-4a19-4406-b6e8-45fab717d9c8.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "4c099644-047c-42a3-8187-bfcbfe6662e4": {
+        "os": 365,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-2397.xml",
+            "gene": "51b41730-a7f8-4b00-9f17-808c5057077f.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "16aee105-3628-4350-8235-476ab5dcfc01.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.a01002c1-8053-41b0-b055-ce45f4091349.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "b923ac70-70ea-4a82-8466-46350c5803bf": {
+        "os": 1446,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-23-1021.xml",
+            "gene": "06bfef84-bc96-4d26-a658-3da2432dd948.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "215c9c8c-036c-4259-8846-414413c433fc.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.c3f1fd36-fc3e-48f9-9d09-14d678126742.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "8652ddee-98f4-4584-b450-e6f2f5c9d7ec": {
+        "os": 1499,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-04-1356.xml",
+            "gene": "36aef44f-03b6-4aff-bc8a-dfbc664dd2d0.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "3d679a07-9899-4673-a2ac-da61af15cb01.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.72a0595a-c9a2-4424-bbfc-1b63c7c21489.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "34f285ab-6c31-4865-a0a7-a57af3567df0": {
+        "os": 701,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-20-0987.xml",
+            "gene": "7d8d9d6c-b701-4eda-8e36-c36ca7c90903.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "d13ce77c-db8b-480d-ac7c-2496943596c2.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.d0a0712d-97d3-4301-b693-8c55388dda13.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "34f545ab-d420-4dd2-8db4-3159896efd23": {
+        "os": 3224,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1467.xml",
+            "gene": "19fb1859-5fb2-443a-a8ea-d3dd9f5e50b9.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "168dc178-a1c3-434c-a66e-0c0a2ba73159.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.61640eb0-8af4-4f10-99aa-f4fc652f7a36.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "374ea8df-ecc4-44b0-b519-33efa5078018": {
+        "os": 528,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-29-1761.xml",
+            "gene": "850ac9a7-0b03-493b-abd7-a2cad3ce1e23.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "4725ff3b-fc31-4812-ad22-75865956df3c.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.99d32dd3-0594-46be-96ba-6a981950aa0f.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "4c18d9cf-4af4-4a86-8b1c-f78795fbbd7e": {
+        "os": 1384,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1562.xml",
+            "gene": "4d8ce68c-cba9-44e2-be95-477c938fdd73.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "f56e25e1-b563-440a-9255-f8d8d8e20c7a.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.55792c9d-411b-4188-8681-7febc219f995.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "e9483296-cb91-497a-b955-39a3c3289dac": {
+        "os": 1720,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-04-1514.xml",
+            "gene": "87ba5532-0958-4480-9f81-c567430216f2.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "4d59eeea-5d4d-4c6a-ba4d-a6098cb3b34c.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.a059d969-2eb2-44d5-93cd-ed88f5b61719.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "446ce2a3-d328-443c-a419-3344baad0e16": {
+        "os": 377,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-13-0725.xml",
+            "gene": "67293c0e-904a-4cc2-ad09-a99d791bd05a.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "e4c8f82e-3612-46cf-aa51-0f568f0391f5.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.b31aaae9-a48c-4344-8b6e-69b5dbdc6c2c.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "d77ef9cf-f8e6-4ee9-8d4f-1106885f6b06": {
+        "os": 787,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1564.xml",
+            "gene": "05a9121e-555a-49ee-ad73-4d0bf8771a82.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "08ac3d40-6172-447a-a1de-8a71aa8ae25a.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.eaf70996-ac08-4e56-8747-06a8af702dd5.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "45baebac-32ae-4093-9eba-488b95c1a58d": {
+        "os": 8,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-30-1857.xml",
+            "gene": "c3482424-68d5-43cd-a75c-a1cefa68e6d0.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "b988154b-d8bd-4110-ab51-fdd948c023dd.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.f729e6d0-2adf-4c44-b25e-99b5aff0b85f.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "2ae65a06-df0f-4de1-a536-537cae0cc260": {
+        "os": 637,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-61-1724.xml",
+            "gene": "c0e46d22-7732-4048-b5e9-7e631f7a797a.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "1a1d256e-d7f8-42e0-a6a3-8214ce1f1903.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.400e0133-bdd9-42b7-85cb-e486303ab5b2.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "15556b28-c6bd-455a-87b6-4b7b3e33d0e4": {
+        "os": 1091,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1634.xml",
+            "gene": "cb9a0bb7-64d1-4fc6-9c3c-6f8ec74e0942.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "bc7a3025-a45e-4083-a49a-4a2f3015b877.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.cee2a595-164b-4263-9f5c-fb80463b0675.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "f8e9d538-7291-4fe7-b3f2-d01676a027f9": {
+        "os": 1169,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-09-1661.xml",
+            "gene": "a00f0490-91d3-4a33-b4bf-3a8c3013c97e.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "4e3440bb-5549-45a2-9238-b6903624c5eb.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.57bcc405-f49e-4201-afff-dcd766946ce0.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "e07a61e2-bcd2-4a96-80df-97e04aafbd32": {
+        "os": 1000,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-10-0931.xml",
+            "gene": "6b5cd598-f52f-48bc-8256-74a2e98ec04b.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "a6df2a75-8cce-40db-8af0-e3d90f19792b.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.fa0c4583-eb33-4be7-9d29-a9587b4eeefe.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "5ed14506-f69a-4da8-9965-72d3270b9f72": {
+        "os": 53,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-57-1585.xml",
+            "gene": "f04b7806-98d3-45b7-a8dd-e50812a5ca3f.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "a5d63e29-8fe9-4038-8b3f-4e11128c10fa.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.33185003-e0a6-4c8e-bf25-4623b5c7ef82.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "62efb5ae-43dc-4a4c-a898-6cd9c6dba027": {
+        "os": 2467,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1930.xml",
+            "gene": "95184079-0806-49b9-8bf7-edd8aaca0ba2.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "d8ffe3eb-1ef1-49d8-b5fc-0065ac4b2d6f.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.2a2cad37-1da4-4b68-b16d-6d2ba3ce6ab8.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "46395c3d-5e51-477f-946e-e58b87cc7baa": {
+        "os": 1155,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1320.xml",
+            "gene": "86274ce9-71ad-45a7-88c4-956a1d8bce61.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "aa86525d-a6bf-4953-9f3f-660ad0ce3080.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.299330bc-594b-43a2-b4df-72b668d3797a.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "0724f800-e873-45d0-bc56-809d0ec4f6e9": {
+        "os": 1058,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-30-1861.xml",
+            "gene": "fcfc2db3-01ff-4f31-a8fc-7a5f1a7051f8.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "543b169a-b710-424f-b59e-251f45578232.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.4ae6e2e6-c949-4bd2-8258-156075a41920.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "3491d67a-4f83-4f67-8085-bbb9fe942be5": {
+        "os": 479,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-61-1918.xml",
+            "gene": "b9ac701c-5ec1-49bb-b988-7799a603981d.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "dce12d18-0fb4-4dea-bb60-b806f1525b99.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.eaa038ef-a98e-4cae-a8b2-11d6afd9991c.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "2cb50c2d-e749-4172-b101-d975507435c5": {
+        "os": 524,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1567.xml",
+            "gene": "85db4a2d-ca76-4a24-8f69-c4ae6a781879.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "f1e56978-87f1-4859-8234-c6345bc53955.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.0b5247be-fdf5-4d54-84fb-12e5387b5a30.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "2ab32e11-80d6-4ed0-a42e-da612219bbdd": {
+        "os": 1699,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-2297.xml",
+            "gene": "24c604c0-2021-4829-b187-f160ee75d6cc.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "30ba72eb-a31f-4f57-a743-a05ecfe2a9e0.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.1d8caa41-37c3-4a40-8d3e-bb356efdbb77.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "2517ca7a-6057-4c19-b7e1-f6d078e9881a": {
+        "os": 1059,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-2026.xml",
+            "gene": "6965bf9d-d903-428d-91f1-c240967edb77.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "7af97f40-72c4-4f08-9c61-db722c09e034.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.0a35f5c8-aad8-45f8-aaf2-94f16c84a273.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "86b513ba-df09-485d-92d4-fb9e888f7350": {
+        "os": 515,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-29-1701.xml",
+            "gene": "8b38327a-d165-473f-bc49-2d28305e9689.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "d481a443-9615-4203-af7f-d69061ecfe9a.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.fe1cab9b-cff2-4467-ba52-134831acf48d.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "4160e048-f0b0-40f5-805b-e277a5893a3b": {
+        "os": 379,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1464.xml",
+            "gene": "a437b3c5-4dce-41f1-a050-61055225ab47.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "ef1aed95-eaee-4ab6-bac4-a25e3acbd5de.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.f9aacc4e-2615-4434-a61b-664886f92289.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "20336269-5a5b-4ba7-8fe8-665a1f9af738": {
+        "os": 1891,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1633.xml",
+            "gene": "2d1f87db-68ea-4a99-beab-ac630a5b407a.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "4cabbb81-9012-4fb9-a048-22a7df6691ce.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.3ea2b821-8f7a-4430-9b27-16bdc5f0b4d4.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "41178cbc-db73-4007-b5d8-febebf7f578d": {
+        "os": 2342,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-23-2081.xml",
+            "gene": "94e50abd-1c5d-4267-b36e-25d229716049.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "693956c3-a901-4e52-80a5-52c6587a5227.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.02e34699-d3cd-4dba-b8ab-9038ca6a14a5.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "65435f50-a35d-49e3-a36e-b95d9e274ca0": {
+        "os": 2688,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1604.xml",
+            "gene": "32c81ba3-dca1-4bbd-9e03-5899dc6e3b0b.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "1327ac1a-8743-4c51-85eb-fa4f04ca14c9.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.644ce6b1-1823-4eb8-bc5d-029b3f51fe2f.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "9e7d3dea-5d81-4f10-819c-1c2a68ddd150": {
+        "os": 1955,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1546.xml",
+            "gene": "7211b055-44a1-4b87-a97e-ce36fdca987d.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "11556e5c-ad39-49f3-9a7f-07969fc356af.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.69614804-5f34-4b8e-ac15-a4466ceb880b.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "58427bce-6b81-4083-aeda-25f59e292bbc": {
+        "os": 1279,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1316.xml",
+            "gene": "c2f06573-c165-486c-bf6c-28316a82acaa.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "7c1779d0-8bc3-4881-95d0-e92ab2eb1677.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.fbc1848d-a366-49d3-96f0-befdaa9a2cb1.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "f7752d6e-f9cd-4dc9-ab01-3ab87acb21e4": {
+        "os": 1483,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-04-1348.xml",
+            "gene": "2e844d1a-874f-4972-820e-1d4f89575463.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "52647a51-f1b7-49b9-917a-7f0ab523ac9d.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.86b353ef-ba2c-4dd0-91f6-ef700eb3c5d6.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "9af2248a-d86a-4277-93b4-8eba5a39bd3c": {
+        "os": 1736,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-2254.xml",
+            "gene": "01b83536-edd8-482a-bff6-01d0bb9970d5.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "f695414e-ae65-4761-a767-6ac85a200ac1.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.ad900317-46f7-4681-8fb1-692f07f48e38.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "2ebb738c-4829-4720-931a-96c0fd117e2a": {
+        "os": 542,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-13-0730.xml",
+            "gene": "d7735ff1-203e-4a8b-b189-e36fa25da887.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "9bd95e0f-a79f-4d68-9fe8-6ce4372bfd6c.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.f17ead9c-d1d3-47fa-9f19-292fb6d9cbec.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "778ce436-a825-4689-81c1-b7c965404163": {
+        "os": 1875,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-61-2095.xml",
+            "gene": "d3d30fe1-8e55-436e-85b7-bff934cfcb8a.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "370e91e4-a4fc-43c8-a7ac-d578bf2823cb.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.0f90bddb-ac68-44ad-a48a-6293e7529aa1.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "6746533a-8d0b-4ebc-87ec-49c8738121a8": {
+        "os": 887,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-09-0364.xml",
+            "gene": "be93160b-4c67-48f1-8bdf-23d29b8c815d.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "c023caed-a917-4b29-bf2d-6808321e4463.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.3ad89fc4-fa3f-4090-a41c-a46b6aa68cd5.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "933dbfbd-4697-403e-bd73-c17cb300c94b": {
+        "os": 2490,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-10-0927.xml",
+            "gene": "052a97e5-fd39-4af4-a29a-284bc185c9e7.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "9225dd25-cd84-4a29-b399-788e63033d70.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.0afd6963-4ee0-474d-89b9-4fa151d8f1b4.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "708eec28-2348-4e15-b98c-8c6f9d057b1e": {
+        "os": 65,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-59-2355.xml",
+            "gene": "f5c15b21-916a-4900-aec7-d30ed3377e0a.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "781eecf6-ec17-4c48-8a24-a67b86b1b18a.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.f3bf0766-203a-4cef-9b0f-d9e84bfcfb38.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "13319c20-02f6-4b5f-b24f-3d8f4084094c": {
+        "os": 1064,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1318.xml",
+            "gene": "f0cdf1bd-137e-42cf-a98f-dc9dd37ae19d.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "8412104d-07f4-4d74-aba7-14fccd2ccee9.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.376e5a23-7824-4935-b63c-454fc1c99627.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "e641aed9-1dd8-4c30-b231-f12b20a76df0": {
+        "os": 788,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-10-0926.xml",
+            "gene": "b1f91d13-fe60-4444-a254-db4fd36163a4.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "287e60d5-8f5d-4604-98ac-f771fca970fb.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.7f20859a-904e-4a7b-b57b-20ad49c3eeae.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "66face4a-f35c-4364-90e5-8f28e6372606": {
+        "os": 31,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1312.xml",
+            "gene": "55f58064-b810-4345-bd41-a844cfb255c6.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "272cc5f5-8f44-4314-8583-cb8677a15524.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.ab0cc4c2-aa3b-4c0c-904e-090c5ce00162.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "29d26e7e-f4ae-4476-9a3f-27d5ec2ccb8a": {
+        "os": 563,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-10-0928.xml",
+            "gene": "861aa222-1133-4423-9746-6a0d1b8e5163.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "975e21a3-c806-416c-9329-892de67e0acd.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.53d6550d-4d80-4e28-accb-fd3a46abcdd5.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "1fe19c6b-71d0-4b07-923b-74ea32210db0": {
+        "os": 885,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-04-1536.xml",
+            "gene": "1eacd17c-5634-465d-83d4-d39d136d0ce2.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "703c0003-5ace-4eda-8186-5a6ed65fa880.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.c65769ca-85bb-4730-a7d7-4fb0776baed8.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "0c1a2e7d-e7e4-481e-a012-ef214c444497": {
+        "os": 2561,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-04-1542.xml",
+            "gene": "d779f8e6-b653-4d7e-bfa4-729b9caf329d.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "9298e8eb-6565-4f6a-8836-9c24d58382ff.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.d346cd40-dcdc-4a57-8a9d-b20544c87d5f.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "09820a33-80b1-42d0-8366-a0ddaf94b122": {
+        "os": 1158,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-30-1714.xml",
+            "gene": "86f6b100-9d37-4a8a-b3c5-03ec17f83559.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "5bb76691-f216-460e-98ac-c15f3857c1d1.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.3a5d57c7-62f9-48cc-9b9e-b8d437d7c86d.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "bc2591b0-65d7-48c3-a5cc-783f67b65869": {
+        "os": 1583,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1635.xml",
+            "gene": "25ff83ac-f657-473a-a0d0-fd5e98e2f691.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "09bc800e-e2c5-4da9-8e0a-96ce8036f565.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.ad7b6bfa-58a2-47ef-8dea-981ccd71b872.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "062982f8-9f49-425a-99e9-008af5ed9040": {
+        "os": 857,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-2035.xml",
+            "gene": "253e8a92-35ff-45b4-bf43-8f52d62ca993.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "0a47157f-f490-4ca0-a6ba-b97435d80413.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.501f96cc-6600-48c6-bb6f-3bd38b1d4d09.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "3bc8a74f-49bd-46b6-a3a4-68ca838e83c6": {
+        "os": 90,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-2401.xml",
+            "gene": "d3e779d2-6fec-4c44-80b2-d7d61eb03c81.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "2a38ef6d-6056-49de-9add-8f49b9939e37.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.a4fd7722-6def-42c0-a910-239b48cee2bd.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "7a08efd0-f984-430e-a8eb-1881047214b6": {
+        "os": 197,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-61-2102.xml",
+            "gene": "c6e887f8-3f80-4099-b8dc-8b32a2a92065.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "2b7f49bd-899a-46e5-a85c-7561cf0391f9.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.7d0cc9f7-b9ad-4338-a6ea-2d815502dbfe.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "635f5335-b008-428e-b005-615776a6643f": {
+        "os": 1583,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1315.xml",
+            "gene": "ecff58ca-03fb-42b8-8da2-c971025a43e8.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "f3ea933a-05be-4f3d-a115-3fb442f038e2.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.2471a056-c835-4330-ac57-a98b31d44bbe.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "7592a659-7175-486f-a16e-24a4b4365a36": {
+        "os": 2148,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1556.xml",
+            "gene": "f25d516a-d4ea-4f89-9f6e-9f41c1634505.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "7ae252d4-c54f-44e4-b2b1-89612f876d40.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.30477fb0-3b9b-4b2e-aeff-69d84d2b2647.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "2ee36d9d-128b-4761-aa1a-a637da106f3d": {
+        "os": 395,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1323.xml",
+            "gene": "caa902d6-c184-4b05-b61c-96c04f7196b0.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "24438f0d-d8e0-45a9-9dc1-e52633bc8c71.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.0255205f-8e52-4d29-aa0a-7eecf30fc836.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "22178c3c-6b04-46d8-8041-dc83fa195029": {
+        "os": 883,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-2404.xml",
+            "gene": "57439dc1-cb41-424c-ab78-f8d8efa49d27.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "323f2ea4-fb77-4100-a65a-f8792ab9a8f2.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.b71494e2-1f72-45de-bf6b-2f5ae0b0c1f8.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "005a6517-2e5a-4ea3-ab36-531522723607": {
+        "os": 74,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-61-1740.xml",
+            "gene": "00d52735-8d5a-405b-a26f-52a4f1ab6df8.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "4454042e-0f74-450f-ad17-e3bb7b48c983.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.dbcc180d-1916-4914-8ca8-44ba79083add.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "f5033d52-ec36-4e67-88d8-b6d898b81b2f": {
+        "os": 1492,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-2391.xml",
+            "gene": "8455c6c2-16c8-47ce-80d2-6925795285f2.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "1632215a-9e47-46cb-9e7b-87e68c315b67.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.e77f1b20-4c6a-4a79-999f-7caa799d2476.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "8449955f-42d9-46f6-919a-5cc5d59e6284": {
+        "os": 690,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1923.xml",
+            "gene": "6f9bb9a5-b2d8-42c1-94fc-05eb778c1f0d.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "71ffaaf8-d55e-4089-9066-527e982edf34.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.ef194766-b0df-43cd-ba19-677605132446.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "f34aa3b6-e966-49c6-bc55-130545772c53": {
+        "os": 1646,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1103.xml",
+            "gene": "597eeda6-4844-4897-8fa6-8b42317b88d6.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "3e9d3f5d-6365-4d85-af3a-71e47dbb6422.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.1d325c54-f0d1-4a78-a803-95239abbf8e1.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "5c159ab5-8475-4d93-89b8-b6befed4a5b3": {
+        "os": 2097,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-13-0883.xml",
+            "gene": "3f97103b-9c36-40df-b3d3-88e9b118f5ce.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "94f2d575-c88d-45b8-8e8c-b471dbbc4bf4.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.ceabd0be-fcb9-4fc3-9817-00452e386182.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "d2c0d320-d1c5-4eed-af4f-15540e60db0b": {
+        "os": 1189,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-23-1122.xml",
+            "gene": "98990aa6-30f1-4a05-aecb-a13b907c2f57.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "d4292db8-ecae-4127-9989-0e7e9ee9d3ec.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.6a4eb92b-ed80-40ce-8275-922cfcd1b1f2.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "0a2d29de-869a-4dc8-ad11-6ee0d0a3a895": {
+        "os": 1484,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-61-1736.xml",
+            "gene": "d34ab5f4-ced0-436d-be8e-28f8f58e228d.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "557b590e-0e24-4601-9798-7f4c755554f5.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.f2a87dfd-48e3-4ca8-be68-808d869dbfec.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "95e58015-a7c0-4bdc-bf64-7617d24d0784": {
+        "os": 354,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-0970.xml",
+            "gene": "59b900d7-691a-423c-a590-cc9e1f0735dc.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "e0a7c637-691f-43c3-a17d-a72c2c1f41d0.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.40e41ce7-8a6b-440d-be49-8502f20b1c96.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "42b3dfa3-152f-4ab7-ac9f-988c7f473bea": {
+        "os": 3622,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-04-1530.xml",
+            "gene": "f691c28c-5b0d-4b28-8b05-030dd07a2b13.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "4c2b78f7-0bd5-4886-9ac6-836e93c4cc8b.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.bed7524f-5148-430a-8c10-deeefa3f408e.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "955c80be-53df-4565-9303-a7abf96a2f81": {
+        "os": 457,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1329.xml",
+            "gene": "2458e827-5ac6-4d31-8ad4-b335e7f787cd.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "ce897708-8d5f-40ac-92ae-81b37f1932cb.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.5b2ef5e1-b131-4220-9a34-6650e8656e76.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "e5a329ec-e50e-4786-901d-b58474f8ea65": {
+        "os": 129,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-13-1496.xml",
+            "gene": "34e59c84-b0d2-4373-9a9c-b265b828631e.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "7b9a30b7-5f95-4380-826b-d9cdbfcfc6f4.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.1b6ac59f-1dcb-4473-9af6-27d0d869f05e.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "b46263ab-c3ca-4fda-a895-74c7e6e6fe22": {
+        "os": 1247,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-04-1332.xml",
+            "gene": "bb5d75c1-c4fb-440f-8f09-0be3dd6b7daf.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "c88be2a7-9678-493e-9a65-b3dc27872fb7.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.79e63073-7d6d-456b-92c7-a3a7f0216ee7.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "1e14f098-17b2-4f54-8e4f-e38088008df7": {
+        "os": 189,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-13-0714.xml",
+            "gene": "72e3b5ff-0679-4d43-a7c2-697635faa1fc.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "85cc565a-f52a-4f5b-85c1-b891b62b7126.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.e4f66c8d-3cf1-4e33-b49e-98b6ee4b98f2.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "077079c3-6877-467b-b9cc-5c650aae4f07": {
+        "os": 730,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1877.xml",
+            "gene": "5a59c958-9d85-4f7b-88ec-4a15a81dae28.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "9959fefd-3a87-4356-9968-a7511430cbe6.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.a6bd71ab-f853-4170-91f3-e32429cfdd43.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "15f1a992-0724-4d76-a71a-702ac7753a41": {
+        "os": 455,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1870.xml",
+            "gene": "a0a073aa-4198-4139-b0d3-ce95e1fa4327.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "99ea8809-e73a-436c-97f4-d9953262072c.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.d86ee094-af3a-4be2-9ac6-35f6cc825ebb.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "6209e80d-a115-4f8e-bf0d-18461401a1c6": {
+        "os": 949,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-23-1113.xml",
+            "gene": "a0361246-7cde-47eb-938d-53b0e2bf236d.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "a38762ce-65b6-4b8d-98f3-5d638bbc06b0.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.3ea8c102-7d7b-49a5-893b-a1ea2fdbe6ae.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "b520aae5-65a6-4b27-bc2a-10b02c7b1aeb": {
+        "os": 91,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1322.xml",
+            "gene": "e77ccd7a-1dda-4c03-bf50-08b5df2b66e7.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "19132958-f12a-42e0-ba39-fc452e31cf40.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.6655a8af-6e09-4618-83a0-aa2db334795b.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "5d36676e-4140-44b5-aa0e-b2af092b7dc0": {
+        "os": 2692,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1555.xml",
+            "gene": "9ae61124-172b-4d16-aadc-bc7c096002cf.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "fc8f0006-3696-462e-9852-91fa7865ed12.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.7575e343-6f72-42a9-9011-2b7e02cf01cc.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "55153632-1673-487a-85c0-f156377db1fc": {
+        "os": 1102,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-04-1651.xml",
+            "gene": "68f32d39-8608-443c-ac04-95f12812fb72.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "be737c22-e2c5-41f0-9113-c6256541f151.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.5ce5aabb-61c2-484f-9fd2-be3da4e1242f.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "ba68f2cf-9271-41fd-9655-1fac7681f588": {
+        "os": 594,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1558.xml",
+            "gene": "46d71567-d992-4687-bba2-f015c65e3778.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "022ccf56-cad1-404d-8fd0-6de0f7e4058e.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.59734a4a-9daf-4a2f-b772-443dc12a9100.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "7016714b-6af8-45dd-8341-1493927e5515": {
+        "os": 1123,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-10-0936.xml",
+            "gene": "4f01c248-9d66-4561-ab24-5301b843630a.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "ec98f93d-8992-4fa2-a916-8d46ee4e3955.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.0eb9976b-f75f-4763-8954-bdba8c9047a1.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "a09f0626-002a-48fd-8b2d-c66b8285cf23": {
+        "os": 1484,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-30-1892.xml",
+            "gene": "24fb0a8d-34f2-4cac-9b8c-03c2503a34fd.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "e64b8d8c-6c87-4cca-b14f-9b59a2781810.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.e4d8afcf-21af-4406-bc25-ff15f9c85107.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "7e01f23a-0b0e-46a2-9f30-c3a9d2c779d2": {
+        "os": 1442,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1105.xml",
+            "gene": "c5318c3f-ea9a-421a-be7c-26fa120568c6.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "b4439a62-822e-4954-ab5f-937d58ea98d6.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.d94a3067-cc80-4110-91a3-3fe91a0b3d7f.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "6ad8bc89-d8e9-48c2-bc25-c8e51f972b4d": {
+        "os": 1033,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1321.xml",
+            "gene": "8ce770db-df49-4c86-b57b-3d98375f65c9.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "d3238dc1-b748-423a-9c9e-27f83ce4df27.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.8a0d15e0-9f45-4ec6-a19d-d4aa0c3bbf28.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "fe0e3851-d8cb-4533-9536-b4826cd25f87": {
+        "os": 1106,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-29-1699.xml",
+            "gene": "d4a99056-1263-41dd-910a-a5a34394cf42.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "08d0eba3-a3b8-4879-a759-b7dafd544f21.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.4524d67a-604f-44a9-8638-dd472da98b91.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "867f9563-16c9-45a8-b519-6df61ba1b6b7": {
+        "os": 2717,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-09-1662.xml",
+            "gene": "3852b0f7-4b5b-444f-b948-f04b2d112b2b.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "9409fede-202b-44fc-b6dc-83232512e56d.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.e9bba0c4-8491-438b-838b-d52ef50cfdf7.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "d1e974e7-dd68-40cc-ad06-2b57d964e5a1": {
+        "os": 61,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-04-1337.xml",
+            "gene": "ce797402-bbd4-4ad0-8b02-b44d6b30f70e.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "40c4602d-3466-46bb-9d4e-b17b52315365.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.e9050a41-d803-4991-b9b6-0aafbfa90480.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "a85f6f9c-1e1d-44fc-85eb-3b2d96cfbc61": {
+        "os": 2154,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-13-1488.xml",
+            "gene": "be31437e-d2d6-4e6b-99e0-42ddb5a4359d.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "ed3b7801-985a-4dc5-b02c-9f73dea35197.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.42496ce6-0aae-4ae4-a70b-6f339b5b7e62.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "78777a80-cc6c-46c9-a14a-837ac7943719": {
+        "os": 61,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1317.xml",
+            "gene": "bf0b1fa1-16b5-44ed-bbdd-535835f2c4e9.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "453999b4-466d-428b-a9e3-850352ce6f3c.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.bd6da330-a14d-424a-8bb6-ac244273969e.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "33d36b64-4688-40a7-9a4f-7cd3d4cc683d": {
+        "os": 1229,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-29-1695.xml",
+            "gene": "2e2a3b0d-9b35-47ef-bfa8-98c2519cff9c.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "38f9d4db-cfd3-4191-86c2-feb8a04c64dd.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.85c10346-60f7-45e9-9948-a150ef623db1.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "f9c835db-2ab6-4bf5-826f-48723493c0ec": {
+        "os": 555,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-29-1705.xml",
+            "gene": "f43a4550-8d3e-44c5-ad1a-2b0d173809db.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "57a254cb-52e2-4c4e-931a-60785493667d.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.c848015b-7d16-4074-9253-1d4dcc070a70.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "afd92922-b8dc-48bd-a9c0-bc8d95855eb7": {
+        "os": 1341,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1560.xml",
+            "gene": "9cfca6ea-1dc8-4e87-8cca-3878e58831a3.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "e0b5c688-22c0-4c9a-b52d-9e9394449886.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.92fcc5c5-9d98-49f8-ada9-b4a663d7f2bf.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "e978a457-92ff-4eab-b759-ec6e74d973e8": {
+        "os": 679,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-59-2350.xml",
+            "gene": "7ac150f1-a758-4259-b65d-52e51bc3fb1f.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "bab25eea-535f-4dbc-acd6-42059d0ad79f.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.a3747731-86b6-4f6d-8044-d677000432cd.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "6d10d4ee-6331-4bba-93bc-a7b64cc0b22a": {
+        "os": 1336,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-04-1331.xml",
+            "gene": "bfcea1b8-fb75-4e7b-972b-620d9f1fc3bb.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "5a934d68-9421-41f5-a248-2d87c55b3ce8.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.eb2cd85e-61a9-4180-b953-a8ad5fd9bef0.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "23771dab-2aab-4d2b-95e2-9af7092cee6b": {
+        "os": 1757,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-09-0366.xml",
+            "gene": "582b5cee-9df1-4c95-9c52-de02e271c747.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "c733766e-eccc-4c0d-b5bd-5d05fe30d765.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.00014f01-24a5-4226-9ed6-4b9cabacd074.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "dc5a6ce7-01e5-408d-812e-e3e0ddc1cde5": {
+        "os": 629,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-61-2109.xml",
+            "gene": "7370550b-9232-4382-ba1c-5d3ff2a69da1.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "c3f5ce9a-9138-4ef2-ae07-3c6985595aa9.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.1987530a-49d4-4e7a-aaef-fa30a1aac2d7.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "384170fc-e8be-426a-a54e-bf1ca61f2986": {
+        "os": 583,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1431.xml",
+            "gene": "f6e1478c-72b3-45ae-a328-bba09df4a0a5.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "2bc4213a-5fcc-4124-b37c-9a2735544786.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.bf3ced77-b793-484a-8bfa-7ffabbf491cf.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "1aea3c25-d2bc-4ff5-bc27-32e939944e9d": {
+        "os": 1104,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-29-1785.xml",
+            "gene": "5e46819c-e79e-496f-9903-82b5c155a78b.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "41014086-9c56-4cd8-bcbc-c035920c9a74.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.9f35633c-a588-4469-8103-108308f76323.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "cddce77f-21e6-4124-9f03-96fb5ca7cefa": {
+        "os": 871,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-04-1648.xml",
+            "gene": "1730a0a1-8a5a-4532-a35e-4e4db4a4b4b6.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "34208675-4fb2-4f3e-a014-1ca9662e118d.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.634da42b-ae78-42e0-8115-37a735e4e057.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "21f6bf91-dfc6-4a59-8b76-88a0f95c7b47": {
+        "os": 820,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1544.xml",
+            "gene": "2e3b43ae-a0aa-4d7e-a66e-07d4a88b16e8.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "62be0caa-e73b-4414-9a22-af2c47c02f9c.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.7cce06da-3bb9-44e1-b971-e87ea08505d0.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "5d603bba-62e6-48fb-b8fc-401109abcaee": {
+        "os": 1103,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-30-1853.xml",
+            "gene": "40578293-a4b2-449e-bcdb-f6ae9bfbc3e2.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "a4474966-9838-4d25-926e-1b252a2dc4c0.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.d27694d2-11bd-4504-9546-564c20cb6832.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "1d192835-524e-429d-bf74-3c4727acb446": {
+        "os": 1348,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-04-1362.xml",
+            "gene": "78b8f856-9896-41af-bb90-e35569bacc42.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "4941f0f1-fef4-4861-bb53-41f78154f8b3.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.8fcdd3d0-8a62-49aa-b7e2-5b06cb390d40.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "60cce7ac-d27d-44a6-9873-ecf91da5e906": {
+        "os": 1018,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-23-1123.xml",
+            "gene": "fa8ad93c-f08b-4227-9be1-419b5353b160.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "7f7ced98-3cb9-4d44-bd76-ecd8f40a4937.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.68b7f950-ef65-40a8-8ead-3c28e800c770.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "6264e699-d40b-4ebc-b443-0a0edcb220dc": {
+        "os": 92,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-2396.xml",
+            "gene": "ecf72b78-167b-4353-87bd-ca38c7c1d0a0.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "0021fa34-6918-4218-ae32-4cdfc4d169ad.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.81983782-4b6f-4b83-937d-e4ac8676a0f0.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "58f5a54e-de50-4cca-afa1-cc331d8b3479": {
+        "os": 186,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-30-1862.xml",
+            "gene": "4951ff48-dfd1-4df5-b7ab-4bdd6ef8af67.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "e51bf98e-09d5-4313-9d77-5cba23ed824f.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.8e98ecf8-ef07-43bf-8dc3-9410eca8ab79.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "f9f44f86-10c7-4473-b156-5afbfa9a2ad0": {
+        "os": 1933,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1104.xml",
+            "gene": "57bfee10-7547-4a15-a774-23ea7e6cf5e9.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "68861201-d59d-47b2-91a6-3d279b1fc231.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.3f7272d0-dda4-4232-a079-d77f1567d529.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "d7b3156d-672a-4a55-868d-9ca6a09fcb0f": {
+        "os": 676,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1474.xml",
+            "gene": "a235d4c4-13bf-4267-82b5-1a4c82d202b3.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "14220d4a-fa5e-4040-aaa4-727ee48b4791.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.17d5600b-8927-444b-96b2-82a3c8a81001.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "206ce0ed-36a4-47ab-ac8e-f6fca6ac5c18": {
+        "os": 679,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-0982.xml",
+            "gene": "02d00dd6-708d-46a9-b885-d6d14eed564d.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "45ac2b21-9065-4645-99f5-2eddf940b78e.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.292ddf98-fc4e-4f92-8d5b-638de30cb924.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "ff844242-7559-4b07-b09e-69ea40e5ac6b": {
+        "os": 760,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1871.xml",
+            "gene": "43c987b0-278d-49c9-a332-8cfcc9bdb05a.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "6a297250-2e0f-41c7-8198-9046fe4f9e9e.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.dec54b8f-0a64-47c3-acd7-cec92f30e0ef.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "914d8613-3c25-4a10-be50-28b42f4d3a5d": {
+        "os": 1977,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1319.xml",
+            "gene": "8b8765b7-07af-45c1-8aaa-d9facff1b04b.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "31dfb0a1-eebc-4120-97bb-f8fc896da6ab.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.11cc2243-9785-4894-a8de-52d32cd4e466.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "12581634-eebb-4841-8498-71dc9d78c546": {
+        "os": 695,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-36-1571.xml",
+            "gene": "4383d6c3-b23c-412a-9329-25cd54654941.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "d5dc0914-02a9-4f7a-8f26-3b31231203a3.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.63eb62f1-969d-49a9-963a-af10e9e878cf.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "c5355491-e1e8-46a4-a05e-bafcaf2e7459": {
+        "os": 2648,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-13-1481.xml",
+            "gene": "7477b82e-dc6c-4bf4-ba14-b7d33a867161.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "89dcf1e2-f8a3-466d-bfd9-99a1ff058863.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.69a7fc68-d6f9-4804-87d1-693346e176e8.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "ad2939e6-b8b8-475a-90e2-6a369c3d3167": {
+        "os": 1579,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-30-1718.xml",
+            "gene": "73fb7bab-b6f9-4411-a0f2-48f884eb5679.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "beee7850-9c3e-46f5-83c0-e16562d09f14.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.eb5ed8b0-d282-45c0-b673-c2822ddff885.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "88180134-710f-46ea-9b06-5e5d860d6d9f": {
+        "os": 1354,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-61-2110.xml",
+            "gene": "bc3bc9f5-e99c-4384-a528-5dc71d1a5a19.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "2963986e-381c-417b-8c20-e6e5e3241211.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.6f43196c-f5bd-473e-8212-acbdd3a7f02d.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "808eb134-9c7d-43bb-b86c-2f3259193954": {
+        "os": 565,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1623.xml",
+            "gene": "03462bef-e22d-42c1-8360-f2a3404e698d.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "b3cdfc5a-eb12-4714-93f6-be2b9002acef.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.fb6d2d72-8352-495b-96c7-69e45636ad78.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "32960bc7-839a-42c5-9460-3917fa578ffc": {
+        "os": 949,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-13-0726.xml",
+            "gene": "7711187f-5e2a-44eb-804f-c32556a2f02f.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "3e60ef6c-44ae-48a9-a1dc-31240f0349e3.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.49926024-a499-4744-9ea6-5dc05da705e8.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "662d77d1-1a43-427a-813b-e11edd30868e": {
+        "os": 518,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1626.xml",
+            "gene": "278dc83a-1488-4a81-8e24-56b784c77796.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "5953b080-f186-425d-956d-c46bc29978f2.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.e112fed6-8e4f-4bc6-9f93-d6c73ba9b223.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "b4b49027-7815-4813-9769-a3fe3a26a37a": {
+        "os": 1157,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-2393.xml",
+            "gene": "3c94176b-696a-453b-b80a-e7d9e3ee91f8.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "c819eaaf-630c-47c6-a627-ee649b761f45.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.dcc7bdda-71fa-4e79-8a0e-28259dc2cdaf.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "9446e349-71e6-455a-aa8f-53ec96597146": {
+        "os": 446,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-10-0933.xml",
+            "gene": "21ff9928-00f0-4b96-8d70-35e9bfad5d40.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "607e4557-47f3-406c-8068-eea42e33c649.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.e601f5e7-56ad-440a-873e-34e99749e92b.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "6b06281b-d3a9-440e-a86c-ee7db003352a": {
+        "os": 1448,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-29-1690.xml",
+            "gene": "1019e11f-92fd-42dd-b47a-5eff5fb10de5.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "26d98961-fd5e-4fd1-87ad-42d40070032c.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.c40243b2-89d4-4f9d-8674-09e2a35103d9.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "533f5ff9-466c-4cdb-9c46-b841c2626775": {
+        "os": 737,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-36-1580.xml",
+            "gene": "4d444647-db80-41e2-b7dd-148690e2b3c2.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "c677d31c-a159-4ebf-8051-047c3cbdccb8.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.f14c674a-b25b-4929-b28b-4ba9ff78eb17.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "f3af727e-b592-4828-94f5-22008666cf8c": {
+        "os": 1877,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-13-1482.xml",
+            "gene": "846a9737-f1d2-4c15-8023-360f22805491.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "da00bba6-86c4-4acd-8d68-f675f589bb37.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.576a7db4-0c37-4d05-a4ed-cee6c88bc73c.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "52386f66-2877-4c75-894e-5c1dc03e6ef4": {
+        "os": 1451,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1563.xml",
+            "gene": "80422946-6ccc-40bd-bf90-e2b9a159a826.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "c10a9394-6fde-4fab-945c-c39ee94789c8.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.ebfb5ea7-457c-49f1-830b-d2ec9e10d930.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "9d25cd0e-0a3e-4ee0-b1a3-58ffab348c9d": {
+        "os": 1266,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-09-1665.xml",
+            "gene": "d0f28c51-328f-4573-a872-a3ef811d18ca.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "d67a4dcf-44ad-4c06-b9be-b2b40a196d42.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.7fa92667-c84b-4b05-ab4f-4813e5a2e956.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "7e4e7914-ec23-4c55-98d6-3c5eecffa8e4": {
+        "os": 1620,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-2298.xml",
+            "gene": "dfe1fbdb-b7c2-46f0-ae12-b63a8375b8be.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "bdcc491f-fc13-4224-ab25-7a590bfc8e67.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.9b422094-dde1-4ed5-9431-cb15e6d90b35.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "80f85c54-e12f-4afa-8fa5-5f3e083b6f95": {
+        "os": 1024,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-04-1364.xml",
+            "gene": "f2db0392-6666-4458-a93b-e0ec560018c2.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "afa1281c-3b15-42fe-b713-1775b058ec72.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.e73359b7-f33f-4a24-b93a-f93196d5719a.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "35916942-e7aa-45db-ad27-03cba67d4d5b": {
+        "os": 608,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-04-1517.xml",
+            "gene": "615dafd3-130a-4a7c-9e27-a3632c2be831.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "815234f2-6e4e-42bf-9ffa-d4b2233d28f8.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.5e521fd3-5489-4e99-92db-70c6bb30d44f.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "17181157-c9e2-4bd6-8653-f5dce56f9053": {
+        "os": 1354,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-2038.xml",
+            "gene": "f08b0e14-26ec-4a08-8668-66d0137d72b1.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "4a009440-1f81-4cc5-9cb8-e6ad3e234bdc.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.e765cea0-7987-4b98-bbe6-14c21afe6b58.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "cf1e86ec-4bcb-403c-831b-d67bddef14eb": {
+        "os": 312,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1565.xml",
+            "gene": "d90d2b4f-8865-440d-a8b7-e0b7c947e095.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "49b80937-9772-45fe-89b9-c46d0eabbe94.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.ef759014-dfd0-4f35-ab00-20f9a884114f.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "263e85e2-7b6f-453f-8fd0-e5ea1409fece": {
+        "os": 1162,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1630.xml",
+            "gene": "99fea937-9d25-46e5-8fcf-b8319d0fa002.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "7182f641-3182-49fb-a0a0-198ca4e61fe8.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.6ff06087-e0a3-4c0c-90d4-f30437d25f15.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "0f4a4ad1-e394-45c4-9aa9-aadf2bff0628": {
+        "os": 1946,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-04-1350.xml",
+            "gene": "50c62016-a463-4dba-a179-146df17fb5dd.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "e8fb5d4d-be7e-4bfa-ac1c-77a8da3d7217.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.9ee784ec-de14-4b73-b0eb-94f4ff4defcf.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "4a2ca7b8-729d-4fab-a6f3-a5d1e5d1f4f3": {
+        "os": 914,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-30-1891.xml",
+            "gene": "bba3e52a-fb3f-4339-9969-07f40425e711.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "4dec72e0-23d1-4e14-918f-d34ae24e5a6e.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.3d12d22b-4400-4141-9ee8-111bd81681ab.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "b45c543a-40d9-423a-a7fa-98e4b325b487": {
+        "os": 336,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1928.xml",
+            "gene": "216248b8-0db2-464b-ab1d-0253d71dc54d.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "d4b51a35-7792-4147-86cf-af211516838a.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.3fbc2630-ca7b-44f2-b331-bcf6dfbf6982.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "b4225c44-b9b6-46c5-aabf-7b0d9a9fe20b": {
+        "os": 1470,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-29-1691.xml",
+            "gene": "a14ac53b-7e97-46f3-9dce-41a2a9010f17.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "ff9eff03-d86b-4a2a-a83c-5355b25b1d51.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.4f153dda-e919-4502-aa9f-0d52487e60eb.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "05ba5839-e00a-4a9e-8ba3-ecb490781e62": {
+        "os": 23,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1422.xml",
+            "gene": "3e81ddc0-4479-48c8-a93d-a63b9eb4e8c0.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "14506194-47b0-49b0-86e8-486e701408b7.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.9b610217-9f59-46d7-ba9d-9d460c659802.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "2b14123b-8fcd-402c-9399-4e7c47f20252": {
+        "os": 1102,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-2290.xml",
+            "gene": "03bade58-bed9-43c1-90ca-1a3e81671bec.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "0ba0007f-44ad-4db7-9ef5-1bf94e7b8832.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.52fce37e-fd7f-4b44-81ae-b2a3253f8699.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "c435627c-159d-4a6d-a819-30abac24bf4d": {
+        "os": 1799,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1632.xml",
+            "gene": "14ad7b5f-80d5-4271-b46c-bbed630b59bf.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "fe5a396c-5857-43e8-a783-77a146cdf886.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.2ba3a197-86fc-466a-a9be-54e24daba3a4.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "7413c891-f74e-456f-bc70-69c83fb53c70": {
+        "os": 31,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-2392.xml",
+            "gene": "13e069ad-b3f9-48e6-93f8-24060058ed43.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "998135f2-510b-40cc-869e-f562a87c83b3.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.ed1cf8c6-d594-49f7-9aa5-9a13cafc0f4a.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "13f5814c-1f99-4ffa-84a4-3bbd8979faae": {
+        "os": 1662,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-13-1477.xml",
+            "gene": "207cda7f-138a-4ae2-a6fd-90a003a94073.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "a6a7272e-d34b-432d-951b-efdb3f19dc4e.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.05a360b5-04ea-4f1b-be78-86470c58cb80.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "758e6b52-062e-4ca0-84d1-ea38477414ac": {
+        "os": 286,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-59-2352.xml",
+            "gene": "0cb97f5d-d78d-409e-9b67-30f15d6ac77b.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "b6891973-e619-4443-8efe-32a065b9b81e.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.a8594369-1e61-444b-a8f9-d47ca065010d.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "0a48873a-092a-4b25-822b-b0b3c18c08a8": {
+        "os": 1769,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-2024.xml",
+            "gene": "59fd8143-0e82-4c16-acb3-c54e518248fb.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "f91ba17c-fb22-4a07-a5f8-8b4f976e0b07.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.7faa8eaf-a19f-40df-bc1c-2dddd37dac9a.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "1858b58f-fdf4-413c-9c29-96ae85b88a74": {
+        "os": 1249,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1550.xml",
+            "gene": "8e1e205e-342c-4434-a78d-fc206a85003d.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "5fb9990f-004d-465a-a939-7edd90962e0c.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.308919de-3238-4f7a-a68c-97bcae3252a9.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "66c92b9e-de3c-4d1a-bb69-46ffbc6caf33": {
+        "os": 493,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1548.xml",
+            "gene": "7696baa7-abb2-4c3e-8c10-72bedc9d7b2d.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "2fd20d8d-ff6b-47b0-8c33-da17f07ab39a.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.113a01ed-70f4-4c51-9b01-2c567aa5e9fb.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "6a57948c-0dc5-4ea2-8043-380f26763752": {
+        "os": 663,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-0975.xml",
+            "gene": "82abd810-1a10-4eb8-911f-6393b01249fa.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "318f6480-46c8-42f9-8d8b-570c21020222.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.99ebcf7b-cbb1-421f-b4a8-7d3ab443ccd1.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "818dc159-aba4-46bc-a4ed-68ee0f8c4461": {
+        "os": 396,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-2042.xml",
+            "gene": "68831b64-75d3-410c-ab86-105d126690e9.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "63a84074-aef3-4a35-9bac-ad3d4329566c.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.3a1d29f8-0300-4798-9b2e-d0bed27dcd45.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "512de609-757b-42be-8b30-c414f71af422": {
+        "os": 36,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-61-2016.xml",
+            "gene": "1a807944-1fce-4a18-ae2b-f19a8f13e4d7.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "21127e5e-c1de-4878-89aa-dfa135d9cdbc.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.a936f935-1d08-4408-a115-beaa5313f7c7.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "dce71741-ccbe-40b7-a0b8-2048d07187a4": {
+        "os": 821,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-2409.xml",
+            "gene": "f5f0cecd-ef58-47e5-a8e9-0788d7f00248.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "d2fd13ab-a076-4ef9-8d18-8ec311f71915.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.e7acdc39-9016-45df-bb67-56626afa7fe3.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "fd4740db-76a8-4362-be71-7b609479bb67": {
+        "os": 1369,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-2398.xml",
+            "gene": "962fb836-bac4-4da3-8705-fe9a5cacde8e.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "4d97600b-79bd-4ae7-a773-176f1f08b598.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.153cbdd2-f7cd-4eff-8e91-20feba468aa1.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "d8d13aa4-45d5-4e1a-a6cf-895bdf05e7b2": {
+        "os": 351,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-13-0760.xml",
+            "gene": "6ec47cac-85ce-4536-a51d-346a0e281261.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "c049ea83-3d42-4a29-995a-7dc7349946c1.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.5b3a8dc0-c3ed-4616-8b9d-65673910c222.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "c9e58844-9d61-44a2-aee6-1760bc19711b": {
+        "os": 976,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-23-1027.xml",
+            "gene": "3906ba4a-96da-4833-a237-b402ffe42da5.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "d036b513-9738-45e3-ad2c-75589ee3ac8a.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.aab18c3a-4453-43e9-aa21-1abcfe39f526.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "7ca97692-0bf5-4bbd-81ce-10a051d04bd5": {
+        "os": 636,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-10-0938.xml",
+            "gene": "2b12b5be-f274-4a43-b69b-24b736e2bcac.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "98686c23-bac9-467e-8b28-e7d19a9fec88.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.b2a05747-aa38-4968-8fb8-1f27a40a4181.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "3768d34f-1527-40db-b116-cd80cee5ec3a": {
+        "os": 1069,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-09-2045.xml",
+            "gene": "0d31f76f-d6b7-4d9f-83b7-fb0babab1231.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "73441d85-27e8-411a-b7f8-8625dd24afed.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.c7485ff7-5733-441c-8496-c28f0056e5b3.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "62379be5-13f0-474b-94d3-6f944ec4ee96": {
+        "os": 1259,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1552.xml",
+            "gene": "5d9a6911-c16e-4b16-8d56-2b99a9fbce3f.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "50e353aa-6f2d-43ab-bad8-cbb3d3c9b6b5.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.ba336da3-a3ac-4707-a55b-71fa7068a4e4.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "eec69ea9-ceb8-456a-aff4-41fb8a261e36": {
+        "os": 24,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-2261.xml",
+            "gene": "21d6ea46-7964-4c21-8829-13f2cfd99829.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "9b71b0c9-60b6-4b07-80dc-ce0a10e831b9.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.ef885a49-a605-4f56-8d82-08eddf0a0850.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "0b2ea4b7-98bb-4190-b682-2c75b447c90a": {
+        "os": 1004,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1314.xml",
+            "gene": "987381dd-ab88-40a1-ade8-e4e3c06ee8a4.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "cccb80f8-3335-419f-8482-af14aac9f50f.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.5d71d039-8fd3-447b-bddd-98aacbfa2582.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "f2ec64f5-a414-4c34-99c7-d59bc4e831e0": {
+        "os": 1746,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1545.xml",
+            "gene": "980e31f1-5128-485e-befe-f68e1df82adb.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "3784dc19-8c45-474e-b2fa-c3c82a29e14a.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.e8b27e1d-a6b3-4afd-b8fc-f8a77374697f.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "5201ee13-2aed-4641-9169-4d5ee07a23da": {
+        "os": 1364,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-2023.xml",
+            "gene": "9e237ede-a8c8-4e90-a52e-521af59b147b.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "bcb4aede-833a-48d7-860d-6fe7a749a93e.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.ae92c485-b80f-452c-b45d-013c366a9e89.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "5d1a54fe-e0df-4c17-b623-b649a136dc82": {
+        "os": 1688,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-61-2101.xml",
+            "gene": "42165baf-b32c-4fc4-8b04-29c5b4e76de0.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "8d2a609e-c2c3-4519-ae30-c7b6330c2c71.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.604f0e46-eff5-4389-9197-27b7399b2ad9.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "16ced1b8-64d5-4498-82df-4d37bfe5b310": {
+        "os": 1024,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-61-1741.xml",
+            "gene": "04bfa099-3ca5-4db7-ac00-5d0e32744621.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "a9e0ebb4-d259-4eda-96ad-981f8617decb.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.ecf278dc-02fe-48ca-82ac-14f7a013aba1.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "8a98a6e6-b763-4824-858b-fd2738e6c9a3": {
+        "os": 1032,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-29-1696.xml",
+            "gene": "f9e43abb-04fc-45c2-9a74-61a2bea4eeec.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "ae24c21f-e3be-4339-b5d9-0ccc16fefa96.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.0dc98f7b-7321-4599-a587-1f71e53db3ed.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "72c40fba-f502-489b-ad87-843f52655894": {
+        "os": 1089,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-61-1738.xml",
+            "gene": "6670929c-6c96-4256-affa-910687f99a45.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "aca6eeb0-f4a6-4022-926b-eed2f806f14c.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.217579ca-cc7a-4c54-a669-1b511735f20e.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "3018efe7-13a1-47ae-a726-8fc967c73841": {
+        "os": 863,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-1430.xml",
+            "gene": "525a600e-544a-436f-926e-522ad287f188.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "d3c746d1-55db-404c-908b-e08c106c02ab.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.51b1e818-3048-4c41-9074-e36212c7dd7e.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "6a1be87b-c4e0-4fd4-b050-50a245b22038": {
+        "os": 9,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-1631.xml",
+            "gene": "4050c1a3-e430-4ab6-9e11-d267f48e51ad.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "9425c7cf-003e-42cb-b2c1-f9c770508a88.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.0c5f4350-1f10-498c-bd92-e3db1a2492bd.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "872d2922-7292-4681-adb7-d3b267eccbe7": {
+        "os": 562,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-2033.xml",
+            "gene": "9d007b37-ba7a-4e85-af1f-1c8aeadda990.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "f7e5a271-f18a-48ff-ad17-955b43193209.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.eeb3061c-910c-407b-a949-a65bf1b74689.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "1db60f09-7f5a-4f21-8003-06a6abc781db": {
+        "os": 1187,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-29-1694.xml",
+            "gene": "5257902c-d131-4599-aa89-6a318efb0586.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "9637056e-19b4-41f1-ba2d-324623e66dae.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.d38cff49-cc65-4b8d-87f7-6a5e3deeaf69.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "b867e933-e3e3-4491-9bb6-b18c48d6f173": {
+        "os": 2049,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-2289.xml",
+            "gene": "0328d523-1d48-483a-abc6-40787ed24b72.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "1270ca1f-da3c-4ed9-aed1-f9c8e72d0897.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.2805596c-3015-489a-8683-8df919934cb8.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "9a30dee8-962a-49db-a85a-c39515c91b68": {
+        "os": 1264,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-0979.xml",
+            "gene": "32d18d49-fe09-4929-a5f6-34150f155c3e.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "2a34def9-3d60-482c-bc11-fcc2a317a3e3.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.17fad821-42e6-4165-b2ec-55e98864d94b.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "01ea6354-137b-47f3-9021-a01a382b1147": {
+        "os": 1199,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-29-1766.xml",
+            "gene": "779823e2-dd98-436f-9f33-6dad561515f5.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "b43fb4f9-dfd6-448e-aea8-0dc15ecfd5c8.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.fef20c85-59fd-4c83-a61d-e7cdc277917a.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "a3e26259-732b-49fb-bc95-2f0ec7a0494e": {
+        "os": 1329,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-61-1743.xml",
+            "gene": "bbb907c3-ad29-4255-9b4c-764d052db122.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "eabd8acc-907b-440a-b26b-831292868f5d.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.fb06147a-5892-4f9f-9698-4d71896fa8e7.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "5495b18a-10ec-427b-83b8-03ef4b587b13": {
+        "os": 2634,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-29-1762.xml",
+            "gene": "91438de0-6c76-4add-b836-2283ffe21473.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "0c8d8bbd-3354-47f7-8bfb-a819460a0df0.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.dfcb305a-ff38-4426-9baf-9e8154cd6e1b.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "5c127332-5ca0-45f1-a5ac-4876ad94e491": {
+        "os": 1278,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-25-2400.xml",
+            "gene": "8a8dab8f-000a-46bc-9e8e-de80237aed4c.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "bd8f68c5-ceb1-43e4-b3d5-0a7031f9365f.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.0f0a599b-d0df-44be-811c-d79bbfa918cf.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "e20ea417-7296-4da8-9fdb-71cd1f45153a": {
+        "os": 4624,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-24-2020.xml",
+            "gene": "30351cfc-3af6-45bb-9106-9a1fc6ae7bcc.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "d1aa16c1-5b95-482f-918b-ad7ef7c252ac.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.354d346e-f49a-410e-90fc-073cd4977286.absolute_liftover.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "7e34d3c1-1fab-4326-9a69-4260d2bac558": {
+        "os": 1073,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-13-0804.xml",
+            "gene": "cac17859-2779-4a77-98b7-3c6e392f0f1e.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "2c951c73-ecff-4a78-89df-8058554c9375.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.b17d54a4-6801-452e-bb62-a9c403db4e92.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "acb7ec56-8a47-495f-a11b-2c9fb5d8fe95": {
+        "os": 9,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-23-1107.xml",
+            "gene": "7a647483-f972-492c-972d-63b7eff7beff.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "53340649-b6e4-488c-887c-0a75fc37be05.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.e758a0be-9dc0-40de-80f6-7f22ce5bbb38.ascat3.gene_level_copy_number.v36.tsv"
+        }
+    },
+    "d7925dfc-18ce-46ab-a47b-9d06eacc96d0": {
+        "os": 1046,
+        "files": {
+            "os": "nationwidechildrens.org_clinical.TCGA-59-2354.xml",
+            "gene": "2b584a37-d6c1-41f9-98b4-1592ac54a82b.rna_seq.augmented_star_gene_counts.tsv",
+            "methylation": "95e71b64-3350-4d2a-b9bc-1876d197a022.methylation_array.sesame.level3betas.txt",
+            "copy_number": "TCGA-OV.786c5533-6c42-469a-a7eb-9a3feefdfdcb.gene_level_copy_number.v36.tsv"
+        }
+    }
+}

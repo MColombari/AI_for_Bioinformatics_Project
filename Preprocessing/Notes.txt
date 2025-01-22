@@ -1,0 +1,15 @@
+What to do next:
+- Redo the preprocessing.
+    - Take only the 20k gene about proteine coding.
+        - Information in .gts.
+    - So first get only the dead one.
+    - Then save corresponging relative data, like OS, and files name.
+- Procede with next data preprocessing, so normalization and such.
+
+- how to apply normalization:
+    - Gene expression.
+        - log in base 10, plus a small constant, like "0.01".
+        - Then normalize "[0,1]", "[-1,1]".
+    - Methylation.
+        - See how many row we have and eventually cut some based on gene, keep only around 27k.
+    - Copy number.
