@@ -1,4 +1,49 @@
 import torch
+from Save_model import SaveModel as SM
+
+# So we have a structure of folder where we have a main folder containig all the test for
+# each subgroup (Methylation, Gene, Copy number), and in each of these folder we have
+# a folder for each test, inside all the results and checkpoint are saved.
+
+#   Data Parameter
+
+# Name of the test, like methylation or gene... .
+TEST_NAME = "Test name"
+MORE_INFO = """
+    More information.
+"""
+
+# PATH where we'll create the folder containig the new test.
+TEST_FOLDER_PATH = "."
+
+# Load previous checkpoint.
+START_FROM_CHECKPOINT = False
+CHECKPOINT_PATH = "."
+
+#   Model parameter
+hyperparameter = {
+    'num_classes': 2,
+    'epochs': 500,
+    'batch_size': 10
+}
+
+model_structure_description = """
+    How many layer, and how are they made
+    Just copy and paste what's inside the model
+"""
+
+# Create Folder and first files.
+sm = SM(TEST_FOLDER_PATH, TEST_NAME)
+sm.save_test_info(MORE_INFO, START_FROM_CHECKPOINT, CHECKPOINT_PATH)
+# https://pytorch.org/tutorials/beginner/saving_loading_models.html
+sm.save_model_hyperparameter(hyperparameter, model_structure_description)
+
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+
+# Create Folder
+
 #from torch.nn import Linear
 #import torch.nn.functional as F
 #from torch_geometric.nn import GCNConv
