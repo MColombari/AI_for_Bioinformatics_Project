@@ -33,10 +33,13 @@ class SaveModel:
             f.write(f"\tPath start checkpoint:\n{checkpoint_path}")
             f.write(f"\tMore info:\n{more_info}")
     
-    def save_model_hyperparameter(self, p_dict, model_structure):
+    def save_model_hyperparameter(self, p_dict):
         with open(f"{self.current_folder}/model_hyperparameter.txt", "w") as f:
-            f.write("\tModel Structure")
-            f.write(model_structure)
             f.write("\n\tModel hyperparameter")
             for k, v in p_dict:
                 f.write(f"{k}: {v}")
+
+    def save_model_architecture(self, model):
+        with open(f"{self.current_folder}/model_architecture.txt", "w") as f:
+            f.write("\tModel Structure")
+            f.write(str(model))
