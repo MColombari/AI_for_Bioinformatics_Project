@@ -3,6 +3,7 @@ from Save_model import SaveModel as SM
 from models import simple_GCN
 from Load_and_Process_Data import LPD
 from torch_geometric.loader import DataLoader
+from collections import OrderedDict
 
 # So we have a structure of folder where we have a main folder containig all the test for
 # each subgroup (Methylation, Gene, Copy number), and in each of these folder we have
@@ -28,7 +29,8 @@ hyperparameter = {
     'num_classes': 2,
     'epochs': 500,
     'batch_size': 10,
-    'seed': 123456
+    'seed': 123456,
+    'num_workers': 12
 }
 
 torch.manual_seed(hyperparameter['seed'])
@@ -41,6 +43,18 @@ sm.save_model_hyperparameter(hyperparameter)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+
+# https://pytorch-geometric.readthedocs.io/en/2.5.3/notes/create_dataset.html
+lpd = LPD()
+data_train_list, data_test_list = lpd.get_data()  # List of Data.
+# Inside of data we need to specify which y we have.
+
+train = DataLoader(data_train_list, batch_size=hyperparameter['batch_size'], shuffle=True, num_workers=hyperparameter['num_workers'], pin_memory=True)
+test = DataLoader(data_test_list, batch_size=hyperparameter['batch_size'], shuffle=True, num_workers=hyperparameter['num_workers'], pin_memory=True)
+# pin_memory=True will automatically put the fetched data Tensors in pinned memory, and thus enables faster data transfer to CUDA-enabled GPUs.
+# https://pytorch.org/docs/stable/data.html.
+
+
 node_feature_number = None #TODO
 model = simple_GCN(node_feature_number, 10, hyperparameter['num_classes'])
                                        #TODO
@@ -48,7 +62,12 @@ model = simple_GCN(node_feature_number, 10, hyperparameter['num_classes'])
 # https://pytorch.org/tutorials/beginner/saving_loading_models.html
 sm.save_model_architecture(model)
 
-# https://pytorch-geometric.readthedocs.io/en/2.5.3/notes/create_dataset.html
-lpd = LPD()
-data_list = lpd.get_data()  # List of Data.
-loader = DataLoader(data_list, batch_size=hyperparameter['batch_size'])
+if START_FROM_CHECKPOINT:
+    checkpoint = torch.load(CHECKPOINT_PATH)
+    s_epoch = checkpoint['epoch']
+    model_dict = checkpoint['model_dict']
+    new_state_dict = OrderedDict()
+    for k, v in model_dict.items():
+        name = k[7:] # remove 'module.'
+        new_state_dict[name]=v
+    model.load_state_dict(new_state_dict)
