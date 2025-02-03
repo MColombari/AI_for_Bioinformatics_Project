@@ -59,15 +59,17 @@ node_feature_number = None #TODO
 model = simple_GCN(node_feature_number, 10, hyperparameter['num_classes'])
                                        #TODO
 
-# https://pytorch.org/tutorials/beginner/saving_loading_models.html
-sm.save_model_architecture(model)
-
 if START_FROM_CHECKPOINT:
     checkpoint = torch.load(CHECKPOINT_PATH)
     s_epoch = checkpoint['epoch']
     model_dict = checkpoint['model_dict']
     new_state_dict = OrderedDict()
     for k, v in model_dict.items():
-        name = k[7:] # remove 'module.'
+        name = k[7:]                    # remove 'module'.
         new_state_dict[name]=v
     model.load_state_dict(new_state_dict)
+
+# https://pytorch.org/tutorials/beginner/saving_loading_models.html
+sm.save_model_architecture(model)
+
+model = model.to(device)
