@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --account=cvcs2024
+#SBATCH --account=ai4bio2024
 #SBATCH --job-name=top1_testing
 #SBATCH --partition=all_usr_prod
 #SBATCH --gres=gpu:1
@@ -10,4 +10,4 @@
 #SBATCH --error="run_output/error_test1.log"
 
 # training 
-python3 ensemble_NN.py
+python3 fra.py
