@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/homes/fmancinelli/progettoBio/AI_for_Bioinformatics_Project/Training/Test/Test1/fra.py", line 1, in <module>
+    import torch
+  File "/homes/fmancinelli/.local/lib/python3.9/site-packages/torch/__init__.py", line 367, in <module>
+    from torch._C import *  # noqa: F403
+ImportError: /homes/fmancinelli/.local/lib/python3.9/site-packages/torch/lib/../../nvidia/cusparse/lib/libcusparse.so.12: undefined symbol: __nvJitLinkComplete_12_4, version libnvJitLink.so.12
