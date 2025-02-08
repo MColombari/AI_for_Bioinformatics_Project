@@ -23,8 +23,8 @@ MORE_INFO = """
 TEST_FOLDER_PATH = "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output"
 
 # Load previous checkpoint.
-START_FROM_CHECKPOINT = False
-CHECKPOINT_PATH = "."
+START_FROM_CHECKPOINT = True
+CHECKPOINT_PATH = "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train_Gene_25/model_checkpoints/Train_Gene_epoch_1.pth"
 
 # Load data path
 PATH_GTF_FILE = "/homes/mcolombari/AI_for_Bioinformatics_Project/Personal/gencode.v47.annotation.gtf"
@@ -35,12 +35,12 @@ PATH_CASE_ID_STRUCTURE = "/homes/mcolombari/AI_for_Bioinformatics_Project/Prepro
 #   Model parameter TODO
 hyperparameter = {
     'num_classes': 2,
-    'epochs': 2,
+    'epochs': 4,
     'batch_size': 10,
     'seed': 123456,
-    'num_workers': 12,
+    'num_workers': 6,
     'lr': 0.01,
-    'save_model_period': 1, # How many epoch to wait before save the next model.
+    'save_model_period': 2, # How many epoch to wait before save the next model.
     'percentage_of_test': 0.3, # How many percentage of the dataset is used for testing.
     'feature_to_save': ['tpm_unstranded'], # Specifci parameter for gene.
     'feature_to_compare': 'tpm_unstranded'
@@ -64,7 +64,7 @@ test_loader = DataLoader(data_test_list, batch_size=hyperparameter['batch_size']
 # https://pytorch.org/docs/stable/data.html.
 
 
-node_feature_number = 141680
+node_feature_number = 1
 model = simple_GCN(node_feature_number, 10, hyperparameter['num_classes'])
 
 s_epoch = 0
@@ -72,11 +72,7 @@ if START_FROM_CHECKPOINT:
     checkpoint = torch.load(CHECKPOINT_PATH)
     s_epoch = checkpoint['epoch']
     model_dict = checkpoint['model_dict']
-    new_state_dict = OrderedDict()
-    for k, v in model_dict.items():
-        name = k[7:]                    # remove 'module'.
-        new_state_dict[name]=v
-    model.load_state_dict(new_state_dict)
+    model.load_state_dict(model_dict)
 
 # Create Folder and first files.
 sm = SM(TEST_FOLDER_PATH, TEST_NAME)
@@ -94,40 +90,58 @@ criterion = torch.nn.CrossEntropyLoss()
 
 def train(loader):
     model.train()
-
-    count = 0
     for data in loader:
-        print(f"\tBatch number: {count + 1}")
-        count += 1
-        x = data.x.to(device)
-        edge_index = data.edge_index.to(device)
-        y = data.y.to(device)
-        batch = data.batch.to(device)
+        # Get the inputs and labels
+        inputs, labels = data.x.unsqueeze(1).to(device), data.y.to(device)
+        edge_index, batch = data.edge_index.to(device), data.batch.to(device)
         optimizer.zero_grad()
-        pred = model(x, edge_index, batch)
-        loss = criterion(pred, y)
+
+        # print(inputs.size())
+        # print(labels.min(), labels.max())
+
+        # Forward
+        outputs = model(inputs, edge_index, batch)
+        if isinstance(outputs, list):
+            outputs = outputs[0] #check the model gets back only one output
+
+        # Compute the loss
+        loss = criterion(outputs, labels.squeeze())
+        
+        # Backward & optimize
         loss.backward()
         optimizer.step()
     
 
 def test(loader):
     model.eval()
+    losses = []
+    all_label = []
+    all_pred = []
 
-    correct = 0
-    loss = []
-    for data in loader:
-        x = data.x.to(device)
-        edge_index = data.edge_index.to(device)
-        y = data.y.to(device)
-        batch = data.batch.to(device)
-        pred = model(x, edge_index, batch)
-        loss.append(float(criterion(pred, y)))
-        pred = pred.argmax(dim=1)
-        correct += int((pred == y).sum())
-    ret_loss = np.mean(loss)
-    ret_acc = correct / len(loader.dataset)
-    
-    return ret_loss, ret_acc
+    with torch.no_grad():
+        for data in loader:
+            # get the inputs and labels
+            inputs, labels = data.x.unsqueeze(1).to(device), data.y.to(device)
+            edge_index, batch = data.edge_index.to(device), data.batch.to(device)
+
+            # forward
+            outputs = model(inputs, edge_index, batch)
+
+            # compute the loss
+            loss = criterion(outputs, labels.squeeze())
+            losses.append(loss.item())
+            # collect labels & prediction
+            prediction = torch.max(outputs, 1)[1]
+            all_label.extend(labels.squeeze())
+            all_pred.extend(prediction)
+
+        # Compute the average loss & accuracy
+        test_loss = sum(losses)/len(losses)
+        all_label = torch.stack(all_label, dim=0)
+        all_pred = torch.stack(all_pred, dim=0)
+        test_acc = accuracy_score(all_label.squeeze().cpu().data.squeeze().numpy(), all_pred.cpu().data.squeeze().numpy())
+
+    return test_loss, test_acc
 
 
 
@@ -138,8 +152,8 @@ for epoch_index in range(s_epoch, hyperparameter['epochs']):
     test_loss, test_acc = test(test_loader)
     print(f"\tTrain loss: {train_loss}")
     print(f"\tTrain acc: {train_acc}")
-    print(f"\Test loss: {test_loss}")
-    print(f"\Test acc: {test_acc}")
+    print(f"\tTest loss: {test_loss}")
+    print(f"\tTest acc: {test_acc}")
     sm.save_epoch_data(epoch_index, train_loss, train_acc, test_loss, test_acc)
 
     if (epoch_index - s_epoch) % hyperparameter['save_model_period'] == 0:

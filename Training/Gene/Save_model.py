@@ -29,17 +29,17 @@ class SaveModel:
 
     def save_test_info(self, more_info, start_from_checkpoint, checkpoint_path):
         with open(f"{self.current_folder}/test_info.txt", "w") as f:
-            f.write("\tDate and time test start")
-            f.write(f"UTC time: \"{datetime.now(timezone.utc)}\"")
-            f.write(f"\tStart from checkpoint:\n{start_from_checkpoint}")
-            f.write(f"\tPath start checkpoint:\n{checkpoint_path}")
-            f.write(f"\tMore info:\n{more_info}")
+            f.write("Date and time test start\n")
+            f.write(f"\tUTC time: \"{datetime.now(timezone.utc)}\"\n")
+            f.write(f"Start from checkpoint:\n\t{start_from_checkpoint}\n")
+            f.write(f"Path start checkpoint:\n\t{checkpoint_path}\n")
+            f.write(f"More info:\n\t{more_info}\n")
     
     def save_model_hyperparameter(self, p_dict):
         with open(f"{self.current_folder}/model_hyperparameter.txt", "w") as f:
-            f.write("\n\tModel hyperparameter")
+            f.write("\tModel hyperparameter\n")
             for k in p_dict.keys():
-                f.write(f"{k}: {p_dict[k]}")
+                f.write(f"{k}: {p_dict[k]}\n")
 
     def save_model_architecture(self, model):
         with open(f"{self.current_folder}/model_architecture.txt", "w") as f:
@@ -55,4 +55,4 @@ class SaveModel:
     # logger.info("epoch {:3d} | iteration {:5d} | Loss {:.6f} | Acc {:.2f}%".format(epoch+1, batch_idx+1, loss.item(), score*100))
     def save_epoch_data(self, epoch, loss_train, accuracy_train, loss_test, accuracy_test):
         with open(f"{self.current_folder}/epoch_data.txt", "a") as f:
-            f.write(f"Epoch: '{epoch}', Loss Train: '{loss_train}', Accuracy Train: '{accuracy_train}, Loss Test: '{loss_test}', Accuracy Test: '{accuracy_test}'")
+            f.write(f"Epoch: '{epoch}', Loss Train: '{loss_train}', Accuracy Train: '{accuracy_train}, Loss Test: '{loss_test}', Accuracy Test: '{accuracy_test}'\n")
