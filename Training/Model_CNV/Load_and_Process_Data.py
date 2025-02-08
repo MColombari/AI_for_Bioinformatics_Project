@@ -3,90 +3,150 @@ from pathlib import Path
 import torch
 import json
 import os
+import time
+import numpy as np
 import networkx as nx
 from torch_geometric.utils.convert import to_networkx, from_networkx
 from torch_geometric.data import Data
 import matplotlib.pyplot as plt
 
-PATH_FOLDER_COPY_NUMBER = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/CopyNumber"
-PATH_CASE_ID_STRUCTURE = "./case_id_and_structure.json"
-PATH_GENE_ID_PROTEIN_CODING = "./gene_id_protein_coding.json"
+def measure_time(func):
+    def wrapper(x):
+        start_time = time.time()
+        func(x)
+        print(f"\t\t{np.floor(time.time() - start_time)}s")
+    return wrapper
 
 class LPD:
-    def __init__(self):
-        pass
+    def __init__(self, folder_copy_number_path: str, case_id_json_path: str,
+        gene_id_protein_coding_path: str, num_classes: int, percentage_test: float):
+        self.folder_copy_number_path = folder_copy_number_path
+        self.case_id_json_path = case_id_json_path
+        self.gene_id_protein_coding_path = gene_id_protein_coding_path
+
+        self.THRESHOLD = 0.1
+        self.num_classes = num_classes
+        self.percentage_test = percentage_test
 
     # Here i have to split the dataset in train and test, while keeping balance
     # between all the label in each subset.
     # Return train and test separately.
-    def get_data(self):
-        with open(PATH_CASE_ID_STRUCTURE, 'r') as file:
+    @measure_time
+    def preprocessing(self):
+        with open(self.case_id_json_path, 'r') as file:
             file_parsed = json.load(file)
 
         copy_number_folder_list = []
-        os_list = []
+        self.os_list = []
         for key in file_parsed.keys():
             copy_number_folder_list.append(file_parsed[key]["files"]["copy_number"])
-            os_list.append(file_parsed[key]['os'])
+            self.os_list.append(file_parsed[key]['os'])
 
         list_df_CNV = []
-        for root, dirs, files in os.walk(PATH_FOLDER_COPY_NUMBER):
+        for root, dirs, files in os.walk(self.folder_copy_number_path):
             for dir in dirs:
-                for root, dirs, files in os.walk(PATH_FOLDER_COPY_NUMBER + "/" + dir):
+                for root, dirs, files in os.walk(self.folder_copy_number_path + "/" + dir):
                     for file in files:
                         if file in copy_number_folder_list:
-                            list_df_CNV.append(pd.read_csv(PATH_FOLDER_COPY_NUMBER + "/" + dir + "/" + file, sep='\t'))
+                            list_df_CNV.append(pd.read_csv(self.folder_copy_number_path + "/" + dir + "/" + file, sep='\t'))
 
         gene_id_list = []
-        with open(PATH_GENE_ID_PROTEIN_CODING) as json_file:
+        with open(self.gene_id_protein_coding_path) as json_file:
             gene_id_list = json.load(json_file)
 
-        # Converti gene_id_list in un set per velocizzare le operazioni di lookup
+        # Convert gene_id_list into a set data structure to speed up the lookup
         gene_id_set = set(gene_id_list)
 
         list_df_CNV_filtered = []
         for df in list_df_CNV:
-            # Filtra le righe del dataframe dove 'gene_id' è presente in gene_id_set
+            # Filter dataframe rows where 'gene_id'value is in gene_id_set
             df_filtered = df[df['gene_id'].isin(gene_id_set)]
             list_df_CNV_filtered.append(df_filtered)
 
-        list_df_CNV_filled = []
+        self.list_df_CNV_filled = []
         for i in range(len(list_df_CNV_filtered)):
-            list_df_CNV_filled.append(list_df_CNV_filtered[i].fillna(0))
+            self.list_df_CNV_filled.append(list_df_CNV_filtered[i].fillna(0))
 
-        list_of_Data = []
-        for case_index in range(0,20):
+    @measure_time
+    def create_graph(self):
+        self.list_of_Data = []
+        for case_index in range(0,100):
 
-            df_CNV = list_df_CNV_filled[case_index][:200]
+            df_CNV = self.list_df_CNV_filled[case_index][:2000]
 
-            # Crea un grafo vuoto
+            # Build an Empty Graph 
             G = nx.Graph()
 
-            # Aggiungi i geni come nodi
+            # Add genes in the Graph 
             for _, row in df_CNV.iterrows():
                 G.add_node(row['gene_name'], x=row['copy_number'])
 
-            # Aggiungi archi basati sulla sovrapposizione delle coordinate (start, end)
+            # Add edges between genes that overlap (start, end)
             for i, gene1 in df_CNV.iterrows():
                 for j, gene2 in df_CNV.iterrows():
                     if i >= j:
-                        continue  # Evita di considerare due volte la stessa coppia
+                        continue  # Check every pair of genes only once
                     if gene1['chromosome'] == gene2['chromosome']:
-                        # Controlla la sovrapposizione dei segmenti
+                        # Check if their segments overlap
                         if (gene1['start'] <= gene2['end']) and (gene1['end'] >= gene2['start']):
                             G.add_edge(gene1['gene_name'], gene2['gene_name'])
 
             pyg_graph = from_networkx(G)
-
-            if os_list[case_index] > 1000:
-                pyg_graph['y'] = torch.tensor([1])
-            else:
-                pyg_graph['y'] = torch.tensor([0])
-
-            list_of_Data.append(pyg_graph)
+            pyg_graph['y'] = torch.tensor([self.os_list[case_index]])
+            self.list_of_Data.append(pyg_graph)
             # print(case_index)
+    
+    @measure_time
+    def split_dataset(self):
+        # First divide it in classes
+        os = [int(d.y) for d in self.list_of_Data]
+        os.sort()
 
-        train_list = list_of_Data[0:15]
-        test_list = list_of_Data[15:]
+        n = len(os)
 
-        return train_list, test_list
+        split_values = []
+        for c in range(1, self.num_classes + 1):
+            if c == self.num_classes:
+                split_values.append(os[len(os) - 1])
+            else:
+                index = (n // self.num_classes) * c
+                split_values.append(os[index - 1])
+
+        list_data_split = []
+        for c in range(self.num_classes):
+            list_data_split.append([])
+            for d in self.list_of_Data:
+                if  (c == 0 and int(d.y) <= split_values[c]) or \
+                    (c > 0 and int(d.y) <= split_values[c] and int(d.y) > split_values[c-1]):
+                    d.y = torch.tensor(c)
+                    list_data_split[c].append(d)
+
+        # Now split in train and test.
+        self.train_list = []
+        self.test_list = []
+
+        if self.percentage_test > 0:
+            test_interval = np.floor(1 / self.percentage_test)
+        else:
+            test_interval = len(self.list_of_Data) + 1 # we'll never reach it.
+        # print(test_interval)
+
+        for class_list in list_data_split:
+            count = 1
+            for d in class_list:
+                if count >= test_interval:
+                    self.test_list.append(d)
+                    count = 0
+                else:
+                    self.train_list.append(d)
+                count += 1
+
+    def get_data(self):
+        print("Start preprocessing", end="")
+        self.preprocessing()
+        print("Create the Graph", end="")
+        self.create_graph()
+        print("Split dataset\t", end="")
+        self.split_dataset()
+        
+        return self.train_list, self.test_list
