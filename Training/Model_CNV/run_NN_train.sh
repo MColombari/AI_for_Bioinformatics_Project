@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --account=ai4bio2024
+#SBATCH --account=h2020deciderficarra_shared
 #SBATCH --job-name=top1_testing
 #SBATCH --partition=all_usr_prod
 #SBATCH --gres=gpu:1
@@ -10,4 +10,4 @@
 #SBATCH --error="run_output/error_test1.log"
 
 # training 
-python3 fra.py
+python3 model.py
