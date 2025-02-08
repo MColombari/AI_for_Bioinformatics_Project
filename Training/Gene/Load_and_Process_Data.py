@@ -161,6 +161,7 @@ class LPD:
             for d in self.list_of_Data:
                 if  (c == 0 and int(d.y) <= split_values[c]) or \
                     (c > 0 and int(d.y) <= split_values[c] and int(d.y) > split_values[c-1]):
+                    d.y = torch.tensor(c)
                     list_data_split[c].append(d)
 
         # Now split in train and test.
