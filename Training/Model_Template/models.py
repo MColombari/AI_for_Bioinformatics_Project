@@ -6,7 +6,7 @@ from torch_geometric.nn import global_mean_pool
 
 class simple_GCN(torch.nn.Module):
    def __init__(self, input_feature, hidden_channels, num_classes):
-       # input fature comes form dataset.num_node_feature
+       # input feature comes from dataset.num_node_feature
        # which returns the number of features per node in the dataset.
        # So input_feature need to be number of feature per node in the dataset.
        # source: https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.data.Dataset.html
