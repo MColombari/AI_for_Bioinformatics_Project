@@ -146,6 +146,6 @@ for epoch_index in range(s_epoch, hyperparameter['epochs']):
     print(f"\tTest acc: {test_acc}")
     sm.save_epoch_data(epoch_index, train_loss, train_acc, test_loss, test_acc)
 
-    if (epoch_index - s_epoch) % hyperparameter['save_model_period'] == 0:
+    if (epoch_index + 1 - s_epoch) % hyperparameter['save_model_period'] == 0:
         print("###    Model saved    ###")
         sm.save_epoch(epoch_index, model)
