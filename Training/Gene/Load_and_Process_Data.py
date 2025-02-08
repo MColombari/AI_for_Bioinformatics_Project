@@ -13,15 +13,15 @@ import time
 # So just copy the code in "Preprocessing".
 
 def measure_time(func):
-    def wrapper():
+    def wrapper(x):
         start_time = time.time()
-        func()
-        print(f"\t{(time.time() - start_time)}s")
+        func(x)
+        print(f"\t\t{np.floor(time.time() - start_time)}s")
     return wrapper
 
 class LPD:
     def __init__(self, gtf_file_path: str, folder_gene_path: str, case_id_json_path: str,
-                 feature_to_save: list, num_classes: int, percentage_test: float):
+                 feature_to_save: list, feature_to_compare: str, num_classes: int, percentage_test: float):
         # PATH_GTF_FILE = "/homes/mcolombari/AI_for_Bioinformatics_Project/Personal/gencode.v47.annotation.gtf"
         self.gtf_file_path = gtf_file_path
         # PATH_FOLDER_GENE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneExpression"
@@ -38,6 +38,7 @@ class LPD:
         self.feature_to_save = feature_to_save
 
         self.THRESHOLD = 0.1
+        self.feature_to_compare = feature_to_compare
 
         # NUMBER_OF_CLASSES = 3
         self.num_classes = num_classes
@@ -119,14 +120,14 @@ class LPD:
     def create_graph(self):
         self.list_of_Data = []
         for case_index in range(0, self.datastructure.shape[0]):
-            feature_size = self.datastructure['values'].loc[case_index][self.feature_to_save].shape[0]
+            feature_size = self.datastructure['values'].loc[case_index][self.feature_to_compare].shape[0]
             edges = [[],[]]
 
             for f_1_index in range(feature_size):
                 for f_2_index in range(f_1_index + 1, self.datastructure.shape[0]):
                     similarity = np.linalg.norm(   
-                        self.datastructure['values'].loc[case_index][self.feature_to_save].iloc[f_1_index] - \
-                        self.datastructure['values'].loc[case_index][self.feature_to_save].iloc[f_2_index])
+                        self.datastructure['values'].loc[case_index][self.feature_to_compare].iloc[f_1_index] - \
+                        self.datastructure['values'].loc[case_index][self.feature_to_compare].iloc[f_2_index])
                     if similarity <= self.THRESHOLD:
                         edges[0].append(f_1_index)
                         edges[0].append(f_2_index)
@@ -134,7 +135,7 @@ class LPD:
                         edges[1].append(f_1_index)
             
             edge_index = torch.tensor(edges, dtype=torch.long)
-            x = torch.tensor(list(self.datastructure['values'].loc[case_index][self.feature_to_save]), dtype=torch.float)
+            x = torch.tensor(list(self.datastructure['values'].loc[case_index][self.feature_to_compare]), dtype=torch.float)
             y = torch.tensor(self.datastructure['os'].loc[case_index])
             self.list_of_Data.append(Data(x=x, edge_index=edge_index, y=y))
 
@@ -186,13 +187,13 @@ class LPD:
     # between all the label in each subset.
     # Return train and test separately.
     def get_data(self):
-        print("Read GTF file", end="")
-        self.read_gtf_file(self)
+        print("Read GTF file\t", end="")
+        self.read_gtf_file()
         print("Start preprocessing", end="")
-        self.preprocessing(self)
+        self.preprocessing()
         print("Create the Graph", end="")
-        self.create_graph(self)
-        print("Split dataset", end="")
-        self.split_dataset(self)
+        self.create_graph()
+        print("Split dataset\t", end="")
+        self.split_dataset()
         
         return self.train_list, self.test_list
