@@ -13,9 +13,9 @@ from sklearn.metrics import accuracy_score
 #   Data Parameter
 
 # Name of the test, like methylation or gene... .
-TEST_NAME = "Test_Copy_Number"
+TEST_NAME = "Train_Copy_Number"
 MORE_INFO = """
-
+        First implementation with basic model
 """
 
 # PATH where we'll create the folder containig the new test.
@@ -25,22 +25,30 @@ TEST_FOLDER_PATH = "."
 START_FROM_CHECKPOINT = False
 CHECKPOINT_PATH = "."
 
+# Load data path
+PATH_FOLDER_COPY_NUMBER = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/CopyNumber"
+PATH_CASE_ID_STRUCTURE = "/homes/dlupo/Progetto_BioInformatics/AI_for_Bioinformatics_Project/Preprocessing/Final/case_id_and_structure.json"
+PATH_GENE_ID_PROTEIN_CODING = "/homes/dlupo/Progetto_BioInformatics/AI_for_Bioinformatics_Project/Preprocessing/Final/gene_id_protein_coding.json"
+
+
 #   Model parameter
 hyperparameter = {
-    'num_classes': 2,
+    'num_classes': 3,
     'epochs': 10,
     'batch_size': 10,
     'seed': 123456,
     'num_workers': 12,
     'lr': 0.01,
-    'save_model_period': 10 # How many epoch to wait before save the next model.
+    'save_model_period': 2, # How many epoch to wait before save the next model.
+    'percentage_of_test': 0.3, # How many percentage of the dataset is used for testing.
 }
 
 torch.manual_seed(hyperparameter['seed'])
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # https://pytorch-geometric.readthedocs.io/en/2.5.3/notes/create_dataset.html
-lpd = LPD()
+lpd = LPD(PATH_FOLDER_COPY_NUMBER, PATH_CASE_ID_STRUCTURE, PATH_GENE_ID_PROTEIN_CODING,
+       hyperparameter['num_classes'], hyperparameter['percentage_of_test'])
 data_train_list, data_test_list = lpd.get_data()  # List of Data.
 # Inside of data we need to specify which y we have.
 
@@ -158,5 +166,5 @@ for epoch_index in range(s_epoch, hyperparameter['epochs']):
     print('==============')
 
     # sm.save_epoch_data(epoch_index, train_loss, train_acc, test_loss, test_acc)
-    # if (epoch_index - s_epoch) % hyperparameter['save_model_period'] == 0:
+    # if (epoch_index + 1 - s_epoch) % hyperparameter['save_model_period'] == 0:
     #     sm.save_epoch(epoch_index, model)
