@@ -67,34 +67,87 @@ class LPD:
         for i in range(len(list_df_CNV_filtered)):
             self.list_df_CNV_filled.append(list_df_CNV_filtered[i].fillna(0))
 
+    def find_overlapping_genes(self, df_CNV):
+        """
+        Trova in modo efficiente le coppie di geni che si sovrappongono.
+        """
+        # Ordina il dataframe per cromosoma e posizione di inizio
+        df_CNV = df_CNV.sort_values(['chromosome', 'start'])
+        overlapping_pairs = []
+        
+        # Raggruppa per cromosoma
+        for chrom, group in df_CNV.groupby('chromosome'):
+            genes = group.to_dict('records')
+            active = []
+            
+            for gene in genes:
+                # Rimuovi i geni che non possono più sovrapporsi
+                active = [g for g in active if g['end'] >= gene['start']]
+                
+                # Aggiungi collegamenti per le sovrapposizioni
+                for active_gene in active:
+                    if active_gene['start'] <= gene['end']:
+                        overlapping_pairs.append((active_gene['gene_name'], gene['gene_name']))
+                
+                active.append(gene)
+        
+        return overlapping_pairs
+
     @measure_time
     def create_graph(self):
+        """
+        Crea grafi per ogni caso nel dataset.
+        """
         self.list_of_Data = []
-        for case_index in range(0,100):
-
-            df_CNV = self.list_df_CNV_filled[case_index][:2000]
-
-            # Build an Empty Graph 
+        for case_index in range(226): 
+            df_CNV = self.list_df_CNV_filled[case_index]
+            
+            # Crea un grafo vuoto
             G = nx.Graph()
-
-            # Add genes in the Graph 
-            for _, row in df_CNV.iterrows():
-                G.add_node(row['gene_name'], x=row['copy_number'])
-
-            # Add edges between genes that overlap (start, end)
-            for i, gene1 in df_CNV.iterrows():
-                for j, gene2 in df_CNV.iterrows():
-                    if i >= j:
-                        continue  # Check every pair of genes only once
-                    if gene1['chromosome'] == gene2['chromosome']:
-                        # Check if their segments overlap
-                        if (gene1['start'] <= gene2['end']) and (gene1['end'] >= gene2['start']):
-                            G.add_edge(gene1['gene_name'], gene2['gene_name'])
-
+            
+            # Aggiungi i nodi con i loro attributi
+            nodes_data = {row['gene_name']: {'x': row['copy_number']} 
+                         for _, row in df_CNV.iterrows()}
+            G.add_nodes_from(nodes_data.items())
+            
+            # Trova e aggiungi gli archi per i geni sovrapposti
+            overlapping_pairs = self.find_overlapping_genes(df_CNV)
+            G.add_edges_from(overlapping_pairs)
+            
+            # Converti in PyTorch Geometric graph
             pyg_graph = from_networkx(G)
             pyg_graph['y'] = torch.tensor([self.os_list[case_index]])
             self.list_of_Data.append(pyg_graph)
-            # print(case_index)
+
+    # @measure_time
+    # def create_graph(self):
+    #     self.list_of_Data = []
+    #     for case_index in range(0,2):
+
+    #         df_CNV = self.list_df_CNV_filled[case_index][:2000]
+
+    #         # Build an Empty Graph 
+    #         G = nx.Graph()
+
+    #         # Add genes in the Graph 
+    #         for _, row in df_CNV.iterrows():
+    #             G.add_node(row['gene_name'], x=row['copy_number'])
+
+    #         # Add edges between genes that overlap (start, end)
+    #         for i, gene1 in df_CNV.iterrows():
+    #             print('\t',i)
+    #             for j, gene2 in df_CNV.iterrows():
+    #                 if i >= j:
+    #                     continue  # Check every pair of genes only once
+    #                 if gene1['chromosome'] == gene2['chromosome']:
+    #                     # Check if their segments overlap
+    #                     if (gene1['start'] <= gene2['end']) and (gene1['end'] >= gene2['start']):
+    #                         G.add_edge(gene1['gene_name'], gene2['gene_name'])
+
+    #         pyg_graph = from_networkx(G)
+    #         pyg_graph['y'] = torch.tensor([self.os_list[case_index]])
+    #         self.list_of_Data.append(pyg_graph)
+    #         print('case index: ',case_index)
     
     @measure_time
     def split_dataset(self):

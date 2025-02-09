@@ -19,7 +19,7 @@ MORE_INFO = """
 """
 
 # PATH where we'll create the folder containig the new test.
-TEST_FOLDER_PATH = "."
+TEST_FOLDER_PATH = "/homes/dlupo/Progetto_BioInformatics/AI_for_Bioinformatics_Project/Training/Model_CNV/Checkpoint"
 
 # Load previous checkpoint.
 START_FROM_CHECKPOINT = False
@@ -34,12 +34,12 @@ PATH_GENE_ID_PROTEIN_CODING = "/homes/dlupo/Progetto_BioInformatics/AI_for_Bioin
 #   Model parameter
 hyperparameter = {
     'num_classes': 3,
-    'epochs': 10,
-    'batch_size': 10,
+    'epochs': 200,
+    'batch_size': 20,
     'seed': 123456,
-    'num_workers': 12,
+    'num_workers': 6,
     'lr': 0.01,
-    'save_model_period': 2, # How many epoch to wait before save the next model.
+    'save_model_period': 10, # How many epoch to wait before save the next model.
     'percentage_of_test': 0.3, # How many percentage of the dataset is used for testing.
 }
 
@@ -73,11 +73,11 @@ if START_FROM_CHECKPOINT:
     model.load_state_dict(new_state_dict)
 
 # Create Folder and first files.
-# sm = SM(TEST_FOLDER_PATH, TEST_NAME)
-# sm.save_test_info(MORE_INFO, START_FROM_CHECKPOINT, CHECKPOINT_PATH)
-# sm.save_model_hyperparameter(hyperparameter)
+sm = SM(TEST_FOLDER_PATH, TEST_NAME)
+sm.save_test_info(MORE_INFO, START_FROM_CHECKPOINT, CHECKPOINT_PATH)
+sm.save_model_hyperparameter(hyperparameter)
 # # https://pytorch.org/tutorials/beginner/saving_loading_models.html
-# sm.save_model_architecture(model)
+sm.save_model_architecture(model)
 
 model = model.to(device)
 
@@ -88,9 +88,6 @@ criterion = torch.nn.CrossEntropyLoss()
 
 def train(loader):
     model.train()
-    losses = []
-    all_label = []
-    all_pred = []
     for data in loader:
         # Get the inputs and labels
         inputs, labels = data.x.unsqueeze(1).to(device), data.y.to(device)
@@ -104,27 +101,11 @@ def train(loader):
 
         # Compute the loss
         loss = criterion(outputs, labels.squeeze())
-        losses.append(loss.item())
-
-        # Compute the accuracy
-        prediction = torch.max(outputs, 1)[1]
-        all_label.extend(labels.squeeze())
-        all_pred.extend(prediction)
-        score = accuracy_score(labels.squeeze().cpu().data.squeeze().numpy(), prediction.cpu().data.squeeze().numpy())
 
         # Backward & optimize
         loss.backward()
         optimizer.step()
-
-    # Compute the average loss & accuracy
-    training_loss = sum(losses)/len(losses)
-    all_label = torch.stack(all_label, dim=0)
-    all_pred = torch.stack(all_pred, dim=0)
-    training_acc = accuracy_score(all_label.squeeze().cpu().data.squeeze().numpy(), all_pred.cpu().data.squeeze().numpy())
-
-    return training_loss, training_acc
     
-
 def test(loader):
     model.eval()
     losses = []
@@ -154,17 +135,27 @@ def test(loader):
         all_pred = torch.stack(all_pred, dim=0)
         test_acc = accuracy_score(all_label.squeeze().cpu().data.squeeze().numpy(), all_pred.cpu().data.squeeze().numpy())
 
-        return test_loss, test_acc
+    return test_loss, test_acc
 
 
-
+test_acc_list = []
 for epoch_index in range(s_epoch, hyperparameter['epochs']):
-    train_loss, train_acc = train(train_loader)
+    print(f"Epoch {epoch_index + 1}")
+    train(train_loader)
+    train_loss, train_acc = test(train_loader)
     test_loss, test_acc = test(test_loader)
-    print(f'Epoch: {epoch_index:02d}, Train Acc: {train_acc:.3f}, Test Acc: {test_acc:.3f}')
-    print(f'Epoch: {epoch_index:02d}, Train Loss: {train_loss:.3f}, Test Loss: {test_loss:.3f}')
-    print('==============')
+    test_acc_list.append(test_acc)
+    #print(f"\tTrain loss: {train_loss}")
+    #print(f"\tTrain acc: {train_acc}")
+    print(f"\tTest loss: {test_loss}")
+    print(f"\tTest acc: {test_acc}")
+    sm.save_epoch_data(epoch_index, train_loss, train_acc, test_loss, test_acc)
 
-    # sm.save_epoch_data(epoch_index, train_loss, train_acc, test_loss, test_acc)
-    # if (epoch_index + 1 - s_epoch) % hyperparameter['save_model_period'] == 0:
-    #     sm.save_epoch(epoch_index, model)
+    if (epoch_index - s_epoch) % hyperparameter['save_model_period'] == 0:
+        print("###    Model saved    ###")
+        sm.save_epoch(epoch_index, model)
+
+print('\n\n')
+print('max accuracy: ',max(test_acc_list))
+print('min accuracy: ',min(test_acc_list))
+print('mean accuracy: ',sum(test_acc_list)/len(test_acc_list))
