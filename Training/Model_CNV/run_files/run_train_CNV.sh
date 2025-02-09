@@ -10,4 +10,4 @@
 #SBATCH --error="run_output/error.log"
 
 # training 
-python3 train.py
+python3 AI_for_Bioinformatics_Project/Training/Model_CNV/train.py

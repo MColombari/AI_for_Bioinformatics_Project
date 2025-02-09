@@ -1,0 +1,4 @@
+TEST #1 : 200 epoch, 3 conv_layer
+max accuracy:  0.4594594594594595
+min accuracy:  0.2702702702702703
+mean accuracy:  0.36986486486486475
