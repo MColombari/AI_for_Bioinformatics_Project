@@ -1,7 +1,7 @@
 import torch
 from Save_model import SaveModel as SM
 from models import simple_GCN
-from Load_and_Process_Data import LPD
+from Load_and_Process_Data import LPD, LPDEdgeKnowledgeBased
 from torch_geometric.loader import DataLoader
 from collections import OrderedDict
 from sklearn.metrics import accuracy_score
@@ -30,6 +30,8 @@ CHECKPOINT_PATH = ""
 PATH_GTF_FILE = "/homes/mcolombari/AI_for_Bioinformatics_Project/Personal/gencode.v47.annotation.gtf"
 PATH_FOLDER_GENE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneExpression"
 PATH_CASE_ID_STRUCTURE = "/homes/mcolombari/AI_for_Bioinformatics_Project/Preprocessing/Final/case_id_and_structure.json"
+# For edge similarity file.
+PATH_EDGE_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/9606.protein.links.v12.0.txt"
 
 
 #   Model parameter TODO
@@ -52,9 +54,10 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 # https://pytorch-geometric.readthedocs.io/en/2.5.3/notes/create_dataset.html
-lpd = LPD(PATH_GTF_FILE, PATH_FOLDER_GENE, PATH_CASE_ID_STRUCTURE,
-          hyperparameter['feature_to_save'], hyperparameter['feature_to_compare'],
-          hyperparameter['num_classes'], hyperparameter['percentage_of_test'])
+lpd = LPDEdgeKnowledgeBased(PATH_GTF_FILE, PATH_FOLDER_GENE, PATH_CASE_ID_STRUCTURE,
+                            hyperparameter['feature_to_save'], hyperparameter['feature_to_compare'],
+                            hyperparameter['num_classes'], hyperparameter['percentage_of_test'],
+                            PATH_EDGE_FILE)
 data_train_list, data_test_list = lpd.get_data()  # List of Data.
 # Inside of data we need to specify which y we have.
 
