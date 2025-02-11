@@ -37,7 +37,7 @@ class LPD:
         # feature_to_save = ['tpm_unstranded']
         self.feature_to_save = feature_to_save
 
-        self.THRESHOLD = 0.1
+        self.THRESHOLD = 0.05
         self.feature_to_compare = feature_to_compare
 
         # NUMBER_OF_CLASSES = 3
@@ -138,6 +138,28 @@ class LPD:
             x = torch.tensor(list(self.datastructure['values'].loc[case_index][self.feature_to_compare]), dtype=torch.float)
             y = torch.tensor(self.datastructure['os'].loc[case_index])
             self.list_of_Data.append(Data(x=x, edge_index=edge_index, y=y))
+
+    
+    def get_instance_class(self, d):
+        # So we give in unput an instance of data and get the respenctive data
+        os = [int(d.y) for d in self.list_of_Data]
+        os.sort()
+
+        n = len(os)
+
+        split_values = []
+        for c in range(1, self.num_classes + 1):
+            if c == self.num_classes:
+                split_values.append(os[len(os) - 1])
+            else:
+                index = (n // self.num_classes) * c
+                split_values.append(os[index - 1])
+
+        for c in range(self.num_classes):
+            if  (c == 0 and int(d.y) <= split_values[c]) or \
+                (c > 0 and int(d.y) <= split_values[c] and int(d.y) > split_values[c-1]):
+                return c
+        raise Exception("No Class found")
 
     @measure_time
     def split_dataset(self):
