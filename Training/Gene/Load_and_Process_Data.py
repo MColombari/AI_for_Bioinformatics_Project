@@ -37,7 +37,6 @@ class LPD:
         # feature_to_save = ['tpm_unstranded']
         self.feature_to_save = feature_to_save
 
-        self.THRESHOLD = 0.05
         self.feature_to_compare = feature_to_compare
 
         # NUMBER_OF_CLASSES = 3
@@ -45,6 +44,10 @@ class LPD:
         # PERCENTAGE_OF_TEST = 0.3
         self.percentage_test = percentage_test
 
+    def remove_version(self, x):
+        if '.' in x:
+            return x.split('.')[0]
+        return x
 
     @measure_time
     def read_gtf_file(self):
@@ -56,6 +59,8 @@ class LPD:
             gtf[p] = gtf['attribute'].apply(lambda x: re.findall(rf'{p} "([^"]*)"', x)[0] if rf'{p} "' in x else np.nan)
 
         gtf.drop('attribute', axis=1, inplace=True)
+
+        gtf['gene_id'] = gtf['gene_id'].apply(self.remove_version)
 
         gtf_pc = gtf[gtf['gene_type'] == 'protein_coding']
 
@@ -92,6 +97,8 @@ class LPD:
                             # So the 'gene_type' in the dataset don't match the in the gtf file.
                             # So i'm gonna use as the right reference the gtf file.
 
+                            parsed_file['gene_id'] = parsed_file['gene_id'].apply(self.remove_version)
+
                             # parsed_file = parsed_file[parsed_file['gene_type'] == 'protein_coding']
                             # if not set(parsed_file['gene_id']).issubset(gtf_pc_set):
                             #     raise Exception("List of coding genes don't match.")
@@ -118,6 +125,8 @@ class LPD:
 
     @measure_time
     def create_graph(self):
+        self.THRESHOLD = 0.05
+
         self.list_of_Data = []
         for case_index in range(0, self.datastructure.shape[0]):
             feature_size = self.datastructure['values'].loc[case_index][self.feature_to_compare].shape[0]
@@ -125,6 +134,7 @@ class LPD:
 
             for f_1_index in range(feature_size):
                 for f_2_index in range(f_1_index + 1, self.datastructure.shape[0]):
+                    # The lower the more similar they are.
                     similarity = np.linalg.norm(   
                         self.datastructure['values'].loc[case_index][self.feature_to_compare].iloc[f_1_index] - \
                         self.datastructure['values'].loc[case_index][self.feature_to_compare].iloc[f_2_index])
@@ -220,3 +230,59 @@ class LPD:
         self.split_dataset()
         
         return self.train_list, self.test_list
+
+
+
+class LPDEdgeKnowledgeBased(LPD):
+    def __init__(self, gtf_file_path: str, folder_gene_path: str, case_id_json_path: str,
+                 feature_to_save: list, feature_to_compare: str, num_classes: int, percentage_test: float,
+                 edge_file_path: str):
+        super().__init__(gtf_file_path, folder_gene_path, case_id_json_path,
+                         feature_to_save, feature_to_compare, num_classes, percentage_test)
+        self.edge_file_path = edge_file_path
+
+    @measure_time
+    def create_graph(self):
+        self.THRESHOLD = 206
+
+        comparison_dict = {}
+        with open(self.edge_file_path, 'r') as file:
+            skip_first = True
+            for line in file:
+                if skip_first:
+                    skip_first = False
+                    continue
+                f = line.split(".")[1].split(" ")[0]
+                s = line.split(".")[2].split(" ")[0]
+                v = int(line.split(" ")[-1])
+                if not f in comparison_dict.keys():
+                    comparison_dict[f] = {}
+                comparison_dict[f][s] = v
+
+        self.list_of_Data = []
+        for case_index in range(0, self.datastructure.shape[0]):
+            feature_size = self.datastructure['values'].loc[case_index][self.feature_to_compare].shape[0]
+            edges = [[],[]]
+
+            for f_1_index in range(feature_size):
+                for f_2_index in range(f_1_index + 1, self.datastructure.shape[0]):
+                    gene_1 = self.datastructure['values'].loc[case_index]['gene_id'].iloc[f_1_index]
+                    gene_2 = self.datastructure['values'].loc[case_index]['gene_id'].iloc[f_2_index]
+
+                    if gene_1 in comparison_dict.keys() and gene_2 in comparison_dict[gene_1].keys():
+                        similarity = comparison_dict[gene_1][gene_2]
+                    else:
+                        similarity = 0
+                        print("Similarity not found")
+                    
+                    # In this case the higher the number the more similarity.
+                    if similarity >= self.THRESHOLD:
+                        edges[0].append(f_1_index)
+                        edges[0].append(f_2_index)
+                        edges[1].append(f_2_index)
+                        edges[1].append(f_1_index)
+            
+            edge_index = torch.tensor(edges, dtype=torch.long)
+            x = torch.tensor(list(self.datastructure['values'].loc[case_index][self.feature_to_compare]), dtype=torch.float)
+            y = torch.tensor(self.datastructure['os'].loc[case_index])
+            self.list_of_Data.append(Data(x=x, edge_index=edge_index, y=y))
