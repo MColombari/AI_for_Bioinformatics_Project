@@ -263,7 +263,8 @@ class LPDEdgeKnowledgeBased(LPD):
         for case_index in range(0, self.datastructure.shape[0]):
             feature_size = self.datastructure['values'].loc[case_index][self.feature_to_compare].shape[0]
             edges = [[],[]]
-
+            miss_count = 0
+            got_count = 0
             for f_1_index in range(feature_size):
                 for f_2_index in range(f_1_index + 1, self.datastructure.shape[0]):
                     gene_1 = self.datastructure['values'].loc[case_index]['gene_id'].iloc[f_1_index]
@@ -271,9 +272,11 @@ class LPDEdgeKnowledgeBased(LPD):
 
                     if gene_1 in comparison_dict.keys() and gene_2 in comparison_dict[gene_1].keys():
                         similarity = comparison_dict[gene_1][gene_2]
+                        got_count += 1
                     else:
                         similarity = 0
-                        print("Similarity not found")
+                        miss_count += 1
+                        # print("Similarity not found")
                     
                     # In this case the higher the number the more similarity.
                     if similarity >= self.THRESHOLD:
@@ -281,6 +284,8 @@ class LPDEdgeKnowledgeBased(LPD):
                         edges[0].append(f_2_index)
                         edges[1].append(f_2_index)
                         edges[1].append(f_1_index)
+
+            print(f"{miss_count} similarities not found, got {got_count}")
             
             edge_index = torch.tensor(edges, dtype=torch.long)
             x = torch.tensor(list(self.datastructure['values'].loc[case_index][self.feature_to_compare]), dtype=torch.float)
