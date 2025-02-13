@@ -33,8 +33,8 @@ PATH_GENE_ID_PROTEIN_CODING = "/homes/dlupo/Progetto_BioInformatics/AI_for_Bioin
 
 #   Model parameter
 hyperparameter = {
-    'num_classes': 3,
-    'epochs': 200,
+    'num_classes': 2,
+    'epochs': 20,
     'batch_size': 20,
     'seed': 123456,
     'num_workers': 6,
