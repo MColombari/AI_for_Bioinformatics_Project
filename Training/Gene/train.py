@@ -1,7 +1,7 @@
 import torch
 from Save_model import SaveModel as SM
 from models import simple_GCN
-from Load_and_Process_Data import LPD
+from Load_and_Process_Data import LPD, LPDEdgeKnowledgeBased
 from torch_geometric.loader import DataLoader
 from collections import OrderedDict
 from sklearn.metrics import accuracy_score
@@ -23,24 +23,26 @@ MORE_INFO = """
 TEST_FOLDER_PATH = "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output"
 
 # Load previous checkpoint.
-START_FROM_CHECKPOINT = True
-CHECKPOINT_PATH = "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train_Gene_25/model_checkpoints/Train_Gene_epoch_1.pth"
+START_FROM_CHECKPOINT = False
+CHECKPOINT_PATH = ""
 
 # Load data path
 PATH_GTF_FILE = "/homes/mcolombari/AI_for_Bioinformatics_Project/Personal/gencode.v47.annotation.gtf"
 PATH_FOLDER_GENE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneExpression"
 PATH_CASE_ID_STRUCTURE = "/homes/mcolombari/AI_for_Bioinformatics_Project/Preprocessing/Final/case_id_and_structure.json"
+# For edge similarity file.
+PATH_EDGE_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/9606.protein.links.v12.0.txt"
 
 
 #   Model parameter TODO
 hyperparameter = {
     'num_classes': 2,
-    'epochs': 4,
+    'epochs': 2000,
     'batch_size': 10,
     'seed': 123456,
     'num_workers': 6,
-    'lr': 0.01,
-    'save_model_period': 2, # How many epoch to wait before save the next model.
+    'lr': 0.0001,
+    'save_model_period': 100, # How many epoch to wait before save the next model.
     'percentage_of_test': 0.3, # How many percentage of the dataset is used for testing.
     'feature_to_save': ['tpm_unstranded'], # Specifci parameter for gene.
     'feature_to_compare': 'tpm_unstranded'
@@ -52,9 +54,10 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 # https://pytorch-geometric.readthedocs.io/en/2.5.3/notes/create_dataset.html
-lpd = LPD(PATH_GTF_FILE, PATH_FOLDER_GENE, PATH_CASE_ID_STRUCTURE,
-          hyperparameter['feature_to_save'], hyperparameter['feature_to_compare'],
-          hyperparameter['num_classes'], hyperparameter['percentage_of_test'])
+lpd = LPDEdgeKnowledgeBased(PATH_GTF_FILE, PATH_FOLDER_GENE, PATH_CASE_ID_STRUCTURE,
+                            hyperparameter['feature_to_save'], hyperparameter['feature_to_compare'],
+                            hyperparameter['num_classes'], hyperparameter['percentage_of_test'],
+                            PATH_EDGE_FILE)
 data_train_list, data_test_list = lpd.get_data()  # List of Data.
 # Inside of data we need to specify which y we have.
 
@@ -65,7 +68,7 @@ test_loader = DataLoader(data_test_list, batch_size=hyperparameter['batch_size']
 
 
 node_feature_number = 1
-model = simple_GCN(node_feature_number, 10, hyperparameter['num_classes'])
+model = simple_GCN(node_feature_number, 4, hyperparameter['num_classes'])
 
 s_epoch = 0
 if START_FROM_CHECKPOINT:
@@ -131,7 +134,10 @@ def test(loader):
             loss = criterion(outputs, labels.squeeze())
             losses.append(loss.item())
             # collect labels & prediction
-            prediction = torch.max(outputs, 1)[1]
+            prediction = torch.argmax(outputs, 1)
+            # print(prediction)
+            # print(prediction[0])
+            # print(prediction[1])
             all_label.extend(labels.squeeze())
             all_pred.extend(prediction)
 
@@ -156,6 +162,6 @@ for epoch_index in range(s_epoch, hyperparameter['epochs']):
     print(f"\tTest acc: {test_acc}")
     sm.save_epoch_data(epoch_index, train_loss, train_acc, test_loss, test_acc)
 
-    if (epoch_index - s_epoch) % hyperparameter['save_model_period'] == 0:
+    if (epoch_index + 1 - s_epoch) % hyperparameter['save_model_period'] == 0:
         print("###    Model saved    ###")
         sm.save_epoch(epoch_index, model)
