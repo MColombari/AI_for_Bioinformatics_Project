@@ -15,3 +15,5 @@ Training/Model_CNV/__pycache__/Load_and_Process_Data.cpython-39.pyc
 Training/Model_CNV/__pycache__/models.cpython-39.pyc
 Training/Model_CNV/__pycache__/Save_model.cpython-39.pyc
 Preprocessing/Final/Gene/9606.protein.links.v12.0.txt
+Preprocessing/Final/Gene_sbatch/error_test.log
+Preprocessing/Final/Gene_sbatch/output_test.log
