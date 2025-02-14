@@ -33,8 +33,8 @@ PATH_GENE_ID_PROTEIN_CODING = "/homes/dlupo/Progetto_BioInformatics/AI_for_Bioin
 
 #   Model parameter
 hyperparameter = {
-    'num_classes': 3,
-    'epochs': 200,
+    'num_classes': 2,
+    'epochs': 20,
     'batch_size': 20,
     'seed': 123456,
     'num_workers': 6,
@@ -125,7 +125,7 @@ def test(loader):
             loss = criterion(outputs, labels.squeeze())
             losses.append(loss.item())
             # collect labels & prediction
-            prediction = torch.max(outputs, 1)[1]
+            prediction = torch.argmax(outputs, 1)
             all_label.extend(labels.squeeze())
             all_pred.extend(prediction)
 

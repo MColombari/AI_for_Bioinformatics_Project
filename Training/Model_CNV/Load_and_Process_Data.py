@@ -21,7 +21,7 @@ class LPD:
     def __init__(self, folder_copy_number_path: str, case_id_json_path: str,
         gene_id_protein_coding_path: str, num_classes: int, percentage_test: float):
         self.folder_copy_number_path = folder_copy_number_path
-        self.case_id_json_path = case_id_json_path
+        self.case_id_json_path = case_id_json_path\
         self.gene_id_protein_coding_path = gene_id_protein_coding_path
 
         self.THRESHOLD = 0.1
@@ -113,41 +113,26 @@ class LPD:
             # Trova e aggiungi gli archi per i geni sovrapposti
             overlapping_pairs = self.find_overlapping_genes(df_CNV)
             G.add_edges_from(overlapping_pairs)
-            
+
+            # print('GRAGO N.',case_index,'\n')
+            # # Numero di nodi (geni) e archi (relazioni di sovrapposizione)
+            # print("Numero di nodi:", G.number_of_nodes())
+            # print("Numero di archi:", G.number_of_edges())
+
+            # # Nodo con il massimo grado (gene con più connessioni)
+            # degrees = dict(G.degree())
+            # max_degree_node = max(degrees, key=degrees.get)
+            # print(f"Gene con il massimo grado: {max_degree_node} ({degrees[max_degree_node]} connessioni)")
+
+            # # Trova tutte le componenti connesse
+            # connected_components = list(nx.connected_components(G))
+            # print("Numero di componenti connesse:", len(connected_components))
+            # print('\n\n================\n\n')
+
             # Converti in PyTorch Geometric graph
             pyg_graph = from_networkx(G)
             pyg_graph['y'] = torch.tensor([self.os_list[case_index]])
             self.list_of_Data.append(pyg_graph)
-
-    # @measure_time
-    # def create_graph(self):
-    #     self.list_of_Data = []
-    #     for case_index in range(0,2):
-
-    #         df_CNV = self.list_df_CNV_filled[case_index][:2000]
-
-    #         # Build an Empty Graph 
-    #         G = nx.Graph()
-
-    #         # Add genes in the Graph 
-    #         for _, row in df_CNV.iterrows():
-    #             G.add_node(row['gene_name'], x=row['copy_number'])
-
-    #         # Add edges between genes that overlap (start, end)
-    #         for i, gene1 in df_CNV.iterrows():
-    #             print('\t',i)
-    #             for j, gene2 in df_CNV.iterrows():
-    #                 if i >= j:
-    #                     continue  # Check every pair of genes only once
-    #                 if gene1['chromosome'] == gene2['chromosome']:
-    #                     # Check if their segments overlap
-    #                     if (gene1['start'] <= gene2['end']) and (gene1['end'] >= gene2['start']):
-    #                         G.add_edge(gene1['gene_name'], gene2['gene_name'])
-
-    #         pyg_graph = from_networkx(G)
-    #         pyg_graph['y'] = torch.tensor([self.os_list[case_index]])
-    #         self.list_of_Data.append(pyg_graph)
-    #         print('case index: ',case_index)
     
     @measure_time
     def split_dataset(self):
@@ -173,6 +158,7 @@ class LPD:
                     (c > 0 and int(d.y) <= split_values[c] and int(d.y) > split_values[c-1]):
                     d.y = torch.tensor(c)
                     list_data_split[c].append(d)
+                    
 
         # Now split in train and test.
         self.train_list = []
