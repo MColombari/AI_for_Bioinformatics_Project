@@ -30,26 +30,22 @@ import requests
 
 conversion = {}
 
-ensp_ids = list(esnp_set)
-server = "https://rest.ensembl.org"
-ext = "/lookup/id/"
+skip_first = True
+with open('/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/mart_export.txt', 'r') as f:
+    for line in f:
+        if skip_first:
+            skip_first = False
+            continue
+        genes = line.split('\t')
+        # print(genes)
+        if len(genes) >= 2:
+            g = genes[0]
+            p = genes[1].split('\n')[0]
+            conversion[p] = g
 
-headers = {"Content-Type": "application/json"}
+print(len(conversion.keys()))
 
-found_count = 0
-not_found_count = 0
-for ensp in ensp_ids:
-    response = requests.get(server + ext + ensp, headers=headers)
-    if response.ok:
-        data = response.json()
-        conversion[ensp] = str(data.get('gene_id'))
-        found_count += 1
-    else:
-        conversion[ensp] = None
-        not_found_count += 1
-
-print(f"Found {found_count}\t Not Found {not_found_count} - {not_found_count / (found_count + not_found_count)}%")
-
+total_row = 0
 row_skipped_count = 0
 with open('/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/9606.protein.links.v12.0.txt', 'r') as in_file:
     with open('/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/9606.protein.links.v12.0.ENSG.txt', 'w') as out_file:
@@ -59,10 +55,11 @@ with open('/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/9606.protei
                 skip_first = False
                 continue
             f, s, v = parse_row(line)
-            new_f = conversion[f]
-            new_s = conversion[s]
-            if new_f and new_s:
-                out_file.write(f"{new_f} {new_s} {v}\n")
-            else:
+            if (not f in conversion.keys()) or (not s in conversion.keys()):
                 row_skipped_count += 1
-print(f"{row_skipped_count} row skipped")
+            else:
+                new_f = conversion[f]
+                new_s = conversion[s]
+                out_file.write(f"{new_f} {new_s} {v}\n")
+            total_row += 1
+print(f"Total: {total_row}\tSkipped: {row_skipped_count} - {(row_skipped_count / total_row) * 100}%")
