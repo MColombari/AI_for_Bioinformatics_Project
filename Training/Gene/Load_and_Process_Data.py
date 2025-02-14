@@ -8,6 +8,7 @@ import networkx as nx
 from torch_geometric.data import Data
 from torch_geometric.utils import to_networkx
 import time
+from sklearn.metrics import pairwise_distances
 
 # Here we define the class to load and preprocess data.
 # So just copy the code in "Preprocessing".
@@ -125,29 +126,31 @@ class LPD:
 
     @measure_time
     def create_graph(self):
-        self.THRESHOLD = 0.05
+        self.THRESHOLD = 0.08
 
         self.list_of_Data = []
         for case_index in range(0, self.datastructure.shape[0]):
-            feature_size = self.datastructure['values'].loc[case_index][self.feature_to_compare].shape[0]
-            edges = [[],[]]
+            edges = []
+            in_1 = [[v] for v in list(self.datastructure['values'].loc[case_index][self.feature_to_compare])]
 
-            for f_1_index in range(feature_size):
-                for f_2_index in range(f_1_index + 1, self.datastructure.shape[0]):
-                    # The lower the more similar they are.
-                    similarity = np.linalg.norm(   
-                        self.datastructure['values'].loc[case_index][self.feature_to_compare].iloc[f_1_index] - \
-                        self.datastructure['values'].loc[case_index][self.feature_to_compare].iloc[f_2_index])
-                    if similarity <= self.THRESHOLD:
-                        edges[0].append(f_1_index)
-                        edges[0].append(f_2_index)
-                        edges[1].append(f_2_index)
-                        edges[1].append(f_1_index)
-            
+            dist_a = pairwise_distances(in_1, metric="euclidean")
+
+            d_mask = np.zeros(dist_a.shape, dtype=bool)
+            np.fill_diagonal(d_mask, 1)
+
+            # Force the diagonal to be equal to Threshold, so it will not be considered, so no self loops.
+            dist_a[d_mask] = self.THRESHOLD
+
+            row, cols = np.where(dist_a < self.THRESHOLD)
+            edges.append(list(row))
+            edges.append(list(cols))
+
             edge_index = torch.tensor(edges, dtype=torch.long)
             x = torch.tensor(list(self.datastructure['values'].loc[case_index][self.feature_to_compare]), dtype=torch.float)
             y = torch.tensor(self.datastructure['os'].loc[case_index])
             self.list_of_Data.append(Data(x=x, edge_index=edge_index, y=y))
+
+
 
     
     def get_instance_class(self, d):
@@ -246,18 +249,23 @@ class LPDEdgeKnowledgeBased(LPD):
         self.THRESHOLD = 206
 
         comparison_dict = {}
+        row_index = 0
         with open(self.edge_file_path, 'r') as file:
-            skip_first = True
             for line in file:
-                if skip_first:
-                    skip_first = False
-                    continue
-                f = line.split(".")[1].split(" ")[0]
-                s = line.split(".")[2].split(" ")[0]
-                v = int(line.split(" ")[-1])
-                if not f in comparison_dict.keys():
-                    comparison_dict[f] = {}
-                comparison_dict[f][s] = v
+                row_index += 1
+                # print(row_index)
+                f = line.split(" ")[0]
+                s = line.split(" ")[1]
+                v = int(line.split(" ")[2].split('\n')[0])
+                k = [f, s]
+                k.sort()
+                k = tuple(k)
+                if k in comparison_dict.keys():
+                    old_v = comparison_dict[k]
+                    if old_v < v:
+                        comparison_dict[k] = v
+                else:
+                    comparison_dict[k] = v
 
         self.list_of_Data = []
         for case_index in range(0, self.datastructure.shape[0]):
@@ -266,16 +274,25 @@ class LPDEdgeKnowledgeBased(LPD):
             miss_count = 0
             got_count = 0
             for f_1_index in range(feature_size):
-                for f_2_index in range(f_1_index + 1, self.datastructure.shape[0]):
+                for f_2_index in range(f_1_index + 1, feature_size):
                     gene_1 = self.datastructure['values'].loc[case_index]['gene_id'].iloc[f_1_index]
                     gene_2 = self.datastructure['values'].loc[case_index]['gene_id'].iloc[f_2_index]
 
-                    if gene_1 in comparison_dict.keys() and gene_2 in comparison_dict[gene_1].keys():
-                        similarity = comparison_dict[gene_1][gene_2]
+                    print(gene_1)
+                    print(gene_2)
+                    k = [gene_1, gene_2]
+                    k.sort()
+                    k = tuple(k)
+                    print(k)
+
+                    if k in comparison_dict.keys():
+                        similarity = comparison_dict[k]
                         got_count += 1
+                        print(f"Got it\t{similarity}")
                     else:
                         similarity = 0
                         miss_count += 1
+                        print("Drop it")
                         # print("Similarity not found")
                     
                     # In this case the higher the number the more similarity.
@@ -285,9 +302,104 @@ class LPDEdgeKnowledgeBased(LPD):
                         edges[1].append(f_2_index)
                         edges[1].append(f_1_index)
 
-            print(f"{miss_count} similarities not found, got {got_count}")
+            print("Similarities found")
+            print(f"\tMissed: {miss_count} - {(miss_count / (miss_count + got_count))*100}%")
+            print(f"\tGot: {got_count} - {(got_count / (miss_count + got_count))*100}%")
             
             edge_index = torch.tensor(edges, dtype=torch.long)
             x = torch.tensor(list(self.datastructure['values'].loc[case_index][self.feature_to_compare]), dtype=torch.float)
             y = torch.tensor(self.datastructure['os'].loc[case_index])
+            self.list_of_Data.append(Data(x=x, edge_index=edge_index, y=y))
+
+class LPDHybrid(LPDEdgeKnowledgeBased):
+    @measure_time
+    def create_graph(self):
+        self.THRESHOLD_A = 175
+        self.THRESHOLD = 0.09
+
+        comparison_dict = {}
+        row_index = 0
+        with open(self.edge_file_path, 'r') as file:
+            for line in file:
+                row_index += 1
+                # print(row_index)
+                f = line.split(" ")[0]
+                s = line.split(" ")[1]
+                v = int(line.split(" ")[2].split('\n')[0])
+                k = [f, s]
+                k.sort()
+                k = tuple(k)
+                if k in comparison_dict.keys():
+                    old_v = comparison_dict[k]
+                    if old_v < v:
+                        comparison_dict[k] = v
+                else:
+                    comparison_dict[k] = v
+
+        self.list_of_Data = []
+        for case_index in range(0, self.datastructure.shape[0]):
+            feature_size = self.datastructure['values'].loc[case_index][self.feature_to_compare].shape[0]
+            edges = [[],[]]
+            miss_count = 0
+            got_count = 0
+            for f_1_index in range(feature_size):
+                for f_2_index in range(f_1_index + 1, feature_size):
+                    gene_1 = self.datastructure['values'].loc[case_index]['gene_id'].iloc[f_1_index]
+                    gene_2 = self.datastructure['values'].loc[case_index]['gene_id'].iloc[f_2_index]
+
+                    # print(gene_1)
+                    # print(gene_2)
+                    k = [gene_1, gene_2]
+                    k.sort()
+                    k = tuple(k)
+                    # print(k)
+
+                    make_edge = False
+
+                    if k in comparison_dict.keys():
+                        similarity = comparison_dict[k]
+                        got_count += 1
+                        if similarity >= self.THRESHOLD_A:
+                            make_edge = True
+                    else:
+                        # If we are not able to find any match to compare, then we check the values.
+                        miss_count += 1
+                        similarity = np.linalg.norm(   
+                            self.datastructure['values'].loc[case_index][self.feature_to_compare].iloc[f_1_index] - \
+                            self.datastructure['values'].loc[case_index][self.feature_to_compare].iloc[f_2_index])
+                        if similarity <= self.THRESHOLD:
+                            make_edge = True
+                        
+                        # print("Similarity not found")
+                    
+                    # In this case the higher the number the more similarity.
+                    if make_edge:
+                        edges[0].append(f_1_index)
+                        edges[0].append(f_2_index)
+                        edges[1].append(f_2_index)
+                        edges[1].append(f_1_index)
+
+            print("Similarities found")
+            print(f"\tMissed: {miss_count} - {(miss_count / (miss_count + got_count))*100}%")
+            print(f"\tGot: {got_count} - {(got_count / (miss_count + got_count))*100}%")
+            
+            edge_index = torch.tensor(edges, dtype=torch.long)
+            x = torch.tensor(list(self.datastructure['values'].loc[case_index][self.feature_to_compare]), dtype=torch.float)
+            y = torch.tensor(self.datastructure['os'].loc[case_index])
+            data = Data(x=x, edge_index=edge_index, y=y)
+
+            G = to_networkx(data, to_undirected=True)
+            print(f"\n\n### Graph {case_index} ###")
+            print("Numero di nodi:", G.number_of_nodes())
+            print("Numero di edge:", G.number_of_edges())
+            degrees = dict(G.degree())
+            # Nodo con il massimo grado (gene con più connessioni)
+            max_degree_node = max(degrees, key=degrees.get)
+            print(f"Nodo con il massimo grado: {max_degree_node} ({degrees[max_degree_node]} connessioni)")
+
+            # Trova tutte le componenti connesse
+            connected_components = list(nx.connected_components(G))
+            print("Numero di componenti connesse: ", len(connected_components))
+            print(f"density: {nx.density(G)}")
+
             self.list_of_Data.append(Data(x=x, edge_index=edge_index, y=y))

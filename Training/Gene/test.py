@@ -1,6 +1,6 @@
 from models import simple_GCN
 import torch
-from Load_and_Process_Data import LPD
+from Load_and_Process_Data import LPD, LPDHybrid
 from torch_geometric.loader import DataLoader
 from collections import OrderedDict
 from sklearn.metrics import accuracy_score
@@ -10,11 +10,12 @@ from Save_model import SaveTest as ST
 TEST_NAME = "Test_Gene"
 TEST_FOLDER_PATH = "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Test_output"
 
-CHECKPOINT_PATH = "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train_Gene_7/model_checkpoints/Train_Gene_epoch_199.pth"
+CHECKPOINT_PATH = "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train_Gene_18/model_checkpoints/Train_Gene_epoch_99.pth"
 PATH_GTF_FILE = "/homes/mcolombari/AI_for_Bioinformatics_Project/Personal/gencode.v47.annotation.gtf"
 PATH_FOLDER_GENE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneExpression"
 PATH_CASE_ID_STRUCTURE = "/homes/mcolombari/AI_for_Bioinformatics_Project/Preprocessing/Final/case_id_and_structure.json"
 
+PATH_EDGE_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/9606.protein.links.v12.0.ENSG.txt"
 
 hyperparameter = {
     'num_classes': 2,
@@ -34,7 +35,7 @@ torch.manual_seed(hyperparameter['seed'])
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Model
-model = simple_GCN(1, 4, hyperparameter['num_classes'])
+model = simple_GCN(1, 100, hyperparameter['num_classes'])
 
 # Load Model
 checkpoint = torch.load(CHECKPOINT_PATH)
@@ -42,10 +43,11 @@ model_dict = checkpoint['model_dict']
 model.load_state_dict(model_dict)
 
 
-# Load data
-lpd = LPD(PATH_GTF_FILE, PATH_FOLDER_GENE, PATH_CASE_ID_STRUCTURE,
-          hyperparameter['feature_to_save'], hyperparameter['feature_to_compare'],
-          hyperparameter['num_classes'], hyperparameter['percentage_of_test'])
+# https://pytorch-geometric.readthedocs.io/en/2.5.3/notes/create_dataset.html
+lpd = LPDHybrid(PATH_GTF_FILE, PATH_FOLDER_GENE, PATH_CASE_ID_STRUCTURE,
+                            hyperparameter['feature_to_save'], hyperparameter['feature_to_compare'],
+                            hyperparameter['num_classes'], hyperparameter['percentage_of_test'],
+                            PATH_EDGE_FILE)
 
 lpd.read_gtf_file()
 lpd.preprocessing()
