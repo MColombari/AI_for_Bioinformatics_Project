@@ -12,11 +12,17 @@ class simple_GCN(torch.nn.Module):
         # source: https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.data.Dataset.html
         super(simple_GCN, self).__init__()
         self.conv1 = GCNConv(input_feature, hidden_channels)
+        self.conv2 = GCNConv(hidden_channels, hidden_channels)
+        self.conv3 = GCNConv(hidden_channels, hidden_channels)
         self.lin = Linear(hidden_channels, num_classes)
 
     def forward(self, x, edge_index, batch=None):
         # 1. Obtain node embeddings 
         x = self.conv1(x, edge_index)
+        x = x.relu()
+        x = self.conv2(x, edge_index)
+        x = x.relu()
+        x = self.conv3(x, edge_index)
 
         # 2. Readout layer
         x = global_mean_pool(x, batch)  # [batch_size, hidden_channels]
