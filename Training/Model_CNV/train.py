@@ -125,7 +125,7 @@ def test(loader):
             loss = criterion(outputs, labels.squeeze())
             losses.append(loss.item())
             # collect labels & prediction
-            prediction = torch.max(outputs, 1)[1]
+            prediction = torch.argmax(outputs, 1)
             all_label.extend(labels.squeeze())
             all_pred.extend(prediction)
 
