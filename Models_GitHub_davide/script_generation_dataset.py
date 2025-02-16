@@ -59,15 +59,34 @@ for c in range(1, num_classes + 1):
         split_values.append(os_list_sorted[index - 1])
 
 
-list_of_Data = []
+edge = [[],[]]
+nodes = len(list_df_CNV_filled[0])
+df = list_df_CNV_filled[0]
+# Aggiunta delle connessioni in base alla sovrapposizione
+for f_1_index in range(nodes):
+    for f_2_index in range(f_1_index + 1, nodes):
+        row1 = df.iloc[f_1_index]
+        row2 = df.iloc[f_2_index]
+        if row1['chromosome'] == row2['chromosome']:  # Evita duplicati
+            if not (row1['end'] < row2['start'] or row2['end'] < row1['start']):
+                edge[0].append(f_1_index)
+                edge[0].append(f_2_index)
+                edge[1].append(f_2_index)
+                edge[1].append(f_1_index)
+
 list_label = []
 list_attribute = []
-edges = [[],[]]
-count = 0
 graph_indicator = []
-
+list_of_list = []
+count = 0
 for case_index in range(226): 
     df = list_df_CNV_filled[case_index]
+
+    temp_list = [[],[]]
+    temp_list[0] = [elem + count for elem in edge[0]]
+    temp_list[1] = [elem + count for elem in edge[1]]
+    list_of_list.append(temp_list)
+    count += nodes
 
     for i in range(len(df)):
         graph_indicator.append(case_index)
@@ -77,25 +96,13 @@ for case_index in range(226):
     else:
         list_label.append(1)
 
-    # Aggiunta delle connessioni in base alla sovrapposizione
-    nodes = len(df)
-    for f_1_index in range(nodes):
-        for f_2_index in range(f_1_index + 1, nodes):
-            row1 = df.iloc[f_1_index]
-            row2 = df.iloc[f_2_index]
-            if row1['chromosome'] == row2['chromosome']:  # Evita duplicati
-                if not (row1['end'] < row2['start'] or row2['end'] < row1['start']):
-                    edges[0].append(f_1_index + count)
-                    edges[0].append(f_2_index + count)
-                    edges[1].append(f_2_index + count)
-                    edges[1].append(f_1_index + count)
-                    # G.add_edge(row1['gene_name'], row2['gene_name'])
-
-    count += nodes
-    print(case_index)
-    # list_attribute.append(row['copy_number'] for _, row in df_CNV.iterrows())
     for _, row in df.iterrows():
         list_attribute.append(row['copy_number'])
+
+edges = [[],[]]
+for item in list_of_list:
+    edges[0].extend(item[0])
+    edges[1].extend(item[1])
 
 with open('./datasets/Copy_Number/Copy_Number_graph_labels.txt','w') as file:
     for item in list_label:

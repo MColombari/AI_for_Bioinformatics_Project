@@ -10,4 +10,4 @@
 #SBATCH --error="run_output/error.log"
 
 # training 
-python3 script_generation_dataset.py
+python3 train.py --epoch 5 --n_folds 5 --model_list GCN --dataset_list COPY_NUMBER --readout_list avg --n_agg_layer 2 --agg_hidden 32
