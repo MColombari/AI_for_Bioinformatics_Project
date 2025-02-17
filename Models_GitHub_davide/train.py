@@ -398,6 +398,7 @@ for dataset_name in args.dataset_list:
                 start = time.time()
                 train_loss, n_samples = 0, 0
                 for batch_idx, data in enumerate(train_loader):
+                    print('batch_index:',batch_index)
                     for i in range(len(data)):
                         data[i] = data[i].to(device)
                     optimizer.zero_grad()

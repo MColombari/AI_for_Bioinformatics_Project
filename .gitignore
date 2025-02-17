@@ -23,3 +23,7 @@ Models_GitHub_davide/datasets/__pycache__
 Models_GitHub_davide/layers/__pycache__
 Models_GitHub_davide/models/__pycache__
 Models_GitHub_davide/readouts/__pycache__
+Models_GitHub_davide/datasets/COPY_NUMBER/__pycache__
+Models_GitHub_davide/run_files/run_train.sh
+Models_GitHub_davide/run_output/error.log
+Models_GitHub_davide/run_output/output.log
