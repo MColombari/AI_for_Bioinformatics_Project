@@ -22,7 +22,8 @@ def measure_time(func):
 
 class LPD:
     def __init__(self, gtf_file_path: str, folder_gene_path: str, case_id_json_path: str,
-                 feature_to_save: list, feature_to_compare: str, num_classes: int, percentage_test: float):
+                 feature_to_save: list, feature_to_compare: str, num_classes: int, percentage_test: float,
+                 device):
         # PATH_GTF_FILE = "/homes/mcolombari/AI_for_Bioinformatics_Project/Personal/gencode.v47.annotation.gtf"
         self.gtf_file_path = gtf_file_path
         # PATH_FOLDER_GENE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneExpression"
@@ -44,6 +45,8 @@ class LPD:
         self.num_classes = num_classes
         # PERCENTAGE_OF_TEST = 0.3
         self.percentage_test = percentage_test
+
+        self.device = device
 
     def remove_version(self, x):
         if '.' in x:
@@ -126,7 +129,7 @@ class LPD:
 
     @measure_time
     def create_graph(self):
-        self.THRESHOLD = 0.08
+        self.THRESHOLD = 0.06
 
         self.list_of_Data = []
         for case_index in range(0, self.datastructure.shape[0]):
@@ -239,73 +242,57 @@ class LPD:
 class LPDEdgeKnowledgeBased(LPD):
     def __init__(self, gtf_file_path: str, folder_gene_path: str, case_id_json_path: str,
                  feature_to_save: list, feature_to_compare: str, num_classes: int, percentage_test: float,
-                 edge_file_path: str):
+                 device, edge_file_path: str, edge_complete_file_path):
         super().__init__(gtf_file_path, folder_gene_path, case_id_json_path,
-                         feature_to_save, feature_to_compare, num_classes, percentage_test)
+                         feature_to_save, feature_to_compare, num_classes, percentage_test,
+                         device)
         self.edge_file_path = edge_file_path
+        self.edge_complete_file_path = edge_complete_file_path
 
     @measure_time
-    def create_graph(self):
-        self.THRESHOLD = 206
+    def read_gtf_file(self):
+        # We read the GTF file and the edge file, to keep only the gene that we have there.
+        gtf = pd.read_csv(self.gtf_file_path, sep="\t", header=None, comment='#')
+        gtf.columns = ['seqname', 'source', 'feature', 'start', 'end', 'score', 'strand', 'frame', 'attribute']
 
-        comparison_dict = {}
-        row_index = 0
+        parameters = ['gene_id', 'gene_type']
+        for p in parameters:
+            gtf[p] = gtf['attribute'].apply(lambda x: re.findall(rf'{p} "([^"]*)"', x)[0] if rf'{p} "' in x else np.nan)
+
+        gtf.drop('attribute', axis=1, inplace=True)
+
+        gtf['gene_id'] = gtf['gene_id'].apply(self.remove_version)
+
+        gtf_pc = gtf[gtf['gene_type'] == 'protein_coding']
+
+        # Protein coding set
+        self.pc_set = set(gtf_pc['gene_id'].to_list())
+        print(f"\nProtein coding dim: {len(self.pc_set)}")
+
+        accepted_gene = set()
         with open(self.edge_file_path, 'r') as file:
             for line in file:
-                row_index += 1
                 # print(row_index)
                 f = line.split(" ")[0]
                 s = line.split(" ")[1]
-                v = int(line.split(" ")[2].split('\n')[0])
-                k = [f, s]
-                k.sort()
-                k = tuple(k)
-                if k in comparison_dict.keys():
-                    old_v = comparison_dict[k]
-                    if old_v < v:
-                        comparison_dict[k] = v
-                else:
-                    comparison_dict[k] = v
+                accepted_gene.add(f)
+                accepted_gene.add(s)
 
+        print(f"Accepted gene dim: {len(accepted_gene)}")
+
+        self.pc_set = self.pc_set.intersection(accepted_gene)
+
+        print(f"Intersection dim: {len(self.pc_set)}\n Execution time: ")
+
+
+
+    @measure_time
+    def create_graph(self):
+        with open(self.edge_complete_file_path, 'r') as file:
+            edges = json.load(file)
         self.list_of_Data = []
         for case_index in range(0, self.datastructure.shape[0]):
-            feature_size = self.datastructure['values'].loc[case_index][self.feature_to_compare].shape[0]
-            edges = [[],[]]
-            miss_count = 0
-            got_count = 0
-            for f_1_index in range(feature_size):
-                for f_2_index in range(f_1_index + 1, feature_size):
-                    gene_1 = self.datastructure['values'].loc[case_index]['gene_id'].iloc[f_1_index]
-                    gene_2 = self.datastructure['values'].loc[case_index]['gene_id'].iloc[f_2_index]
-
-                    print(gene_1)
-                    print(gene_2)
-                    k = [gene_1, gene_2]
-                    k.sort()
-                    k = tuple(k)
-                    print(k)
-
-                    if k in comparison_dict.keys():
-                        similarity = comparison_dict[k]
-                        got_count += 1
-                        print(f"Got it\t{similarity}")
-                    else:
-                        similarity = 0
-                        miss_count += 1
-                        print("Drop it")
-                        # print("Similarity not found")
-                    
-                    # In this case the higher the number the more similarity.
-                    if similarity >= self.THRESHOLD:
-                        edges[0].append(f_1_index)
-                        edges[0].append(f_2_index)
-                        edges[1].append(f_2_index)
-                        edges[1].append(f_1_index)
-
-            print("Similarities found")
-            print(f"\tMissed: {miss_count} - {(miss_count / (miss_count + got_count))*100}%")
-            print(f"\tGot: {got_count} - {(got_count / (miss_count + got_count))*100}%")
-            
+            # print(f"\n{case_index}\t", end="")
             edge_index = torch.tensor(edges, dtype=torch.long)
             x = torch.tensor(list(self.datastructure['values'].loc[case_index][self.feature_to_compare]), dtype=torch.float)
             y = torch.tensor(self.datastructure['os'].loc[case_index])
