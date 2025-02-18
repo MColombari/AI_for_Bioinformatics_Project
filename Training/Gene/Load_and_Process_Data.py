@@ -22,8 +22,8 @@ def measure_time(func):
 
 class LPD:
     def __init__(self, gtf_file_path: str, folder_gene_path: str, case_id_json_path: str,
-                 feature_to_save: list, feature_to_compare: str, num_classes: int, percentage_test: float,
-                 device):
+                 feature_to_save: list, feature_to_compare: str, num_classes: int, percentage_test: float
+                 ):
         # PATH_GTF_FILE = "/homes/mcolombari/AI_for_Bioinformatics_Project/Personal/gencode.v47.annotation.gtf"
         self.gtf_file_path = gtf_file_path
         # PATH_FOLDER_GENE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneExpression"
@@ -46,12 +46,11 @@ class LPD:
         # PERCENTAGE_OF_TEST = 0.3
         self.percentage_test = percentage_test
 
-        self.device = device
-
     def remove_version(self, x):
         if '.' in x:
             return x.split('.')[0]
         return x
+
 
     @measure_time
     def read_gtf_file(self):
@@ -242,12 +241,13 @@ class LPD:
 class LPDEdgeKnowledgeBased(LPD):
     def __init__(self, gtf_file_path: str, folder_gene_path: str, case_id_json_path: str,
                  feature_to_save: list, feature_to_compare: str, num_classes: int, percentage_test: float,
-                 device, edge_file_path: str, edge_complete_file_path):
+                 edge_file_path: str, edge_complete_file_path: str, edge_order_file_path: str):
         super().__init__(gtf_file_path, folder_gene_path, case_id_json_path,
-                         feature_to_save, feature_to_compare, num_classes, percentage_test,
-                         device)
+                         feature_to_save, feature_to_compare, num_classes, percentage_test
+                         )
         self.edge_file_path = edge_file_path
         self.edge_complete_file_path = edge_complete_file_path
+        self.edge_order_file_path = edge_order_file_path
 
     @measure_time
     def read_gtf_file(self):
@@ -282,8 +282,79 @@ class LPDEdgeKnowledgeBased(LPD):
 
         self.pc_set = self.pc_set.intersection(accepted_gene)
 
-        print(f"Intersection dim: {len(self.pc_set)}\n Execution time: ")
+        print(f"Intersection dim: {len(self.pc_set)}\n Execution time: ", end="")
 
+        # Get gene order.
+        with open(self.edge_order_file_path, 'r') as file:
+            edges_order = json.load(file)
+        self.edges_order = pd.Series(edges_order)
+
+
+    def is_in_order(self, input):
+        # print(type(input))
+        # print(type(self.edges_order))
+        return input.to_list() == self.edges_order.to_list()
+
+
+    @measure_time
+    def preprocessing(self):
+        with open(self.case_id_json_path, 'r') as file:
+            file_parsed = json.load(file)
+        file_to_case_id = dict((file_parsed[k]['files']['gene'], k) for k in file_parsed.keys())
+        file_to_os = dict((file_parsed[k]['files']['gene'], file_parsed[k]['os']) for k in file_parsed.keys())
+
+        self.datastructure = pd.DataFrame(columns=['case_id', 'os', 'values'])
+
+        index = 0
+        # Now explore data path to get the right files
+        for root, dirs, files in os.walk(self.folder_gene_path):
+            for dir in dirs:
+                for root, dirs, files in os.walk(self.folder_gene_path + "/" + dir):
+                    for file in files:
+                        if file in file_to_case_id.keys():
+                            parsed_file = pd.read_csv(self.folder_gene_path + "/" + dir + "/" + file,
+                                                    sep='\t', header=0, skiprows=lambda x: x in [0, 2, 3, 4, 5])
+                            parsed_file = parsed_file[['gene_id'] + self.feature_to_save]
+
+                            # Now specify columns type.
+                            convert_dict = dict([(k, float) for k in self.feature_to_save])
+                            convert_dict['gene_id'] = str
+                            parsed_file = parsed_file.astype(convert_dict)
+                            
+                            # They actually don't match.
+                            # So the 'gene_type' in the dataset don't match the in the gtf file.
+                            # So i'm gonna use as the right reference the gtf file.
+
+                            parsed_file['gene_id'] = parsed_file['gene_id'].apply(self.remove_version)
+
+                            # parsed_file = parsed_file[parsed_file['gene_type'] == 'protein_coding']
+                            # if not set(parsed_file['gene_id']).issubset(gtf_pc_set):
+                            #     raise Exception("List of coding genes don't match.")
+
+                            parsed_file = parsed_file[parsed_file['gene_id'].isin(self.pc_set)]
+
+                            # I generate the edge base on the first graph's gene order, so
+                            # i make sure that all the other graph has the same gene order.
+                            if not self.is_in_order(parsed_file['gene_id']):
+                                raise Exception("One of the case has gene in the wrong order")
+
+                            self.datastructure.loc[index] = [
+                                file_to_case_id[file],
+                                file_to_os[file],
+                                parsed_file
+                            ]
+                            index += 1
+
+        # Apply log.
+        for i in range(self.datastructure.shape[0]):
+            self.datastructure['values'].loc[i][self.feature_to_save] = self.datastructure['values'].loc[i][self.feature_to_save].applymap(lambda x: np.log10(x + 0.01))
+        
+        # Make value in a [0, 1] range.
+        for r in range(self.datastructure.shape[0]):
+            for c in self.feature_to_save:
+                self.datastructure['values'].loc[r][c] =    (self.datastructure['values'].loc[r][c] - self.datastructure['values'].loc[r][c].min()) / \
+                                                            (self.datastructure['values'].loc[r][c].max() - self.datastructure['values'].loc[r][c].min())
+                
 
 
     @measure_time
