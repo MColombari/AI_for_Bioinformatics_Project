@@ -26,3 +26,6 @@ Models_GitHub_davide/models/__pycache__
 Models_GitHub_davide/readouts/__pycache__
 Test_link_connections/ggLink.csv
 
+bash.sh
+.vscode/launch.json
+.vscode/settings.json
