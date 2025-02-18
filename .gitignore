@@ -18,7 +18,6 @@ Preprocessing/Final/Gene/9606.protein.links.v12.0.txt
 Preprocessing/Final/Gene_sbatch/error_test.log
 Preprocessing/Final/Gene_sbatch/output_test.log
 Preprocessing/Raw_Data/
-<<<<<<< HEAD
 Models_GitHub_davide/__pycache__
 Models_GitHub_davide/datasets/__pycache__
 Models_GitHub_davide/layers/__pycache__
@@ -29,5 +28,4 @@ Models_GitHub_davide/run_files/run_train.sh
 Models_GitHub_davide/run_output/error.log
 Models_GitHub_davide/run_output/output.log
 Test_link_connections/ggLink.csv
-=======
->>>>>>> 731c396f8b463a753fcabd0637b7936a50b70355
+Models_GitHub_davide/datasets/MUTAG

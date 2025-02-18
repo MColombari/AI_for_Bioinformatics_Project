@@ -11,4 +11,4 @@
 #SBATCH --error="run_output/error.log"
 
 # training 
-python3 train.py --epoch 5 --n_folds 10 --model_list GCN --dataset_list MUTAG --readout_list avg --n_agg_layer 2 --agg_hidden 32
+python3 preprocessingLink.py
