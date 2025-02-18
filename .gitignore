@@ -18,3 +18,6 @@ Preprocessing/Final/Gene/9606.protein.links.v12.0.txt
 Preprocessing/Final/Gene_sbatch/error_test.log
 Preprocessing/Final/Gene_sbatch/output_test.log
 Preprocessing/Raw_Data/
+bash.sh
+.vscode/launch.json
+.vscode/settings.json
