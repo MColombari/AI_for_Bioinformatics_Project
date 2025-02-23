@@ -267,7 +267,7 @@ class LPDEdgeKnowledgeBased(LPD):
 
         # Protein coding set
         self.pc_set = set(gtf_pc['gene_id'].to_list())
-        print(f"\nProtein coding dim: {len(self.pc_set)}")
+        print(f"\n\tProtein coding dim: {len(self.pc_set)}")
 
         accepted_gene = set()
         with open(self.edge_file_path, 'r') as file:
@@ -278,11 +278,11 @@ class LPDEdgeKnowledgeBased(LPD):
                 accepted_gene.add(f)
                 accepted_gene.add(s)
 
-        print(f"Accepted gene dim: {len(accepted_gene)}")
+        print(f"\tAccepted gene dim: {len(accepted_gene)}")
 
         self.pc_set = self.pc_set.intersection(accepted_gene)
 
-        print(f"Intersection dim: {len(self.pc_set)}\n Execution time: ", end="")
+        print(f"\tIntersection dim: {len(self.pc_set)}\n\t\tExecution time: ", end="")
 
         # Get gene order.
         with open(self.edge_order_file_path, 'r') as file:
@@ -362,12 +362,14 @@ class LPDEdgeKnowledgeBased(LPD):
         with open(self.edge_complete_file_path, 'r') as file:
             edges = json.load(file)
         self.list_of_Data = []
+        print(f"\n\tWe have {len(edges[0])} edges")
         for case_index in range(0, self.datastructure.shape[0]):
             # print(f"\n{case_index}\t", end="")
             edge_index = torch.tensor(edges, dtype=torch.long)
-            x = torch.tensor(list(self.datastructure['values'].loc[case_index][self.feature_to_compare]), dtype=torch.float)
-            y = torch.tensor(self.datastructure['os'].loc[case_index])
+            x = torch.tensor(self.datastructure['values'].loc[case_index][self.feature_to_save].values, dtype=torch.float)
+            y = torch.tensor(self.datastructure['os'].iloc[case_index])
             self.list_of_Data.append(Data(x=x, edge_index=edge_index, y=y))
+        print("\t\tExecution time:", end="")
 
 class LPDHybrid(LPDEdgeKnowledgeBased):
     @measure_time
