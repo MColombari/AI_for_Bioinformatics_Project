@@ -1,0 +1,14 @@
+         gene1  gene2  minResCount
+0            2     C2            3
+1            2     C3            8
+2            2    C4B            8
+3            2  C4BPA            2
+4            2     C5            8
+...        ...    ...          ...
+1322480  ZWINT  ZWINT         3828
+1322481   ZXDA   ZXDA            5
+1322482   ZXDA   ZXDC            5
+1322483   ZXDC   ZXDC            5
+1322484    ZYX    ZYX            6
+
+[1322485 rows x 3 columns]

@@ -25,11 +25,9 @@ from models.GraphDenseNet import GraphDenseNet
 from models.NodeRandomWalkNet import NodeRandomWalkNet
 from models.ExpandedSpatialGraphEmbeddingNet import ExpandedSpatialGraphEmbeddingNet
 from utils import create_directory, save_result_csv
-from Load_and_Process_Data import LPD
-from torch_geometric.loader import DataLoader
 
 model_list = ['GCN', 'GAT', 'GraphSAGE', 'APPNP', 'GIN', 'GraphUNet', 'ARMA', 'SGCNN', 'GraphResNet', 'GraphDenseNet', 'NodeRandomWalkNet', 'ExpandedSpatialGraphEmbeddingNet']
-dataset_list = ['Copy_Number','IMDB-BINARY', 'IMDB-MULTI', 'PROTEINS', 'ENZYMES', 'NCI1', 'MUTAG']
+dataset_list = ['COPY_NUMBER','IMDB-BINARY', 'IMDB-MULTI', 'PROTEINS', 'ENZYMES', 'NCI1', 'MUTAG']
 readout_list = ['max', 'avg', 'sum']
 
 parser = argparse.ArgumentParser(formatter_class=RawTextHelpFormatter)
@@ -57,7 +55,7 @@ parser.add_argument('--node_att', default='FALSE',
                     'TRUE/FALSE')
 parser.add_argument('--seed', type=int, default=111,
                     help='random seed')
-parser.add_argument('--n_folds', type=int, default=1,
+parser.add_argument('--n_folds', type=int, default=10,
                     help='the number of folds in 10-cross validation')
 parser.add_argument('--threads', type=int, default=0,
                     help='how many subprocesses to use for data loading \n'+
@@ -79,7 +77,7 @@ parser.add_argument('--cuda', default='TRUE',
                     'TRUE/FALSE')
 parser.add_argument('--batch_size', type=int, default=32,
                     help='batch size of data')                  
-parser.add_argument('--epochs', type=int, default=20,
+parser.add_argument('--epochs', type=int, default=50,
                     help='train epochs')
 parser.add_argument('--learning_rate', type=float, default=0.001,
                     help='learning rate of optimizer')
@@ -183,42 +181,33 @@ if args.n_graph_subsampling > 0 and args.graph_node_subsampling:
 elif args.n_graph_subsampling > 0 and not args.graph_node_subsampling:
   print('graph subsampling: random edge removal')
 
-PATH_FOLDER_COPY_NUMBER = "./datasets/Copy_Number"
-PATH_CASE_ID_STRUCTURE = "./case_id_and_structure.json"
-PATH_GENE_ID_PROTEIN_CODING = "./gene_id_protein_coding.json"
-
-#   Model parameter
-hyperparameter = {
-    'num_classes': 2,
-    'epochs': 10,
-     'batch_size': 10,
-    'seed': 123456,
-    'num_workers': 6,
-    'lr': 0.01,
-    'save_model_period': 10, # How many epoch to wait before save the next model.
-    'percentage_of_test': 0.3, # How many percentage of the dataset is used for testing.
-}
-node_feature_number = 1
-
 for dataset_name in args.dataset_list:
-    print('-'*50)    
+    print('-'*50)
+    
+    start_time = time.time() ##########
     print('Target dataset:', dataset_name)
+    # Build graph data reader: IMDB-BINARY, IMDB-MULTI, ...
+    datareader = DataReader(data_dir='./datasets/%s/' % dataset_name.upper(),
+                        rnd_state=np.random.RandomState(args.seed),
+                        folds=args.n_folds,           
+                        use_cont_node_attr=False,
+                        random_walk=random_walk,
+                        num_walk=args.num_walk,
+                        walk_length=args.walk_length,
+                        p=args.p,
+                        q=args.q,
+                        node2vec_hidden=args.agg_hidden
+                        )
+    print(f"Braph builded in \t\t{np.floor(time.time() - start_time)}s")
 
-    lpd = LPD(PATH_FOLDER_COPY_NUMBER, PATH_CASE_ID_STRUCTURE, PATH_GENE_ID_PROTEIN_CODING,
-    hyperparameter['num_classes'], hyperparameter['percentage_of_test'])
-    data_train_list, data_test_list = lpd.get_data()
-
-    train_loader = DataLoader(data_train_list, batch_size=hyperparameter['batch_size'], shuffle=True, num_workers=hyperparameter['num_workers'], pin_memory=True)
-    test_loader = DataLoader(data_test_list, batch_size=hyperparameter['batch_size'], shuffle=True, num_workers=hyperparameter['num_workers'], pin_memory=True)
-        
     for model_name in args.model_list:
       for i, readout_name in enumerate(args.readout_list):
         print('-'*25)
         
         # Build graph classification model
         if model_name == 'GCN':
-            model = GCN(n_feat=node_feature_number,
-                    n_class=hyperparameter['num_classes'],
+            model = GCN(n_feat=datareader.data['features_dim'],
+                    n_class=datareader.data['n_classes'],
                     n_layer=args.n_agg_layer,
                     agg_hidden=args.agg_hidden,
                     fc_hidden=args.fc_hidden,
@@ -226,8 +215,8 @@ for dataset_name in args.dataset_list:
                     readout=readout_name,
                     device=device).to(device)
         elif model_name == 'GAT':
-            model = GAT(n_feat=node_feature_number,
-                    n_class=hyperparameter['num_classes'],
+            model = GAT(n_feat=datareader.data['features_dim'],
+                    n_class=datareader.data['n_classes'],
                     n_layer=args.n_agg_layer,
                     agg_hidden=args.agg_hidden,
                     fc_hidden=args.fc_hidden,
@@ -235,24 +224,160 @@ for dataset_name in args.dataset_list:
                     readout=readout_name,
                     device=device).to(device)
         elif model_name == 'GraphSAGE':
-            model = GraphSAGE(n_feat=node_feature_number,
-                    n_class=hyperparameter['num_classes'],
+            model = GraphSAGE(n_feat=datareader.data['features_dim'],
+                    n_class=datareader.data['n_classes'],
                     n_layer=args.n_agg_layer,
                     agg_hidden=args.agg_hidden,
                     fc_hidden=args.fc_hidden,
                     dropout=args.dropout,
                     readout=readout_name,
                     device=device).to(device)
-                                              
+        elif model_name == 'APPNP':
+            model = APPNP(n_feat=datareader.data['features_dim'],
+                    n_class=datareader.data['n_classes'],
+                    n_layer=args.n_agg_layer,
+                    agg_hidden=args.agg_hidden,
+                    fc_hidden=args.fc_hidden,
+                    dropout=args.dropout,
+                    readout=readout_name,
+                    device=device).to(device)
+        elif model_name == 'GIN':
+            model = GIN(n_feat=datareader.data['features_dim'],
+                    n_class=datareader.data['n_classes'],
+                    n_layer=args.n_agg_layer,
+                    agg_hidden=args.agg_hidden,
+                    fc_hidden=args.fc_hidden,
+                    dropout=args.dropout,
+                    readout=readout_name,
+                    device=device).to(device)
+        elif model_name == 'GraphUNet':
+            model = GraphUNet(n_feat=datareader.data['features_dim'],
+                    n_class=datareader.data['n_classes'],
+                    n_layer=args.n_agg_layer,
+                    agg_hidden=args.agg_hidden,
+                    fc_hidden=args.fc_hidden,
+                    dropout=args.dropout,
+                    readout=readout_name,
+                    device=device).to(device)
+        elif model_name == 'GraphResNet':
+            model = GraphResNet(n_feat=datareader.data['features_dim'],
+                    n_class=datareader.data['n_classes'],
+                    n_layer=args.n_agg_layer,
+                    agg_hidden=args.agg_hidden,
+                    fc_hidden=args.fc_hidden,
+                    dropout=args.dropout,
+                    readout=readout_name,
+                    device=device).to(device)
+        elif model_name == 'ARMA':
+            model = ARMA(n_feat=datareader.data['features_dim'],
+                    n_class=datareader.data['n_classes'],
+                    n_layer=args.n_agg_layer,
+                    agg_hidden=args.agg_hidden,
+                    fc_hidden=args.fc_hidden,
+                    dropout=args.dropout,
+                    readout=readout_name,
+                    device=device).to(device)
+        elif model_name == 'SGCNN':
+            model = SGCNN(n_feat=datareader.data['features_dim'],
+                    n_class=datareader.data['n_classes'],
+                    n_layer=args.n_agg_layer,
+                    agg_hidden=args.agg_hidden,
+                    fc_hidden=args.fc_hidden,
+                    dropout=args.dropout,
+                    readout=readout_name,
+                    device=device).to(device)
+        elif model_name == 'GraphDenseNet':
+            model = GraphDenseNet(n_feat=datareader.data['features_dim'],
+                    n_class=datareader.data['n_classes'],
+                    n_layer=args.n_agg_layer,
+                    agg_hidden=args.agg_hidden,
+                    fc_hidden=args.fc_hidden,
+                    dropout=args.dropout,
+                    readout=readout_name,
+                    device=device).to(device)
+        elif model_name == 'NodeRandomWalkNet':
+            model = NodeRandomWalkNet(n_feat=datareader.data['features_dim'],
+                    n_class=datareader.data['n_classes'],
+                    n_layer=args.n_agg_layer,
+                    agg_hidden=args.agg_hidden,
+                    fc_hidden=args.fc_hidden,
+                    dropout=args.dropout,
+                    readout=readout_name,
+                    device=device,
+                    walk_length=args.walk_length,
+                    node_random_walk_model_name=args.node_random_walk_model_name).to(device)
+        elif model_name == 'ExpandedSpatialGraphEmbeddingNet':
+            model = ExpandedSpatialGraphEmbeddingNet(
+                    n_class=datareader.data['n_classes'],
+                    agg_hidden=args.agg_hidden,
+                    fc_hidden=args.fc_hidden,
+                    dropout=args.dropout,
+                    readout=readout_name,
+                    device=device,
+                    walk_length=args.walk_length,
+                    n_spatial_graph_embedding_model_layer=args.n_spatial_graph_embedding_model_layer,
+                    n_node_random_walk_model_layer=args.n_node_random_walk_model_layer,
+                    node_random_walk_model_name=args.node_random_walk_model_name).to(device) 
+#        elif model_name == 'ExpandedSpatialGraphEmbeddingNet':
+#            model = ExpandedSpatialGraphEmbeddingNet(
+#                    n_class=datareader.data['n_classes'],
+#                    fc_hidden=args.fc_hidden,
+#                    dropout=args.dropout,
+#                    readout=readout_name,
+#                    device=device,
+#                    dataset_name=dataset_name,
+#                    n_folds=args.n_folds,
+#                    freeze_layer=args.freeze_layer,
+#                    fc_dropout=args.concat_dropout).to(device)  
+#         elif model_name == 'ExpandedSpatialGraphEmbeddingNet':
+#             model = ExpandedSpatialGraphEmbeddingNet(
+#                     n_class=datareader.data['n_classes'],
+#                     fc_hidden=args.fc_hidden,
+#                     dropout=args.dropout,
+#                     readout=readout_name,
+#                     device=device,
+#                     dataset_name=dataset_name,
+#                     n_folds=args.n_folds,
+#                     freeze_layer=args.freeze_layer,
+#                     fc_layer_type=args.fc_layer_type,
+#                     concat_dropout=args.concat_dropout).to(device)  
+                                                         
         print(model)
         print('Readout:', readout_name)
-
+        
         # Train & test each fold
         acc_folds = []
         time_folds = []
         for fold_id in range(args.n_folds):
             print('\nFOLD', fold_id)
-
+            loaders = []
+            for split in ['train', 'test']:
+                # Build GDATA object
+                if split == 'train':
+                    gdata = GraphData(fold_id=fold_id,
+                                       datareader=datareader,
+                                       split=split,
+                                       random_walk=random_walk,
+                                       n_graph_subsampling=args.n_graph_subsampling,
+                                       graph_node_subsampling=args.graph_node_subsampling,
+                                       graph_subsampling_rate=args.graph_subsampling_rate)
+                else:
+                    gdata = GraphData(fold_id=fold_id,
+                                       datareader=datareader,
+                                       split=split,
+                                       random_walk=random_walk,
+                                       n_graph_subsampling=0,
+                                       graph_node_subsampling=args.graph_node_subsampling,
+                                       graph_subsampling_rate=args.graph_subsampling_rate)      
+                
+                # Build graph data pytorch loader
+                loader = torch.utils.data.DataLoader(gdata, 
+                                                     batch_size=args.batch_size,
+                                                     shuffle=split.find('train') >= 0,
+                                                     num_workers=args.threads,
+                                                     drop_last=False)
+                loaders.append(loader)
+            
             # Total trainable param
             c = 0
             for p in filter(lambda p: p.requires_grad, model.parameters()):
@@ -274,18 +399,15 @@ for dataset_name in args.dataset_list:
                 model.train()
                 start = time.time()
                 train_loss, n_samples = 0, 0
-
                 for batch_idx, data in enumerate(train_loader):
-                    inputs, labels = data.x.unsqueeze(1).to(device), data.y.to(device)
-                    edge_index, batch = data.edge_index.to(device), data.batch.to(device)
+                    for i in range(len(data)):
+                        data[i] = data[i].to(device)
                     optimizer.zero_grad()
-
                     if model_name == 'ExpandedSpatialGraphEmbeddingNet':
                         output = model(data, fold_id, 'train')
                     else:
-                        output = model(inputs)
-
-                    loss = loss_fn(output, labels.squeeze())
+                        output = model(data)
+                    loss = loss_fn(output, data[4])
                     loss.backward()
                     optimizer.step()
                     time_iter = time.time() - start
@@ -335,9 +457,11 @@ for dataset_name in args.dataset_list:
             
             total_time = 0
             for epoch in range(args.epochs):
-                total_time_iter = train(train_loader)
+                start_time = time.time()  ########
+                total_time_iter = train(loaders[0])
                 total_time += total_time_iter
-                acc = test(test_loader)
+                acc = test(loaders[1])
+                print(f"one Epoch terminated in \t\t{np.floor(time.time() - start_time)}s")
             acc_folds.append(round(acc,2))
             time_folds.append(round(total_time/args.epochs,2))
             
