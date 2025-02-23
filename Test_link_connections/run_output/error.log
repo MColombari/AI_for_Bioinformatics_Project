@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/homes/dlupo/Progetto_BioInformatics/AI_for_Bioinformatics_Project/Test_link_connections/preprocessingLink.py", line 73, in <module>
+    for f_1_index in range(nodes):
+NameError: name 'nodes' is not defined

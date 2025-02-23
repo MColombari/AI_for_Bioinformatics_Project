@@ -18,6 +18,14 @@ Preprocessing/Final/Gene/9606.protein.links.v12.0.txt
 Preprocessing/Final/Gene_sbatch/error_test.log
 Preprocessing/Final/Gene_sbatch/output_test.log
 Preprocessing/Raw_Data/
+Models_GitHub_davide/__pycache__
+Models_GitHub_davide/datasets/__pycache__
+Models_GitHub_davide/datasets/COPY_NUMBER
+Models_GitHub_davide/layers/__pycache__
+Models_GitHub_davide/models/__pycache__
+Models_GitHub_davide/readouts/__pycache__
+Test_link_connections/ggLink.csv
+
 bash.sh
 .vscode/launch.json
 .vscode/settings.json
