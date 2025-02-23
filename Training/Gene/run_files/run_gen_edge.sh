@@ -11,4 +11,4 @@
 #SBATCH --error="run_output/error_gen_edge.log"
 
 # training 
-python3 generate_edge_file.py
+python3 generate_edge_file.py 900

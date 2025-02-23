@@ -10,7 +10,16 @@ from torch_geometric.utils import to_networkx
 import time
 from sklearn.metrics import pairwise_distances
 
-THRESHOLD = 300
+import argparse
+
+# Instantiate the parser
+parser = argparse.ArgumentParser(description='Parser')
+
+parser.add_argument('pos_arg', type=int, help='A required integer positional argument')
+
+args = parser.parse_args()
+
+THRESHOLD = args.pos_arg
 
 def remove_version(x):
     if '.' in x:
@@ -152,7 +161,7 @@ print("Similarities found")
 print(f"\tMissed: {miss_count} - {(miss_count / (miss_count + got_count))*100}%")
 print(f"\tGot: {got_count} - {(got_count / (miss_count + got_count))*100}%")
 
-with open('/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/edge.json', 'w') as f:
+with open(f'/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/edge_T{THRESHOLD}.json', 'w') as f:
     json.dump(edges, f)
 
 with open('/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/edge_node_order.json', 'w') as f:
