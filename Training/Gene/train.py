@@ -1,12 +1,13 @@
 import torch
 from Save_model import SaveModel as SM
-from models import simple_GCN, small_GCN
+from models import simple_GCN, small_GCN, GAT
 from Load_and_Process_Data import LPD, LPDEdgeKnowledgeBased, LPDHybrid
 from torch_geometric.loader import DataLoader
 from collections import OrderedDict
 from sklearn.metrics import accuracy_score
 import numpy as np
 import torch_geometric.transforms as T
+from torch.nn import DataParallel
 
 # So we have a structure of folder where we have a main folder containig all the test for
 # each subgroup (Methylation, Gene, Copy number), and in each of these folder we have
@@ -33,21 +34,21 @@ PATH_FOLDER_GENE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/Ge
 PATH_CASE_ID_STRUCTURE = "/homes/mcolombari/AI_for_Bioinformatics_Project/Preprocessing/Final/case_id_and_structure.json"
 # For edge similarity file.
 PATH_EDGE_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/9606.protein.links.v12.0.ENSG.txt"
-PATH_COMPLETE_EDGE_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/edge.json"
+PATH_COMPLETE_EDGE_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/edge_T650.json"
 PATH_EDGE_ORDER_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/edge_node_order.json"
 
 
 #   Model parameter TODO
 hyperparameter = {
     'num_classes': 2,
-    'epochs': 20,
+    'epochs': 10,
     'batch_size': 4,
     'seed': 123456,
-    'num_workers': 6,
-    'lr': 0.0001,
-    'save_model_period': 5, # How many epoch to wait before save the next model.
+    'num_workers': 2,
+    'lr': 0.01,
+    'save_model_period': 2, # How many epoch to wait before save the next model.
     'percentage_of_test': 0.1, # How many percentage of the dataset is used for testing.
-    'feature_to_save': ['tpm_unstranded'], # Specifci parameter for gene.
+    'feature_to_save': ['tpm_unstranded', 'fpkm_unstranded', 'fpkm_uq_unstranded'], # Specify parameter for gene.
     'feature_to_compare': 'tpm_unstranded'
 }
 
@@ -55,7 +56,7 @@ torch.manual_seed(hyperparameter['seed'])
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-# print("Start code")
+print("Start code")
 # print(f"\tFree memory usage:      {torch.cuda.mem_get_info()[0]}")
 # print(f"\tTotal available memory: {torch.cuda.mem_get_info()[1]}")
 
@@ -70,14 +71,20 @@ lpd = LPDEdgeKnowledgeBased(PATH_GTF_FILE, PATH_FOLDER_GENE, PATH_CASE_ID_STRUCT
 data_train_list, data_test_list = lpd.get_data()  # List of Data.
 # Inside of data we need to specify which y we have.
 
+# Transform in sparse tensor.
+# https://github.com/pyg-team/pytorch_geometric/issues/1702
+# data_train_list = [T.ToSparseTensor()(data) for data in data_train_list]
+# data_test_list = [T.ToSparseTensor()(data) for data in data_test_list]
+
 train_loader = DataLoader(data_train_list, batch_size=hyperparameter['batch_size'], shuffle=True, num_workers=hyperparameter['num_workers'], pin_memory=True)
-test_loader = DataLoader(data_test_list, batch_size=hyperparameter['batch_size'], shuffle=True, num_workers=hyperparameter['num_workers'], pin_memory=True)
+test_loader = DataLoader(data_test_list, batch_size=hyperparameter['batch_size'], shuffle=False, num_workers=hyperparameter['num_workers'], pin_memory=True)
 # pin_memory=True will automatically put the fetched data Tensors in pinned memory, and thus enables faster data transfer to CUDA-enabled GPUs.
 # https://pytorch.org/docs/stable/data.html.
 
 
-node_feature_number = 1
-model = simple_GCN(node_feature_number, 1000, hyperparameter['num_classes'])
+node_feature_number = len(hyperparameter['feature_to_save'])
+model = GAT(node_feature_number, 10, 10, hyperparameter['num_classes'], 0.2)
+# model = DataParallel(model)
 
 s_epoch = 0
 if START_FROM_CHECKPOINT:
@@ -109,24 +116,41 @@ def train(loader):
         # Get the inputs and labels
         # https://github.com/pyg-team/pytorch_geometric/issues/1702
         data = T.ToSparseTensor()(data)
-        inputs, labels = data.x.unsqueeze(1).to(device), data.y.to(device)
+        if node_feature_number == 1:
+            inputs, labels = data.x .unsqueeze(1).to(device), data.y.to(device)
+        else:
+            inputs, labels = data.x.to(device), data.y.to(device)
         edge_adj, batch = data.adj_t.to(device), data.batch.to(device)
-        optimizer.zero_grad()
+
+        # print(f"Inputs:\t{inputs}")
+        # print(f"Inputs size:\t{inputs.size()}")
+        # print(f"Labels:\t{labels}")
+        # print(f"Batch:\t{batch}")
+        # print(f"Batch size:\t{batch.size()}")
 
         # print(inputs.size())
         # print(labels.min(), labels.max())
 
         # Forward
         outputs = model(inputs, edge_adj, batch)
-        if isinstance(outputs, list):
-            outputs = outputs[0] #check the model gets back only one output
+        # if isinstance(outputs, list):
+        #     outputs = outputs[0] #check the model gets back only one output
 
+        # print(f"Output: {outputs}")
         # Compute the loss
-        loss = criterion(outputs, labels.squeeze())
+        # print(f"Labels: {labels}")
+        loss = criterion(outputs, labels)
+
+        # print(f"Loss: {loss}")
         
         # Backward & optimize
         loss.backward()
+        for name, param in model.named_parameters():
+            if param.grad is None:
+                print(f"{name} has no gradient!")
         optimizer.step()
+        optimizer.zero_grad()
+        # raise Exception("Stop")
     
 
 def test(loader):
@@ -139,7 +163,10 @@ def test(loader):
         for data in loader:
             # get the inputs and labels
             data = T.ToSparseTensor()(data)
-            inputs, labels = data.x.unsqueeze(1).to(device), data.y.to(device)
+            if node_feature_number == 1:
+                inputs, labels = data.x .unsqueeze(1).to(device), data.y.to(device)
+            else:
+                inputs, labels = data.x.to(device), data.y.to(device)
             edge_adj, batch = data.adj_t.to(device), data.batch.to(device)
 
             # print(data.x)
@@ -147,6 +174,8 @@ def test(loader):
 
             # forward
             outputs = model(inputs, edge_adj, batch)
+            if isinstance(outputs, list):
+                outputs = outputs[0] #check the model gets back only one output
 
             # compute the loss
             loss = criterion(outputs, labels.squeeze())
@@ -174,12 +203,12 @@ for epoch_index in range(s_epoch, hyperparameter['epochs']):
     train(train_loader)
     print("\tAfter train")
     print(f"\t\tFree memory usage:      {torch.cuda.mem_get_info()[0]}")
-    print(f"\t\tTotal available memory: {torch.cuda.mem_get_info()[0]}")
+    print(f"\t\tTotal available memory: {torch.cuda.mem_get_info()[1]}")
     train_loss, train_acc = test(train_loader)
     test_loss, test_acc = test(test_loader)
     print("\tAfter test")
     print(f"\t\tFree memory usage:      {torch.cuda.mem_get_info()[0]}")
-    print(f"\t\tTotal available memory: {torch.cuda.mem_get_info()[0]}")
+    print(f"\t\tTotal available memory: {torch.cuda.mem_get_info()[1]}")
     print(f"\tTrain loss: {train_loss}")
     print(f"\tTrain acc: {train_acc}")
     print(f"\tTest loss: {test_loss}")
