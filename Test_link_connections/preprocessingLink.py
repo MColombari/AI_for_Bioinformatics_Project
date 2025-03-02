@@ -75,7 +75,6 @@ for i in range(len(list_df_CNV)):
 
 # # Aggiunta delle connessioni in base alla sovrapposizione
 # for f_1_index in range(nodes):
-#     print(f_1_index)
 #     for f_2_index in range(f_1_index + 1, nodes):
 #         row1 = df.iloc[f_1_index]
 #         row2 = df.iloc[f_2_index]
@@ -136,8 +135,8 @@ for i in range(len(list_df_CNV)):
 # print(edges)
 
 #SOLUZIONE 3 : ottimizzata
-# nodes = len(list_df_CNV_filled[0])
-nodes = 50
+nodes = len(list_df_CNV_filled[0])
+# nodes = 50
 edges = set()
 df = list_df_CNV_filled[0]
 
@@ -167,3 +166,8 @@ for f_1_index in range(nodes):
 edges = [list(edge) for edge in zip(*edges)]
 print(f" terminated in \t\t{np.floor(time.time() - start_time)}s") #time=62s
 print(edges)
+with open('/homes/dlupo/Progetto_BioInformatics/AI_for_Bioinformatics_Project/Test_link_connections/edges.txt','w') as file:
+    for i in range(len(edges[0])):
+        file.write(str(edges[0][i])+', '+str(edges[1][i])+'\n')
+
+#time for 19000 nodes = 147 minutes

@@ -26,29 +26,33 @@ START_FROM_CHECKPOINT = False
 CHECKPOINT_PATH = "."
 
 # Load data path
+PATH_GTF_FILE = '/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/gencode.v47.annotation.gtf'
 PATH_FOLDER_COPY_NUMBER = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/CopyNumber"
 PATH_CASE_ID_STRUCTURE = "/homes/dlupo/Progetto_BioInformatics/AI_for_Bioinformatics_Project/Preprocessing/Final/case_id_and_structure.json"
-PATH_GENE_ID_PROTEIN_CODING = "/homes/dlupo/Progetto_BioInformatics/AI_for_Bioinformatics_Project/Preprocessing/Final/gene_id_protein_coding.json"
-
 
 #   Model parameter
 hyperparameter = {
     'num_classes': 2,
-    'epochs': 20,
+    'epochs': 50,
     'batch_size': 20,
     'seed': 123456,
-    'num_workers': 6,
+    'num_workers': 2,
     'lr': 0.01,
-    'save_model_period': 10, # How many epoch to wait before save the next model.
+    'save_model_period': 5, # How many epoch to wait before save the next model.
     'percentage_of_test': 0.3, # How many percentage of the dataset is used for testing.
+    'feature_to_save': ['copy_number'], # Specify parameter for gene.
+    'feature_to_compare': 'copy_number'
+
 }
 
 torch.manual_seed(hyperparameter['seed'])
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+print("Start code")
+
 # https://pytorch-geometric.readthedocs.io/en/2.5.3/notes/create_dataset.html
-lpd = LPD(PATH_FOLDER_COPY_NUMBER, PATH_CASE_ID_STRUCTURE, PATH_GENE_ID_PROTEIN_CODING,
-       hyperparameter['num_classes'], hyperparameter['percentage_of_test'])
+lpd = LPD(PATH_GTF_FILE, PATH_FOLDER_COPY_NUMBER, PATH_CASE_ID_STRUCTURE, hyperparameter['feature_to_save'],
+       hyperparameter['feature_to_compare'], hyperparameter['num_classes'], hyperparameter['percentage_of_test'])
 data_train_list, data_test_list = lpd.get_data()  # List of Data.
 # Inside of data we need to specify which y we have.
 

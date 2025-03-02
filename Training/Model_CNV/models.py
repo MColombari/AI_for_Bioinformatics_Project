@@ -19,8 +19,8 @@ class simple_GCN(torch.nn.Module):
    def forward(self, x, edge_index, batch):
        # 1. Obtain node embeddings 
        x = self.conv1(x, edge_index)
-       #x = x.relu()
-       #x = self.conv2(x, edge_index)
+       x = x.relu()
+       x = self.conv2(x, edge_index)
        #x = x.relu()
        #x = self.conv3(x, edge_index)
 

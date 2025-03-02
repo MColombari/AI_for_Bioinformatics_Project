@@ -21,10 +21,18 @@ Preprocessing/Raw_Data/
 Models_GitHub_davide/__pycache__
 Models_GitHub_davide/datasets/__pycache__
 Models_GitHub_davide/datasets/COPY_NUMBER
+Models_GitHub_davide/datasets/MUTAG
 Models_GitHub_davide/layers/__pycache__
 Models_GitHub_davide/models/__pycache__
+Training/Model_CNV/__pycache__
+Training/Model_CNV/run_files
+Training/Model_CNV/run_output
 Models_GitHub_davide/readouts/__pycache__
 Test_link_connections/ggLink.csv
+Models_GitHub_davide/save_model
+Models_GitHub_davide/test_result
+Models_GitHub_davide/run_output
+
 
 bash.sh
 .vscode/launch.json
