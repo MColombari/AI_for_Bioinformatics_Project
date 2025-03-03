@@ -1,13 +1,14 @@
 #!/bin/bash
 
 #SBATCH --account=ai4bio2024
-#SBATCH --job-name=copy_number_train
+#SBATCH --job-name=CNV_train
 #SBATCH --partition=all_usr_prod
 #SBATCH --gres=gpu:1
 #SBATCH --time=24:00:00
+#SBATCH --mem-per-cpu=16G
 
 #SBATCH --output="run_output/output.log"
 #SBATCH --error="run_output/error.log"
 
 # training 
-python3 AI_for_Bioinformatics_Project/Training/Model_CNV/train.py
+python3 train.py

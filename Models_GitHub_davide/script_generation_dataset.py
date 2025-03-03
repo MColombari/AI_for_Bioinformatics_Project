@@ -44,6 +44,19 @@ for root, dirs, files in os.walk(PATH_FOLDER_COPY_NUMBER):
 list_df_CNV_filled = []
 for i in range(len(list_df_CNV)):
     list_df_CNV_filled.append(list_df_CNV[i].fillna(0))
+
+# Concatenare tutti i dataframe
+df_concatenato = pd.concat(list_df_CNV_filled)
+
+# Calcolare la varianza per ogni gene_id
+varianze = df_concatenato.groupby('gene_id')['copy_number'].var()
+
+top_n = 2000  # numero di geni che si vuole mantenere
+gene_significativi = varianze.nlargest(top_n).index 
+
+list_df_CNV_filtered = []        
+for case_index in range(len(list_df_CNV_filled)):
+    list_df_CNV_filtered.append(list_df_CNV_filled[list_df_CNV_filled[case_index].isin(gene_significativi)])
         
 os_list_sorted = list(os_list)
 os_list_sorted.sort()
@@ -59,28 +72,34 @@ for c in range(1, num_classes + 1):
         split_values.append(os_list_sorted[index - 1])
 
 
-edge = [[],[]]
-nodes = len(list_df_CNV_filled[0])
-df = list_df_CNV_filled[0]
-# Aggiunta delle connessioni in base alla sovrapposizione
-for f_1_index in range(nodes):
-    for f_2_index in range(f_1_index + 1, nodes):
-        row1 = df.iloc[f_1_index]
-        row2 = df.iloc[f_2_index]
-        if row1['chromosome'] == row2['chromosome']:  # Evita duplicati
-            if not (row1['end'] < row2['start'] or row2['end'] < row1['start']):
-                edge[0].append(f_1_index)
-                edge[0].append(f_2_index)
-                edge[1].append(f_2_index)
-                edge[1].append(f_1_index)
+THRESHOLD = 0.06
+feature_to_compare = 'copy_number'
+
+for case_index in range(0, len(list_df_CNV_filtered)):
+    edges = []
+    in_1 = [[v] for v in list(list_df_CNV_filtered[case_index][feature_to_compare])]
+
+    dist_a = pairwise_distances(in_1, metric="euclidean")
+
+    d_mask = np.zeros(dist_a.shape, dtype=bool)
+    np.fill_diagonal(d_mask, 1)
+
+    # Force the diagonal to be equal to Threshold, so it will not be considered, so no self loops.
+    dist_a[d_mask] = THRESHOLD
+
+    row, cols = np.where(dist_a < THRESHOLD)
+    edges.append(list(row))
+    edges.append(list(cols))
+
+    # edge_index = torch.tensor(edges, dtype=torch.long)
 
 list_label = []
 list_attribute = []
 graph_indicator = []
 list_of_list = []
 count = 0
-for case_index in range(226): 
-    df = list_df_CNV_filled[case_index]
+for case_index in range(len(list_df_CNV_filtered)): 
+    df = list_df_CNV_filtered[case_index]
 
     temp_list = [[],[]]
     temp_list[0] = [elem + count for elem in edge[0]]
