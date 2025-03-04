@@ -1,1 +1,2 @@
-slurmstepd: error: *** JOB 2535346 ON gervasoni CANCELLED AT 2025-02-28T15:46:09 ***
+/homes/dlupo/Progetto_BioInformatics/AI_for_Bioinformatics_Project/Models_GitHub_davide/models/GAT.py:47: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  x = F.softmax(self.fc2(x))
