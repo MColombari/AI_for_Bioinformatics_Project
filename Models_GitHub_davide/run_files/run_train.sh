@@ -11,4 +11,4 @@
 #SBATCH --error="run_output/error.log"
 
 # training 
-python3 train2.py --epoch 10 --n_folds 10 --model_list GCN --dataset_list COPY_NUMBER --readout_list avg --n_agg_layer 2 --agg_hidden 32
+python3 train2.py --epoch 100 --n_folds 10 --model_list GAT --dataset_list COPY_NUMBER --readout_list avg --n_agg_layer 2 --agg_hidden 32
