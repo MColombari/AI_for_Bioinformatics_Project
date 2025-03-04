@@ -5,7 +5,7 @@ Training/Test_output/
 Training/Gene/__pycache__/Load_and_Process_Data.cpython-39.pyc
 Training/Gene/__pycache__/models.cpython-39.pyc
 Training/Gene/__pycache__/Save_model.cpython-39.pyc
-Training/Model_CNV/Checkpoint/
+Training/Copy_Number/Checkpoint/
 Preprocessing/Final/Gene/9606.protein.links.v12.0.txt
 Preprocessing/Final/Gene_sbatch/error_test.log
 Preprocessing/Final/Gene_sbatch/output_test.log
@@ -16,16 +16,16 @@ Models_GitHub_davide/datasets/COPY_NUMBER
 Models_GitHub_davide/datasets/MUTAG
 Models_GitHub_davide/layers/__pycache__
 Models_GitHub_davide/models/__pycache__
-Training/Model_CNV/__pycache__
-Training/Model_CNV/run_files
-Training/Model_CNV/run_output
+Training/Copy_Number/__pycache__
+Training/Copy_Number/run_files
+Training/Copy_Number/run_output
 Models_GitHub_davide/readouts/__pycache__
 Test_link_connections/ggLink.csv
 Models_GitHub_davide/save_model
 Models_GitHub_davide/run_files
 Models_GitHub_davide/test_result
 Models_GitHub_davide/run_output
-Training/Model_CNV/__pycache__
+Training/Copy_Number/__pycache__
 
 
 
