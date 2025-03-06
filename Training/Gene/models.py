@@ -12,10 +12,17 @@ class simple_GCN(torch.nn.Module):
         # So input_feature need to be number of feature per node in the dataset.
         # source: https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.data.Dataset.html
         super(simple_GCN, self).__init__()
-        self.conv1 = GCNConv(input_feature, 9000)
-        self.conv2 = GCNConv(9000, 6000)
-        self.conv3 = GCNConv(6000, 2000)
-        self.lin = Linear(2000, num_classes)
+        self.conv1 = GCNConv(input_feature, 1000)
+        self.conv2 = GCNConv(1000, 700)
+        self.conv3 = GCNConv(700, 200)
+        self.lin = Linear(200, num_classes)
+
+        # Weight initialization
+        for m in self.modules():
+            if isinstance(m, torch.nn.Linear):
+                torch.nn.init.xavier_uniform_(m.weight)
+                if m.bias is not None:
+                    torch.nn.init.zeros_(m.bias)
 
     def forward(self, x, edge_index, batch=None):
         # print(x.device)
@@ -25,17 +32,15 @@ class simple_GCN(torch.nn.Module):
         # print(f"Numero di nodi: {num_nodes}, Max edge_index: {max_index}")
         # assert max_index < num_nodes, "Errore: edge_index contiene un indice fuori dai limiti!"
         # 1. Obtain node embeddings 
-        x = self.conv1(x, edge_index)
-        x = x.relu()
-        x = self.conv2(x, edge_index)
-        x = x.relu()
-        x = self.conv3(x, edge_index)
+        x = self.conv1(x, edge_index).relu()
+        x = self.conv2(x, edge_index).relu()
+        x = self.conv3(x, edge_index).relu()
 
         # 2. Readout layer
         x = global_mean_pool(x, batch)  # [batch_size, hidden_channels]
 
         # 3. Apply a final classifier
-        # x = F.dropout(x, p=0.5, training=self.training)
+        x = F.dropout(x, p=0.5, training=self.training)
         x = self.lin(x)
         
         return x 
@@ -83,14 +88,35 @@ class GAT(torch.nn.Module):
 
     def forward(self, x, edge_index, batch=None):
 
+        # x = x.type(torch.float)
+
         x = F.dropout(x, p=self.drop_out_prob, training=self.training)
+        # print(x)
+        if torch.isnan(x).any():
+            raise Exception("NaN detected before first conv")
         x = self.conv1(x, edge_index)
+        # print(x)
+        if torch.isnan(x).any():
+            raise Exception("NaN detected in first conv")
         x = F.elu(x)
         x = F.dropout(x, p=self.drop_out_prob, training=self.training)
         x = self.conv2(x, edge_index)
+        # print(x)
+        if torch.isnan(x).any():
+            raise Exception("NaN detected in second conv")
         x = F.elu(x)
 
         x = global_mean_pool(x, batch)
         x = self.lin(x)
 
-        return F.log_softmax(x, dim=1)
+        # print(x)
+        if torch.isnan(x).any():
+            raise Exception("NaN detected in linear layer")
+        
+        x = F.log_softmax(x, dim=1)
+
+        # print(x)
+        if torch.isnan(x).any():
+            raise Exception("NaN detected in output model")
+
+        return x
