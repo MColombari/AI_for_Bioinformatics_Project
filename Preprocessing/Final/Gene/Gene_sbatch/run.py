@@ -3,6 +3,7 @@
 # ESNG represents a gene – a segment of DNA that contains the instructions for making proteins (or other functional RNA).
 # ESNP represents a protein – the product of a gene that has been transcribed into mRNA and translated into a protein.
 
+# https://string-db.org/cgi/download.pl?species_text=Homo+sapiens
 # https://www.ensembl.org/biomart/martview/7f7b41e90e558e294ad71b377c25b12e
 
 def parse_row(row):
