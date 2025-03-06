@@ -183,8 +183,11 @@ elif args.n_graph_subsampling > 0 and not args.graph_node_subsampling:
 
 for dataset_name in args.dataset_list:
     print('-'*50)
-    
-    start_time = time.time() ##########
+
+    #-----------------------------------#
+    start_time = time.time()
+    #-----------------------------------#
+
     print('Target dataset:', dataset_name)
     # Build graph data reader: IMDB-BINARY, IMDB-MULTI, ...
     datareader = DataReader(data_dir='./datasets/%s/' % dataset_name.upper(),
@@ -198,10 +201,16 @@ for dataset_name in args.dataset_list:
                         q=args.q,
                         node2vec_hidden=args.agg_hidden
                         )
-                        
-    print(f"Graph builded in \t\t{np.floor(time.time() - start_time)}s")
 
+    #-----------------------------------#                    
+    print(f"Data reader builded in \t\t{np.floor(time.time() - start_time)}s")                        
+    #-----------------------------------#
+    
     for model_name in args.model_list:
+      #-----------------------------------#
+      start_time = time.time()
+      #-----------------------------------#
+
       for i, readout_name in enumerate(args.readout_list):
         print('-'*25)
         
@@ -435,11 +444,9 @@ for dataset_name in args.dataset_list:
             
             total_time = 0
             for epoch in range(args.epochs):
-                start_time = time.time()  ########
                 total_time_iter = train(loaders[0])
                 total_time += total_time_iter
                 acc = test(loaders[1])
-                print(f"one Epoch terminated in \t\t{np.floor(time.time() - start_time)}s")
             acc_folds.append(round(acc,2))
             time_folds.append(round(total_time/args.epochs,2))
             
