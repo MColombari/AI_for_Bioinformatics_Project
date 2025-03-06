@@ -32,3 +32,7 @@ Training/Copy_Number/__pycache__
 bash.sh
 .vscode/launch.json
 .vscode/settings.json
+Preprocessing/Final/Gene/Gene_sbatch/error_gene_variance.log
+Preprocessing/Final/Gene/Gene_sbatch/error_test.log
+Preprocessing/Final/Gene/Gene_sbatch/output_test.log
+Preprocessing/Final/Gene/Gene_sbatch/output_gene_variance.log
