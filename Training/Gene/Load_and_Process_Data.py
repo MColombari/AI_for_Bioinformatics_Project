@@ -9,26 +9,17 @@ from torch_geometric.data import Data
 from torch_geometric.utils import to_networkx
 import time
 from sklearn.metrics import pairwise_distances
+from Save_model import SaveModel
 
 # Here we define the class to load and preprocess data.
 # So just copy the code in "Preprocessing".
 
-def measure_time(func):
-    def wrapper(x):
-        start_time = time.time()
-        func(x)
-        print(f"\t\t{np.floor(time.time() - start_time)}s")
-    return wrapper
-
 class LPD:
     def __init__(self, gtf_file_path: str, folder_gene_path: str, case_id_json_path: str,
-                 feature_to_save: list, feature_to_compare: str, num_classes: int, percentage_test: float
-                 ):
-        # PATH_GTF_FILE = "/homes/mcolombari/AI_for_Bioinformatics_Project/Personal/gencode.v47.annotation.gtf"
+                 feature_to_save: list, feature_to_compare: str, num_classes: int, percentage_test: float,
+                 sm: SaveModel, number_of_nodes: str, variance_order_list_path: str):
         self.gtf_file_path = gtf_file_path
-        # PATH_FOLDER_GENE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneExpression"
         self.folder_gene_path = folder_gene_path
-        # PATH_CASE_ID_STRUCTURE = "./case_id_and_structure.json"
         self.case_id_json_path = case_id_json_path
 
         # All possibilitys.
@@ -41,10 +32,21 @@ class LPD:
 
         self.feature_to_compare = feature_to_compare
 
-        # NUMBER_OF_CLASSES = 3
         self.num_classes = num_classes
-        # PERCENTAGE_OF_TEST = 0.3
         self.percentage_test = percentage_test
+
+        self.sm = sm
+
+        self.number_of_nodes = number_of_nodes
+        self.variance_order_list_path = variance_order_list_path
+
+    def measure_time(func):
+        def wrapper(self, *arg, **kw):
+            start_time = time.time()
+            ret = func(*arg, **kw)
+            self.sm.print(f"\t\t{np.floor(time.time() - start_time)}s")
+            return ret
+        return wrapper
 
     def remove_version(self, x):
         if '.' in x:
@@ -69,6 +71,14 @@ class LPD:
 
         # Protein coding set
         self.pc_set = set(gtf_pc['gene_id'].to_list())
+
+        # Take only the first n nodes in order of variance.
+        with open(self.variance_order_list_path, 'r') as file:
+            list_of_nodes = json.load(file)
+
+        self.pc_set = self.pc_set.intersection(set(list_of_nodes[:self.number_of_nodes]))
+
+        self.sm.print(f"\n\tIntersection dim: {len(self.pc_set)}\n\t\tExecution time: ", end="")
 
 
     @measure_time
@@ -128,9 +138,10 @@ class LPD:
 
     @measure_time
     def create_graph(self):
-        self.THRESHOLD = 0.06
+        self.THRESHOLD = 0.002
 
         self.list_of_Data = []
+        avg_edges = []
         for case_index in range(0, self.datastructure.shape[0]):
             edges = []
             in_1 = [[v] for v in list(self.datastructure['values'].loc[case_index][self.feature_to_compare])]
@@ -147,11 +158,16 @@ class LPD:
             edges.append(list(row))
             edges.append(list(cols))
 
-            edge_index = torch.tensor(edges, dtype=torch.long)
-            x = torch.tensor(list(self.datastructure['values'].loc[case_index][self.feature_to_compare]), dtype=torch.float)
-            y = torch.tensor(self.datastructure['os'].loc[case_index])
-            self.list_of_Data.append(Data(x=x, edge_index=edge_index, y=y))
+            avg_edges.append(len(edges[0]))
 
+            edge_index = torch.tensor(edges, dtype=torch.long)
+            x = torch.tensor(self.datastructure['values'].loc[case_index][self.feature_to_save].values, dtype=torch.float)
+            y = torch.tensor(self.datastructure['os'].iloc[case_index])
+            self.list_of_Data.append(Data(x=x, edge_index=edge_index, y=y))
+        
+        self.sm.print(f"\n\tAverage num of edges: {np.average(np.array(avg_edges))}")
+        self.sm.print(f"\tVariance num of edges: {np.var(np.array(avg_edges))}")
+        self.sm.print(f"\tMedian num of edges: {np.median(np.array(avg_edges))}\n\t\tExecution time: ", end="")
 
 
     
@@ -225,13 +241,13 @@ class LPD:
     # between all the label in each subset.
     # Return train and test separately.
     def get_data(self):
-        print("Read GTF file\t", end="")
+        self.sm.print("Read GTF file\t", end="")
         self.read_gtf_file()
-        print("Start preprocessing", end="")
+        self.sm.print("Start preprocessing", end="")
         self.preprocessing()
-        print("Create the Graph", end="")
+        self.sm.print("Create the Graph", end="")
         self.create_graph()
-        print("Split dataset\t", end="")
+        self.sm.print("Split dataset\t", end="")
         self.split_dataset()
         
         return self.train_list, self.test_list
@@ -241,10 +257,10 @@ class LPD:
 class LPDEdgeKnowledgeBased(LPD):
     def __init__(self, gtf_file_path: str, folder_gene_path: str, case_id_json_path: str,
                  feature_to_save: list, feature_to_compare: str, num_classes: int, percentage_test: float,
-                 edge_file_path: str, edge_complete_file_path: str, edge_order_file_path: str):
+                 sm: SaveModel, edge_file_path: str, edge_complete_file_path: str, edge_order_file_path: str):
         super().__init__(gtf_file_path, folder_gene_path, case_id_json_path,
-                         feature_to_save, feature_to_compare, num_classes, percentage_test
-                         )
+                         feature_to_save, feature_to_compare, num_classes, percentage_test,
+                         sm)
         self.edge_file_path = edge_file_path
         self.edge_complete_file_path = edge_complete_file_path
         self.edge_order_file_path = edge_order_file_path
@@ -267,7 +283,7 @@ class LPDEdgeKnowledgeBased(LPD):
 
         # Protein coding set
         self.pc_set = set(gtf_pc['gene_id'].to_list())
-        print(f"\n\tProtein coding dim: {len(self.pc_set)}")
+        self.sm.print(f"\n\tProtein coding dim: {len(self.pc_set)}")
 
         accepted_gene = set()
         with open(self.edge_file_path, 'r') as file:
@@ -278,11 +294,11 @@ class LPDEdgeKnowledgeBased(LPD):
                 accepted_gene.add(f)
                 accepted_gene.add(s)
 
-        print(f"\tAccepted gene dim: {len(accepted_gene)}")
+        self.sm.print(f"\tAccepted gene dim: {len(accepted_gene)}")
 
         self.pc_set = self.pc_set.intersection(accepted_gene)
 
-        print(f"\tIntersection dim: {len(self.pc_set)}\n\t\tExecution time: ", end="")
+        self.sm.print(f"\tIntersection dim: {len(self.pc_set)}\n\t\tExecution time: ", end="")
 
         # Get gene order.
         with open(self.edge_order_file_path, 'r') as file:
@@ -362,14 +378,14 @@ class LPDEdgeKnowledgeBased(LPD):
         with open(self.edge_complete_file_path, 'r') as file:
             edges = json.load(file)
         self.list_of_Data = []
-        print(f"\n\tWe have {len(edges[0])} edges")
+        self.sm.print(f"\n\tWe have {len(edges[0])} edges")
         for case_index in range(0, self.datastructure.shape[0]):
             # print(f"\n{case_index}\t", end="")
             edge_index = torch.tensor(edges, dtype=torch.long)
             x = torch.tensor(self.datastructure['values'].loc[case_index][self.feature_to_save].values, dtype=torch.float)
             y = torch.tensor(self.datastructure['os'].iloc[case_index])
             self.list_of_Data.append(Data(x=x, edge_index=edge_index, y=y))
-        print("\t\tExecution time:", end="")
+        self.sm.print("\t\tExecution time:", end="")
 
 class LPDHybrid(LPDEdgeKnowledgeBased):
     @measure_time
@@ -439,9 +455,9 @@ class LPDHybrid(LPDEdgeKnowledgeBased):
                         edges[1].append(f_2_index)
                         edges[1].append(f_1_index)
 
-            print("Similarities found")
-            print(f"\tMissed: {miss_count} - {(miss_count / (miss_count + got_count))*100}%")
-            print(f"\tGot: {got_count} - {(got_count / (miss_count + got_count))*100}%")
+            self.sm.print("Similarities found")
+            self.sm.print(f"\tMissed: {miss_count} - {(miss_count / (miss_count + got_count))*100}%")
+            self.sm.print(f"\tGot: {got_count} - {(got_count / (miss_count + got_count))*100}%")
             
             edge_index = torch.tensor(edges, dtype=torch.long)
             x = torch.tensor(list(self.datastructure['values'].loc[case_index][self.feature_to_compare]), dtype=torch.float)
@@ -449,17 +465,17 @@ class LPDHybrid(LPDEdgeKnowledgeBased):
             data = Data(x=x, edge_index=edge_index, y=y)
 
             G = to_networkx(data, to_undirected=True)
-            print(f"\n\n### Graph {case_index} ###")
-            print("Numero di nodi:", G.number_of_nodes())
-            print("Numero di edge:", G.number_of_edges())
+            self.sm.print(f"\n\n### Graph {case_index} ###")
+            self.sm.print("Numero di nodi:", G.number_of_nodes())
+            self.sm.print("Numero di edge:", G.number_of_edges())
             degrees = dict(G.degree())
             # Nodo con il massimo grado (gene con più connessioni)
             max_degree_node = max(degrees, key=degrees.get)
-            print(f"Nodo con il massimo grado: {max_degree_node} ({degrees[max_degree_node]} connessioni)")
+            self.sm.print(f"Nodo con il massimo grado: {max_degree_node} ({degrees[max_degree_node]} connessioni)")
 
             # Trova tutte le componenti connesse
             connected_components = list(nx.connected_components(G))
-            print("Numero di componenti connesse: ", len(connected_components))
-            print(f"density: {nx.density(G)}")
+            self.sm.print("Numero di componenti connesse: ", len(connected_components))
+            self.sm.print(f"density: {nx.density(G)}")
 
             self.list_of_Data.append(Data(x=x, edge_index=edge_index, y=y))

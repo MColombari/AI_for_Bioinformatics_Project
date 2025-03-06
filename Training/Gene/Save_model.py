@@ -56,6 +56,11 @@ class SaveModel:
     def save_epoch_data(self, epoch, loss_train, accuracy_train, loss_test, accuracy_test):
         with open(f"{self.current_folder}/epoch_data.txt", "a") as f:
             f.write(f"Epoch: '{epoch}', Loss Train: '{loss_train}', Accuracy Train: '{accuracy_train}, Loss Test: '{loss_test}', Accuracy Test: '{accuracy_test}'\n")
+    
+    def print(self, string:str, end:str="\n"):
+        with open(f"{self.current_folder}/model_prints.txt", "a") as f:
+            f.write(string + end)
+        print(string, end=end)
 
 class SaveTest:
     def __init__(self, main_folder_path, test_name):
