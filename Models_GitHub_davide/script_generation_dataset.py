@@ -7,6 +7,7 @@ import json
 import os
 import matplotlib.pyplot as plt
 from torch_geometric.utils.convert import to_networkx, from_networkx
+from sklearn.metrics import pairwise_distances
 
 PATH_FOLDER_COPY_NUMBER = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/CopyNumber"
 PATH_CASE_ID_STRUCTURE = "/homes/dlupo/Progetto_BioInformatics/AI_for_Bioinformatics_Project/Preprocessing/Final/case_id_and_structure.json"
@@ -20,7 +21,7 @@ os_list = []
 for key in file_parsed.keys():
     copy_number_folder_list.append(file_parsed[key]["files"]["copy_number"])
     os_list.append(file_parsed[key]['os'])
-print()
+
 gene_id_list = []
 with open(PATH_GENE_ID_PROTEIN_CODING) as json_file:
    gene_id_list = json.load(json_file)
@@ -44,6 +45,19 @@ for root, dirs, files in os.walk(PATH_FOLDER_COPY_NUMBER):
 list_df_CNV_filled = []
 for i in range(len(list_df_CNV)):
     list_df_CNV_filled.append(list_df_CNV[i].fillna(0))
+
+# Concatenare tutti i dataframe
+df_concatenato = pd.concat(list_df_CNV_filled)
+
+# Calcolare la varianza per ogni gene_id
+varianze = df_concatenato.groupby('gene_id')['copy_number'].var()
+
+top_n = 200  # numero di geni che si vuole mantenere
+gene_significativi = varianze.nlargest(top_n).index 
+
+list_df_CNV_filtered = []    
+for case_index in range(len(list_df_CNV_filled)):
+    list_df_CNV_filtered.append(list_df_CNV_filled[case_index][list_df_CNV_filled[case_index]['gene_id'].isin(gene_significativi)])
         
 os_list_sorted = list(os_list)
 os_list_sorted.sort()
@@ -59,37 +73,40 @@ for c in range(1, num_classes + 1):
         split_values.append(os_list_sorted[index - 1])
 
 
-edge = [[],[]]
-nodes = len(list_df_CNV_filled[0])
-df = list_df_CNV_filled[0]
-# Aggiunta delle connessioni in base alla sovrapposizione
-for f_1_index in range(nodes):
-    for f_2_index in range(f_1_index + 1, nodes):
-        row1 = df.iloc[f_1_index]
-        row2 = df.iloc[f_2_index]
-        if row1['chromosome'] == row2['chromosome']:  # Evita duplicati
-            if not (row1['end'] < row2['start'] or row2['end'] < row1['start']):
-                edge[0].append(f_1_index)
-                edge[0].append(f_2_index)
-                edge[1].append(f_2_index)
-                edge[1].append(f_1_index)
+THRESHOLD = 0.06
+feature_to_compare = 'copy_number'
+list_of_list = []
+count = 1
+for case_index in range(0, len(list_df_CNV_filtered)):
+    edges = []
+    in_1 = [[v] for v in list(list_df_CNV_filtered[case_index][feature_to_compare])]
+
+    dist_a = pairwise_distances(in_1, metric="euclidean")
+
+    d_mask = np.zeros(dist_a.shape, dtype=bool)
+    np.fill_diagonal(d_mask, 1)
+
+    # Force the diagonal to be equal to Threshold, so it will not be considered, so no self loops.
+    dist_a[d_mask] = THRESHOLD
+
+    row, cols = np.where(dist_a < THRESHOLD)
+    edges.append(list(row))
+    edges.append(list(cols))
+
+    temp_list = [[],[]]
+    temp_list[0] = [elem + count for elem in edges[0]]
+    temp_list[1] = [elem + count for elem in edges[1]]
+    list_of_list.append(temp_list)
+    count += top_n
 
 list_label = []
 list_attribute = []
 graph_indicator = []
-list_of_list = []
-count = 0
-for case_index in range(226): 
-    df = list_df_CNV_filled[case_index]
-
-    temp_list = [[],[]]
-    temp_list[0] = [elem + count for elem in edge[0]]
-    temp_list[1] = [elem + count for elem in edge[1]]
-    list_of_list.append(temp_list)
-    count += nodes
+for case_index in range(len(list_df_CNV_filtered)): 
+    df = list_df_CNV_filtered[case_index]
 
     for i in range(len(df)):
-        graph_indicator.append(case_index)
+        graph_indicator.append(case_index+1)
 
     if os_list[case_index] <= split_values[0]:
         list_label.append(0)
@@ -104,19 +121,19 @@ for item in list_of_list:
     edges[0].extend(item[0])
     edges[1].extend(item[1])
 
-with open('./datasets/Copy_Number/Copy_Number_graph_labels.txt','w') as file:
+with open('./datasets/COPY_NUMBER/COPY_NUMBER_graph_labels.txt','w') as file:
     for item in list_label:
         file.write(str(item)+'\n')
 
-with open('./datasets/Copy_Number/Copy_Number_node_attributes.txt','w') as file:
+with open('./datasets/COPY_NUMBER/COPY_NUMBER_node_attributes.txt','w') as file:
     for item in list_attribute:
         file.write(str(item)+'\n')
 
-with open('./datasets/Copy_Number/Copy_Number_graph_indicator.txt','w') as file:
+with open('./datasets/COPY_NUMBER/COPY_NUMBER_graph_indicator.txt','w') as file:
     for item in graph_indicator:
         file.write(str(item)+'\n')
 
-with open('./datasets/Copy_Number/Copy_Number_A.txt','w') as file:
+with open('./datasets/COPY_NUMBER/COPY_NUMBER_A.txt','w') as file:
     for i in range(len(edges[0])):
         file.write(str(edges[0][i])+', '+str(edges[1][i])+'\n')
 
