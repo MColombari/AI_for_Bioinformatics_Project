@@ -43,7 +43,7 @@ class LPD:
     def measure_time(func):
         def wrapper(self, *arg, **kw):
             start_time = time.time()
-            ret = func(*arg, **kw)
+            ret = func(self, *arg, **kw)
             self.sm.print(f"\t\t{np.floor(time.time() - start_time)}s")
             return ret
         return wrapper
@@ -138,7 +138,7 @@ class LPD:
 
     @measure_time
     def create_graph(self):
-        self.THRESHOLD = 0.002
+        self.THRESHOLD = 0.01
 
         self.list_of_Data = []
         avg_edges = []
@@ -250,7 +250,7 @@ class LPD:
         self.sm.print("Split dataset\t", end="")
         self.split_dataset()
         
-        return self.train_list, self.test_list
+        return self.list_of_Data
 
 
 
@@ -264,6 +264,14 @@ class LPDEdgeKnowledgeBased(LPD):
         self.edge_file_path = edge_file_path
         self.edge_complete_file_path = edge_complete_file_path
         self.edge_order_file_path = edge_order_file_path
+
+    def measure_time(func):
+        def wrapper(self, *arg, **kw):
+            start_time = time.time()
+            ret = func(*arg, **kw)
+            self.sm.print(f"\t\t{np.floor(time.time() - start_time)}s")
+            return ret
+        return wrapper
 
     @measure_time
     def read_gtf_file(self):
@@ -388,6 +396,14 @@ class LPDEdgeKnowledgeBased(LPD):
         self.sm.print("\t\tExecution time:", end="")
 
 class LPDHybrid(LPDEdgeKnowledgeBased):
+    def measure_time(func):
+        def wrapper(self, *arg, **kw):
+            start_time = time.time()
+            ret = func(*arg, **kw)
+            self.sm.print(f"\t\t{np.floor(time.time() - start_time)}s")
+            return ret
+        return wrapper
+    
     @measure_time
     def create_graph(self):
         self.THRESHOLD_A = 175
