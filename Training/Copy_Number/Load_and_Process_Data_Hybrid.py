@@ -11,6 +11,8 @@ import time
 from sklearn.metrics import pairwise_distances
 from sklearn.preprocessing import StandardScaler
 
+PATH_FOLDER_GENE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneExpression"
+
 # Here we define the class to load and preprocess data.
 # So just copy the code in "Preprocessing".
 
@@ -21,8 +23,8 @@ def measure_time(func):
         print(f"\t\t{np.floor(time.time() - start_time)}s")
     return wrapper
 
-class LPD:
-    def __init__(self, gtf_file_path: str, folder_gene_path: str, case_id_json_path: str, top_n: int,
+class LPD_Hybrid:
+    def __init__(self, gtf_file_path: str, folder_gene_path: str, case_id_json_path: str,
                  feature_to_save: list, feature_to_compare: str, num_classes: int, percentage_test: float
                  ):
         # PATH_GTF_FILE = "/homes/mcolombari/AI_for_Bioinformatics_Project/Personal/gencode.v47.annotation.gtf"
@@ -33,9 +35,10 @@ class LPD:
         self.case_id_json_path = case_id_json_path
 
         self.feature_to_save = feature_to_save
+
         self.feature_to_compare = feature_to_compare
         self.list_df_CNV_filtered = []
-        self.top_n = top_n
+        self.list_df_Gene_filtered = []
 
         # NUMBER_OF_CLASSES = 3
         self.num_classes = num_classes
@@ -74,7 +77,7 @@ class LPD:
         file_to_case_id = dict((file_parsed[k]['files']['copy_number'], k) for k in file_parsed.keys())
         file_to_os = dict((file_parsed[k]['files']['copy_number'], file_parsed[k]['os']) for k in file_parsed.keys())
 
-        self.datastructure = pd.DataFrame(columns=['case_id', 'os', 'values'])
+        self.datastructure_CNV = pd.DataFrame(columns=['case_id', 'os', 'values'])
 
         index = 0
         # Now explore data path to get the right files
@@ -103,29 +106,87 @@ class LPD:
 
                             parsed_file = parsed_file[parsed_file['gene_id'].isin(self.pc_set)].fillna(0)
 
-                            self.datastructure.loc[index] = [
+                            self.datastructure_CNV.loc[index] = [
                                 file_to_case_id[file],
                                 file_to_os[file],
                                 parsed_file
                             ]
                             index += 1
-        
-        # Concatenare tutti i dataframe
-        df_concatenato = pd.concat(self.datastructure['values'].values)
-
-        # Calcolare la varianza per ogni gene_id
-        varianze = df_concatenato.groupby('gene_id')['copy_number'].var()
-
-        gene_significativi = varianze.nlargest(self.top_n).index 
 
         scaler = StandardScaler()
                 
-        for case_index in range(self.datastructure.shape[0]):
-            df = self.datastructure['values'].loc[case_index][self.datastructure['values'].loc[case_index]['gene_id'].isin(gene_significativi)]
+        for case_index in range(self.datastructure_CNV.shape[0]):
+            df = self.datastructure_CNV['values'].loc[case_index][self.datastructure_CNV['values'].loc[case_index]['gene_id'].isin(gene_significativi)]
             X_scaled = scaler.fit_transform(df['copy_number'].values.reshape(-1,1))
             df = df.drop(columns='copy_number')
             df['copy_number'] = X_scaled.flatten()
             self.list_df_CNV_filtered.append(df)
+        
+        ###########################################################################
+        with open(PATH_FOLDER_GENE, 'r') as file:
+            file_parsed = json.load(file)
+        file_to_case_id = dict((file_parsed[k]['files']['gene'], k) for k in file_parsed.keys())
+        file_to_os = dict((file_parsed[k]['files']['gene'], file_parsed[k]['os']) for k in file_parsed.keys())
+
+        self.datastructure_Gene = pd.DataFrame(columns=['case_id', 'os', 'values'])
+
+        index = 0
+        # Now explore data path to get the right files
+        for root, dirs, files in os.walk(PATH_FOLDER_GENE):
+            for dir in dirs:
+                for root, dirs, files in os.walk(PATH_FOLDER_GENE + "/" + dir):
+                    for file in files:
+                        if file in file_to_case_id.keys():
+                            parsed_file = pd.read_csv(PATH_FOLDER_GENE + "/" + dir + "/" + file,
+                                                    sep='\t', header=0, skiprows=lambda x: x in [0, 2, 3, 4, 5])
+                            parsed_file = parsed_file[['gene_id'] + ['tpm_unstranded']]
+
+                            # Now specify columns type.
+                            convert_dict = dict([(k, float) for k in ['tpm_unstranded']])
+                            convert_dict['gene_id'] = str
+                            parsed_file = parsed_file.astype(convert_dict)
+                            
+                            # They actually don't match.
+                            # So the 'gene_type' in the dataset don't match the in the gtf file.
+                            # So i'm gonna use as the right reference the gtf file.
+
+                            parsed_file['gene_id'] = parsed_file['gene_id'].apply(self.remove_version)
+
+                            # parsed_file = parsed_file[parsed_file['gene_type'] == 'protein_coding']
+                            # if not set(parsed_file['gene_id']).issubset(gtf_pc_set):
+                            #     raise Exception("List of coding genes don't match.")
+
+                            parsed_file = parsed_file[parsed_file['gene_id'].isin(self.pc_set)]
+
+                            self.datastructure_Gene.loc[index] = [
+                                file_to_case_id[file],
+                                file_to_os[file],
+                                parsed_file
+                            ]
+                            index += 1
+
+        # Concatenare tutti i dataframe
+        df_concatenato = pd.concat(self.datastructure_Gene['values'].values)
+
+        # Calcolare la varianza per ogni gene_id
+        varianze = df_concatenato.groupby('gene_id')['copy_number'].var()
+
+        top_n = 2000  # numero di geni che si vuole mantenere
+        gene_significativi = varianze.nlargest(top_n).index 
+
+        # Apply log.
+        for i in range(self.datastructure_Gene.shape[0]):
+            self.datastructure_Gene['values'].loc[i][['tpm_unstranded']] = self.datastructure_Gene['values'].loc[i][self.feature_to_save].applymap(lambda x: np.log10(x + 0.01))
+        
+        # Make value in a [0, 1] range.
+        for r in range(self.datastructure_Gene.shape[0]):
+            for c in ['tpm_unstranded']:
+                self.datastructure_Gene['values'].loc[r][c] =    (self.datastructure_Gene['values'].loc[r][c] - self.datastructure_Gene['values'].loc[r][c].min()) / \
+                                                            (self.datastructure_Gene['values'].loc[r][c].max() - self.datastructure_Gene['values'].loc[r][c].min())
+        
+        for case_index in range(self.datastructure_Gene.shape[0]):
+            df = self.datastructure_Gene['values'].loc[case_index][self.datastructure_Gene['values'].loc[case_index]['gene_id'].isin(gene_significativi)]
+            self.list_df_Gene_filtered.append(df)
 
 
     @measure_time
@@ -133,9 +194,10 @@ class LPD:
         self.THRESHOLD = 0.06
 
         self.list_of_Data = []
-        for case_index in range(0, self.datastructure.shape[0]):
+        avg_edges = []
+        for case_index in range(0, self.datastructure_Gene.shape[0]):
             edges = []
-            in_1 = [[v] for v in list(self.list_df_CNV_filtered[case_index][self.feature_to_compare])]
+            in_1 = [[v] for v in list(self.datastructure_Gene['values'].loc[case_index]['tpm_unstranded'])]
 
             dist_a = pairwise_distances(in_1, metric="euclidean")
 
@@ -148,25 +210,17 @@ class LPD:
             row, cols = np.where(dist_a < self.THRESHOLD)
             edges.append(list(row))
             edges.append(list(cols))
+            avg_edges.append(len(edges[0]))
 
             edge_index = torch.tensor(edges, dtype=torch.long)
             x = torch.tensor(list(self.list_df_CNV_filtered[case_index][self.feature_to_compare]), dtype=torch.float)
-            y = torch.tensor(self.datastructure['os'].loc[case_index])
+            y = torch.tensor(self.datastructure_CNV['os'].loc[case_index])
             self.list_of_Data.append(Data(x=x, edge_index=edge_index, y=y))
 
-            G = to_networkx(Data(x=x, edge_index=edge_index, y=y), to_undirected=True)
-            print(f"\n\n### Graph {case_index} ###")
-            print("Numero di nodi:", G.number_of_nodes())
-            print("Numero di edge:", G.number_of_edges())
-            degrees = dict(G.degree())
-            # Nodo con il massimo grado (gene con più connessioni)
-            max_degree_node = max(degrees, key=degrees.get)
-            print(f"Nodo con il massimo grado: {max_degree_node} ({degrees[max_degree_node]} connessioni)")
+        self.sm.print(f"\n\tAverage num of edges: {np.average(np.array(avg_edges))}")
+        self.sm.print(f"\tVariance num of edges: {np.var(np.array(avg_edges))}")
+        self.sm.print(f"\tMedian num of edges: {np.median(np.array(avg_edges))}\n\t\tExecution time: ", end="")
 
-            # Trova tutte le componenti connesse
-            connected_components = list(nx.connected_components(G))
-            print("Numero di componenti connesse: ", len(connected_components))
-            print(f"density: {nx.density(G)}")
 
 
     

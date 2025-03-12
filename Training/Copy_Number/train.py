@@ -2,6 +2,7 @@ import torch
 from Save_model import SaveModel as SM
 from models import simple_GCN
 from Load_and_Process_Data import LPD
+from Load_and_Process_Data_Hybrid import LPD_Hybrid
 from torch_geometric.loader import DataLoader
 from collections import OrderedDict
 from sklearn.metrics import accuracy_score
@@ -41,7 +42,8 @@ hyperparameter = {
     'save_model_period': 5, # How many epoch to wait before save the next model.
     'percentage_of_test': 0.3, # How many percentage of the dataset is used for testing.
     'feature_to_save': ['copy_number'], # Specify parameter for gene.
-    'feature_to_compare': 'copy_number'
+    'feature_to_compare': 'copy_number',
+    'top_n' : 200 #how many genes to keep
 
 }
 
@@ -51,7 +53,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print("Start code")
 
 # https://pytorch-geometric.readthedocs.io/en/2.5.3/notes/create_dataset.html
-lpd = LPD(PATH_GTF_FILE, PATH_FOLDER_COPY_NUMBER, PATH_CASE_ID_STRUCTURE, hyperparameter['feature_to_save'],
+lpd = LPD(PATH_GTF_FILE, PATH_FOLDER_COPY_NUMBER, PATH_CASE_ID_STRUCTURE, hyperparameter['top_n'], hyperparameter['feature_to_save'],
        hyperparameter['feature_to_compare'], hyperparameter['num_classes'], hyperparameter['percentage_of_test'])
 data_train_list, data_test_list = lpd.get_data()  # List of Data.
 # Inside of data we need to specify which y we have.
@@ -63,7 +65,8 @@ test_loader = DataLoader(data_test_list, batch_size=hyperparameter['batch_size']
 
 
 node_feature_number = 1
-model = simple_GCN(node_feature_number, 10, hyperparameter['num_classes'])
+# model = simple_GCN(node_feature_number, 10, hyperparameter['num_classes'])
+model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
 
 s_epoch = 0
 if START_FROM_CHECKPOINT:
@@ -92,23 +95,59 @@ criterion = torch.nn.CrossEntropyLoss()
 
 def train(loader):
     model.train()
+    index_batch = 0
     for data in loader:
-        # Get the inputs and labels
-        inputs, labels = data.x.unsqueeze(1).to(device), data.y.to(device)
-        edge_index, batch = data.edge_index.to(device), data.batch.to(device)
         optimizer.zero_grad()
+        # print(f"\tBatch: {index_batch + 1}")
+        index_batch += 1
+        # Get the inputs and labels
+        # https://github.com/pyg-team/pytorch_geometric/issues/1702
+        # data = T.ToSparseTensor()(data)
+        if torch.isnan(data.x).any() or torch.isnan(data.y).any():
+            raise Exception("NaN detected in inputs!")
+        
+        inputs, labels = data.x.to(device), data.y.to(device)
+        # edge_adj, batch = data.adj_t.to(device), data.batch.to(device)
+        edge_index, batch = data.edge_index.to(device), data.batch.to(device)
+
+        if torch.isnan(edge_index).any() or torch.isinf(edge_index).any():
+            raise Exception("NaN or Inf detected in edge_index!")
+        num_nodes = inputs.shape[0]
+        if (edge_index >= num_nodes).any() or (edge_index < 0).any():
+            raise Exception("Invalid edge_index detected!")
+
+        # print(f"Inputs:\t{inputs}")
+        # print(f"Inputs size:\t{inputs.size()}")
+        # print(f"Labels:\t{labels}")
+        # print(f"Batch:\t{batch}")
+        # print(f"Batch size:\t{batch.size()}")
 
         # Forward
         outputs = model(inputs, edge_index, batch)
-        if isinstance(outputs, list):
-            outputs = outputs[0] #check the model gets back only one output
+        # if isinstance(outputs, list):
+        #     outputs = outputs[0] #check the model gets back only one output
+        # print(f"Output: {outputs}")
+        if torch.isnan(outputs).any():
+            raise Exception("NaN detected in model output!")
 
         # Compute the loss
-        loss = criterion(outputs, labels.squeeze())
+        # print(f"Labels: {labels}")
+        loss = criterion(outputs, labels)
 
+        # print(f"Loss: {loss}")
+        
         # Backward & optimize
         loss.backward()
+        for name, param in model.named_parameters():
+            if param.grad is None:
+                raise Exception(f"{name} has no gradient!")
+        for name, param in model.named_parameters():
+            if param.grad is not None and (torch.isnan(param.grad).any() or torch.isinf(param.grad).any()):
+                raise Exception(f"NaN or Inf detected in gradients: {name}")
+        # torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=0.1)
         optimizer.step()
+        # raise Exception("Stop")
+ 
     
 def test(loader):
     model.eval()
@@ -119,15 +158,22 @@ def test(loader):
     with torch.no_grad():
         for data in loader:
             # get the inputs and labels
-            inputs, labels = data.x.unsqueeze(1).to(device), data.y.to(device)
+            # data = T.ToSparseTensor()(data)
+            inputs, labels = data.x.to(device), data.y.to(device)
+            # edge_adj, batch = data.adj_t.to(device), data.batch.to(device)
             edge_index, batch = data.edge_index.to(device), data.batch.to(device)
 
             # forward
             outputs = model(inputs, edge_index, batch)
+            # if isinstance(outputs, list):
+            #     outputs = outputs[0] #check the model gets back only one output
+
+            # print(f"Output: {outputs}")
 
             # compute the loss
-            loss = criterion(outputs, labels.squeeze())
+            loss = criterion(outputs, labels)
             losses.append(loss.item())
+
             # collect labels & prediction
             prediction = torch.argmax(outputs, 1)
             all_label.extend(labels.squeeze())
@@ -142,22 +188,27 @@ def test(loader):
     return test_loss, test_acc
 
 
-test_acc_list = []
 for epoch_index in range(s_epoch, hyperparameter['epochs']):
-    print(f"Epoch {epoch_index + 1}")
+    sm.print(f"\nEpoch {epoch_index + 1}")
     train(train_loader)
+    sm.print("\tAfter train")
+    sm.print(f"\t\tFree memory usage:      {torch.cuda.mem_get_info()[0]}")
+    sm.print(f"\t\tTotal available memory: {torch.cuda.mem_get_info()[1]}")
     train_loss, train_acc = test(train_loader)
     test_loss, test_acc = test(test_loader)
     test_acc_list.append(test_acc)
-    #print(f"\tTrain loss: {train_loss}")
-    #print(f"\tTrain acc: {train_acc}")
-    print(f"\tTest loss: {test_loss}")
-    print(f"\tTest acc: {test_acc}")
+    sm.print("\tAfter test")
+    sm.print(f"\t\tFree memory usage:      {torch.cuda.mem_get_info()[0]}")
+    sm.print(f"\t\tTotal available memory: {torch.cuda.mem_get_info()[1]}")
+    sm.print(f"\tTrain loss: {train_loss}")
+    sm.print(f"\tTrain acc: {train_acc}")
+    sm.print(f"\tTest loss: {test_loss}")
+    sm.print(f"\tTest acc: {test_acc}")
     sm.save_epoch_data(epoch_index, train_loss, train_acc, test_loss, test_acc)
 
-    if (epoch_index - s_epoch) % hyperparameter['save_model_period'] == 0:
-        print("###    Model saved    ###")
-        sm.save_epoch(epoch_index, model)
+    if (epoch_index + 1 - s_epoch) % hyperparameter['save_model_period'] == 0:
+        sm.print("###    Model saved    ###")
+        sm.save_epoch(epoch_index + 1, model)
 
 print('\n\n')
 print('max accuracy: ',max(test_acc_list))
