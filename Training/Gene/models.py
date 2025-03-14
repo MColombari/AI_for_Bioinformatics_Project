@@ -120,3 +120,82 @@ class GAT(torch.nn.Module):
             raise Exception("NaN detected in output model")
 
         return x
+    
+
+class SimpleGAT(torch.nn.Module):
+    def __init__(self, input_feature:int, hidden_channels:list, num_head:int, num_classes:int, drop_out_prob:float):
+        super(SimpleGAT, self).__init__()
+        self.drop_out_prob = drop_out_prob
+
+        self.conv1 = GATConv(input_feature, hidden_channels, heads=num_head, dropout=drop_out_prob)
+
+        self.lin = nn.Linear(hidden_channels * num_head, num_classes)
+
+    def forward(self, x, edge_index, batch=None):
+
+        # x = x.type(torch.float)
+
+        x = F.dropout(x, p=self.drop_out_prob, training=self.training)
+        # print(x)
+        if torch.isnan(x).any():
+            raise Exception("NaN detected before first conv")
+        x = self.conv1(x, edge_index)
+        # print(x)
+        if torch.isnan(x).any():
+            raise Exception("NaN detected in first conv")
+        x = F.elu(x)
+        x = F.dropout(x, p=self.drop_out_prob, training=self.training)
+
+        x = global_mean_pool(x, batch)
+        x = self.lin(x)
+
+        # print(x)
+        if torch.isnan(x).any():
+            raise Exception("NaN detected in linear layer")
+        
+        x = F.log_softmax(x, dim=1)
+
+        # print(x)
+        if torch.isnan(x).any():
+            raise Exception("NaN detected in output model")
+
+        return x
+    
+
+class ComplexGAT(torch.nn.Module):
+    def __init__(self, input_feature:int, hidden_channels:list, num_head:int, num_classes:int, drop_out_prob:float):
+        super(ComplexGAT, self).__init__()
+        self.drop_out_prob = drop_out_prob
+        self.layer1 = GATConv(input_feature, hidden_channels, heads=num_head, dropout=drop_out_prob)
+        self.layer2 = GATConv(hidden_channels * num_head, hidden_channels, heads=num_head, dropout=drop_out_prob)
+        self.layer3 = GATConv(hidden_channels * num_head, hidden_channels, heads=num_head, dropout=drop_out_prob)
+        self.layer4 = GATConv(hidden_channels * num_head, hidden_channels, heads=num_head, dropout=drop_out_prob)
+
+        self.lin = nn.Linear(hidden_channels * num_head, num_classes)
+
+    def forward(self, x, edge_index, batch=None):
+        x = F.dropout(x, p=self.drop_out_prob, training=self.training)
+        x = self.layer1(x, edge_index)
+        x = F.elu(x)
+
+        x = F.dropout(x, p=self.drop_out_prob, training=self.training)
+        x = self.layer2(x, edge_index)
+        x = F.elu(x)
+
+        x = F.dropout(x, p=self.drop_out_prob, training=self.training)
+        x = self.layer3(x, edge_index)
+        x = F.elu(x)
+
+        x = F.dropout(x, p=self.drop_out_prob, training=self.training)
+        x = self.layer4(x, edge_index)
+        x = F.elu(x)
+
+        x = global_mean_pool(x, batch)
+        x = self.lin(x)
+
+        if torch.isnan(x).any():
+            raise Exception("NaN detected in linear layer")
+        
+        x = F.log_softmax(x, dim=1)
+
+        return x
