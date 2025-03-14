@@ -10,6 +10,7 @@ from torch_geometric.utils import to_networkx
 import time
 from sklearn.metrics import pairwise_distances
 from Save_model import SaveModel
+import random
 
 # Here we define the class to load and preprocess data.
 # So just copy the code in "Preprocessing".
@@ -138,7 +139,7 @@ class LPD:
 
     @measure_time
     def create_graph(self):
-        self.THRESHOLD = 0.01
+        self.THRESHOLD = 0.0004
 
         self.list_of_Data = []
         avg_edges = []
@@ -167,7 +168,9 @@ class LPD:
         
         self.sm.print(f"\n\tAverage num of edges: {np.average(np.array(avg_edges))}")
         self.sm.print(f"\tVariance num of edges: {np.var(np.array(avg_edges))}")
-        self.sm.print(f"\tMedian num of edges: {np.median(np.array(avg_edges))}\n\t\tExecution time: ", end="")
+        self.sm.print(f"\tMedian num of edges: {np.median(np.array(avg_edges))}")
+        self.sm.print(f"\tMax num of edges: {max(avg_edges)}")
+        self.sm.print(f"\tMin num of edges: {min(avg_edges)}\n\t\tExecution time: ", end="")
 
 
     
@@ -194,6 +197,33 @@ class LPD:
 
     @measure_time
     def split_dataset(self):
+        os = [int(d.y) for d in self.list_of_Data]
+        os.sort()
+
+        n = len(os)
+
+        split_values = []
+        for c in range(1, self.num_classes + 1):
+            if c == self.num_classes:
+                split_values.append(os[-1])
+            else:
+                index = (n // self.num_classes) * c
+                split_values.append(os[index - 1])
+
+        for c in range(self.num_classes):
+            for d in self.list_of_Data:
+                if  (c == 0 and int(d.y) <= split_values[c]) or \
+                    (c > 0 and int(d.y) <= split_values[c] and int(d.y) > split_values[c-1]):
+                    d.y = torch.tensor(c)
+
+        random.shuffle(self.list_of_Data) #TODO Use a seed.
+        total = len(self.list_of_Data)
+        n_test = int(np.floor(total * self.percentage_test))
+        print(f"\nNum test: {n_test}, Total: {total}")
+        self.test_list = self.list_of_Data[:n_test]
+        self.train_list = self.list_of_Data[n_test:]
+        return
+
         # First divide it in classes
         os = [int(d.y) for d in self.list_of_Data]
         os.sort()
@@ -203,7 +233,7 @@ class LPD:
         split_values = []
         for c in range(1, self.num_classes + 1):
             if c == self.num_classes:
-                split_values.append(os[len(os) - 1])
+                split_values.append(os[-1])
             else:
                 index = (n // self.num_classes) * c
                 split_values.append(os[index - 1])
@@ -216,6 +246,10 @@ class LPD:
                     (c > 0 and int(d.y) <= split_values[c] and int(d.y) > split_values[c-1]):
                     d.y = torch.tensor(c)
                     list_data_split[c].append(d)
+
+        self.sm.print(f"\n\tNum of instances per class:")
+        for c in range(self.num_classes):
+            self.sm.print(f"\t\tClass {c} -> {len(list_data_split[c])} case")
 
         # Now split in train and test.
         self.train_list = []
@@ -237,6 +271,11 @@ class LPD:
                     self.train_list.append(d)
                 count += 1
 
+        self.sm.print(f"\tTrain size: {len(self.train_list)}")
+        self.sm.print(f"\tTest size: {len(self.test_list)}")
+
+        self.sm.print(f"\t\t\tExecution time: ", end="")
+
     # Here i have to split the dataset in train and test, while keeping balance
     # between all the label in each subset.
     # Return train and test separately.
@@ -250,7 +289,7 @@ class LPD:
         self.sm.print("Split dataset\t", end="")
         self.split_dataset()
         
-        return self.list_of_Data
+        return self.train_list, self.test_list
 
 
 
