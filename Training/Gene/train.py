@@ -1,6 +1,6 @@
 import torch
 from Save_model import SaveModel as SM
-from models import simple_GCN, small_GCN, GAT
+from models import simple_GCN, small_GCN, GAT, SimpleGAT, ComplexGAT
 from Load_and_Process_Data import LPD, LPDEdgeKnowledgeBased, LPDHybrid
 from torch_geometric.loader import DataLoader
 from collections import OrderedDict
@@ -43,16 +43,16 @@ PATH_ORDER_GENE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/Gen
 #   Model parameter TODO
 hyperparameter = {
     'num_classes': 2,
-    'num_nodes': 20,
-    'epochs': 10,
+    'num_nodes': 200,
+    'epochs': 100,
     'batch_size': 16,
     'seed': 123456,
     'num_workers': 6,
-    'lr': 0.001,
+    'lr': 0.00001,
     'save_model_period': 20, # How many epoch to wait before save the next model.
     'percentage_of_test': 0.1, # How many percentage of the dataset is used for testing.
-    'feature_to_save': ['tpm_unstranded'], # Specify parameter for gene.
-    'feature_to_compare': 'tpm_unstranded'
+    'feature_to_save': ['fpkm_uq_unstranded'], # Specify parameter for gene.
+    'feature_to_compare': 'fpkm_uq_unstranded'
 }
 
 torch.manual_seed(hyperparameter['seed'])
@@ -87,7 +87,12 @@ test_loader = DataLoader(data_test_list, batch_size=hyperparameter['batch_size']
 
 
 node_feature_number = len(hyperparameter['feature_to_save'])
-model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
+# model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
+# model = small_GCN(node_feature_number, 2000, hyperparameter['num_classes'])
+model =  GAT(node_feature_number, 1000, 30, hyperparameter['num_classes'], 0.2)
+# model = SimpleGAT(node_feature_number, 2000, 30, hyperparameter['num_classes'], 0.2)
+# model = ComplexGAT(node_feature_number, 500, 20, hyperparameter['num_classes'], 0.2)
+
 # model = DataParallel(model)
 
 s_epoch = 0
@@ -119,7 +124,6 @@ def train(loader):
     model.train()
     index_batch = 0
     for data in loader:
-        optimizer.zero_grad()
         # print(f"\tBatch: {index_batch + 1}")
         index_batch += 1
         # Get the inputs and labels
@@ -143,6 +147,8 @@ def train(loader):
         # print(f"Labels:\t{labels}")
         # print(f"Batch:\t{batch}")
         # print(f"Batch size:\t{batch.size()}")
+
+        optimizer.zero_grad()
 
         # Forward
         outputs = model(inputs, edge_index, batch)
