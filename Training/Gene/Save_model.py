@@ -55,7 +55,7 @@ class SaveModel:
     # logger.info("epoch {:3d} | iteration {:5d} | Loss {:.6f} | Acc {:.2f}%".format(epoch+1, batch_idx+1, loss.item(), score*100))
     def save_epoch_data(self, epoch, loss_train, accuracy_train, loss_test, accuracy_test):
         with open(f"{self.current_folder}/epoch_data.txt", "a") as f:
-            f.write(f"Epoch: '{epoch}', Loss Train: '{loss_train}', Accuracy Train: '{accuracy_train}, Loss Test: '{loss_test}', Accuracy Test: '{accuracy_test}'\n")
+            f.write(f"Epoch: '{epoch}', Loss Train: '{loss_train}', Accuracy Train: '{accuracy_train}', Loss Test: '{loss_test}', Accuracy Test: '{accuracy_test}'\n")
     
     def print(self, string:str, end:str="\n"):
         with open(f"{self.current_folder}/model_prints.txt", "a") as f:
