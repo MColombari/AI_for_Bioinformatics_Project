@@ -27,7 +27,10 @@ from models.ExpandedSpatialGraphEmbeddingNet import ExpandedSpatialGraphEmbeddin
 from utils import create_directory, save_result_csv
 
 model_list = ['GCN', 'GAT', 'GraphSAGE', 'APPNP', 'GIN', 'GraphUNet', 'ARMA', 'SGCNN', 'GraphResNet', 'GraphDenseNet', 'NodeRandomWalkNet', 'ExpandedSpatialGraphEmbeddingNet']
-dataset_list = ['COPY_NUMBER','IMDB-BINARY', 'IMDB-MULTI', 'PROTEINS', 'ENZYMES', 'NCI1', 'MUTAG']
+dataset_list = ['COPY_NUMBER', 
+                'GENE_EXP_100_001', 'GENE_EXP_100_0001', 'GENE_EXP_100_0004',
+                'GENE_EXP_200_001', 'GENE_EXP_200_0001', 'GENE_EXP_200_0004',
+                'GENE_EXP_500_001', 'GENE_EXP_500_0001', 'GENE_EXP_500_0004']
 readout_list = ['max', 'avg', 'sum']
 
 parser = argparse.ArgumentParser(formatter_class=RawTextHelpFormatter)
