@@ -421,15 +421,3 @@ class GraphData(torch.utils.data.Dataset):
                                           self.pad(self.edge_matrix_list[index], self.max_edge_matrix),
                                           int(self.node_count_list[index]),
                                           int(self.edge_matrix_count_list[index])])            
-    
-# datareader = DataReader(data_dir='./datasets/MUTAG/',
-#                         rnd_state=np.random.RandomState(12355),
-#                         folds=5,           
-#                         use_cont_node_attr=False,
-#                         random_walk=False,
-#                         num_walk=10,
-#                         walk_length=20,
-#                         p=0.65,
-#                         q=0.35,
-#                         node2vec_hidden=64
-#                         )

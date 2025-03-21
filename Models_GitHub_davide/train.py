@@ -27,7 +27,10 @@ from models.ExpandedSpatialGraphEmbeddingNet import ExpandedSpatialGraphEmbeddin
 from utils import create_directory, save_result_csv
 
 model_list = ['GCN', 'GAT', 'GraphSAGE', 'APPNP', 'GIN', 'GraphUNet', 'ARMA', 'SGCNN', 'GraphResNet', 'GraphDenseNet', 'NodeRandomWalkNet', 'ExpandedSpatialGraphEmbeddingNet']
-dataset_list = ['COPY_NUMBER','IMDB-BINARY', 'IMDB-MULTI', 'PROTEINS', 'ENZYMES', 'NCI1', 'MUTAG']
+dataset_list = ['COPY_NUMBER', 
+                'GENE_EXP_100_001', 'GENE_EXP_100_0001', 'GENE_EXP_100_0004',
+                'GENE_EXP_200_001', 'GENE_EXP_200_0001', 'GENE_EXP_200_0004',
+                'GENE_EXP_500_001', 'GENE_EXP_500_0001', 'GENE_EXP_500_0004']
 readout_list = ['max', 'avg', 'sum']
 
 parser = argparse.ArgumentParser(formatter_class=RawTextHelpFormatter)
@@ -183,8 +186,11 @@ elif args.n_graph_subsampling > 0 and not args.graph_node_subsampling:
 
 for dataset_name in args.dataset_list:
     print('-'*50)
-    
-    start_time = time.time() ##########
+
+    #-----------------------------------#
+    start_time = time.time()
+    #-----------------------------------#
+
     print('Target dataset:', dataset_name)
     # Build graph data reader: IMDB-BINARY, IMDB-MULTI, ...
     datareader = DataReader(data_dir='./datasets/%s/' % dataset_name.upper(),
@@ -198,9 +204,16 @@ for dataset_name in args.dataset_list:
                         q=args.q,
                         node2vec_hidden=args.agg_hidden
                         )
-    print(f"Braph builded in \t\t{np.floor(time.time() - start_time)}s")
 
+    #-----------------------------------#                    
+    print(f"Data reader builded in \t\t{np.floor(time.time() - start_time)}s")                        
+    #-----------------------------------#
+    
     for model_name in args.model_list:
+      #-----------------------------------#
+      start_time = time.time()
+      #-----------------------------------#
+
       for i, readout_name in enumerate(args.readout_list):
         print('-'*25)
         
@@ -318,29 +331,6 @@ for dataset_name in args.dataset_list:
                     n_spatial_graph_embedding_model_layer=args.n_spatial_graph_embedding_model_layer,
                     n_node_random_walk_model_layer=args.n_node_random_walk_model_layer,
                     node_random_walk_model_name=args.node_random_walk_model_name).to(device) 
-#        elif model_name == 'ExpandedSpatialGraphEmbeddingNet':
-#            model = ExpandedSpatialGraphEmbeddingNet(
-#                    n_class=datareader.data['n_classes'],
-#                    fc_hidden=args.fc_hidden,
-#                    dropout=args.dropout,
-#                    readout=readout_name,
-#                    device=device,
-#                    dataset_name=dataset_name,
-#                    n_folds=args.n_folds,
-#                    freeze_layer=args.freeze_layer,
-#                    fc_dropout=args.concat_dropout).to(device)  
-#         elif model_name == 'ExpandedSpatialGraphEmbeddingNet':
-#             model = ExpandedSpatialGraphEmbeddingNet(
-#                     n_class=datareader.data['n_classes'],
-#                     fc_hidden=args.fc_hidden,
-#                     dropout=args.dropout,
-#                     readout=readout_name,
-#                     device=device,
-#                     dataset_name=dataset_name,
-#                     n_folds=args.n_folds,
-#                     freeze_layer=args.freeze_layer,
-#                     fc_layer_type=args.fc_layer_type,
-#                     concat_dropout=args.concat_dropout).to(device)  
                                                          
         print(model)
         print('Readout:', readout_name)
@@ -457,11 +447,9 @@ for dataset_name in args.dataset_list:
             
             total_time = 0
             for epoch in range(args.epochs):
-                start_time = time.time()  ########
                 total_time_iter = train(loaders[0])
                 total_time += total_time_iter
                 acc = test(loaders[1])
-                print(f"one Epoch terminated in \t\t{np.floor(time.time() - start_time)}s")
             acc_folds.append(round(acc,2))
             time_folds.append(round(total_time/args.epochs,2))
             

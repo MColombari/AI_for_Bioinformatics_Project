@@ -1,6 +1,6 @@
 import torch
 from Save_model import SaveModel as SM
-from models import simple_GCN, small_GCN, GAT
+from models import simple_GCN, small_GCN, GAT, SimpleGAT, ComplexGAT
 from Load_and_Process_Data import LPD, LPDEdgeKnowledgeBased, LPDHybrid
 from torch_geometric.loader import DataLoader
 from collections import OrderedDict
@@ -29,27 +29,30 @@ START_FROM_CHECKPOINT = False
 CHECKPOINT_PATH = ""
 
 # Load data path
-PATH_GTF_FILE = "/homes/mcolombari/AI_for_Bioinformatics_Project/Personal/gencode.v47.annotation.gtf"
+PATH_GTF_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/gencode.v47.annotation.gtf"
 PATH_FOLDER_GENE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneExpression"
-PATH_CASE_ID_STRUCTURE = "/homes/mcolombari/AI_for_Bioinformatics_Project/Preprocessing/Final/case_id_and_structure.json"
-# For edge similarity file.
+PATH_CASE_ID_STRUCTURE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/case_id_and_structure.json"
+# For edge similarity files.
 PATH_EDGE_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/9606.protein.links.v12.0.ENSG.txt"
-PATH_COMPLETE_EDGE_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/edge_T650.json"
+PATH_COMPLETE_EDGE_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/edge_T900.json"
 PATH_EDGE_ORDER_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/edge_node_order.json"
+# Order of nodes files.
+PATH_ORDER_GENE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/gene_variance_order_tpm_unstranded.json"
 
 
 #   Model parameter TODO
 hyperparameter = {
     'num_classes': 2,
-    'epochs': 10,
-    'batch_size': 4,
+    'num_nodes': 200,
+    'epochs': 100,
+    'batch_size': 16,
     'seed': 123456,
-    'num_workers': 2,
-    'lr': 0.01,
-    'save_model_period': 2, # How many epoch to wait before save the next model.
+    'num_workers': 6,
+    'lr': 0.00001,
+    'save_model_period': 20, # How many epoch to wait before save the next model.
     'percentage_of_test': 0.1, # How many percentage of the dataset is used for testing.
-    'feature_to_save': ['tpm_unstranded', 'fpkm_unstranded', 'fpkm_uq_unstranded'], # Specify parameter for gene.
-    'feature_to_compare': 'tpm_unstranded'
+    'feature_to_save': ['fpkm_uq_unstranded'], # Specify parameter for gene.
+    'feature_to_compare': 'fpkm_uq_unstranded'
 }
 
 torch.manual_seed(hyperparameter['seed'])
@@ -62,12 +65,13 @@ print("Start code")
 
 # torch.cuda.empty_cache()
 
+sm = SM(TEST_FOLDER_PATH, TEST_NAME)
 
 # https://pytorch-geometric.readthedocs.io/en/2.5.3/notes/create_dataset.html
-lpd = LPDEdgeKnowledgeBased(PATH_GTF_FILE, PATH_FOLDER_GENE, PATH_CASE_ID_STRUCTURE,
+lpd = LPD(PATH_GTF_FILE, PATH_FOLDER_GENE, PATH_CASE_ID_STRUCTURE,
                             hyperparameter['feature_to_save'], hyperparameter['feature_to_compare'],
                             hyperparameter['num_classes'], hyperparameter['percentage_of_test'],
-                            PATH_EDGE_FILE, PATH_COMPLETE_EDGE_FILE, PATH_EDGE_ORDER_FILE)
+                            sm, hyperparameter['num_nodes'], PATH_ORDER_GENE)
 data_train_list, data_test_list = lpd.get_data()  # List of Data.
 # Inside of data we need to specify which y we have.
 
@@ -83,7 +87,12 @@ test_loader = DataLoader(data_test_list, batch_size=hyperparameter['batch_size']
 
 
 node_feature_number = len(hyperparameter['feature_to_save'])
-model = GAT(node_feature_number, 10, 10, hyperparameter['num_classes'], 0.2)
+# model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
+# model = small_GCN(node_feature_number, 2000, hyperparameter['num_classes'])
+model =  GAT(node_feature_number, 1000, 30, hyperparameter['num_classes'], 0.2)
+# model = SimpleGAT(node_feature_number, 2000, 30, hyperparameter['num_classes'], 0.2)
+# model = ComplexGAT(node_feature_number, 500, 20, hyperparameter['num_classes'], 0.2)
+
 # model = DataParallel(model)
 
 s_epoch = 0
@@ -94,13 +103,17 @@ if START_FROM_CHECKPOINT:
     model.load_state_dict(model_dict)
 
 # Create Folder and first files.
-sm = SM(TEST_FOLDER_PATH, TEST_NAME)
 sm.save_test_info(MORE_INFO, START_FROM_CHECKPOINT, CHECKPOINT_PATH)
 sm.save_model_hyperparameter(hyperparameter)
 # https://pytorch.org/tutorials/beginner/saving_loading_models.html
 sm.save_model_architecture(model)
 
 model = model.to(device)
+# model.half()
+
+for name, param in model.named_parameters():
+    if torch.isnan(param).any():
+        raise Exception(f"NaN detected in {name} weights!")
 
 optimizer = torch.optim.Adam(model.parameters(), lr=hyperparameter['lr'])
 criterion = torch.nn.CrossEntropyLoss()
@@ -111,16 +124,23 @@ def train(loader):
     model.train()
     index_batch = 0
     for data in loader:
-        # print(f"Batch: {index_batch + 1}")
+        # print(f"\tBatch: {index_batch + 1}")
         index_batch += 1
         # Get the inputs and labels
         # https://github.com/pyg-team/pytorch_geometric/issues/1702
-        data = T.ToSparseTensor()(data)
-        if node_feature_number == 1:
-            inputs, labels = data.x .unsqueeze(1).to(device), data.y.to(device)
-        else:
-            inputs, labels = data.x.to(device), data.y.to(device)
-        edge_adj, batch = data.adj_t.to(device), data.batch.to(device)
+        # data = T.ToSparseTensor()(data)
+        if torch.isnan(data.x).any() or torch.isnan(data.y).any():
+            raise Exception("NaN detected in inputs!")
+        
+        inputs, labels = data.x.to(device), data.y.to(device)
+        # edge_adj, batch = data.adj_t.to(device), data.batch.to(device)
+        edge_index, batch = data.edge_index.to(device), data.batch.to(device)
+
+        if torch.isnan(edge_index).any() or torch.isinf(edge_index).any():
+            raise Exception("NaN or Inf detected in edge_index!")
+        num_nodes = inputs.shape[0]
+        if (edge_index >= num_nodes).any() or (edge_index < 0).any():
+            raise Exception("Invalid edge_index detected!")
 
         # print(f"Inputs:\t{inputs}")
         # print(f"Inputs size:\t{inputs.size()}")
@@ -128,15 +148,16 @@ def train(loader):
         # print(f"Batch:\t{batch}")
         # print(f"Batch size:\t{batch.size()}")
 
-        # print(inputs.size())
-        # print(labels.min(), labels.max())
+        optimizer.zero_grad()
 
         # Forward
-        outputs = model(inputs, edge_adj, batch)
+        outputs = model(inputs, edge_index, batch)
         # if isinstance(outputs, list):
         #     outputs = outputs[0] #check the model gets back only one output
-
         # print(f"Output: {outputs}")
+        if torch.isnan(outputs).any():
+            raise Exception("NaN detected in model output!")
+
         # Compute the loss
         # print(f"Labels: {labels}")
         loss = criterion(outputs, labels)
@@ -147,9 +168,12 @@ def train(loader):
         loss.backward()
         for name, param in model.named_parameters():
             if param.grad is None:
-                print(f"{name} has no gradient!")
+                raise Exception(f"{name} has no gradient!")
+        for name, param in model.named_parameters():
+            if param.grad is not None and (torch.isnan(param.grad).any() or torch.isinf(param.grad).any()):
+                raise Exception(f"NaN or Inf detected in gradients: {name}")
+        # torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=0.1)
         optimizer.step()
-        optimizer.zero_grad()
         # raise Exception("Stop")
     
 
@@ -162,24 +186,31 @@ def test(loader):
     with torch.no_grad():
         for data in loader:
             # get the inputs and labels
-            data = T.ToSparseTensor()(data)
-            if node_feature_number == 1:
-                inputs, labels = data.x .unsqueeze(1).to(device), data.y.to(device)
-            else:
-                inputs, labels = data.x.to(device), data.y.to(device)
-            edge_adj, batch = data.adj_t.to(device), data.batch.to(device)
+            # data = T.ToSparseTensor()(data)
+            inputs, labels = data.x.to(device), data.y.to(device)
+            # edge_adj, batch = data.adj_t.to(device), data.batch.to(device)
+            edge_index, batch = data.edge_index.to(device), data.batch.to(device)
 
-            # print(data.x)
-            # print(inputs)
+
+            # print(f"Inputs:\t{inputs}")
+            # print(f"Inputs size:\t{inputs.size()}")
+            # print(f"Labels:\t{labels}")
+            # print(f"Batch:\t{batch}")
+            # print(f"Batch size:\t{batch.size()}")
 
             # forward
-            outputs = model(inputs, edge_adj, batch)
-            if isinstance(outputs, list):
-                outputs = outputs[0] #check the model gets back only one output
+            outputs = model(inputs, edge_index, batch)
+            # if isinstance(outputs, list):
+            #     outputs = outputs[0] #check the model gets back only one output
+
+            # print(f"Output: {outputs}")
 
             # compute the loss
-            loss = criterion(outputs, labels.squeeze())
+            loss = criterion(outputs, labels)
             losses.append(loss.item())
+            
+            # print(f"Loss: {loss}")
+
             # collect labels & prediction
             prediction = torch.argmax(outputs, 1)
             # print(prediction)
@@ -199,22 +230,22 @@ def test(loader):
 
 
 for epoch_index in range(s_epoch, hyperparameter['epochs']):
-    print(f"\nEpoch {epoch_index + 1}")
+    sm.print(f"\nEpoch {epoch_index + 1}")
     train(train_loader)
-    print("\tAfter train")
-    print(f"\t\tFree memory usage:      {torch.cuda.mem_get_info()[0]}")
-    print(f"\t\tTotal available memory: {torch.cuda.mem_get_info()[1]}")
+    sm.print("\tAfter train")
+    sm.print(f"\t\tFree memory usage:      {torch.cuda.mem_get_info()[0]}")
+    sm.print(f"\t\tTotal available memory: {torch.cuda.mem_get_info()[1]}")
     train_loss, train_acc = test(train_loader)
     test_loss, test_acc = test(test_loader)
-    print("\tAfter test")
-    print(f"\t\tFree memory usage:      {torch.cuda.mem_get_info()[0]}")
-    print(f"\t\tTotal available memory: {torch.cuda.mem_get_info()[1]}")
-    print(f"\tTrain loss: {train_loss}")
-    print(f"\tTrain acc: {train_acc}")
-    print(f"\tTest loss: {test_loss}")
-    print(f"\tTest acc: {test_acc}")
+    sm.print("\tAfter test")
+    sm.print(f"\t\tFree memory usage:      {torch.cuda.mem_get_info()[0]}")
+    sm.print(f"\t\tTotal available memory: {torch.cuda.mem_get_info()[1]}")
+    sm.print(f"\tTrain loss: {train_loss}")
+    sm.print(f"\tTrain acc: {train_acc}")
+    sm.print(f"\tTest loss: {test_loss}")
+    sm.print(f"\tTest acc: {test_acc}")
     sm.save_epoch_data(epoch_index, train_loss, train_acc, test_loss, test_acc)
 
     if (epoch_index + 1 - s_epoch) % hyperparameter['save_model_period'] == 0:
-        print("###    Model saved    ###")
+        sm.print("###    Model saved    ###")
         sm.save_epoch(epoch_index + 1, model)
