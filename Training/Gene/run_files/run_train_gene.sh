@@ -4,7 +4,7 @@
 #SBATCH --job-name=gene_training
 #SBATCH --partition=all_usr_prod
 #SBATCH --gres=gpu:1
-#SBATCH --time=24:00:00
+#SBATCH --time=1:00:00
 #SBATCH --mem-per-cpu=16G
 
 #SBATCH --output="run_output/output_train.log"

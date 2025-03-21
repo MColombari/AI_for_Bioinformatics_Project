@@ -1,4 +1,6 @@
-Traceback (most recent call last):
-  File "/homes/dlupo/Progetto_BioInformatics/AI_for_Bioinformatics_Project/Test_link_connections/preprocessingLink.py", line 73, in <module>
-    for f_1_index in range(nodes):
-NameError: name 'nodes' is not defined
+/homes/dlupo/Progetto_BioInformatics/AI_for_Bioinformatics_Project/Test_link_connections/preprocessingLink.py:93: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df['gene_name'] = df['gene_id'].map(gene_name_dict)

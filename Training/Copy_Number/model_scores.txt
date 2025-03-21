@@ -1,0 +1,19 @@
+TEST #1 : 200 epoch, 3 conv_layer, 3 classes
+max accuracy:  0.4594594594594595
+min accuracy:  0.2702702702702703
+mean accuracy:  0.36986486486486475
+
+TEST #2 : 200 epoch, 2 conv_layer, 3 classes
+max accuracy:  0.4594594594594595
+min accuracy:  0.28378378378378377
+mean accuracy:  0.3683108108108108
+
+TEST #3 : 200 epoch, 2 conv_layer, 2 classes
+max accuracy:  0.527027027027027
+min accuracy:  0.43243243243243246
+mean accuracy:  0.47331081081080983
+
+TEST #4 : 200 epoch, 1 conv_layer, 2 classes
+max accuracy:  0.5405405405405406
+min accuracy:  0.43243243243243246
+mean accuracy:  0.47601351351351257
