@@ -29,3 +29,6 @@ Test_link_connections/ggLink.csv
 bash.sh
 .vscode/launch.json
 .vscode/settings.json
+conda_env/
+conda_env2/
+conda_env3/
