@@ -169,7 +169,7 @@ class LPD:
         # Converti le liste di valori in array numpy e poi in tensori torch
         methylation_data = np.array([np.array(x) for x in methylation_data], dtype=np.float32)
         x = torch.tensor(methylation_data, dtype=torch.float)
-        print(x)
+        #print(x)
         edge_index = torch.tensor(edges, dtype=torch.long)
         list_of_Data.append(Data(x=x, edge_index=edge_index))
         G1 = to_networkx(list_of_Data[0], to_undirected=True)
@@ -220,15 +220,19 @@ class LPD:
         # Applying SMOTE to balance the training set
         #smote = SMOTE(random_state=42)
         #X_train_balanced, y_train_balanced = smote.fit_resample(X_train, y_train)
-        #X_train = [data for data in X_train if isinstance(data, Data)]
-        #X_test = [data for data in X_test if isinstance(data, Data)]
 
-        print("Balanced Train set:")
+        # Converting to Data class instances
+        X_train = [Data(values) for values in X_train.values]
+        X_test = [Data(values) for values in X_test.values]
+        y_train = [Data(values) for values in y_train.values]
+        y_test = [Data(values) for values in y_test.values]
+
+        print("Train set:")
         print(X_train)
         print(y_train)
 
         print("\nTest set:")
         print(X_test)
         print(y_test)
-        
-        return X_train, X_test
+        # Returning the entire train and test sets
+        return (X_train, y_train), (X_test, y_test)
