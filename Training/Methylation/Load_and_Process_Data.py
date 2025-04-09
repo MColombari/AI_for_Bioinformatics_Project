@@ -19,8 +19,8 @@ from sklearn.model_selection import train_test_split
 from imblearn.over_sampling import SMOTE
 
 PATH_METHYLATION = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/Methylation"
-FILE_PATH_DICT = "../case_id_and_structure.json"
-FILE_PATH_CONVERTER = "matched_cpg_genes.csv"
+FILE_PATH_DICT = "/homes/fmancinelli/progettoBio/AI_for_Bioinformatics_Project/Preprocessing/Final/case_id_and_structure.json"
+FILE_PATH_CONVERTER = "/homes/fmancinelli/progettoBio/AI_for_Bioinformatics_Project/Preprocessing/Final/Methylation/matched_cpg_genes.csv"
 FILE_PATH_DATASTRUCTURE_CONVERTED = 'datastructure_converted.csv'
 NUMBER_OF_VALUES = 1000
 
@@ -64,8 +64,7 @@ class LPD:
                             index += 1
 
         # Carica il file di conversione
-        conversion_df = pd.read_csv(FILE_PATH_CONVERTER)
-
+        conversion_df = pd.read_csv(FILE_PATH_CONVERTER, dtype = {'gene_id': str, 'gene_chr': str, 'gene_strand': str, 'gene_start': str, 'gene_end': str, 'cpg_island': str, 'cpg_IlmnID': str, 'cpg_chr': str})
         # Crea un dizionario per la conversione rapida
         conversion_dict = pd.Series(conversion_df.gene_id.values, index=conversion_df.cpg_IlmnID).to_dict()
 
@@ -193,17 +192,17 @@ class LPD:
     # Funzione per rimuovere i valori None dalle liste e le posizioni corrispondenti in altre colonne
     def remove_none_and_corresponding_positions(self, df):
         # Trova le posizioni dei valori None in gene_id
-        none_positions = self.df['gene_id'].apply(lambda x: [i for i, value in enumerate(x) if value is None])
+        none_positions = df['gene_id'].apply(lambda x: [i for i, value in enumerate(x) if value is None])
 
         # Rimuovi i valori None da gene_id e le posizioni corrispondenti da methylation_id e methylation_values
-        self.df['gene_id'] = self.df['gene_id'].apply(lambda x: [value for value in x if value is not None])
-        self.df['methylation_id'] = self.df.apply(lambda row: [value for i, value in enumerate(row['methylation_id']) if i not in none_positions[row.name]], axis=1)
-        self.df['methylation_values'] = self.df.apply(lambda row: [value for i, value in enumerate(row['methylation_values']) if i not in none_positions[row.name]], axis=1)
+        df['gene_id'] = df['gene_id'].apply(lambda x: [value for value in x if value is not None])
+        df['methylation_id'] = df.apply(lambda row: [value for i, value in enumerate(row['methylation_id']) if i not in none_positions[row.name]], axis=1)
+        df['methylation_values'] = df.apply(lambda row: [value for i, value in enumerate(row['methylation_values']) if i not in none_positions[row.name]], axis=1)
 
-        return self.df
+        return df
     
     # Funzione per convertire methylation_id in gene_id utilizzando il dizionario
-    def convert_methylation_to_gene(methylation_ids, conversion_dict):
+    def convert_methylation_to_gene(self, methylation_ids, conversion_dict):
         return [conversion_dict.get(methylation_id, None) for methylation_id in methylation_ids]
 
     # Here i have to split the dataset in train and test, while keeping balance
@@ -219,13 +218,17 @@ class LPD:
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
         # Applying SMOTE to balance the training set
-        smote = SMOTE(random_state=42)
-        X_train_balanced, y_train_balanced = smote.fit_resample(X_train, y_train)
+        #smote = SMOTE(random_state=42)
+        #X_train_balanced, y_train_balanced = smote.fit_resample(X_train, y_train)
+        #X_train = [data for data in X_train if isinstance(data, Data)]
+        #X_test = [data for data in X_test if isinstance(data, Data)]
 
         print("Balanced Train set:")
-        print(X_train_balanced)
-        print(y_train_balanced)
+        print(X_train)
+        print(y_train)
 
         print("\nTest set:")
         print(X_test)
         print(y_test)
+        
+        return X_train, X_test

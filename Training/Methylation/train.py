@@ -1,7 +1,7 @@
 import torch
 from Save_model import SaveModel as SM
 from models import simple_GCN, small_GCN, GAT, SimpleGAT, ComplexGAT
-from Load_and_Process_Data import LPD, LPDEdgeKnowledgeBased, LPDHybrid
+from Load_and_Process_Data import LPD
 from torch_geometric.loader import DataLoader
 from collections import OrderedDict
 from sklearn.metrics import accuracy_score
@@ -68,18 +68,14 @@ print("Start code")
 sm = SM(TEST_FOLDER_PATH, TEST_NAME)
 
 # https://pytorch-geometric.readthedocs.io/en/2.5.3/notes/create_dataset.html
-lpd = LPD(PATH_GTF_FILE, PATH_FOLDER_METHYLATION, PATH_CASE_ID_STRUCTURE,
-                            hyperparameter['feature_to_save'], hyperparameter['feature_to_compare'],
-                            hyperparameter['num_classes'], hyperparameter['percentage_of_test'],
-                            sm, hyperparameter['num_nodes'], PATH_ORDER_METHYLATION)
+lpd = LPD()
 data_train_list, data_test_list = lpd.get_data()  # List of Data.
 # Inside of data we need to specify which y we have.
 
 # Transform in sparse tensor.
 # https://github.com/pyg-team/pytorch_geometric/issues/1702
-# data_train_list = [T.ToSparseTensor()(data) for data in data_train_list]
-# data_test_list = [T.ToSparseTensor()(data) for data in data_test_list]
-
+data_train_list = [T.ToSparseTensor()(data) for data in data_train_list]
+data_test_list = [T.ToSparseTensor()(data) for data in data_test_list]
 train_loader = DataLoader(data_train_list, batch_size=hyperparameter['batch_size'], shuffle=True, num_workers=hyperparameter['num_workers'], pin_memory=True)
 test_loader = DataLoader(data_test_list, batch_size=hyperparameter['batch_size'], shuffle=False, num_workers=hyperparameter['num_workers'], pin_memory=True)
 # pin_memory=True will automatically put the fetched data Tensors in pinned memory, and thus enables faster data transfer to CUDA-enabled GPUs.
