@@ -22,7 +22,7 @@ MORE_INFO = """
 """
 
 # PATH where we'll create the folder containig the new test.
-TEST_FOLDER_PATH = "/homes/fmancinelli/progettoBio/AI_for_Bioinformatics_Project/Training/Methylation/Train_output"
+TEST_FOLDER_PATH = "/homes/fmancinelli/progettoBio/AI_for_Bioinformatics_Project/Training/Methylation/run_file/run_output"
 
 # Load previous checkpoint.
 START_FROM_CHECKPOINT = False
