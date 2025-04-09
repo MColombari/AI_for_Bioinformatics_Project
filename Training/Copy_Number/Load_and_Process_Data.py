@@ -154,20 +154,19 @@ class LPD:
             y = torch.tensor(self.datastructure['os'].loc[case_index])
             self.list_of_Data.append(Data(x=x, edge_index=edge_index, y=y))
 
-            G = to_networkx(Data(x=x, edge_index=edge_index, y=y), to_undirected=True)
-            print(f"\n\n### Graph {case_index} ###")
-            print("Numero di nodi:", G.number_of_nodes())
-            print("Numero di edge:", G.number_of_edges())
-            degrees = dict(G.degree())
-            # Nodo con il massimo grado (gene con più connessioni)
-            max_degree_node = max(degrees, key=degrees.get)
-            print(f"Nodo con il massimo grado: {max_degree_node} ({degrees[max_degree_node]} connessioni)")
+            # G = to_networkx(Data(x=x, edge_index=edge_index, y=y), to_undirected=True)
+            # print(f"\n\n### Graph {case_index} ###")
+            # print("Numero di nodi:", G.number_of_nodes())
+            # print("Numero di edge:", G.number_of_edges())
+            # degrees = dict(G.degree())
+            # # Nodo con il massimo grado (gene con più connessioni)
+            # max_degree_node = max(degrees, key=degrees.get)
+            # print(f"Nodo con il massimo grado: {max_degree_node} ({degrees[max_degree_node]} connessioni)")
 
-            # Trova tutte le componenti connesse
-            connected_components = list(nx.connected_components(G))
-            print("Numero di componenti connesse: ", len(connected_components))
-            print(f"density: {nx.density(G)}")
-
+            # # Trova tutte le componenti connesse
+            # connected_components = list(nx.connected_components(G))
+            # print("Numero di componenti connesse: ", len(connected_components))
+            # print(f"density: {nx.density(G)}")
 
     
     def get_instance_class(self, d):

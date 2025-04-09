@@ -24,7 +24,7 @@ def measure_time(func):
     return wrapper
 
 class LPD_Hybrid:
-    def __init__(self, gtf_file_path: str, folder_gene_path: str, case_id_json_path: str,
+    def __init__(self, gtf_file_path: str, folder_gene_path: str, case_id_json_path: str, top_n: int,
                  feature_to_save: list, feature_to_compare: str, num_classes: int, percentage_test: float
                  ):
         # PATH_GTF_FILE = "/homes/mcolombari/AI_for_Bioinformatics_Project/Personal/gencode.v47.annotation.gtf"
@@ -39,6 +39,7 @@ class LPD_Hybrid:
         self.feature_to_compare = feature_to_compare
         self.list_df_CNV_filtered = []
         self.list_df_Gene_filtered = []
+        self.top_n = top_n
 
         # NUMBER_OF_CLASSES = 3
         self.num_classes = num_classes
@@ -113,10 +114,9 @@ class LPD_Hybrid:
                             ]
                             index += 1
 
-        scaler = StandardScaler()
-                
+        scaler = StandardScaler()        
         for case_index in range(self.datastructure_CNV.shape[0]):
-            df = self.datastructure_CNV['values'].loc[case_index][self.datastructure_CNV['values'].loc[case_index]['gene_id'].isin(gene_significativi)]
+            df = self.datastructure_CNV['values'].loc[case_index]
             X_scaled = scaler.fit_transform(df['copy_number'].values.reshape(-1,1))
             df = df.drop(columns='copy_number')
             df['copy_number'] = X_scaled.flatten()
@@ -171,7 +171,7 @@ class LPD_Hybrid:
         # Calcolare la varianza per ogni gene_id
         varianze = df_concatenato.groupby('gene_id')['copy_number'].var()
 
-        top_n = 2000  # numero di geni che si vuole mantenere
+        top_n = 200  # numero di geni che si vuole mantenere
         gene_significativi = varianze.nlargest(top_n).index 
 
         # Apply log.
