@@ -115,7 +115,6 @@ optimizer = torch.optim.Adam(model.parameters(), lr=hyperparameter['lr'])
 criterion = torch.nn.CrossEntropyLoss()
 # Here you could also use a scheduler to validate the model.
 
-
 def train(loader):
     model.train()
     index_batch = 0
@@ -129,7 +128,11 @@ def train(loader):
             raise Exception("NaN detected in inputs!")
         
         inputs, labels = data.x.to(device), data.y.to(device)
-        # edge_adj, batch = data.adj_t.to(device), data.batch.to(device)
+        #edge_adj, batch = data.adj_t.to(device), data.batch.to(device)
+        print("edge_index")
+        print(data.edge_index)
+        print("data.batch")
+        print(data.batch)
         edge_index, batch = data.edge_index.to(device), data.batch.to(device)
 
         if torch.isnan(edge_index).any() or torch.isinf(edge_index).any():
@@ -138,11 +141,11 @@ def train(loader):
         if (edge_index >= num_nodes).any() or (edge_index < 0).any():
             raise Exception("Invalid edge_index detected!")
 
-        # print(f"Inputs:\t{inputs}")
-        # print(f"Inputs size:\t{inputs.size()}")
-        # print(f"Labels:\t{labels}")
-        # print(f"Batch:\t{batch}")
-        # print(f"Batch size:\t{batch.size()}")
+        print(f"Inputs:\t{inputs}")
+        print(f"Inputs size:\t{inputs.size()}")
+        print(f"Labels:\t{labels}")
+        print(f"Batch:\t{batch}")
+        print(f"Batch size:\t{batch.size()}")
 
         optimizer.zero_grad()
 
@@ -171,7 +174,7 @@ def train(loader):
         # torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=0.1)
         optimizer.step()
         # raise Exception("Stop")
-    
+
 
 def test(loader):
     model.eval()
