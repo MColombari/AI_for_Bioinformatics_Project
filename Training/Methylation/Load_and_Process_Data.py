@@ -13,7 +13,7 @@ import torch
 import os
 import numpy as np
 from sklearn.metrics import pairwise_distances
-
+import random
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from imblearn.over_sampling import SMOTE
@@ -23,6 +23,8 @@ FILE_PATH_DICT = "/homes/fmancinelli/progettoBio/AI_for_Bioinformatics_Project/P
 FILE_PATH_CONVERTER = "/homes/fmancinelli/progettoBio/AI_for_Bioinformatics_Project/Preprocessing/Final/Methylation/matched_cpg_genes.csv"
 FILE_PATH_DATASTRUCTURE_CONVERTED = 'datastructure_converted.csv'
 NUMBER_OF_VALUES = 1000
+NUMBER_OF_CLASSES = 2
+PERCENTAGE_TEST = 0.2
 
 class LPD:
     
@@ -129,8 +131,12 @@ class LPD:
 
         #print("Gene IDs ordinati salvati in sorted_gene_ids_methylation.json")
         self.df.to_csv(FILE_PATH_DATASTRUCTURE_CONVERTED, index=False)
+
         # Creiamo una lista per contenere tutti i valori di metilazione
         all_methylation_values = []
+
+        # Converte la colonna in un tensor PyTorch
+        os_tensor = torch.tensor(self.df['os'].values, dtype=torch.float)
 
         # Itera attraverso il DataFrame e aggiungi i valori di metilazione alla lista
         for index, row in self.df.iterrows():
@@ -138,7 +144,7 @@ class LPD:
             all_methylation_values.extend(methylation_values)
 
         # Calcola la media e la mediana
-        mean_methylation = pd.Series(all_methylation_values).mean()
+        #mean_methylation = pd.Series(all_methylation_values).mean()
         median_methylation = pd.Series(all_methylation_values).median()
 
         #print("Media della metilazione:", mean_methylation)
@@ -146,7 +152,7 @@ class LPD:
 
         THRESHOLD = median_methylation
 
-        list_of_Data = []
+        self.list_of_Data = []
         methylation_data = self.df['methylation_values'].values
         feature_size = methylation_data.shape[0]
         edges = [[], []]
@@ -169,24 +175,37 @@ class LPD:
         # Converti le liste di valori in array numpy e poi in tensori torch
         methylation_data = np.array([np.array(x) for x in methylation_data], dtype=np.float32)
         x = torch.tensor(methylation_data, dtype=torch.float)
-        #print(x)
+        # Calcola il valore minimo e massimo del tensor
+        x_min = torch.min(x)
+        x_max = torch.max(x)
+
+        # Applica la normalizzazione
+        x_normalized = (x - x_min) / (x_max - x_min)
+        print('x: ')
+        print(x_normalized)
+        print('y: ')
+        print(os_tensor)
+        print('edges: ')
+        print(edges)
         edge_index = torch.tensor(edges, dtype=torch.long)
-        list_of_Data.append(Data(x=x, edge_index=edge_index))
-        G1 = to_networkx(list_of_Data[0], to_undirected=True)
+        self.list_of_Data.append(Data(x=x_normalized, edge_index=edge_index, y=os_tensor))
+        print('list of data: ')
+        print(self.list_of_Data)
+        #G1 = to_networkx(self.list_of_Data[0], to_undirected=True)
 
         #print("Numero di nodi:", G1.number_of_nodes())
         #print("Numero di archi:", G1.number_of_edges())
 
         # Grado di ciascun nodo (numero di connessioni per gene)
-        degrees = dict(G1.degree())
+        #degrees = dict(G1.degree())
         #print("Gradi dei nodi:", degrees)
 
         # Nodo con il massimo grado (gene con più connessioni)
-        max_degree_node = max(degrees, key=degrees.get)
+        #max_degree_node = max(degrees, key=degrees.get)
         #print(f"Gene con il massimo grado: {max_degree_node} ({degrees[max_degree_node]} connessioni)")
 
         # Trova tutte le componenti connesse
-        connected_components = list(nx.connected_components(G1))
+        #connected_components = list(nx.connected_components(G1))
         #print("Numero di componenti connesse:", len(connected_components))
 
     # Funzione per rimuovere i valori None dalle liste e le posizioni corrispondenti in altre colonne
@@ -209,30 +228,56 @@ class LPD:
     # between all the label in each subset.
     # Return train and test separately.
     def get_data(self):
-        # Function to call to get data.
-        # Extracting features and target variable
-        X = self.df['methylation_values'].apply(pd.Series)
-        y = self.df['os']
+        # Ottenere e ordinare tutti i valori di 'y'
+        os = []
+        print(f"Numero di dati in self.list_of_Data: {len(self.list_of_Data)}")
+        for d in self.list_of_Data:
+            print(d)
+        for d in self.list_of_Data:
+            if isinstance(d.y, torch.Tensor):
+                os.extend(d.y.view(-1).tolist())  # Converte i tensori multidimensionali in lista
+            else:
+                raise ValueError(f"d.y non è un tensore valido: {d.y}")
 
-        # Splitting the dataframe into train and test sets
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+        # Ordina i valori
+        os.sort()
+        n = len(os)
 
-        # Applying SMOTE to balance the training set
-        #smote = SMOTE(random_state=42)
-        #X_train_balanced, y_train_balanced = smote.fit_resample(X_train, y_train)
+        # Calcola i valori di split
+        split_values = []
+        for c in range(1, NUMBER_OF_CLASSES + 1):
+            if c == NUMBER_OF_CLASSES:
+                split_values.append(os[-1])  # Ultimo valore per l'ultima classe
+            else:
+                index = (n // NUMBER_OF_CLASSES) * c
+                split_values.append(os[index - 1])
 
-        # Converting to Data class instances
-        X_train = [Data(values) for values in X_train.values]
-        X_test = [Data(values) for values in X_test.values]
-        y_train = [Data(values) for values in y_train.values]
-        y_test = [Data(values) for values in y_test.values]
+        # Assegna ogni valore a una classe
+        for d in self.list_of_Data:
+            if isinstance(d.y, torch.Tensor):
+                new_y = []
+                for value in d.y.view(-1).tolist():  # Itera sui valori di d.y
+                    for c in range(NUMBER_OF_CLASSES):
+                        if (c == 0 and value <= split_values[c]) or \
+                           (c > 0 and value <= split_values[c] and value > split_values[c - 1]):
+                            new_y.append(c)  # Assegna la classe corrispondente
+                d.y = torch.tensor(new_y)  # Assegna il nuovo tensore con le classi
 
-        print("Train set:")
-        print(X_train)
-        print(y_train)
-
-        print("\nTest set:")
-        print(X_test)
-        print(y_test)
-        # Returning the entire train and test sets
-        return (X_train, y_train), (X_test, y_test)
+        print(f"Numero di classi: {NUMBER_OF_CLASSES}")
+        print(f"Valori di split: {split_values}")
+        for d in self.list_of_Data:
+            print(f"y originale: {d.y}")
+            print(f"y riassegnato: {d.y.view(-1).tolist()}")
+        # Mescola i dati e suddividi in training e test set
+        random.shuffle(self.list_of_Data)
+        total = len(self.list_of_Data)
+        n_test = max(1, int(np.floor(total * PERCENTAGE_TEST)))  # Assicura almeno 1 elemento nel test set
+        self.test_list = self.list_of_Data[:n_test]
+        self.train_list = self.list_of_Data[n_test:]
+        print(f"Totale dati: {total}")
+        print(f"Dati nel test set: {n_test}")
+        print("train list: ")
+        print(self.train_list)
+        print("test list: ")
+        print(self.test_list)
+        return self.train_list, self.test_list
