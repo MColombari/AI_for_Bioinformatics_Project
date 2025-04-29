@@ -1,2 +1,2 @@
-/var/lib/slurm/slurmd/job2540993/slurm_script: line 14: 3250934 Killed                  python3 script#2_generation_dataset.py
-slurmstepd: error: Detected 1 oom_kill event in StepId=2540993.batch. Some of the step tasks have been OOM Killed.
+/homes/dlupo/Progetto_BioInformatics/AI_for_Bioinformatics_Project/Models_GitHub_davide/models/GCN.py:51: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  x = F.softmax(self.fc2(x))
