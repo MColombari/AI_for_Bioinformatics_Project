@@ -28,6 +28,8 @@ gene_id_list = []
 with open(PATH_GENE_ID_PROTEIN_CODING) as json_file:
    gene_id_list = json.load(json_file)
 
+gene_id_set = set(gene_id_list)
+
 def remove_version(x):
     if '.' in x:
         return x.split('.')[0]
@@ -43,7 +45,7 @@ for root, dirs, files in os.walk(PATH_FOLDER_COPY_NUMBER):
                     attributes = ['chromosome','gene_name','start','end','min_copy_number','max_copy_number']
                     parsed_file = parsed_file.drop(columns=attributes)
                     parsed_file['gene_id'] = parsed_file['gene_id'].apply(remove_version)
-                    parsed_file = parsed_file[parsed_file['gene_id'].isin(gene_id_list)].fillna(0)
+                    parsed_file = parsed_file[parsed_file['gene_id'].isin(gene_id_set)].fillna(0)
                     list_df_CNV.append(parsed_file)
 
 scaler = StandardScaler()
@@ -55,6 +57,9 @@ for i in range(len(list_df_CNV)):
     df['copy_number'] = X_scaled.flatten()
     list_df_CNV_scaling.append(df)
 
+print('list_df_CNV_scaling: ',list_df_CNV_scaling[0],'\n\n')
+
+file_to_case_id = dict((file_parsed[k]['files']['gene'], k) for k in file_parsed.keys())
 datastructure_Gene = pd.DataFrame(columns=['values'])
 index = 0
 # Now explore data path to get the right files
@@ -65,32 +70,32 @@ for root, dirs, files in os.walk(PATH_FOLDER_GENE):
                 if file in file_to_case_id.keys():
                     parsed_file = pd.read_csv(PATH_FOLDER_GENE + "/" + dir + "/" + file,
                                                     sep='\t', header=0, skiprows=lambda x: x in [0, 2, 3, 4, 5])
-                    parsed_file = parsed_file[['gene_id'] + ['tpm_unstranded']]
+                    parsed_file = parsed_file[['gene_id','tpm_unstranded']]
 
                     # Now specify columns type.
                     convert_dict = dict([(k, float) for k in ['tpm_unstranded']])
                     convert_dict['gene_id'] = str
                     parsed_file = parsed_file.astype(convert_dict)
                     parsed_file['gene_id'] = parsed_file['gene_id'].apply(remove_version)
-                    parsed_file = parsed_file[parsed_file['gene_id'].isin(gene_id_list)]
+                    parsed_file = parsed_file[parsed_file['gene_id'].isin(gene_id_set)]
 
                     datastructure_Gene.loc[index] = [
                         parsed_file
                     ]
                     index += 1
-
+print(datastructure_Gene['values'][0])
 # Concatenare tutti i dataframe
 df_concatenato = pd.concat(datastructure_Gene['values'].values)
 
 # Calcolare la varianza per ogni gene_id
 varianze = df_concatenato.groupby('gene_id')['tpm_unstranded'].var()
 
-top_n = 1000  # numero di geni che si vuole mantenere
+top_n = 200  # numero di geni che si vuole mantenere
 gene_significativi = varianze.nlargest(top_n).index 
 
 # Apply log.
 for i in range(datastructure_Gene.shape[0]):
-    datastructure_Gene['values'].loc[i][['tpm_unstranded']] = datastructure_Gene['values'].loc[i]['tpm_unstranded'].applymap(lambda x: np.log10(x + 0.01))
+    datastructure_Gene['values'].loc[i][['tpm_unstranded']] = datastructure_Gene['values'].loc[i][['tpm_unstranded']].applymap(lambda x: np.log10(x + 0.01))
         
 # Make value in a [0, 1] range.
 for r in range(datastructure_Gene.shape[0]):
@@ -104,12 +109,17 @@ for case_index in range(datastructure_Gene.shape[0]):
     df = df.drop_duplicates(subset=['gene_id'])
     list_df_Gene_filtered.append(df)
 
+print('list_df_Gene_filtered: ',list_df_Gene_filtered[0],'\n\n')
+
 list_df_CNV_filtered_gene = []
 for case_index in range(datastructure_Gene.shape[0]):
-    df = list_df_CNV_scaling[case_index][list_df_CNV_scaling[case_index]['gene_id'].isin(list_df_Gene_filtered[case_index]['gene_id'])].drop_duplicates(subset=['gene_id'])
+    df = list_df_CNV_scaling[case_index][list_df_CNV_scaling[case_index]['gene_id'].isin(list_df_Gene_filtered[case_index]['gene_id'])]
+    df = df.drop_duplicates(subset=['gene_id'])
     df = pd.DataFrame(df.sort_values('gene_id').values, columns=['gene_id','copy_number'])
     list_df_CNV_filtered_gene.append(df)
-     
+
+print('list_df_CNV_filtered_gene: ',list_df_CNV_filtered_gene[0],'\n\n')
+
 os_list_sorted = list(os_list)
 os_list_sorted.sort()
 n = len(os_list_sorted)
@@ -123,7 +133,7 @@ for c in range(1, num_classes + 1):
         index = (n // num_classes) * c
         split_values.append(os_list_sorted[index - 1])
 
-THRESHOLD = 0.06
+THRESHOLD = 0.02
 avg_edges = []
 list_of_list = []
 list_edges = []
@@ -150,6 +160,7 @@ for case_index in range(0, datastructure_Gene.shape[0]):
     temp_list[1] = [elem + count for elem in edges[1]]
     list_of_list.append(temp_list)
     count += top_n
+    print(case_index)
 
 print(f"\n\tAverage num of edges: {np.mean(avg_edges)}")
 
@@ -158,7 +169,7 @@ list_label = []
 list_attribute = []
 graph_indicator = []
 for case_index in range(len(list_df_CNV_scaling)): 
-    df = list_df_CNV_scaling[case_index]
+    df = list_df_CNV_filtered_gene[case_index]
 
     for i in range(len(df)):
         graph_indicator.append(case_index+1)

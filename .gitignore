@@ -52,10 +52,11 @@ Models_GitHub_davide/Gene/run_output/
 conda_env/
 conda_env2/
 conda_env3/
-<<<<<<< HEAD
+
 Preprocessing/Final/datastructure_converted.csv
 
 Models_GitHub_davide/datasets/
-=======
+
 Preprocessing/Final/Methylation/datastructure_converted.csv
->>>>>>> da973ee89596d8a92706bc2e98b39f3896f51529
+
+Preprocessing/Raw_Data/
