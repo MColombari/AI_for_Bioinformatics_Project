@@ -51,7 +51,7 @@ df_concatenato = pd.concat(list_df_CNV)
 # Calcolare la varianza per ogni gene_id
 varianze = df_concatenato.groupby('gene_id')['copy_number'].var()
 
-top_n = 500  # numero di geni che si vuole mantenere
+top_n = 1000  # numero di geni che si vuole mantenere
 gene_significativi = varianze.nlargest(top_n).index 
 
 scaler = StandardScaler()
