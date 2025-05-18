@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 
 # PATH variable
+PATH_TRAIN_SEPARATION = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/train_separation_2_classes.json"
 GENE_ID_PROTEIN_CODING_PATH = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/gene_id_protein_coding.json"
 PATH_FOLDER_GENE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneExpression"
 PATH_CASE_ID_STRUCTURE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/case_id_and_structure.json"
@@ -18,6 +19,11 @@ gtf_pc_set = set(gene_id_protein_coding_list)
 
 with open(PATH_CASE_ID_STRUCTURE, 'r') as file:
     file_parsed = json.load(file)
+
+with open(PATH_TRAIN_SEPARATION, 'r') as file:
+    train_case_id_dict = json.load(file)
+
+NUM_CLASS = max([v for v in train_case_id_dict.values()]) + 1
 
 file_to_case_id = dict((file_parsed[k]['files']['gene'], k) for k in file_parsed.keys())
 file_to_os = dict((file_parsed[k]['files']['gene'], file_parsed[k]['os']) for k in file_parsed.keys())
@@ -35,12 +41,14 @@ def remove_version(x):
 feature_to_save = ['tpm_unstranded', 'fpkm_unstranded', 'fpkm_uq_unstranded']
 
 gene_values_dict = dict()
-for f in feature_to_save:
-    gene_values_dict[f] = dict()
+for c in range(NUM_CLASS):
+    gene_values_dict[c] = dict()
+    for f in feature_to_save:
+        gene_values_dict[c][f] = dict()
 
 
 print("Start reading")
-
+gene_list = []
 index = 0
 # Now explore data path to get the right files
 for root, dirs, files in os.walk(PATH_FOLDER_GENE):
@@ -48,6 +56,12 @@ for root, dirs, files in os.walk(PATH_FOLDER_GENE):
         for root, dirs, files in os.walk(PATH_FOLDER_GENE + "/" + dir):
             for file in files:
                 if file in file_to_case_id.keys():
+                    case_id = file_to_case_id[file]
+                    if not case_id in train_case_id_dict.keys():
+                        continue
+
+                    c = train_case_id_dict[case_id]
+
                     parsed_file = pd.read_csv(PATH_FOLDER_GENE + "/" + dir + "/" + file,
                                               sep='\t', header=0, skiprows=lambda x: x in [0, 2, 3, 4, 5])
                     parsed_file = parsed_file[['gene_id'] + feature_to_save]
@@ -72,33 +86,60 @@ for root, dirs, files in os.walk(PATH_FOLDER_GENE):
 
                     for f in feature_to_save:
                         for g in parsed_file['gene_id']:
-                            if not g in gene_values_dict[f].keys():
-                                gene_values_dict[f][g] = []
-                            gene_values_dict[f][g].append(
-                                parsed_file[parsed_file['gene_id'] == g][f])
+                            if index == 0:
+                                gene_list.append(g)
+                            else:
+                                assert g in gene_list
+                            if not g in gene_values_dict[c][f].keys():
+                                gene_values_dict[c][f][g] = []
+
+                            value = parsed_file.loc[parsed_file['gene_id'] == g, f].values[0]
+                            log_value = np.log10(value + 0.01)
+                            gene_values_dict[c][f][g].append(log_value)
                     index += 1
 
 # Now mesure the variance
 print("Start measuring variance")
 
-complete_version = dict()
-just_ordered = dict()
+intra_variance = {}
+for f in feature_to_save:
+    intra_variance[f] = dict()
+    for g in gene_list:
+        tmp = 0
+        for c in range(NUM_CLASS):
+            assert g in gene_values_dict[c][f].keys()
+            variance = np.var(gene_values_dict[c][f][g])
+            tmp += variance / NUM_CLASS
+        intra_variance[f][g] = tmp
+
+inter_variance = {}
+for f in feature_to_save:
+    inter_variance[f] = dict()
+    for g in gene_list:
+        tmp = []
+        for c in range(NUM_CLASS):
+            assert g in gene_values_dict[c][f].keys()
+            tmp.append(np.mean(gene_values_dict[c][f][g]))
+        inter_variance[f][g] = np.var(tmp)
+
+score = dict()
+ordered_gene = dict()
 for f in feature_to_save:
     tmp = []
-    for g in gene_values_dict[f].keys():
-        variance = np.var(gene_values_dict[f][g])
-        tmp.append((g, variance))
+    for g in gene_list:
+        s = inter_variance[f][g] / (intra_variance[f][g] + 1e-6)
+        tmp.append((g, s))
     tmp.sort(key=lambda x: x[1], reverse=True)
-    complete_version[f] = tmp
-    just_ordered[f] = [t[0] for t in tmp]
+    score[f] = tmp
+    ordered_gene[f] = [t[0] for t in tmp]
 
 print("Save data")
 
 with open(SAVE_FOLDER_PATH + f"/gene_variance_order_COMPLETE.json", 'w') as file:
-    json.dump(complete_version, file)
+    json.dump(score, file)
 
 for f in feature_to_save:
     with open(SAVE_FOLDER_PATH + f"/gene_variance_order_{f}.json", 'w') as file:
-        json.dump(just_ordered[f], file)
+        json.dump(ordered_gene[f], file)
 
 print("Program End")
