@@ -50,6 +50,7 @@ for c in range(NUM_CLASS):
 print("Start reading")
 gene_list = []
 index = 0
+gene_list_flag = True
 # Now explore data path to get the right files
 for root, dirs, files in os.walk(PATH_FOLDER_GENE):
     for dir in dirs:
@@ -78,15 +79,23 @@ for root, dirs, files in os.walk(PATH_FOLDER_GENE):
 
                     parsed_file['gene_id'] = parsed_file['gene_id'].apply(remove_version)
 
+                
                     # parsed_file = parsed_file[parsed_file['gene_type'] == 'protein_coding']
                     # if not set(parsed_file['gene_id']).issubset(gtf_pc_set):
                     #     raise Exception("List of coding genes don't match.")
 
                     parsed_file = parsed_file[parsed_file['gene_id'].isin(gtf_pc_set)]
 
+                    # Remove gene duplicate if found.
+                    if not parsed_file['gene_id'].is_unique:
+                        print("Duplicate found")
+                        print(f"\tBefore drop duplicate: {parsed_file.shape[0]} Row")
+                        parsed_file = parsed_file.groupby('gene_id', as_index=False).mean()
+                        print(f"\tAfter drop duplicate: {parsed_file.shape[0]} Row")
+
                     for f in feature_to_save:
                         for g in parsed_file['gene_id']:
-                            if index == 0:
+                            if gene_list_flag:
                                 gene_list.append(g)
                             else:
                                 assert g in gene_list
@@ -96,7 +105,10 @@ for root, dirs, files in os.walk(PATH_FOLDER_GENE):
                             value = parsed_file.loc[parsed_file['gene_id'] == g, f].values[0]
                             log_value = np.log10(value + 0.01)
                             gene_values_dict[c][f][g].append(log_value)
+                        gene_list_flag = False
                     index += 1
+
+print(f"Size gene_list {len(gene_list)}")
 
 # Now mesure the variance
 print("Start measuring variance")
@@ -141,5 +153,8 @@ with open(SAVE_FOLDER_PATH + f"/gene_variance_order_COMPLETE.json", 'w') as file
 for f in feature_to_save:
     with open(SAVE_FOLDER_PATH + f"/gene_variance_order_{f}.json", 'w') as file:
         json.dump(ordered_gene[f], file)
+
+for f in feature_to_save:
+    print(f"{f}:\t{len(score[f])} Entry")
 
 print("Program End")
