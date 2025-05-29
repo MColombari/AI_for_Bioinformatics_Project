@@ -25,12 +25,12 @@ class simple_GCN(torch.nn.Module):
                     torch.nn.init.zeros_(m.bias)
 
     def forward(self, x, edge_index, batch=None):
-        # print(x.device)
-        # num_nodes = x.shape[0]  # Numero di nodi
-        # print(x.shape)
-        # max_index = edge_index.max().item()
-        # print(f"Numero di nodi: {num_nodes}, Max edge_index: {max_index}")
-        # assert max_index < num_nodes, "Errore: edge_index contiene un indice fuori dai limiti!"
+        print(x.device)
+        num_nodes = x.shape[0]  # Numero di nodi
+        print(x.shape)
+        max_index = edge_index.max().item()
+        print(f"Numero di nodi: {num_nodes}, Max edge_index: {max_index}")
+        assert max_index < num_nodes, "Errore: edge_index contiene un indice fuori dai limiti!"
         # 1. Obtain node embeddings 
         x = self.conv1(x, edge_index).relu()
         x = self.conv2(x, edge_index).relu()

@@ -1,0 +1,6 @@
+	Model Structuresimple_GCN(
+  (conv1): GCNConv(1, 1000)
+  (conv2): GCNConv(1000, 700)
+  (conv3): GCNConv(700, 200)
+  (lin): Linear(in_features=200, out_features=2, bias=True)
+)
