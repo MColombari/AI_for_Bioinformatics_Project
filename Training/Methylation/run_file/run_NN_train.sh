@@ -10,4 +10,4 @@
 #SBATCH --error="run_output/error_test1.log"
 
 # training 
-python3 train.py
+python3 Training/Methylation/train.py

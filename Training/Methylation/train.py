@@ -74,8 +74,8 @@ data_train_list, data_test_list = lpd.get_data()  # List of Data.
 
 # Transform in sparse tensor.
 # https://github.com/pyg-team/pytorch_geometric/issues/1702
-data_train_list = [T.ToSparseTensor()(data) for data in data_train_list]
-data_test_list = [T.ToSparseTensor()(data) for data in data_test_list]
+#data_train_list = [T.ToSparseTensor()(data) for data in data_train_list]
+#data_test_list = [T.ToSparseTensor()(data) for data in data_test_list]
 train_loader = DataLoader(data_train_list, batch_size=hyperparameter['batch_size'], shuffle=True, num_workers=hyperparameter['num_workers'], pin_memory=True)
 test_loader = DataLoader(data_test_list, batch_size=hyperparameter['batch_size'], shuffle=False, num_workers=hyperparameter['num_workers'], pin_memory=True)
 # pin_memory=True will automatically put the fetched data Tensors in pinned memory, and thus enables faster data transfer to CUDA-enabled GPUs.
@@ -83,10 +83,10 @@ test_loader = DataLoader(data_test_list, batch_size=hyperparameter['batch_size']
 
 
 node_feature_number = len(hyperparameter['feature_to_save'])
-# model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
+model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
 # model = small_GCN(node_feature_number, 2000, hyperparameter['num_classes'])
-model =  GAT(node_feature_number, 1000, 30, hyperparameter['num_classes'], 0.2)
-# model = SimpleGAT(node_feature_number, 2000, 30, hyperparameter['num_classes'], 0.2)
+# model =  GAT(node_feature_number, 1000, 30, hyperparameter['num_classes'], 0.2)
+# model = SimpleGAT(node_feature_number, 2000, 30, hyperparameter['num_classes'], 0.2)
 # model = ComplexGAT(node_feature_number, 500, 20, hyperparameter['num_classes'], 0.2)
 
 # model = DataParallel(model)
