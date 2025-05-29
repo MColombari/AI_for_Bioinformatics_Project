@@ -52,4 +52,14 @@ Models_GitHub_davide/Gene/run_output/
 conda_env/
 conda_env2/
 conda_env3/
+
+Preprocessing/Final/datastructure_converted.csv
+
+Models_GitHub_davide/datasets/
+
 Preprocessing/Final/Methylation/datastructure_converted.csv
+
+Preprocessing/Raw_Data/
+
+Preprocessing/Final/Gene/Gene_sbatch/error_divide_dataset.log
+Preprocessing/Final/Gene/Gene_sbatch/output_divide_dataset.log

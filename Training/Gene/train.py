@@ -1,7 +1,7 @@
 import torch
 from Save_model import SaveModel as SM
 from models import simple_GCN, small_GCN, GAT, SimpleGAT, ComplexGAT
-from Load_and_Process_Data import LPD, LPDEdgeKnowledgeBased, LPDHybrid
+from Load_and_Process_Data import LPD, LPDEdgeKnowledgeBased #, LPDHybrid
 from torch_geometric.loader import DataLoader
 from collections import OrderedDict
 from sklearn.metrics import accuracy_score
@@ -33,24 +33,26 @@ PATH_GTF_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/genco
 PATH_FOLDER_GENE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneExpression"
 PATH_CASE_ID_STRUCTURE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/case_id_and_structure.json"
 # For edge similarity files.
-PATH_EDGE_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/9606.protein.links.v12.0.ENSG.txt"
+PATH_EDGE_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/9606.protein.links.v12.0.ENSG.txt"
 PATH_COMPLETE_EDGE_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/edge_T900.json"
 PATH_EDGE_ORDER_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/edge_node_order.json"
 # Order of nodes files.
 PATH_ORDER_GENE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/gene_variance_order_tpm_unstranded.json"
 
 
+PATH_TEST_CLASS = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/test_separation_2_classes.json"
+PATH_TRAIN_CLASS = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/train_separation_2_classes.json"
+
 #   Model parameter TODO
 hyperparameter = {
     'num_classes': 2,
     'num_nodes': 200,
     'epochs': 100,
-    'batch_size': 16,
+    'batch_size': 4,
     'seed': 123456,
     'num_workers': 6,
     'lr': 0.00001,
     'save_model_period': 20, # How many epoch to wait before save the next model.
-    'percentage_of_test': 0.1, # How many percentage of the dataset is used for testing.
     'feature_to_save': ['fpkm_uq_unstranded'], # Specify parameter for gene.
     'feature_to_compare': 'fpkm_uq_unstranded'
 }
@@ -68,10 +70,10 @@ print("Start code")
 sm = SM(TEST_FOLDER_PATH, TEST_NAME)
 
 # https://pytorch-geometric.readthedocs.io/en/2.5.3/notes/create_dataset.html
-lpd = LPD(PATH_GTF_FILE, PATH_FOLDER_GENE, PATH_CASE_ID_STRUCTURE,
+lpd = LPDEdgeKnowledgeBased(PATH_GTF_FILE, PATH_FOLDER_GENE, PATH_CASE_ID_STRUCTURE,
                             hyperparameter['feature_to_save'], hyperparameter['feature_to_compare'],
-                            hyperparameter['num_classes'], hyperparameter['percentage_of_test'],
-                            sm, hyperparameter['num_nodes'], PATH_ORDER_GENE)
+                            sm, hyperparameter['num_nodes'],
+                            PATH_ORDER_GENE, PATH_TEST_CLASS, PATH_TRAIN_CLASS, PATH_EDGE_FILE)
 data_train_list, data_test_list = lpd.get_data()  # List of Data.
 # Inside of data we need to specify which y we have.
 
@@ -87,9 +89,9 @@ test_loader = DataLoader(data_test_list, batch_size=hyperparameter['batch_size']
 
 
 node_feature_number = len(hyperparameter['feature_to_save'])
-# model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
+model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
 # model = small_GCN(node_feature_number, 2000, hyperparameter['num_classes'])
-model =  GAT(node_feature_number, 1000, 30, hyperparameter['num_classes'], 0.2)
+# model =  GAT(node_feature_number, 1000, 30, hyperparameter['num_classes'], 0.2)
 # model = SimpleGAT(node_feature_number, 2000, 30, hyperparameter['num_classes'], 0.2)
 # model = ComplexGAT(node_feature_number, 500, 20, hyperparameter['num_classes'], 0.2)
 

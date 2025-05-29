@@ -11,6 +11,4 @@
 
 # training
 cd ..
-python3 train.py --epoch 100 --n_folds 10 --model_list GCN --dataset_list GENE_EXP_100_001 GENE_EXP_100_0001 GENE_EXP_100_0004 --readout_list avg --n_agg_layer 1 --agg_hidden 32
-python3 train.py --epoch 100 --n_folds 10 --model_list GCN --dataset_list GENE_EXP_200_001 GENE_EXP_200_0001 GENE_EXP_200_0004 --readout_list avg --n_agg_layer 1 --agg_hidden 32
-python3 train.py --epoch 100 --n_folds 10 --model_list GCN --dataset_list GENE_EXP_500_001 GENE_EXP_500_0001 GENE_EXP_500_0004 --readout_list avg --n_agg_layer 1 --agg_hidden 32
+python3 train.py --epoch 100 --n_folds 10 --model_list GCN --dataset_list GENE_EXP_100_001 GENE_EXP_100_0001 GENE_EXP_100_0004 GENE_EXP_200_001 GENE_EXP_200_0001 GENE_EXP_200_0004 GENE_EXP_500_001 GENE_EXP_500_0001 GENE_EXP_500_0004 --readout_list avg --n_agg_layer 1 --agg_hidden 32

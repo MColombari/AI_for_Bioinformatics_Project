@@ -17,11 +17,14 @@ import random
 
 class LPD:
     def __init__(self, gtf_file_path: str, folder_gene_path: str, case_id_json_path: str,
-                 feature_to_save: list, feature_to_compare: str, num_classes: int, percentage_test: float,
-                 sm: SaveModel, number_of_nodes: str, variance_order_list_path: str):
+                 feature_to_save: list, feature_to_compare: str,
+                 sm: SaveModel, number_of_nodes: str, variance_order_list_path: str,
+                 test_file_case_id_path: str, train_file_case_id_path: str):
         self.gtf_file_path = gtf_file_path
         self.folder_gene_path = folder_gene_path
         self.case_id_json_path = case_id_json_path
+        self.test_file_case_id_path = test_file_case_id_path
+        self.train_file_case_id_path = train_file_case_id_path
 
         # All possibilitys.
         # feature_to_save = [
@@ -32,9 +35,6 @@ class LPD:
         self.feature_to_save = feature_to_save
 
         self.feature_to_compare = feature_to_compare
-
-        self.num_classes = num_classes
-        self.percentage_test = percentage_test
 
         self.sm = sm
 
@@ -141,7 +141,14 @@ class LPD:
     def create_graph(self):
         self.THRESHOLD = 0.0004
 
-        self.list_of_Data = []
+        with open(self.test_file_case_id_path, 'r') as file:
+            test_case_id = json.load(file)
+        with open(self.train_file_case_id_path, 'r') as file:
+            train_case_id = json.load(file)
+
+        self.test_list = []
+        self.train_list = []
+
         avg_edges = []
         for case_index in range(0, self.datastructure.shape[0]):
             edges = []
@@ -163,8 +170,15 @@ class LPD:
 
             edge_index = torch.tensor(edges, dtype=torch.long)
             x = torch.tensor(self.datastructure['values'].loc[case_index][self.feature_to_save].values, dtype=torch.float)
-            y = torch.tensor(self.datastructure['os'].iloc[case_index])
-            self.list_of_Data.append(Data(x=x, edge_index=edge_index, y=y))
+
+            if self.datastructure['case_id'].iloc[case_index] in train_case_id.keys():
+                y = torch.tensor(train_case_id[self.datastructure['case_id'].iloc[case_index]])
+                self.train_list.append(Data(x=x, edge_index=edge_index, y=y))
+            elif self.datastructure['case_id'].iloc[case_index] in test_case_id.keys():
+                y = torch.tensor(test_case_id[self.datastructure['case_id'].iloc[case_index]])
+                self.test_list.append(Data(x=x, edge_index=edge_index, y=y))
+            else:
+                raise Exception(f"Case id not found in ether train or test\n\"{self.datastructure['case_id'].iloc[case_index]}\"")
         
         self.sm.print(f"\n\tAverage num of edges: {np.average(np.array(avg_edges))}")
         self.sm.print(f"\tVariance num of edges: {np.var(np.array(avg_edges))}")
@@ -195,87 +209,6 @@ class LPD:
                 return c
         raise Exception("No Class found")
 
-    @measure_time
-    def split_dataset(self):
-        os = [int(d.y) for d in self.list_of_Data]
-        os.sort()
-
-        n = len(os)
-
-        split_values = []
-        for c in range(1, self.num_classes + 1):
-            if c == self.num_classes:
-                split_values.append(os[-1])
-            else:
-                index = (n // self.num_classes) * c
-                split_values.append(os[index - 1])
-
-        for c in range(self.num_classes):
-            for d in self.list_of_Data:
-                if  (c == 0 and int(d.y) <= split_values[c]) or \
-                    (c > 0 and int(d.y) <= split_values[c] and int(d.y) > split_values[c-1]):
-                    d.y = torch.tensor(c)
-
-        random.shuffle(self.list_of_Data) #TODO Use a seed.
-        total = len(self.list_of_Data)
-        n_test = int(np.floor(total * self.percentage_test))
-        print(f"\nNum test: {n_test}, Total: {total}")
-        self.test_list = self.list_of_Data[:n_test]
-        self.train_list = self.list_of_Data[n_test:]
-        return
-
-        # First divide it in classes
-        os = [int(d.y) for d in self.list_of_Data]
-        os.sort()
-
-        n = len(os)
-
-        split_values = []
-        for c in range(1, self.num_classes + 1):
-            if c == self.num_classes:
-                split_values.append(os[-1])
-            else:
-                index = (n // self.num_classes) * c
-                split_values.append(os[index - 1])
-
-        list_data_split = []
-        for c in range(self.num_classes):
-            list_data_split.append([])
-            for d in self.list_of_Data:
-                if  (c == 0 and int(d.y) <= split_values[c]) or \
-                    (c > 0 and int(d.y) <= split_values[c] and int(d.y) > split_values[c-1]):
-                    d.y = torch.tensor(c)
-                    list_data_split[c].append(d)
-
-        self.sm.print(f"\n\tNum of instances per class:")
-        for c in range(self.num_classes):
-            self.sm.print(f"\t\tClass {c} -> {len(list_data_split[c])} case")
-
-        # Now split in train and test.
-        self.train_list = []
-        self.test_list = []
-
-        if self.percentage_test > 0:
-            test_interval = np.floor(1 / self.percentage_test)
-        else:
-            test_interval = len(self.list_of_Data) + 1 # we'll never reach it.
-        # print(test_interval)
-
-        for class_list in list_data_split:
-            count = 1
-            for d in class_list:
-                if count >= test_interval:
-                    self.test_list.append(d)
-                    count = 0
-                else:
-                    self.train_list.append(d)
-                count += 1
-
-        self.sm.print(f"\tTrain size: {len(self.train_list)}")
-        self.sm.print(f"\tTest size: {len(self.test_list)}")
-
-        self.sm.print(f"\t\t\tExecution time: ", end="")
-
     # Here i have to split the dataset in train and test, while keeping balance
     # between all the label in each subset.
     # Return train and test separately.
@@ -286,8 +219,6 @@ class LPD:
         self.preprocessing()
         self.sm.print("Create the Graph", end="")
         self.create_graph()
-        self.sm.print("Split dataset\t", end="")
-        self.split_dataset()
         
         return self.train_list, self.test_list
 
@@ -295,19 +226,19 @@ class LPD:
 
 class LPDEdgeKnowledgeBased(LPD):
     def __init__(self, gtf_file_path: str, folder_gene_path: str, case_id_json_path: str,
-                 feature_to_save: list, feature_to_compare: str, num_classes: int, percentage_test: float,
-                 sm: SaveModel, edge_file_path: str, edge_complete_file_path: str, edge_order_file_path: str):
+                 feature_to_save: list, feature_to_compare: str,
+                 sm: SaveModel, number_of_nodes: str, variance_order_list_path: str,
+                 test_file_case_id_path: str, train_file_case_id_path: str, edge_file_path: str):
         super().__init__(gtf_file_path, folder_gene_path, case_id_json_path,
-                         feature_to_save, feature_to_compare, num_classes, percentage_test,
-                         sm)
+                         feature_to_save, feature_to_compare,
+                         sm, number_of_nodes, variance_order_list_path,
+                         test_file_case_id_path, train_file_case_id_path)
         self.edge_file_path = edge_file_path
-        self.edge_complete_file_path = edge_complete_file_path
-        self.edge_order_file_path = edge_order_file_path
 
     def measure_time(func):
         def wrapper(self, *arg, **kw):
             start_time = time.time()
-            ret = func(*arg, **kw)
+            ret = func(self, *arg, **kw)
             self.sm.print(f"\t\t{np.floor(time.time() - start_time)}s")
             return ret
         return wrapper
@@ -345,18 +276,15 @@ class LPDEdgeKnowledgeBased(LPD):
 
         self.pc_set = self.pc_set.intersection(accepted_gene)
 
+        self.sm.print(f"\tIntersection with accepted gene dim: {len(self.pc_set)}")
+
+        # Take only the first n nodes in order of variance.
+        with open(self.variance_order_list_path, 'r') as file:
+            list_of_nodes = json.load(file)
+
+        self.pc_set = self.pc_set.intersection(set(list_of_nodes[:self.number_of_nodes]))
+
         self.sm.print(f"\tIntersection dim: {len(self.pc_set)}\n\t\tExecution time: ", end="")
-
-        # Get gene order.
-        with open(self.edge_order_file_path, 'r') as file:
-            edges_order = json.load(file)
-        self.edges_order = pd.Series(edges_order)
-
-
-    def is_in_order(self, input):
-        # print(type(input))
-        # print(type(self.edges_order))
-        return input.to_list() == self.edges_order.to_list()
 
 
     @measure_time
@@ -396,11 +324,6 @@ class LPDEdgeKnowledgeBased(LPD):
 
                             parsed_file = parsed_file[parsed_file['gene_id'].isin(self.pc_set)]
 
-                            # I generate the edge base on the first graph's gene order, so
-                            # i make sure that all the other graph has the same gene order.
-                            if not self.is_in_order(parsed_file['gene_id']):
-                                raise Exception("One of the case has gene in the wrong order")
-
                             self.datastructure.loc[index] = [
                                 file_to_case_id[file],
                                 file_to_os[file],
@@ -422,31 +345,7 @@ class LPDEdgeKnowledgeBased(LPD):
 
     @measure_time
     def create_graph(self):
-        with open(self.edge_complete_file_path, 'r') as file:
-            edges = json.load(file)
-        self.list_of_Data = []
-        self.sm.print(f"\n\tWe have {len(edges[0])} edges")
-        for case_index in range(0, self.datastructure.shape[0]):
-            # print(f"\n{case_index}\t", end="")
-            edge_index = torch.tensor(edges, dtype=torch.long)
-            x = torch.tensor(self.datastructure['values'].loc[case_index][self.feature_to_save].values, dtype=torch.float)
-            y = torch.tensor(self.datastructure['os'].iloc[case_index])
-            self.list_of_Data.append(Data(x=x, edge_index=edge_index, y=y))
-        self.sm.print("\t\tExecution time:", end="")
-
-class LPDHybrid(LPDEdgeKnowledgeBased):
-    def measure_time(func):
-        def wrapper(self, *arg, **kw):
-            start_time = time.time()
-            ret = func(*arg, **kw)
-            self.sm.print(f"\t\t{np.floor(time.time() - start_time)}s")
-            return ret
-        return wrapper
-    
-    @measure_time
-    def create_graph(self):
-        self.THRESHOLD_A = 175
-        self.THRESHOLD = 0.09
+        self.THRESHOLD = 206
 
         comparison_dict = {}
         row_index = 0
@@ -467,7 +366,13 @@ class LPDHybrid(LPDEdgeKnowledgeBased):
                 else:
                     comparison_dict[k] = v
 
-        self.list_of_Data = []
+        with open(self.test_file_case_id_path, 'r') as file:
+            test_case_id = json.load(file)
+        with open(self.train_file_case_id_path, 'r') as file:
+            train_case_id = json.load(file)
+
+        self.test_list = []
+        self.train_list = []
         for case_index in range(0, self.datastructure.shape[0]):
             feature_size = self.datastructure['values'].loc[case_index][self.feature_to_compare].shape[0]
             edges = [[],[]]
@@ -485,52 +390,137 @@ class LPDHybrid(LPDEdgeKnowledgeBased):
                     k = tuple(k)
                     # print(k)
 
-                    make_edge = False
-
                     if k in comparison_dict.keys():
                         similarity = comparison_dict[k]
                         got_count += 1
-                        if similarity >= self.THRESHOLD_A:
-                            make_edge = True
+                        # print(f"Got it\t{similarity}")
                     else:
-                        # If we are not able to find any match to compare, then we check the values.
+                        similarity = 0
                         miss_count += 1
-                        similarity = np.linalg.norm(   
-                            self.datastructure['values'].loc[case_index][self.feature_to_compare].iloc[f_1_index] - \
-                            self.datastructure['values'].loc[case_index][self.feature_to_compare].iloc[f_2_index])
-                        if similarity <= self.THRESHOLD:
-                            make_edge = True
-                        
+                        # print("Drop it")
                         # print("Similarity not found")
                     
                     # In this case the higher the number the more similarity.
-                    if make_edge:
+                    if similarity >= self.THRESHOLD:
                         edges[0].append(f_1_index)
                         edges[0].append(f_2_index)
                         edges[1].append(f_2_index)
                         edges[1].append(f_1_index)
 
-            self.sm.print("Similarities found")
-            self.sm.print(f"\tMissed: {miss_count} - {(miss_count / (miss_count + got_count))*100}%")
-            self.sm.print(f"\tGot: {got_count} - {(got_count / (miss_count + got_count))*100}%")
-            
+            print("Similarities found")
+            print(f"\tMissed: {miss_count} - {(miss_count / (miss_count + got_count))*100}%")
+            print(f"\tGot: {got_count} - {(got_count / (miss_count + got_count))*100}%")
+
             edge_index = torch.tensor(edges, dtype=torch.long)
-            x = torch.tensor(list(self.datastructure['values'].loc[case_index][self.feature_to_compare]), dtype=torch.float)
-            y = torch.tensor(self.datastructure['os'].loc[case_index])
-            data = Data(x=x, edge_index=edge_index, y=y)
+            x = torch.tensor(self.datastructure['values'].loc[case_index][self.feature_to_save].values, dtype=torch.float)
 
-            G = to_networkx(data, to_undirected=True)
-            self.sm.print(f"\n\n### Graph {case_index} ###")
-            self.sm.print("Numero di nodi:", G.number_of_nodes())
-            self.sm.print("Numero di edge:", G.number_of_edges())
-            degrees = dict(G.degree())
-            # Nodo con il massimo grado (gene con più connessioni)
-            max_degree_node = max(degrees, key=degrees.get)
-            self.sm.print(f"Nodo con il massimo grado: {max_degree_node} ({degrees[max_degree_node]} connessioni)")
+            if self.datastructure['case_id'].iloc[case_index] in train_case_id.keys():
+                y = torch.tensor(train_case_id[self.datastructure['case_id'].iloc[case_index]])
+                self.train_list.append(Data(x=x, edge_index=edge_index, y=y))
+            elif self.datastructure['case_id'].iloc[case_index] in test_case_id.keys():
+                y = torch.tensor(test_case_id[self.datastructure['case_id'].iloc[case_index]])
+                self.test_list.append(Data(x=x, edge_index=edge_index, y=y))
+            else:
+                raise Exception(f"Case id not found in ether train or test\n\"{self.datastructure['case_id'].iloc[case_index]}\"")
 
-            # Trova tutte le componenti connesse
-            connected_components = list(nx.connected_components(G))
-            self.sm.print("Numero di componenti connesse: ", len(connected_components))
-            self.sm.print(f"density: {nx.density(G)}")
 
-            self.list_of_Data.append(Data(x=x, edge_index=edge_index, y=y))
+# class LPDHybrid(LPDEdgeKnowledgeBased):
+#     def measure_time(func):
+#         def wrapper(self, *arg, **kw):
+#             start_time = time.time()
+#             ret = func(*arg, **kw)
+#             self.sm.print(f"\t\t{np.floor(time.time() - start_time)}s")
+#             return ret
+#         return wrapper
+    
+#     @measure_time
+#     def create_graph(self):
+#         self.THRESHOLD_A = 175
+#         self.THRESHOLD = 0.09
+
+#         comparison_dict = {}
+#         row_index = 0
+#         with open(self.edge_file_path, 'r') as file:
+#             for line in file:
+#                 row_index += 1
+#                 # print(row_index)
+#                 f = line.split(" ")[0]
+#                 s = line.split(" ")[1]
+#                 v = int(line.split(" ")[2].split('\n')[0])
+#                 k = [f, s]
+#                 k.sort()
+#                 k = tuple(k)
+#                 if k in comparison_dict.keys():
+#                     old_v = comparison_dict[k]
+#                     if old_v < v:
+#                         comparison_dict[k] = v
+#                 else:
+#                     comparison_dict[k] = v
+
+#         self.list_of_Data = []
+#         for case_index in range(0, self.datastructure.shape[0]):
+#             feature_size = self.datastructure['values'].loc[case_index][self.feature_to_compare].shape[0]
+#             edges = [[],[]]
+#             miss_count = 0
+#             got_count = 0
+#             for f_1_index in range(feature_size):
+#                 for f_2_index in range(f_1_index + 1, feature_size):
+#                     gene_1 = self.datastructure['values'].loc[case_index]['gene_id'].iloc[f_1_index]
+#                     gene_2 = self.datastructure['values'].loc[case_index]['gene_id'].iloc[f_2_index]
+
+#                     # print(gene_1)
+#                     # print(gene_2)
+#                     k = [gene_1, gene_2]
+#                     k.sort()
+#                     k = tuple(k)
+#                     # print(k)
+
+#                     make_edge = False
+
+#                     if k in comparison_dict.keys():
+#                         similarity = comparison_dict[k]
+#                         got_count += 1
+#                         if similarity >= self.THRESHOLD_A:
+#                             make_edge = True
+#                     else:
+#                         # If we are not able to find any match to compare, then we check the values.
+#                         miss_count += 1
+#                         similarity = np.linalg.norm(   
+#                             self.datastructure['values'].loc[case_index][self.feature_to_compare].iloc[f_1_index] - \
+#                             self.datastructure['values'].loc[case_index][self.feature_to_compare].iloc[f_2_index])
+#                         if similarity <= self.THRESHOLD:
+#                             make_edge = True
+                        
+#                         # print("Similarity not found")
+                    
+#                     # In this case the higher the number the more similarity.
+#                     if make_edge:
+#                         edges[0].append(f_1_index)
+#                         edges[0].append(f_2_index)
+#                         edges[1].append(f_2_index)
+#                         edges[1].append(f_1_index)
+
+#             self.sm.print("Similarities found")
+#             self.sm.print(f"\tMissed: {miss_count} - {(miss_count / (miss_count + got_count))*100}%")
+#             self.sm.print(f"\tGot: {got_count} - {(got_count / (miss_count + got_count))*100}%")
+            
+#             edge_index = torch.tensor(edges, dtype=torch.long)
+#             x = torch.tensor(list(self.datastructure['values'].loc[case_index][self.feature_to_compare]), dtype=torch.float)
+#             y = torch.tensor(self.datastructure['os'].loc[case_index])
+#             data = Data(x=x, edge_index=edge_index, y=y)
+
+#             G = to_networkx(data, to_undirected=True)
+#             self.sm.print(f"\n\n### Graph {case_index} ###")
+#             self.sm.print("Numero di nodi:", G.number_of_nodes())
+#             self.sm.print("Numero di edge:", G.number_of_edges())
+#             degrees = dict(G.degree())
+#             # Nodo con il massimo grado (gene con più connessioni)
+#             max_degree_node = max(degrees, key=degrees.get)
+#             self.sm.print(f"Nodo con il massimo grado: {max_degree_node} ({degrees[max_degree_node]} connessioni)")
+
+#             # Trova tutte le componenti connesse
+#             connected_components = list(nx.connected_components(G))
+#             self.sm.print("Numero di componenti connesse: ", len(connected_components))
+#             self.sm.print(f"density: {nx.density(G)}")
+
+#             self.list_of_Data.append(Data(x=x, edge_index=edge_index, y=y))
