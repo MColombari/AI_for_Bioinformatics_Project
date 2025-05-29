@@ -1,0 +1,11 @@
+Date and time test start
+	UTC time: "2025-05-29 08:50:33.432055+00:00"
+Start from checkpoint:
+	False
+Path start checkpoint:
+	
+More info:
+	
+    This is the first try with the basic model.
+with new LPD.
+
