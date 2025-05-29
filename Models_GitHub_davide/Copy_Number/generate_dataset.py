@@ -50,18 +50,18 @@ class ModifiesLPD:
         self.THRESHOLD = threshold
 
         t_value = str(self.THRESHOLD).split('.')[-1]
-        self.MAIN_DIR = f'../datasets/GENE_EXP_LOG_{self.number_of_nodes}_{t_value}'
+        self.MAIN_DIR = f'../datasets/COPY_NUMBER_{self.number_of_nodes}_{t_value}'
         if not os.path.exists(self.MAIN_DIR):
             os.makedirs(self.MAIN_DIR)
 
-        if os.path.exists(f'{self.MAIN_DIR}/GENE_EXP_LOG_A.txt'):
-            os.remove(f'{self.MAIN_DIR}/GENE_EXP_LOG_A.txt')
-        if os.path.exists(f'{self.MAIN_DIR}/GENE_EXP_LOG_graph_indicator.txt'):
-            os.remove(f'{self.MAIN_DIR}/GENE_EXP_LOG_graph_indicator.txt')
-        if os.path.exists(f'{self.MAIN_DIR}/GENE_EXP_LOG_graph_attributes.txt'):
-            os.remove(f'{self.MAIN_DIR}/GENE_EXP_LOG_graph_attributes.txt')
-        if os.path.exists(f'{self.MAIN_DIR}/GENE_EXP_LOG_graph_labels.txt'):
-            os.remove(f'{self.MAIN_DIR}/GENE_EXP_LOG_graph_labels.txt')
+        if os.path.exists(f'{self.MAIN_DIR}/COPY_NUMBER_A.txt'):
+            os.remove(f'{self.MAIN_DIR}/COPY_NUMBER_A.txt')
+        if os.path.exists(f'{self.MAIN_DIR}/COPY_NUMBER_graph_indicator.txt'):
+            os.remove(f'{self.MAIN_DIR}/COPY_NUMBER_graph_indicator.txt')
+        if os.path.exists(f'{self.MAIN_DIR}/COPY_NUMBER_graph_attributes.txt'):
+            os.remove(f'{self.MAIN_DIR}/COPY_NUMBER_graph_attributes.txt')
+        if os.path.exists(f'{self.MAIN_DIR}/COPY_NUMBER_graph_labels.txt'):
+            os.remove(f'{self.MAIN_DIR}/COPY_NUMBER_graph_labels.txt')
 
     def measure_time(func):
         def wrapper(self, *arg, **kw):
@@ -154,7 +154,7 @@ class ModifiesLPD:
                             ]
                             index += 1
 
-        # Apply log.
+        # Apply log.
         for i in range(self.datastructure.shape[0]):
             self.datastructure['values'].loc[i][self.feature_to_save] = self.datastructure['values'].loc[i][self.feature_to_save].applymap(lambda x: np.log10(x + 0.01))
         
@@ -191,17 +191,17 @@ class ModifiesLPD:
             self.list_of_os.append(self.datastructure['os'].iloc[case_index])
 
             # Write edges.
-            with open(f'{self.MAIN_DIR}/GENE_EXP_LOG_A.txt','a') as file:
+            with open(f'{self.MAIN_DIR}/COPY_NUMBER_A.txt','a') as file:
                 for i in range(len(row)):
                     file.write(f'{(row[i] + 1) + offset}, {(cols[i] + 1) + offset}\n')
             
             # Write edges index.
-            with open(f'{self.MAIN_DIR}/GENE_EXP_LOG_graph_indicator.txt','a') as file:
+            with open(f'{self.MAIN_DIR}/COPY_NUMBER_graph_indicator.txt','a') as file:
                 for i in range(len(in_1)):
                     file.write(f'{case_index + 1}\n')
 
             # Write edges index.
-            with open(f'{self.MAIN_DIR}/GENE_EXP_LOG_graph_attributes.txt','a') as file:
+            with open(f'{self.MAIN_DIR}/COPY_NUMBER_graph_attributes.txt','a') as file:
                 for n in self.datastructure['values'].loc[case_index][self.feature_to_save].values:
                     val = [str(v) for v in n]
                     file.write(', '.join(val) + '\n')
@@ -232,7 +232,7 @@ class ModifiesLPD:
                 split_values.append(os[index - 1])
         
         # Write edges index.
-        with open(f'{self.MAIN_DIR}/GENE_EXP_LOG_graph_labels.txt','w') as file:
+        with open(f'{self.MAIN_DIR}/COPY_NUMBER_graph_labels.txt','w') as file:
             for o in self.list_of_os:
                 for c in range(self.num_classes):
                     if  (c == 0 and o <= split_values[c]) or \
@@ -255,7 +255,7 @@ class ModifiesLPD:
 
 # Load data path
 PATH_GTF_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/gencode.v47.annotation.gtf"
-PATH_FOLDER_GENE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneExpression"
+PATH_FOLDER_GENE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/CopyNumber"
 PATH_CASE_ID_STRUCTURE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/case_id_and_structure.json"
 # For edge similarity files.
 PATH_EDGE_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/9606.protein.links.v12.0.ENSG.txt"
