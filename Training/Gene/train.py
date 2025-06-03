@@ -91,7 +91,7 @@ test_loader = DataLoader(data_test_list, batch_size=hyperparameter['batch_size']
 
 node_feature_number = len(hyperparameter['feature_to_save'])
 # model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
-model = small_GCN(node_feature_number, 100, hyperparameter['num_classes'])
+model = small_GCN(node_feature_number, 750, hyperparameter['num_classes'])
 # model =  GAT(node_feature_number, 1000, 30, hyperparameter['num_classes'], 0.2)
 # model = SimpleGAT(node_feature_number, 2000, 30, hyperparameter['num_classes'], 0.2)
 # model = ComplexGAT(node_feature_number, 500, 20, hyperparameter['num_classes'], 0.2)
