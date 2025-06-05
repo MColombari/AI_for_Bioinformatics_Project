@@ -1,9 +1,81 @@
 import torch
-from torch.nn import Linear
+from torch.nn import Linear, Sequential, ReLU, Dropout, Embedding, ModuleList
 import torch.nn.functional as F
 from torch_geometric import nn
-from torch_geometric.nn import GCNConv, GATConv
+from torch_geometric.nn import GCNConv, GATConv, NNConv, GATv2Conv
 from torch_geometric.nn import global_mean_pool
+
+
+class EdgeAttrGNN(torch.nn.Module):
+    def __init__(self, input_feature, hidden_channels, num_classes):
+        super().__init__()
+        self.nn1 = Sequential(
+            Linear(1, 64),
+            ReLU(),
+            Linear(64, input_feature * hidden_channels)
+        )
+        self.conv1 = NNConv(input_feature, hidden_channels, self.nn1, aggr='mean')
+
+        self.nn2 = Sequential(
+            Linear(1, 64),
+            ReLU(),
+            Linear(64, hidden_channels * hidden_channels)
+        )
+        self.conv2 = NNConv(hidden_channels, hidden_channels, self.nn2, aggr='mean')
+
+        self.dropout = Dropout(0.3)
+        self.lin1 = Linear(hidden_channels, hidden_channels)
+        self.lin2 = Linear(hidden_channels, num_classes)
+
+    def forward(self, x, edge_index, edge_attr, batch):
+        x = F.relu(self.conv1(x, edge_index, edge_attr))
+        x = F.relu(self.conv2(x, edge_index, edge_attr))
+        x = global_mean_pool(x, batch)
+        x = self.dropout(x)
+        x = F.relu(self.lin1(x))
+        x = self.lin2(x)
+        return x
+    
+
+class EdgeAttrGAT(torch.nn.Module):
+    def __init__(self, input_feature, hidden_channels, num_classes,
+                 num_layers=3, heads=1, dropout=0.2):
+        super().__init__()
+        self.dropout = dropout
+        self.num_layers = num_layers
+
+        # Embed edge attributes
+        self.edge_emb = Linear(1, hidden_channels)
+
+        # Initial GATv2Conv layer
+        self.convs = ModuleList()
+        self.convs.append(GATv2Conv(input_feature + hidden_channels, hidden_channels, heads=heads, concat=False))
+
+        # Additional GATv2Conv layers
+        for _ in range(num_layers - 1):
+            self.convs.append(GATv2Conv(hidden_channels, hidden_channels, heads=heads, concat=False))
+
+        # Output layer
+        self.classifier = Linear(hidden_channels, num_classes)
+
+    def forward(self, x, edge_index, edge_attr, batch):
+        row, col = edge_index
+        edge_attr_emb = self.edge_emb(edge_attr)  # [num_edges, hidden_channels]
+
+        # Accumulate edge_attr_emb for each source node
+        edge_attr_to_node = torch.zeros(x.size(0), edge_attr_emb.size(1), device=x.device)
+        edge_attr_to_node.index_add_(0, row, edge_attr_emb)
+
+        x = torch.cat([x, edge_attr_to_node], dim=1)
+
+        for conv in self.convs:
+            x = conv(x, edge_index)
+            x = F.relu(x)
+            x = F.dropout(x, p=self.dropout, training=self.training)
+
+        x = global_mean_pool(x, batch)
+        return self.classifier(x)
+
 
 class simple_GCN(torch.nn.Module):
     def __init__(self, input_feature, num_classes):
