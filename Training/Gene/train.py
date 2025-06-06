@@ -19,6 +19,7 @@ from torch.nn import DataParallel
 TEST_NAME = "Train_Gene"
 MORE_INFO = """
     This is the first try with the basic model.\nwith new LPD.
+    And we set Threshold as 600.
 """
 
 # PATH where we'll create the folder containig the new test.
@@ -46,13 +47,13 @@ PATH_TRAIN_CLASS = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/Ge
 #   Model parameter TODO
 hyperparameter = {
     'num_classes': 2,
-    'num_nodes': 200,
+    'num_nodes': 2000,
     'epochs': 100,
     'batch_size': 4,
     'seed': 123456,
     'num_workers': 6,
     'lr': 0.00001,
-    'save_model_period': 20, # How many epoch to wait before save the next model.
+    'save_model_period': 100, # How many epoch to wait before save the next model.
     'feature_to_save': ['fpkm_uq_unstranded'], # Specify parameter for gene.
     'feature_to_compare': 'fpkm_uq_unstranded'
 }
@@ -89,8 +90,8 @@ test_loader = DataLoader(data_test_list, batch_size=hyperparameter['batch_size']
 
 
 node_feature_number = len(hyperparameter['feature_to_save'])
-model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
-# model = small_GCN(node_feature_number, 2000, hyperparameter['num_classes'])
+# model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
+model = small_GCN(node_feature_number, 750, hyperparameter['num_classes'])
 # model =  GAT(node_feature_number, 1000, 30, hyperparameter['num_classes'], 0.2)
 # model = SimpleGAT(node_feature_number, 2000, 30, hyperparameter['num_classes'], 0.2)
 # model = ComplexGAT(node_feature_number, 500, 20, hyperparameter['num_classes'], 0.2)

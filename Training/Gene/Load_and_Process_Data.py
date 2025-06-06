@@ -345,7 +345,7 @@ class LPDEdgeKnowledgeBased(LPD):
 
     @measure_time
     def create_graph(self):
-        self.THRESHOLD = 206
+        self.THRESHOLD = 600
 
         comparison_dict = {}
         row_index = 0
