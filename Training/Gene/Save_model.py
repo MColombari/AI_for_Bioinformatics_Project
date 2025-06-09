@@ -51,6 +51,11 @@ class SaveModel:
             'epoch': epoch,
             'model_dict':model.state_dict()}, 
             f"{self.current_folder}/model_checkpoints/{self.test_name}_epoch_{epoch}.pth")
+        
+    def save_dataset(self, train_dataset, test_dataset):
+        os.mkdir(f"{self.current_folder}/datasets")
+        torch.save(train_dataset, f"{self.current_folder}/datasets/train.pkl")
+        torch.save(test_dataset, f"{self.current_folder}/datasets/test.pkl")
 
     # logger.info("epoch {:3d} | iteration {:5d} | Loss {:.6f} | Acc {:.2f}%".format(epoch+1, batch_idx+1, loss.item(), score*100))
     def save_epoch_data(self, epoch, loss_train, accuracy_train, loss_test, accuracy_test):
