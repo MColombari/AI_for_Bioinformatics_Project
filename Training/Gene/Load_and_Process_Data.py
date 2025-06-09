@@ -345,7 +345,7 @@ class LPDEdgeKnowledgeBased(LPD):
 
     @measure_time
     def create_graph(self):
-        self.THRESHOLD = 600
+        self.THRESHOLD = 100
 
         comparison_dict = {}
         row_index = 0
@@ -376,6 +376,7 @@ class LPDEdgeKnowledgeBased(LPD):
         for case_index in range(0, self.datastructure.shape[0]):
             feature_size = self.datastructure['values'].loc[case_index][self.feature_to_compare].shape[0]
             edges = [[],[]]
+            edge_attr_list = []
             miss_count = 0
             got_count = 0
             for f_1_index in range(feature_size):
@@ -406,20 +407,25 @@ class LPDEdgeKnowledgeBased(LPD):
                         edges[0].append(f_2_index)
                         edges[1].append(f_2_index)
                         edges[1].append(f_1_index)
+                        # I need to append two attribute because we have 2 edge, one in one direction, and the
+                        # second in the opposite direction.
+                        edge_attr_list.append([similarity])
+                        edge_attr_list.append([similarity])
 
             print("Similarities found")
             print(f"\tMissed: {miss_count} - {(miss_count / (miss_count + got_count))*100}%")
             print(f"\tGot: {got_count} - {(got_count / (miss_count + got_count))*100}%")
 
             edge_index = torch.tensor(edges, dtype=torch.long)
+            edge_attr = torch.tensor(edge_attr_list, dtype=torch.float)
             x = torch.tensor(self.datastructure['values'].loc[case_index][self.feature_to_save].values, dtype=torch.float)
 
             if self.datastructure['case_id'].iloc[case_index] in train_case_id.keys():
                 y = torch.tensor(train_case_id[self.datastructure['case_id'].iloc[case_index]])
-                self.train_list.append(Data(x=x, edge_index=edge_index, y=y))
+                self.train_list.append(Data(x=x, edge_index=edge_index, edge_attr=edge_attr, y=y))
             elif self.datastructure['case_id'].iloc[case_index] in test_case_id.keys():
                 y = torch.tensor(test_case_id[self.datastructure['case_id'].iloc[case_index]])
-                self.test_list.append(Data(x=x, edge_index=edge_index, y=y))
+                self.test_list.append(Data(x=x, edge_index=edge_index, edge_attr=edge_attr, y=y))
             else:
                 raise Exception(f"Case id not found in ether train or test\n\"{self.datastructure['case_id'].iloc[case_index]}\"")
 

@@ -35,7 +35,26 @@ class EdgeAttrGNN(torch.nn.Module):
         x = F.relu(self.lin1(x))
         x = self.lin2(x)
         return x
-    
+
+class EdgeAttrGNNLight(torch.nn.Module):
+    def __init__(self, input_feature, hidden_channels, num_classes):
+        super().__init__()
+        self.nn1 = Sequential(
+            Linear(1, 64),
+            ReLU(),
+            Linear(64, input_feature * hidden_channels)
+        )
+        self.conv1 = NNConv(input_feature, hidden_channels, self.nn1, aggr='mean')
+
+        self.dropout = Dropout(0.3)
+        self.lin1 = Linear(hidden_channels, num_classes)
+
+    def forward(self, x, edge_index, edge_attr, batch):
+        x = F.relu(self.conv1(x, edge_index, edge_attr))
+        x = global_mean_pool(x, batch)
+        x = self.dropout(x)
+        x = self.lin1(x)
+        return x
 
 class EdgeAttrGAT(torch.nn.Module):
     def __init__(self, input_feature, hidden_channels, num_classes,
