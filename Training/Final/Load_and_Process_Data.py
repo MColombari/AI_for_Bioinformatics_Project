@@ -9,6 +9,7 @@ from torch_geometric.data import Data
 from torch_geometric.utils import to_networkx
 import time
 from sklearn.metrics import pairwise_distances
+from sklearn.preprocessing import StandardScaler
 from Save_model import SaveModel
 import random
 
@@ -288,13 +289,13 @@ class LPDEdgeKnowledgeBased(LPD):
 
 
     @measure_time
-    def preprocessing(self):
+    def preprocessing_gene(self):
         with open(self.case_id_json_path, 'r') as file:
             file_parsed = json.load(file)
         file_to_case_id = dict((file_parsed[k]['files']['gene'], k) for k in file_parsed.keys())
         file_to_os = dict((file_parsed[k]['files']['gene'], file_parsed[k]['os']) for k in file_parsed.keys())
 
-        self.datastructure = pd.DataFrame(columns=['case_id', 'os', 'values'])
+        self.datastructure_gene = pd.DataFrame(columns=['case_id', 'os', 'values'])
 
         index = 0
         # Now explore data path to get the right files
@@ -324,7 +325,7 @@ class LPDEdgeKnowledgeBased(LPD):
 
                             parsed_file = parsed_file[parsed_file['gene_id'].isin(self.pc_set)]
 
-                            self.datastructure.loc[index] = [
+                            self.datastructure_gene.loc[index] = [
                                 file_to_case_id[file],
                                 file_to_os[file],
                                 parsed_file
@@ -332,16 +333,131 @@ class LPDEdgeKnowledgeBased(LPD):
                             index += 1
 
         # Apply log.
-        for i in range(self.datastructure.shape[0]):
-            self.datastructure['values'].loc[i][self.feature_to_save] = self.datastructure['values'].loc[i][self.feature_to_save].applymap(lambda x: np.log10(x + 0.01))
+        for i in range(self.datastructure_gene.shape[0]):
+            self.datastructure_gene['values'].loc[i][self.feature_to_save] = self.datastructure_gene['values'].loc[i][self.feature_to_save].applymap(lambda x: np.log10(x + 0.01))
         
         # Make value in a [0, 1] range.
-        for r in range(self.datastructure.shape[0]):
+        for r in range(self.datastructure_gene.shape[0]):
             for c in self.feature_to_save:
-                self.datastructure['values'].loc[r][c] =    (self.datastructure['values'].loc[r][c] - self.datastructure['values'].loc[r][c].min()) / \
-                                                            (self.datastructure['values'].loc[r][c].max() - self.datastructure['values'].loc[r][c].min())
+                self.datastructure_gene['values'].loc[r][c] =    (self.datastructure_gene['values'].loc[r][c] - self.datastructure_gene['values'].loc[r][c].min()) / \
+                                                            (self.datastructure_gene['values'].loc[r][c].max() - self.datastructure_gene['values'].loc[r][c].min())
                 
+    @measure_time
+    def preprocessing(self):
+        with open(self.case_id_json_path, 'r') as file:
+            file_parsed = json.load(file)
+        file_to_case_id = dict((file_parsed[k]['files']['copy_number'], k) for k in file_parsed.keys())
+        file_to_os = dict((file_parsed[k]['files']['copy_number'], file_parsed[k]['os']) for k in file_parsed.keys())
 
+        self.datastructure_CNV = pd.DataFrame(columns=['case_id', 'os', 'values'])
+
+        index = 0
+        # Now explore data path to get the right files
+        for root, dirs, files in os.walk(self.folder_gene_path):
+            for dir in dirs:
+                for root, dirs, files in os.walk(self.folder_gene_path + "/" + dir):
+                    for file in files:
+                        if file in file_to_case_id.keys():
+                            parsed_file = pd.read_csv(self.folder_gene_path + "/" + dir + "/" + file, sep='\t')
+                            parsed_file = parsed_file[['gene_id'] + self.feature_to_save]
+
+                            # Now specify columns type.
+                            convert_dict = dict([(k, float) for k in self.feature_to_save])
+                            convert_dict['gene_id'] = str
+                            parsed_file = parsed_file.astype(convert_dict)
+                            
+                            # They actually don't match.
+                            # So the 'gene_type' in the dataset don't match the in the gtf file.
+                            # So i'm gonna use as the right reference the gtf file.
+
+                            parsed_file['gene_id'] = parsed_file['gene_id'].apply(self.remove_version)
+
+                            # parsed_file = parsed_file[parsed_file['gene_type'] == 'protein_coding']
+                            # if not set(parsed_file['gene_id']).issubset(gtf_pc_set):
+                            #     raise Exception("List of coding genes don't match.")
+
+                            parsed_file = parsed_file[parsed_file['gene_id'].isin(self.pc_set)].fillna(0)
+
+                            self.datastructure_CNV.loc[index] = [
+                                file_to_case_id[file],
+                                file_to_os[file],
+                                parsed_file
+                            ]
+                            index += 1
+
+        scaler = StandardScaler()        
+        for case_index in range(self.datastructure_CNV.shape[0]):
+            df = self.datastructure_CNV['values'].loc[case_index]
+            X_scaled = scaler.fit_transform(df['copy_number'].values.reshape(-1,1))
+            df = df.drop(columns='copy_number')
+            df['copy_number'] = X_scaled.flatten()
+            self.list_df_CNV_filtered.append(df)
+        
+        ###########################################################################
+        with open(PATH_FOLDER_GENE, 'r') as file:
+            file_parsed = json.load(file)
+        file_to_case_id = dict((file_parsed[k]['files']['gene'], k) for k in file_parsed.keys())
+        file_to_os = dict((file_parsed[k]['files']['gene'], file_parsed[k]['os']) for k in file_parsed.keys())
+
+        self.datastructure_Gene = pd.DataFrame(columns=['case_id', 'os', 'values'])
+
+        index = 0
+        # Now explore data path to get the right files
+        for root, dirs, files in os.walk(PATH_FOLDER_GENE):
+            for dir in dirs:
+                for root, dirs, files in os.walk(PATH_FOLDER_GENE + "/" + dir):
+                    for file in files:
+                        if file in file_to_case_id.keys():
+                            parsed_file = pd.read_csv(PATH_FOLDER_GENE + "/" + dir + "/" + file,
+                                                    sep='\t', header=0, skiprows=lambda x: x in [0, 2, 3, 4, 5])
+                            parsed_file = parsed_file[['gene_id'] + ['tpm_unstranded']]
+
+                            # Now specify columns type.
+                            convert_dict = dict([(k, float) for k in ['tpm_unstranded']])
+                            convert_dict['gene_id'] = str
+                            parsed_file = parsed_file.astype(convert_dict)
+                            
+                            # They actually don't match.
+                            # So the 'gene_type' in the dataset don't match the in the gtf file.
+                            # So i'm gonna use as the right reference the gtf file.
+
+                            parsed_file['gene_id'] = parsed_file['gene_id'].apply(self.remove_version)
+
+                            # parsed_file = parsed_file[parsed_file['gene_type'] == 'protein_coding']
+                            # if not set(parsed_file['gene_id']).issubset(gtf_pc_set):
+                            #     raise Exception("List of coding genes don't match.")
+
+                            parsed_file = parsed_file[parsed_file['gene_id'].isin(self.pc_set)]
+
+                            self.datastructure_Gene.loc[index] = [
+                                file_to_case_id[file],
+                                file_to_os[file],
+                                parsed_file
+                            ]
+                            index += 1
+
+        # Concatenare tutti i dataframe
+        df_concatenato = pd.concat(self.datastructure_Gene['values'].values)
+
+        # Calcolare la varianza per ogni gene_id
+        varianze = df_concatenato.groupby('gene_id')['copy_number'].var()
+
+        top_n = 200  # numero di geni che si vuole mantenere
+        gene_significativi = varianze.nlargest(top_n).index 
+
+        # Apply log.
+        for i in range(self.datastructure_Gene.shape[0]):
+            self.datastructure_Gene['values'].loc[i][['tpm_unstranded']] = self.datastructure_Gene['values'].loc[i][self.feature_to_save].applymap(lambda x: np.log10(x + 0.01))
+        
+        # Make value in a [0, 1] range.
+        for r in range(self.datastructure_Gene.shape[0]):
+            for c in ['tpm_unstranded']:
+                self.datastructure_Gene['values'].loc[r][c] =    (self.datastructure_Gene['values'].loc[r][c] - self.datastructure_Gene['values'].loc[r][c].min()) / \
+                                                            (self.datastructure_Gene['values'].loc[r][c].max() - self.datastructure_Gene['values'].loc[r][c].min())
+        
+        for case_index in range(self.datastructure_Gene.shape[0]):
+            df = self.datastructure_Gene['values'].loc[case_index][self.datastructure_Gene['values'].loc[case_index]['gene_id'].isin(gene_significativi)]
+            self.list_df_Gene_filtered.append(df)
 
     @measure_time
     def create_graph(self):
