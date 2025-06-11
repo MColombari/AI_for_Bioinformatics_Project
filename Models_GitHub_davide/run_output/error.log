@@ -1,2 +1,4 @@
-/homes/dlupo/Progetto_BioInformatics/AI_for_Bioinformatics_Project/Models_GitHub_davide/models/GCN.py:51: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
-  x = F.softmax(self.fc2(x))
+Traceback (most recent call last):
+  File "/homes/dlupo/Progetto_BioInformatics/AI_for_Bioinformatics_Project/Models_GitHub_davide/train.py", line 12, in <module>
+    from torchsummary import summary
+ModuleNotFoundError: No module named 'torchsummary'
