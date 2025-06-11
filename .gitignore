@@ -66,3 +66,5 @@ Preprocessing/Final/Gene/Gene_sbatch/output_divide_dataset.lo
 
 env/
 Preprocessing/Final/Gene/Gene_sbatch/output_divide_dataset.log
+
+Training/Final/run_output/
