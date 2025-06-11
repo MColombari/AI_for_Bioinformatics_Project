@@ -37,7 +37,11 @@ Models_GitHub_davide/datasets/GENE_EXP_200_0004
 Models_GitHub_davide/datasets/GENE_EXP_500_001
 Models_GitHub_davide/datasets/GENE_EXP_500_0001
 Models_GitHub_davide/datasets/GENE_EXP_500_0004
+<<<<<<< HEAD
 DeepMOCCA_davide/data/model.pt
+=======
+
+>>>>>>> 979deb882c6ec50eb751784678e0219423f7df85
 
 
 bash.sh
