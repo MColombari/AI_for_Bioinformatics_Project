@@ -30,14 +30,19 @@ START_FROM_CHECKPOINT = True
 CHECKPOINT_PATH = "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train_Gene_54/model_checkpoints/Train_Gene_epoch_100.pth"
 
 # Load Dataset.
-LOAD_DATASET = True
+LOAD_DATASET = False
 DATASET_FROM_FOLDER_PATH = "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train_Gene_53"
 SAVE_DATASET = True
 
 # Load data path
 PATH_GTF_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/gencode.v47.annotation.gtf"
 PATH_FOLDER_GENE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneExpression"
+PATH_FOLDER_COPY_NUMBER = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/CopyNumber"
+PATH_FOLDER_METHYLATION = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/Methylation"
 PATH_CASE_ID_STRUCTURE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/case_id_and_structure.json"
+
+PATH_METHYLATION_CONVERTER = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/matched_cpg_genes.csv"
+
 # For edge similarity files.
 PATH_EDGE_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/9606.protein.links.v12.0.ENSG.txt"
 PATH_COMPLETE_EDGE_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/edge_T900.json"
@@ -59,7 +64,9 @@ hyperparameter = {
     'num_workers': 6,
     'lr': 0.001,
     'save_model_period': 500, # How many epoch to wait before save the next model.
-    'feature_to_save': ['fpkm_uq_unstranded'], # Specify parameter for gene.
+    'feature_to_save': {'gene':['fpkm_uq_unstranded'],
+                        'methylation': ['methylation'],
+                        'copy_number': ['copy_number']}, # Specify parameter for gene, methylation and copy number.
     'feature_to_compare': 'fpkm_uq_unstranded'
 }
 
@@ -96,7 +103,8 @@ if LOAD_DATASET:
 
 else:
     # https://pytorch-geometric.readthedocs.io/en/2.5.3/notes/create_dataset.html
-    lpd = LPDEdgeKnowledgeBased(PATH_GTF_FILE, PATH_FOLDER_GENE, PATH_CASE_ID_STRUCTURE,
+    lpd = LPDEdgeKnowledgeBased(PATH_GTF_FILE, PATH_FOLDER_GENE, PATH_FOLDER_METHYLATION, PATH_FOLDER_COPY_NUMBER, PATH_CASE_ID_STRUCTURE,
+                                PATH_METHYLATION_CONVERTER,
                                 hyperparameter['feature_to_save'], hyperparameter['feature_to_compare'],
                                 sm, hyperparameter['num_nodes'],
                                 PATH_ORDER_GENE, PATH_TEST_CLASS, PATH_TRAIN_CLASS, PATH_EDGE_FILE)
@@ -115,6 +123,8 @@ else:
         sm.save_dataset(train_loader, test_loader)
 # pin_memory=True will automatically put the fetched data Tensors in pinned memory, and thus enables faster data transfer to CUDA-enabled GPUs.
 # https://pytorch.org/docs/stable/data.html.
+
+raise Exception("Stop After creating dataset.")
 
 
 node_feature_number = len(hyperparameter['feature_to_save'])
