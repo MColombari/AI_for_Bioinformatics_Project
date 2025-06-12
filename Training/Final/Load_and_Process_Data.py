@@ -350,9 +350,8 @@ class LPDEdgeKnowledgeBased(LPD):
                 self.datastructure_gene['values'].loc[r][c] =    (self.datastructure_gene['values'].loc[r][c] - self.datastructure_gene['values'].loc[r][c].min()) / \
                                                                 (self.datastructure_gene['values'].loc[r][c].max() - self.datastructure_gene['values'].loc[r][c].min())
 
-    def convert_methylation_to_gene(self, methylation_ids, conversion_dict):
-        """Funzione per convertire methylation_id in gene_id utilizzando il dizionario"""
-        return [conversion_dict.get(methylation_id, None) for methylation_id in methylation_ids]
+    def convert_methylation_to_gene(self, methylation_id, conversion_dict):
+        return conversion_dict.get(methylation_id, None)
 
     def preprocessing_methylation(self):
         # Load the file path dictionary
@@ -381,7 +380,7 @@ class LPDEdgeKnowledgeBased(LPD):
                             convert_dict['id'] = str
                             parsed_file = parsed_file.astype(convert_dict)
 
-                            parsed_file.dropna()
+                            parsed_file = parsed_file.dropna()
 
                             # Extract methylation values
                             # methylation_id = parsed_file['id'].tolist()
@@ -402,7 +401,7 @@ class LPDEdgeKnowledgeBased(LPD):
         # Crea una nuova colonna 'gene_id' nel DataFrame
         for i in range(self.datastructure_methylation.shape[0]):
             self.datastructure_methylation['values'].loc[i]['gene_id'] = self.datastructure_methylation['values'].loc[i]['id'].apply(lambda x: self.convert_methylation_to_gene(x, conversion_dict))
-            self.datastructure_methylation['values'].loc[i].drop(columns=['id'])
+            self.datastructure_methylation['values'].loc[i] = self.datastructure_methylation['values'].loc[i].drop(columns=['id'])
             self.datastructure_methylation.at[i, 'values'] = self.datastructure_methylation.at[i, 'values'][
                 self.datastructure_methylation.at[i, 'values']['gene_id'].isin(self.pc_set)
             ]
