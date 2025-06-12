@@ -15,21 +15,21 @@ from torch.nn import DataParallel
 
 #   Data Parameter
 
-# Name of the test, like methylation or gene... .
+# Name of the test, like methylation or gene... . TODO
 TEST_NAME = "Train_Gene"
 MORE_INFO = """
     This is the first try with the basic model.\nwith new LPD.
     And we set Threshold as 0.
 """
 
-# PATH where we'll create the folder containig the new test.
+# PATH where we'll create the folder containig the new test.    TODO
 TEST_FOLDER_PATH = "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output"
 
-# Load previous checkpoint.
+# Load previous checkpoint. TODO
 START_FROM_CHECKPOINT = True
 CHECKPOINT_PATH = "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train_Gene_54/model_checkpoints/Train_Gene_epoch_100.pth"
 
-# Load Dataset.
+# Load Dataset. TODO
 LOAD_DATASET = False
 DATASET_FROM_FOLDER_PATH = "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train_Gene_53"
 SAVE_DATASET = True
