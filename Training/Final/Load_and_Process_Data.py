@@ -400,12 +400,15 @@ class LPDEdgeKnowledgeBased(LPD):
         conversion_dict = pd.Series(conversion_df.gene_id.values, index=conversion_df.cpg_IlmnID).to_dict()
         # Crea una nuova colonna 'gene_id' nel DataFrame
         for i in range(self.datastructure_methylation.shape[0]):
-            self.datastructure_methylation['values'].loc[i]['gene_id'] = self.datastructure_methylation['values'].loc[i]['id'].apply(lambda x: self.convert_methylation_to_gene(x, conversion_dict))
-            self.datastructure_methylation['values'].loc[i] = self.datastructure_methylation['values'].loc[i].drop(columns=['id'])
+            self.datastructure_methylation['values'].iloc[i]['gene_id'] = self.datastructure_methylation['values'].iloc[i]['id'].apply(lambda x: self.convert_methylation_to_gene(x, conversion_dict))
+            self.datastructure_methylation.at[i, 'values'] = self.datastructure_methylation.at[i, 'values'].drop(columns=['id'])
             self.datastructure_methylation.at[i, 'values'] = self.datastructure_methylation.at[i, 'values'][
                 self.datastructure_methylation.at[i, 'values']['gene_id'].isin(self.pc_set)
             ]
-
+            
+            self.sm.print(f"\t\t\tNumber of total gene: {len([v for v in self.datastructure_methylation['values'].loc[i]['gene_id'].duplicated()])}")
+            self.sm.print(f"\t\t\tNumber of duplicate: {len([v for v in self.datastructure_methylation['values'].loc[i]['gene_id'].duplicated() if v == True])}")
+            self.datastructure_methylation.at[i, 'values'] = self.datastructure_methylation.at[i, 'values'].drop_duplicates(subset=['gene_id'])
             assert self.datastructure_methylation['values'].loc[i]['gene_id'].duplicated().any() == False
 
         # Make value in a [0, 1] range.
@@ -515,8 +518,6 @@ class LPDEdgeKnowledgeBased(LPD):
         self.sm.print(f"\t\tNumber of case_id miss due to methylation: {Number_of_miss_case_id_methylation}")
         self.sm.print(f"\t\tNumber of case_id miss due to copy number: {Number_of_miss_case_id_copy_number}")
         self.sm.print(f"\t\tNumber of case_id miss due to both: {Number_of_miss_case_id_copy_number}")
-
-        raise Exception("stop")
 
     @measure_time
     def create_graph(self):

@@ -124,10 +124,11 @@ else:
 # pin_memory=True will automatically put the fetched data Tensors in pinned memory, and thus enables faster data transfer to CUDA-enabled GPUs.
 # https://pytorch.org/docs/stable/data.html.
 
-raise Exception("Stop After creating dataset.")
 
-
-node_feature_number = len(hyperparameter['feature_to_save'])
+node_feature_number = 0
+for k in hyperparameter['feature_to_save'].keys():
+    node_feature_number += len(hyperparameter['feature_to_save'][k])
+    
 # model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
 # model = small_GCN(node_feature_number, 750, hyperparameter['num_classes'])
 model = EdgeAttrGNN(node_feature_number, 128, hyperparameter['num_classes'])
