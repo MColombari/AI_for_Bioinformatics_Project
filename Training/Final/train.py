@@ -1,7 +1,7 @@
 import torch
 from Save_model import SaveModel as SM
 from models import simple_GCN, small_GCN, GAT, SimpleGAT, ComplexGAT, EdgeAttrGNN, EdgeAttrGAT, EdgeAttrGNNLight
-from Load_and_Process_Data import LPD, LPDEdgeKnowledgeBased #, LPDHybrid
+from Load_and_Process_Data import LPDEdgeKnowledgeBased
 from torch_geometric.loader import DataLoader
 from collections import OrderedDict
 from sklearn.metrics import accuracy_score
@@ -26,12 +26,12 @@ MORE_INFO = """
 TEST_FOLDER_PATH = "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output"
 
 # Load previous checkpoint. TODO
-START_FROM_CHECKPOINT = True
+START_FROM_CHECKPOINT = False
 CHECKPOINT_PATH = "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train_Gene_54/model_checkpoints/Train_Gene_epoch_100.pth"
 
 # Load Dataset. TODO
-LOAD_DATASET = False
-DATASET_FROM_FOLDER_PATH = "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train_Gene_53"
+LOAD_DATASET = True
+DATASET_FROM_FOLDER_PATH = "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train_Gene_79"
 SAVE_DATASET = True
 
 # Load data path
@@ -67,7 +67,6 @@ hyperparameter = {
     'feature_to_save': {'gene':['fpkm_uq_unstranded'],
                         'methylation': ['methylation'],
                         'copy_number': ['copy_number']}, # Specify parameter for gene, methylation and copy number.
-    'feature_to_compare': 'fpkm_uq_unstranded'
 }
 
 torch.manual_seed(hyperparameter['seed'])
@@ -103,11 +102,12 @@ if LOAD_DATASET:
 
 else:
     # https://pytorch-geometric.readthedocs.io/en/2.5.3/notes/create_dataset.html
-    lpd = LPDEdgeKnowledgeBased(PATH_GTF_FILE, PATH_FOLDER_GENE, PATH_FOLDER_METHYLATION, PATH_FOLDER_COPY_NUMBER, PATH_CASE_ID_STRUCTURE,
-                                PATH_METHYLATION_CONVERTER,
-                                hyperparameter['feature_to_save'], hyperparameter['feature_to_compare'],
-                                sm, hyperparameter['num_nodes'],
-                                PATH_ORDER_GENE, PATH_TEST_CLASS, PATH_TRAIN_CLASS, PATH_EDGE_FILE)
+    lpd = LPDEdgeKnowledgeBased(PATH_GTF_FILE, PATH_FOLDER_GENE, PATH_FOLDER_METHYLATION,
+                                PATH_FOLDER_COPY_NUMBER, PATH_CASE_ID_STRUCTURE, PATH_METHYLATION_CONVERTER,
+                                PATH_TEST_CLASS, PATH_TRAIN_CLASS, PATH_EDGE_FILE, 
+                                PATH_ORDER_GENE, 
+                                hyperparameter['feature_to_save'], hyperparameter['num_nodes'],
+                                sm)
     data_train_list, data_test_list = lpd.get_data()  # List of Data.
     # Inside of data we need to specify which y we have.
 
