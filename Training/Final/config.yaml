@@ -10,7 +10,7 @@ Conditions:
 PATH:
   Test_folder_path: "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output"
   Checkpoint_path: "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train_Gene_54/model_checkpoints/Train_Gene_epoch_100.pth"
-  Dataset_from_folder_path: ""
+  Dataset_from_folder_path: "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train Final_4"
 
 Generic_PATH:
   pathGtfFile: "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/gencode.v47.annotation.gtf"
@@ -29,15 +29,15 @@ Generic_PATH:
   pathTrainClass: "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/train_separation_2_classes.json"
 
 hyperparameter:
-    num_classes: 2,
-    num_nodes: 2000,
-    epochs: 500,
-    batch_size: 2,
-    seed: 123456,
-    num_workers: 6,
-    lr: 0.001,
-    save_model_period: 500, # How many epoch to wait before save the next model.
-    feature_to_save:
-      gene: ['fpkm_uq_unstranded']
-      methylation: ['methylation']
-      copy_number: ['copy_number']  # Specify parameter for gene, methylation and copy number.
+  num_classes: 2
+  num_nodes: 6500
+  epochs: 500
+  batch_size: 2
+  seed: 123456
+  num_workers: 6
+  lr: 0.001
+  save_model_period: 500 # How many epoch to wait before save the next model.
+  feature_to_save:
+    gene: ['unstranded', 'tpm_unstranded', 'fpkm_unstranded', 'fpkm_uq_unstranded']
+    methylation: ['methylation']
+    copy_number: ['copy_number']  # Specify parameter for gene, methylation and copy number.

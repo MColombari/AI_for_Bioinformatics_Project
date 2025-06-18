@@ -204,6 +204,7 @@ class LPDEdgeKnowledgeBased:
         # Crea un dizionario per la conversione rapida
         conversion_dict = pd.Series(conversion_df.gene_id.values, index=conversion_df.cpg_IlmnID).to_dict()
         # Crea una nuova colonna 'gene_id' nel DataFrame
+        number_of_duplicate_list = []
         for i in range(self.datastructure_methylation.shape[0]):
             self.datastructure_methylation['values'].iloc[i]['gene_id'] = self.datastructure_methylation['values'].iloc[i]['id'].apply(lambda x: self.convert_methylation_to_gene(x, conversion_dict))
             self.datastructure_methylation.at[i, 'values'] = self.datastructure_methylation.at[i, 'values'].drop(columns=['id'])
@@ -211,10 +212,16 @@ class LPDEdgeKnowledgeBased:
                 self.datastructure_methylation.at[i, 'values']['gene_id'].isin(self.pc_set)
             ]
             
-            self.sm.print(f"\t\t\tNumber of total gene: {len([v for v in self.datastructure_methylation['values'].loc[i]['gene_id'].duplicated()])}")
-            self.sm.print(f"\t\t\tNumber of duplicate: {len([v for v in self.datastructure_methylation['values'].loc[i]['gene_id'].duplicated() if v == True])}")
+            # self.sm.print(f"\t\t\tNumber of total gene: {len([v for v in self.datastructure_methylation['values'].loc[i]['gene_id'].duplicated()])}")
+            # self.sm.print(f"\t\t\tNumber of duplicate: {len([v for v in self.datastructure_methylation['values'].loc[i]['gene_id'].duplicated() if v == True])}")
+            number_of_duplicate_list.append(len([v for v in self.datastructure_methylation['values'].loc[i]['gene_id'].duplicated() if v == True]))
             self.datastructure_methylation.at[i, 'values'] = self.datastructure_methylation.at[i, 'values'].drop_duplicates(subset=['gene_id'])
             assert self.datastructure_methylation['values'].loc[i]['gene_id'].duplicated().any() == False
+        self.sm.print("")
+        self.sm.print("\t\tNumber of duplicate gene:")
+        self.sm.print(f"\t\t\tmin: {min(number_of_duplicate_list)}")
+        self.sm.print(f"\t\t\tmax: {max(number_of_duplicate_list)}")
+        self.sm.print(f"\t\t\tavg: {0 if len(number_of_duplicate_list) == 0 else sum(number_of_duplicate_list)/len(number_of_duplicate_list)}")
 
         # Make value in a [0, 1] range.
         for r in range(self.datastructure_methylation.shape[0]):
@@ -285,6 +292,7 @@ class LPDEdgeKnowledgeBased:
 
         merge_index = 0
 
+        final_number_of_node = []
         for index in range(self.datastructure_gene.shape[0]):
             curr_case_id = self.datastructure_gene['case_id'].loc[index]
             curr_gene_datastructure = self.datastructure_gene[self.datastructure_gene['case_id'] == curr_case_id]
@@ -304,13 +312,14 @@ class LPDEdgeKnowledgeBased:
             if curr_copy_number_datastructure.shape[0] == 0:
                 Number_of_miss_case_id_copy_number += 1
 
-            self.sm.print(f"\t\t\tShape of gene_datastructure before merge: {curr_gene_datastructure['values'].iloc[0].shape[0]}")
+            # self.sm.print(f"\t\t\tShape of gene_datastructure before merge: {curr_gene_datastructure['values'].iloc[0].shape[0]}")
 
             merged_value =  curr_gene_datastructure['values'].iloc[0].merge(curr_copy_number_datastructure['values'].iloc[0], on='gene_id', how='inner')
-            self.sm.print(f"\t\t\tShape of merged_value after copy number merge: {merged_value.shape[0]}")
+            # self.sm.print(f"\t\t\tShape of merged_value after copy number merge: {merged_value.shape[0]}")
 
             merged_value = merged_value.merge(curr_methylation_datastructure['values'].iloc[0], on='gene_id', how='inner')
-            self.sm.print(f"\t\t\tShape of merged_value after Methylation merge: {merged_value.shape[0]}\n")
+            # self.sm.print(f"\t\t\tShape of merged_value after Methylation merge: {merged_value.shape[0]}\n")
+            final_number_of_node.append(merged_value.shape[0])
                                                                     
 
             self.datastructure_merge.loc[merge_index] = [
@@ -319,6 +328,12 @@ class LPDEdgeKnowledgeBased:
                 merged_value
             ]
             merge_index += 1
+
+        self.sm.print("")
+        self.sm.print("\t\tNumber of final node:")
+        self.sm.print(f"\t\t\tmin: {min(final_number_of_node)}")
+        self.sm.print(f"\t\t\tmax: {max(final_number_of_node)}")
+        self.sm.print(f"\t\t\tavg: {0 if len(final_number_of_node) == 0 else sum(final_number_of_node)/len(final_number_of_node)}")
 
         self.sm.print(f"\t\tNumber of case_id miss due to methylation: {Number_of_miss_case_id_methylation}")
         self.sm.print(f"\t\tNumber of case_id miss due to copy number: {Number_of_miss_case_id_copy_number}")
