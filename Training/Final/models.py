@@ -115,7 +115,7 @@ class simple_GCN(torch.nn.Module):
                 if m.bias is not None:
                     torch.nn.init.zeros_(m.bias)
 
-    def forward(self, x, edge_index, batch=None):
+    def forward(self, x, edge_index, edge_attr, batch=None):
         # print(x.device)
         # num_nodes = x.shape[0]  # Numero di nodi
         # print(x.shape)
@@ -147,7 +147,7 @@ class small_GCN(torch.nn.Module):
         self.conv1 = GCNConv(input_feature, hidden_channels)
         self.lin = Linear(hidden_channels, num_classes)
 
-    def forward(self, x, edge_index, batch=None):
+    def forward(self, x, edge_index, edge_attr, batch=None):
         # num_nodes = x.shape[0]  # Numero di nodi
         # print(x.shape)
         # max_index = edge_index.max().item()
@@ -177,7 +177,7 @@ class GAT(torch.nn.Module):
 
         self.lin = nn.Linear(hidden_channels * num_head, num_classes)
 
-    def forward(self, x, edge_index, batch=None):
+    def forward(self, x, edge_index, edge_attr, batch=None):
 
         # x = x.type(torch.float)
 
@@ -222,7 +222,7 @@ class SimpleGAT(torch.nn.Module):
 
         self.lin = nn.Linear(hidden_channels * num_head, num_classes)
 
-    def forward(self, x, edge_index, batch=None):
+    def forward(self, x, edge_index, edge_attr, batch=None):
 
         # x = x.type(torch.float)
 
@@ -264,7 +264,7 @@ class ComplexGAT(torch.nn.Module):
 
         self.lin = nn.Linear(hidden_channels * num_head, num_classes)
 
-    def forward(self, x, edge_index, batch=None):
+    def forward(self, x, edge_index, edge_attr, batch=None):
         x = F.dropout(x, p=self.drop_out_prob, training=self.training)
         x = self.layer1(x, edge_index)
         x = F.elu(x)
