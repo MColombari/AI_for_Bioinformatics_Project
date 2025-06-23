@@ -68,3 +68,5 @@ env/
 Preprocessing/Final/Gene/Gene_sbatch/output_divide_dataset.log
 
 Training/Final/run_output/
+Training/Final/Train_output
+Training/Final/config.yaml
