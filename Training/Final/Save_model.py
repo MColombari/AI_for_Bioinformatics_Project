@@ -27,13 +27,21 @@ class SaveModel:
         os.mkdir(self.current_folder)
         os.mkdir(f"{self.current_folder}/model_checkpoints")
 
-    def save_test_info(self, more_info, start_from_checkpoint, checkpoint_path):
+    def save_test_info(self, yaml_dict: dict):
         with open(f"{self.current_folder}/test_info.txt", "w") as f:
             f.write("Date and time test start\n")
             f.write(f"\tUTC time: \"{datetime.now(timezone.utc)}\"\n")
-            f.write(f"Start from checkpoint:\n\t{start_from_checkpoint}\n")
-            f.write(f"Path start checkpoint:\n\t{checkpoint_path}\n")
-            f.write(f"More info:\n\t{more_info}\n")
+            f.write("\nYaml file data:")
+            for k in yaml_dict.keys():
+                f.write(f"\t\"{k}\"")
+                element = yaml_dict[k]
+                if isinstance(element, dict):
+                    for k_e in element.keys():
+                        f.write(f"\t\t\"{k_e}\"")
+                        f.write(f"\t\t\t{element[k_e]}")
+                else:
+                    f.write(f"\t\t{yaml_dict[k]}")
+            
     
     def save_model_hyperparameter(self, p_dict):
         with open(f"{self.current_folder}/model_hyperparameter.txt", "w") as f:

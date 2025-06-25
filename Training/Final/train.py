@@ -133,7 +133,7 @@ if START_FROM_CHECKPOINT:
     model.load_state_dict(model_dict)
 
 # Create Folder and first files.
-sm.save_test_info(MORE_INFO, START_FROM_CHECKPOINT, CHECKPOINT_PATH)
+sm.save_test_info(data_yaml)
 sm.save_model_hyperparameter(hyperparameter)
 # https://pytorch.org/tutorials/beginner/saving_loading_models.html
 sm.save_model_architecture(model)
