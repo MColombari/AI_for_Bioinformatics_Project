@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 
 # PATH variable
-PATH_TRAIN_SEPARATION = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/train_separation_2_classes.json"
+PATH_TRAIN_SEPARATION = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/train_separation_16_classes.json"
 GENE_ID_PROTEIN_CODING_PATH = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/gene_id_protein_coding.json"
 PATH_FOLDER_GENE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneExpression"
 PATH_CASE_ID_STRUCTURE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/case_id_and_structure.json"
@@ -147,11 +147,11 @@ for f in feature_to_save:
 
 print("Save data")
 
-with open(SAVE_FOLDER_PATH + f"/gene_variance_order_COMPLETE.json", 'w') as file:
+with open(SAVE_FOLDER_PATH + f"/gene_variance_order_COMPLETE_{NUM_CLASS}_class.json", 'w') as file:
     json.dump(score, file)
 
 for f in feature_to_save:
-    with open(SAVE_FOLDER_PATH + f"/gene_variance_order_{f}.json", 'w') as file:
+    with open(SAVE_FOLDER_PATH + f"/gene_variance_order_{f}_{NUM_CLASS}_class.json", 'w') as file:
         json.dump(ordered_gene[f], file)
 
 for f in feature_to_save:
