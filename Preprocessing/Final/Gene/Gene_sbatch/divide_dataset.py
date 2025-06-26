@@ -8,7 +8,7 @@ import time
 PATH_FOLDER_GENE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneExpression"
 PATH_CASE_ID_STRUCTURE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/case_id_and_structure.json"
 PATH_OUTPUT_FOLDER = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData"
-NUM_CLASSES = 4
+NUM_CLASSES = 64
 PERCENTAGE_TEST = 0.15
 
 class LPD_modified:
