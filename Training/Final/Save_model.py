@@ -31,14 +31,14 @@ class SaveModel:
         with open(f"{self.current_folder}/test_info.txt", "w") as f:
             f.write("Date and time test start\n")
             f.write(f"\tUTC time: \"{datetime.now(timezone.utc)}\"\n")
-            f.write("\nYaml file data:")
+            f.write("\nYaml file data:\n")
             for k in yaml_dict.keys():
-                f.write(f"\t\"{k}\"")
+                f.write(f"\t\"{k}\"\n")
                 element = yaml_dict[k]
                 if isinstance(element, dict):
                     for k_e in element.keys():
-                        f.write(f"\t\t\"{k_e}\"")
-                        f.write(f"\t\t\t{element[k_e]}")
+                        f.write(f"\t\t\"{k_e}\"\n")
+                        f.write(f"\t\t\t{element[k_e]}\n")
                 else:
                     f.write(f"\t\t{yaml_dict[k]}")
             
