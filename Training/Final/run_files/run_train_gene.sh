@@ -8,7 +8,7 @@
 #SBATCH --constraint="gpu_L40S_48G|gpu_RTX6000_24G|gpu_RTXA5000_24G|gpu_A40_48G"
 #SBATCH --time=12:00:00
 #SBATCH --mail-type=END,FAIL
-#SBATCH --mail-user=270396@studenti.unimore.it
+#SBATCH --mail-user=331837@studenti.unimore.it
 
 #SBATCH --output="run_output/output_train.log"
 #SBATCH --error="run_output/error_train.log"
