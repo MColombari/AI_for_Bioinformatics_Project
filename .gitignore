@@ -22,3 +22,12 @@ Training/Copy_Number/run_output
 Training/Copy_Number/__pycache__
 Test_link_connections/ggLink.csv
 
+Models_GitHub_davide/run_files
+Models_GitHub_davide/save_model
+Models_GitHub_davide/test_result
+
+GGNN_main/data
+GGNN_main/run_files
+GGNN_main/run_output
+GGNN_main/__pycache__
+GGNN_main/GeometricNetworkAnalysis/__pycache__

@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "/homes/dlupo/Progetto_BioInformatics/AI_for_Bioinformatics_Project/DeepMOCCA_davide/deepmocca/main.py", line 4, in <module>
-    import numpy as np
-ModuleNotFoundError: No module named 'numpy'
