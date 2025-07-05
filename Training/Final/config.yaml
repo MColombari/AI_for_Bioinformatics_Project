@@ -1,0 +1,43 @@
+Generic:
+  Test_name: "Francesco"
+  More_info: "Early testing of final model."
+
+Conditions:
+  Start_from_checkpoint: False
+  Load_dataset: False
+  Save_dataset: False
+
+PATH:
+  Test_folder_path: "/homes/fmancinelli/progettoBio/AI_for_Bioinformatics_Project/Training/Final/Train_output"
+  Checkpoint_path: "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train_Gene_54/model_checkpoints/Train_Gene_epoch_100.pth"
+  Dataset_from_folder_path: "/homes/fmancinelli/progettoBio/AI_for_Bioinformatics_Project/Training/Final/Train_output/TrainFinal_0"
+
+Generic_PATH:
+  pathGtfFile: "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/gencode.v47.annotation.gtf"
+  pathFolderGene: "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneExpression"
+  pathFolderCopyNumber: "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/CopyNumber"
+  pathFolderMethylation: "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/Methylation"
+  pathCaseIdStructure: "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/case_id_and_structure.json"
+
+  pathMethylationConverter: "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/matched_cpg_genes.csv"
+
+  pathEdgeFile: "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/9606.protein.links.v12.0.ENSG.txt"
+  
+  pathOrderGene: "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/gene_variance_order_tpm_unstranded.json"
+
+  pathTestClass: "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/test_separation_2_classes.json"
+  pathTrainClass: "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/train_separation_2_classes.json"
+
+hyperparameter:
+  num_classes: 8
+  num_nodes: 6500
+  epochs: 500
+  batch_size: 2
+  seed: 123456
+  num_workers: 6
+  lr: 0.001
+  save_model_period: 500 # How many epoch to wait before save the next model.
+  feature_to_save:
+    gene: ['unstranded', 'tpm_unstranded', 'fpkm_unstranded', 'fpkm_uq_unstranded']
+    methylation: ['methylation']
+    copy_number: ['copy_number']  # Specify parameter for gene, methylation and copy number.

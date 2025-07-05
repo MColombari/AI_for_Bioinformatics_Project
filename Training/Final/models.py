@@ -115,7 +115,7 @@ class simple_GCN(torch.nn.Module):
                 if m.bias is not None:
                     torch.nn.init.zeros_(m.bias)
 
-    def forward(self, x, edge_index, batch=None):
+    def forward(self, x, edge_index, edge_attr, batch=None):
         # print(x.device)
         # num_nodes = x.shape[0]  # Numero di nodi
         # print(x.shape)
@@ -135,7 +135,53 @@ class simple_GCN(torch.nn.Module):
         x = self.lin(x)
         
         return x 
-    
+
+
+class bigger_GCN(torch.nn.Module):
+    def __init__(self, input_feature, num_classes):
+        # input feature comes from dataset.num_node_feature
+        # which returns the number of features per node in the dataset.
+        # So input_feature need to be number of feature per node in the dataset.
+        # source: https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.data.Dataset.html
+        super(bigger_GCN, self).__init__()
+        self.conv1 = GCNConv(input_feature, 2000)
+        self.conv2 = GCNConv(2000, 2000)
+        self.conv3 = GCNConv(2000, 1000)
+        self.conv4 = GCNConv(1000, 700)
+        self.conv5 = GCNConv(700, 200)
+        self.lin = Linear(200, num_classes)
+
+        # Weight initialization
+        for m in self.modules():
+            if isinstance(m, torch.nn.Linear):
+                torch.nn.init.xavier_uniform_(m.weight)
+                if m.bias is not None:
+                    torch.nn.init.zeros_(m.bias)
+
+    def forward(self, x, edge_index, edge_attr, batch=None):
+        # print(x.device)
+        # num_nodes = x.shape[0]  # Numero di nodi
+        # print(x.shape)
+        # max_index = edge_index.max().item()
+        # print(f"Numero di nodi: {num_nodes}, Max edge_index: {max_index}")
+        # assert max_index < num_nodes, "Errore: edge_index contiene un indice fuori dai limiti!"
+        # 1. Obtain node embeddings 
+        x = self.conv1(x, edge_index).relu()
+        x = self.conv2(x, edge_index).relu()
+        x = self.conv3(x, edge_index).relu()
+        x = self.conv4(x, edge_index).relu()
+        x = self.conv5(x, edge_index).relu()
+
+        # 2. Readout layer
+        x = global_mean_pool(x, batch)  # [batch_size, hidden_channels]
+
+        # 3. Apply a final classifier
+        x = F.dropout(x, p=0.5, training=self.training)
+        x = self.lin(x)
+        
+        return x 
+
+
 
 class small_GCN(torch.nn.Module):
     def __init__(self, input_feature, hidden_channels, num_classes):
@@ -147,7 +193,7 @@ class small_GCN(torch.nn.Module):
         self.conv1 = GCNConv(input_feature, hidden_channels)
         self.lin = Linear(hidden_channels, num_classes)
 
-    def forward(self, x, edge_index, batch=None):
+    def forward(self, x, edge_index, edge_attr, batch=None):
         # num_nodes = x.shape[0]  # Numero di nodi
         # print(x.shape)
         # max_index = edge_index.max().item()
@@ -177,7 +223,7 @@ class GAT(torch.nn.Module):
 
         self.lin = nn.Linear(hidden_channels * num_head, num_classes)
 
-    def forward(self, x, edge_index, batch=None):
+    def forward(self, x, edge_index, edge_attr, batch=None):
 
         # x = x.type(torch.float)
 
@@ -222,7 +268,7 @@ class SimpleGAT(torch.nn.Module):
 
         self.lin = nn.Linear(hidden_channels * num_head, num_classes)
 
-    def forward(self, x, edge_index, batch=None):
+    def forward(self, x, edge_index, edge_attr, batch=None):
 
         # x = x.type(torch.float)
 
@@ -264,7 +310,7 @@ class ComplexGAT(torch.nn.Module):
 
         self.lin = nn.Linear(hidden_channels * num_head, num_classes)
 
-    def forward(self, x, edge_index, batch=None):
+    def forward(self, x, edge_index, edge_attr, batch=None):
         x = F.dropout(x, p=self.drop_out_prob, training=self.training)
         x = self.layer1(x, edge_index)
         x = F.elu(x)

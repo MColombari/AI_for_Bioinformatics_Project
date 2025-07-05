@@ -1,73 +1,57 @@
 import torch
 from Save_model import SaveModel as SM
-from models import simple_GCN, small_GCN, GAT, SimpleGAT, ComplexGAT, EdgeAttrGNN, EdgeAttrGAT, EdgeAttrGNNLight
+from models import simple_GCN, bigger_GCN, small_GCN, GAT, SimpleGAT, ComplexGAT, EdgeAttrGNN, EdgeAttrGAT, EdgeAttrGNNLight
 from Load_and_Process_Data import LPDEdgeKnowledgeBased
 from torch_geometric.loader import DataLoader
-from collections import OrderedDict
 from sklearn.metrics import accuracy_score
-import numpy as np
-import torch_geometric.transforms as T
-from torch.nn import DataParallel
+import yaml
 
 # So we have a structure of folder where we have a main folder containig all the test for
 # each subgroup (Methylation, Gene, Copy number), and in each of these folder we have
 # a folder for each test, inside all the results and checkpoint are saved.
 
-#   Data Parameter
+#   Data Parameter loaded from YAML file.
 
-# Name of the test, like methylation or gene... . TODO
-TEST_NAME = "Train_Gene"
-MORE_INFO = """
-    This is the first try with the basic model.\nwith new LPD.
-    And we set Threshold as 0.
-"""
+with open("config.yaml", "r") as yamlfile:
+    data_yaml = yaml.load(yamlfile, Loader=yaml.FullLoader)
 
-# PATH where we'll create the folder containig the new test.    TODO
-TEST_FOLDER_PATH = "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output"
+# Name of the test, like methylation or gene... .
+TEST_NAME = data_yaml['Generic']['Test_name']
+MORE_INFO = data_yaml['Generic']['More_info']
 
-# Load previous checkpoint. TODO
-START_FROM_CHECKPOINT = False
-CHECKPOINT_PATH = "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train_Gene_54/model_checkpoints/Train_Gene_epoch_100.pth"
+# PATH where we'll create the folder containig the new test.
+TEST_FOLDER_PATH = data_yaml['PATH']['Test_folder_path']
 
-# Load Dataset. TODO
-LOAD_DATASET = True
-DATASET_FROM_FOLDER_PATH = "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train_Gene_79"
-SAVE_DATASET = True
+# Load previous checkpoint.
+START_FROM_CHECKPOINT = data_yaml['Conditions']['Start_from_checkpoint']
+CHECKPOINT_PATH = data_yaml['PATH']['Checkpoint_path']
+
+# Load Dataset.
+LOAD_DATASET = data_yaml['Conditions']['Load_dataset']
+DATASET_FROM_FOLDER_PATH = data_yaml['PATH']['Dataset_from_folder_path']
+SAVE_DATASET = data_yaml['Conditions']['Save_dataset']
 
 # Load data path
-PATH_GTF_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/gencode.v47.annotation.gtf"
-PATH_FOLDER_GENE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneExpression"
-PATH_FOLDER_COPY_NUMBER = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/CopyNumber"
-PATH_FOLDER_METHYLATION = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/Methylation"
-PATH_CASE_ID_STRUCTURE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/case_id_and_structure.json"
+PATH_GTF_FILE = data_yaml['Generic_PATH']['pathGtfFile']
+PATH_FOLDER_GENE = data_yaml['Generic_PATH']['pathFolderGene']
+PATH_FOLDER_COPY_NUMBER = data_yaml['Generic_PATH']['pathFolderCopyNumber']
+PATH_FOLDER_METHYLATION = data_yaml['Generic_PATH']['pathFolderMethylation']
+PATH_CASE_ID_STRUCTURE = data_yaml['Generic_PATH']['pathCaseIdStructure']
 
-PATH_METHYLATION_CONVERTER = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/matched_cpg_genes.csv"
+PATH_METHYLATION_CONVERTER = data_yaml['Generic_PATH']['pathMethylationConverter']
 
 # For edge similarity files.
-PATH_EDGE_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/9606.protein.links.v12.0.ENSG.txt"
-PATH_COMPLETE_EDGE_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/edge_T900.json"
-PATH_EDGE_ORDER_FILE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/edge_node_order.json"
+PATH_EDGE_FILE = data_yaml['Generic_PATH']['pathEdgeFile']
+
 # Order of nodes files.
-PATH_ORDER_GENE = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/gene_variance_order_tpm_unstranded.json"
+PATH_ORDER_GENE = data_yaml['Generic_PATH']['pathOrderGene']
 
-
-PATH_TEST_CLASS = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/test_separation_2_classes.json"
-PATH_TRAIN_CLASS = "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/train_separation_2_classes.json"
+# Test and Train separation file.
+PATH_TEST_CLASS = data_yaml['Generic_PATH']['pathTestClass']
+PATH_TRAIN_CLASS = data_yaml['Generic_PATH']['pathTrainClass']
 
 #   Model parameter TODO
-hyperparameter = {
-    'num_classes': 2,
-    'num_nodes': 2000,
-    'epochs': 500,
-    'batch_size': 2,
-    'seed': 123456,
-    'num_workers': 6,
-    'lr': 0.001,
-    'save_model_period': 500, # How many epoch to wait before save the next model.
-    'feature_to_save': {'gene':['fpkm_uq_unstranded'],
-                        'methylation': ['methylation'],
-                        'copy_number': ['copy_number']}, # Specify parameter for gene, methylation and copy number.
-}
+hyperparameter = data_yaml['hyperparameter']
 
 torch.manual_seed(hyperparameter['seed'])
 
@@ -128,15 +112,29 @@ else:
 node_feature_number = 0
 for k in hyperparameter['feature_to_save'].keys():
     node_feature_number += len(hyperparameter['feature_to_save'][k])
+
+sm.print(f"\nNumber of input feature: {node_feature_number}")
     
+<<<<<<< HEAD
+#model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
+# model = small_GCN(node_feature_number, 750, hyperparameter['num_classes'])
+# model = EdgeAttrGNN(node_feature_number, 128, hyperparameter['num_classes'])
+# model = EdgeAttrGNNLight(node_feature_number, 128, hyperparameter['num_classes'])
+model = EdgeAttrGAT(node_feature_number, 500, hyperparameter['num_classes'], heads=10)
+# model =  GAT(node_feature_number, 1000, 30, hyperparameter['num_classes'], 0.2)
+# model = SimpleGAT(node_feature_number, 2000, 30, hyperparameter['num_classes'], 0.2)
+# model = ComplexGAT(node_feature_number, 500, 20, hyperparameter['num_classes'], 0.2)
+=======
 # model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
+# model = bigger_GCN(node_feature_number, hyperparameter['num_classes'])
 # model = small_GCN(node_feature_number, 750, hyperparameter['num_classes'])
 model = EdgeAttrGNN(node_feature_number, 128, hyperparameter['num_classes'])
 # model = EdgeAttrGNNLight(node_feature_number, 128, hyperparameter['num_classes'])
-# model = EdgeAttrGAT(node_feature_number, 200, hyperparameter['num_classes'], heads=4)
-# model =  GAT(node_feature_number, 1000, 30, hyperparameter['num_classes'], 0.2)
+# model = EdgeAttrGAT(node_feature_number, 500, hyperparameter['num_classes'], heads=10)
+# model = GAT(node_feature_number, 1000, 30, hyperparameter['num_classes'], 0.2)
 # model = SimpleGAT(node_feature_number, 2000, 30, hyperparameter['num_classes'], 0.2)
 # model = ComplexGAT(node_feature_number, 500, 20, hyperparameter['num_classes'], 0.2)
+>>>>>>> e4208838f0cde4666478ac0adbdc9a177f0c9cd1
 
 # model = DataParallel(model)
 
@@ -148,7 +146,7 @@ if START_FROM_CHECKPOINT:
     model.load_state_dict(model_dict)
 
 # Create Folder and first files.
-sm.save_test_info(MORE_INFO, START_FROM_CHECKPOINT, CHECKPOINT_PATH)
+sm.save_test_info(data_yaml)
 sm.save_model_hyperparameter(hyperparameter)
 # https://pytorch.org/tutorials/beginner/saving_loading_models.html
 sm.save_model_architecture(model)
