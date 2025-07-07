@@ -115,7 +115,6 @@ for k in hyperparameter['feature_to_save'].keys():
 
 sm.print(f"\nNumber of input feature: {node_feature_number}")
     
-<<<<<<< HEAD
 #model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
 # model = small_GCN(node_feature_number, 750, hyperparameter['num_classes'])
 # model = EdgeAttrGNN(node_feature_number, 128, hyperparameter['num_classes'])
@@ -124,17 +123,6 @@ model = EdgeAttrGAT(node_feature_number, 500, hyperparameter['num_classes'], hea
 # model =  GAT(node_feature_number, 1000, 30, hyperparameter['num_classes'], 0.2)
 # model = SimpleGAT(node_feature_number, 2000, 30, hyperparameter['num_classes'], 0.2)
 # model = ComplexGAT(node_feature_number, 500, 20, hyperparameter['num_classes'], 0.2)
-=======
-# model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
-# model = bigger_GCN(node_feature_number, hyperparameter['num_classes'])
-# model = small_GCN(node_feature_number, 750, hyperparameter['num_classes'])
-model = EdgeAttrGNN(node_feature_number, 128, hyperparameter['num_classes'])
-# model = EdgeAttrGNNLight(node_feature_number, 128, hyperparameter['num_classes'])
-# model = EdgeAttrGAT(node_feature_number, 500, hyperparameter['num_classes'], heads=10)
-# model = GAT(node_feature_number, 1000, 30, hyperparameter['num_classes'], 0.2)
-# model = SimpleGAT(node_feature_number, 2000, 30, hyperparameter['num_classes'], 0.2)
-# model = ComplexGAT(node_feature_number, 500, 20, hyperparameter['num_classes'], 0.2)
->>>>>>> e4208838f0cde4666478ac0adbdc9a177f0c9cd1
 
 # model = DataParallel(model)
 
