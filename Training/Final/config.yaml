@@ -1,6 +1,6 @@
 Generic:
   Test_name: "Train Final"
-  More_info: "Early testing of final model."
+  More_info: "2 class testing GAT."
 
 Conditions:
   Start_from_checkpoint: False
@@ -30,13 +30,13 @@ Generic_PATH:
 
 hyperparameter:
   num_classes: 2
-  num_nodes: 6500
+  num_nodes: 4500
   epochs: 500
   batch_size: 2
   seed: 123456
   num_workers: 6
   lr: 0.001
-  save_model_period: 500 # How many epoch to wait before save the next model.
+  save_model_period: 100 # How many epoch to wait before save the next model.
   feature_to_save:
     gene: ['unstranded', 'tpm_unstranded', 'fpkm_unstranded', 'fpkm_uq_unstranded']
     methylation: ['methylation']
