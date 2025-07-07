@@ -27,6 +27,15 @@ Models_GitHub_davide/test_result
 Models_GitHub_davide/run_output
 Training/Copy_Number/__pycache__
 
+Models_GitHub_davide/run_files
+Models_GitHub_davide/save_model
+Models_GitHub_davide/test_result
+
+GGNN_main/data
+GGNN_main/run_files
+GGNN_main/run_output
+GGNN_main/__pycache__
+GGNN_main/GeometricNetworkAnalysis/__pycache__
 Models_GitHub_davide/datasets/GENE_EXP
 Models_GitHub_davide/datasets/GENE_EXP_100_001
 Models_GitHub_davide/datasets/GENE_EXP_100_0001
