@@ -4,13 +4,13 @@ Generic:
 
 Conditions:
   Start_from_checkpoint: False
-  Load_dataset: False
+  Load_dataset: True
   Save_dataset: True
 
 PATH:
   Test_folder_path: "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output"
   Checkpoint_path: "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train_Gene_54/model_checkpoints/Train_Gene_epoch_100.pth"
-  Dataset_from_folder_path: "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train Final_4"
+  Dataset_from_folder_path: "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train Final Regression_2"
 
 Generic_PATH:
   pathGtfFile: "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/gencode.v47.annotation.gtf"

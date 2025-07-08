@@ -422,10 +422,10 @@ class LPDEdgeKnowledgeBased:
             x = torch.tensor(self.datastructure_merge['values'].loc[case_index][feature_to_save].values, dtype=torch.float)
 
             if self.datastructure_merge['case_id'].iloc[case_index] in train_case_id.keys():
-                y = torch.tensor(train_case_id[self.datastructure_merge['case_id'].iloc[case_index]])
+                y = torch.tensor(train_case_id[self.datastructure_merge['case_id'].iloc[case_index]], dtype=torch.float)
                 self.train_list.append(Data(x=x, edge_index=edge_index, edge_attr=edge_attr, y=y))
             elif self.datastructure_merge['case_id'].iloc[case_index] in test_case_id.keys():
-                y = torch.tensor(test_case_id[self.datastructure_merge['case_id'].iloc[case_index]])
+                y = torch.tensor(test_case_id[self.datastructure_merge['case_id'].iloc[case_index]], dtype=torch.float)
                 self.test_list.append(Data(x=x, edge_index=edge_index, edge_attr=edge_attr, y=y))
             else:
                 raise Exception(f"Case id not found in ether train or test\n\"{self.datastructure_merge['case_id'].iloc[case_index]}\"")
