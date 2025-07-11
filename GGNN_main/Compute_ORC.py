@@ -22,9 +22,9 @@ adj.index=hprd_genes
 #input_folder="/home/jiening666/Data/mm_CoMMpass/out/"
 #omics=["RNA","CNA"]
  
-input_folder="./data/ov_tcga/out/"
-omics=["RNA","CNA","Methyl"]
-#omics=["CNA"]
+input_folder="./data/ov_tcga2/out/"
+# omics=["RNA","CNA","Methyl"]
+omics=["CNA"]
 for omic in omics:
     input_name=input_folder+omic+".csv"
     tb=pd.read_csv(input_name,header=0,index_col=0)

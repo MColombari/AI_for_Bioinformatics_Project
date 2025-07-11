@@ -115,7 +115,7 @@ for k in hyperparameter['feature_to_save'].keys():
 
 sm.print(f"\nNumber of input feature: {node_feature_number}")
     
-#model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
+# model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
 # model = small_GCN(node_feature_number, 750, hyperparameter['num_classes'])
 # model = EdgeAttrGNN(node_feature_number, 128, hyperparameter['num_classes'])
 # model = EdgeAttrGNNLight(node_feature_number, 128, hyperparameter['num_classes'])
