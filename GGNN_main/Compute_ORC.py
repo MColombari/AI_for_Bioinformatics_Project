@@ -18,13 +18,10 @@ hprd_genes=hprd_genes.values.tolist()
 hprd_genes=[k[0] for k in hprd_genes]
 adj.columns=hprd_genes
 adj.index=hprd_genes
-
-#input_folder="/home/jiening666/Data/mm_CoMMpass/out/"
-#omics=["RNA","CNA"]
  
-input_folder="./data/ov_tcga2/out/"
-# omics=["RNA","CNA","Methyl"]
-omics=["CNA"]
+input_folder="./data/ov_tcga4/out/"
+omics=["RNA","CNA","Methyl"]
+# omics=["CNA"]
 for omic in omics:
     input_name=input_folder+omic+".csv"
     tb=pd.read_csv(input_name,header=0,index_col=0)
@@ -32,8 +29,6 @@ for omic in omics:
 
     start = time.time()
     # --- Setup weighted graph ---
-    #G = nx.karate_club_graph()
-    #G = nx.fast_gnp_random_graph(500, 0.1, seed=10)
     adj_s=[[adj[i][j] for j in test] for i in test]
     adj_s=np.array(adj_s)
     adj_s=adj_s-np.diag(np.diag(adj_s))
