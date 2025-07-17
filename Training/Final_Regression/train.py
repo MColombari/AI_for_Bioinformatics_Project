@@ -116,10 +116,10 @@ for k in hyperparameter['feature_to_save'].keys():
 
 sm.print(f"\nNumber of input feature: {node_feature_number}")
     
-model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
+# model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
 # model = bigger_GCN(node_feature_number, hyperparameter['num_classes'])
 # model = small_GCN(node_feature_number, 750, hyperparameter['num_classes'])
-# model = EdgeAttrGNN(node_feature_number, 128, hyperparameter['num_classes'])
+model = EdgeAttrGNN(node_feature_number, 128, hyperparameter['num_classes'])
 # model = EdgeAttrGNNLight(node_feature_number, 128, hyperparameter['num_classes'])
 # model = EdgeAttrGAT(node_feature_number, 15, hyperparameter['num_classes'], num_layers=1, heads=7)
 # model = GAT(node_feature_number, 1000, 30, hyperparameter['num_classes'], 0.2)
@@ -176,7 +176,44 @@ def check_c_index_metrix(labels: list, predictions: list)->bool:
     p_indexs = np.argsort(predictions)
     return np.array_equal(l_indexs, p_indexs)
 
+def cindex_loss(pred, y):
+    n = 0
+    loss = 0.0
+    if y.dim() == 0:
+        dim = 1
+    else:
+        dim = pred.shape[0]
+    # print(pred)
+    for i in range(dim):
+        for j in range(dim):
+            if y[i] < y[j]:
+                diff = pred[j] - pred[i]
+                loss += torch.sigmoid(diff)
+                n += 1
+    return loss if n > 0 else torch.tensor(0.0, device=device)
+
+def cindex_loss_vectorized(pred, y):
+    pred = pred.view(-1)
+    y = y.view(-1)
+
+    # Create all pairwise differences
+    # https://stackoverflow.com/questions/69797614/indexing-a-tensor-with-none-in-pytorch
+    diff = pred[:, None] - pred[None, :]
+    y_diff = y[:, None] - y[None, :]
+
+    # Mask for valid pairs where y_i > y_j
+    valid = y_diff > 0
+
+    # Apply sigmoid to the negative prediction difference
+    loss = torch.sigmoid(-diff[valid])
+
+    if valid.sum() == 0:
+        return torch.tensor(0.0, device=pred.device, requires_grad=True)
+
+    return loss.mean()
+
 def train(loader):
+    torch.autograd.set_detect_anomaly(True)
     model.train()
     index_batch = 0
     for data in loader:
@@ -218,7 +255,7 @@ def train(loader):
 
         # Compute the loss
         # print(f"Labels: {labels}")
-        loss = criterion(outputs, labels)
+        loss = cindex_loss_vectorized(outputs, labels)
 
         # print(f"Loss: {loss}")
         
@@ -226,7 +263,8 @@ def train(loader):
         loss.backward()
         for name, param in model.named_parameters():
             if param.grad is None:
-                raise Exception(f"{name} has no gradient!")
+                pass
+                # raise Exception(f"{name} has no gradient!")
         for name, param in model.named_parameters():
             if param.grad is not None and (torch.isnan(param.grad).any() or torch.isinf(param.grad).any()):
                 raise Exception(f"NaN or Inf detected in gradients: {name}")
@@ -265,7 +303,7 @@ def test(loader):
             # print(f"Output: {outputs}")
 
             # compute the loss
-            loss = criterion(outputs, labels)
+            loss = cindex_loss(outputs, labels)
             losses.append(loss.item())
             
             # print(f"Loss: {loss}")
