@@ -18,8 +18,8 @@ hprd_genes=hprd_genes.values.tolist()
 hprd_genes=[k[0] for k in hprd_genes]
 adj.columns=hprd_genes
 adj.index=hprd_genes
- 
-input_folder="./data/ov_tcga4/out/"
+
+input_folder="./data/ov_tcga5/out/"
 omics=["RNA","CNA","Methyl"]
 # omics=["CNA"]
 for omic in omics:
