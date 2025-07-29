@@ -4,13 +4,14 @@ Generic:
 
 Conditions:
   Start_from_checkpoint: False
-  Load_dataset: True
+  Load_dataset: False
   Save_dataset: True
+  Dont_train: True
 
 PATH:
   Test_folder_path: "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output"
   Checkpoint_path: "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train_Gene_54/model_checkpoints/Train_Gene_epoch_100.pth"
-  Dataset_from_folder_path: "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train Final Regression_2"
+  Dataset_from_folder_path: "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train Final Regression_52"
 
 Generic_PATH:
   pathGtfFile: "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/gencode.v47.annotation.gtf"
@@ -23,19 +24,20 @@ Generic_PATH:
 
   pathEdgeFile: "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/9606.protein.links.v12.0.ENSG.txt"
   
-  pathOrderGene: "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/gene_variance_order_tpm_unstranded_regression.json"
+  pathOrderGene: "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/gene_variance_order_fpkm_uq_unstranded_regression.json"
 
   pathTestClass: "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/test_separation_regression.json"
   pathTrainClass: "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/GeneProcessedData/train_separation_regression.json"
 
 hyperparameter:
   num_classes: 1
-  num_nodes: 4500
+  num_nodes: 10000
   epochs: 500
   batch_size: 4
   seed: 123456
   num_workers: 6
   lr: 0.001
+  alpha_loss: 0.2
   save_model_period: 100 # How many epoch to wait before save the next model.
   feature_to_save:
     gene: ['unstranded', 'tpm_unstranded', 'fpkm_unstranded', 'fpkm_uq_unstranded']
