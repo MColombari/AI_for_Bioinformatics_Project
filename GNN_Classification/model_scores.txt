@@ -1,0 +1,157 @@
+TEST #1 
+pair_wise distance using copy number values
+model_params: GCN, 100 epochs, 10 fold, agg_layer 2, agg_hidden 32
+N nodes avg/std: 	200.00/0.00
+N edges avg/std/min/max: 	7332.79/2896.91/2960/19900
+Node degree avg/std/min/max: 	73.33/43.41/0/199
+accuracy: 60.229, std: 10.850
+
+TEST #2 
+pair_wise distance using copy number values
+model_params: GCN, 100 epochs, 10 fold, agg_layer 3, agg_hidden 32
+N nodes avg/std: 	200.00/0.00
+N edges avg/std/min/max: 	7332.79/2896.91/2960/19900
+Node degree avg/std/min/max: 	73.33/43.41/0/199
+accuracy: 46.477, std: 7.107
+
+TEST #3 
+pair_wise distance using copy number values
+model_params: GCN, 100 epochs, 10 fold, agg_layer 1, agg_hidden 32
+N nodes avg/std: 	200.00/0.00
+N edges avg/std/min/max: 	7332.79/2896.91/2960/19900
+Node degree avg/std/min/max: 	73.33/43.41/0/199
+accuracy: 76.682, std: 12.927
+
+TEST #4 
+pair_wise distance using copy number values
+model_params: GAT, 100 epochs, 10 fold, agg_layer 2, agg_hidden 32
+N nodes avg/std: 	200.00/0.00
+N edges avg/std/min/max: 	7332.79/2896.91/2960/19900
+Node degree avg/std/min/max: 	73.33/43.41/0/199
+accuracy: 61.625, std: 12.694
+
+TEST #5 
+pair_wise distance using copy number values
+model_params: GAT, 100 epochs, 10 fold, agg_layer 3, agg_hidden 32
+N nodes avg/std: 	200.00/0.00
+N edges avg/std/min/max: 	7332.79/2896.91/2960/19900
+Node degree avg/std/min/max: 	73.33/43.41/0/199
+accuracy: 63.112, std: 8.652
+
+TEST #6 
+pair_wise distance using copy number values
+model_params: GAT, 100 epochs, 10 fold, agg_layer 1, agg_hidden 32
+N nodes avg/std: 	200.00/0.00
+N edges avg/std/min/max: 	7332.79/2896.91/2960/19900
+Node degree avg/std/min/max: 	73.33/43.41/0/199
+accuracy: 52.495, std: 14.120
+
+##################################################################
+
+TEST #7 
+pair_wise distance using copy number values
+model_params: GCN, 100 epochs, 10 fold, agg_layer 1, agg_hidden 32
+N nodes avg: 	500.00
+N edges avg/std/min/max: 	39904.31/16419.88/16732/122275
+Node degree avg/std/min/max: 	159.62/100.57/0/494
+accuracy: 89.129, std: 13.320 
+
+TEST #8 
+pair_wise distance using copy number values
+model_params: GCN, 100 epochs, 10 fold, agg_layer 2, agg_hidden 32
+N nodes avg: 	500.00
+N edges avg/std/min/max: 	39904.31/16419.88/16732/122275
+Node degree avg/std/min/max: 	159.62/100.57/0/494
+accuracy: 49.863, std: 9.992
+
+TEST #9 
+pair_wise distance using copy number values
+model_params: GCN, 100 epochs, 10 fold, agg_layer 3, agg_hidden 32
+N nodes avg: 	500.00
+N edges avg/std/min/max: 	39904.31/16419.88/16732/122275
+Node degree avg/std/min/max: 	159.62/100.57/0/494
+accuracy: 49.085, std: 7.960
+
+TEST #10 
+pair_wise distance using copy number values
+model_params: GAT, 100 epochs, 10 fold, agg_layer 1, agg_hidden 32
+N nodes avg: 	500.00
+N edges avg/std/min/max: 	39904.31/16419.88/16732/122275
+Node degree avg/std/min/max: 	159.62/100.57/0/494
+accuracy: 56.933, std: 11.995
+
+TEST #11 
+pair_wise distance using copy number values
+model_params: GAT, 100 epochs, 10 fold, agg_layer 2, agg_hidden 32
+N nodes avg: 	500.00
+N edges avg/std/min/max: 	39904.31/16419.88/16732/122275
+Node degree avg/std/min/max: 	159.62/100.57/0/494
+accuracy: 65.012, std: 6.515
+
+TEST #12 
+pair_wise distance using copy number values
+model_params: GAT, 100 epochs, 10 fold, agg_layer 3, agg_hidden 32
+N nodes avg: 	500.00
+N edges avg/std/min/max: 	39904.31/16419.88/16732/122275
+Node degree avg/std/min/max: 	159.62/100.57/0/494
+accuracy: 66.933, std: 15.490
+
+#######################################################
+
+TEST #13 
+pair_wise distance using copy number values
+model_params: GCN, 100 epochs, 10 fold, agg_layer 1, agg_hidden 32
+N nodes avg: 	1000.00
+N edges avg/std/min/max: 	153268.66/63786.96/66305/494525
+Node degree avg/std/min/max: 	306.54/203.16/0/994
+accuracy: 85.652, std: 19.982
+
+TEST #14 
+pair_wise distance using copy number values
+model_params: GCN, 100 epochs, 10 fold, agg_layer 2, agg_hidden 32
+N nodes avg: 	1000.00
+N edges avg/std/min/max: 	153268.66/63786.96/66305/494525
+Node degree avg/std/min/max: 	306.54/203.16/0/994
+accuracy: 50.047, std: 8.018
+
+TEST #15 
+pair_wise distance using copy number values
+model_params: GCN, 100 epochs, 2 fold, agg_layer 1, agg_hidden 32
+N nodes avg: 	1000.00
+N edges avg/std/min/max: 	153268.66/63786.96/66305/494525
+Node degree avg/std/min/max: 	306.54/203.16/0/994
+accuracy: 53.095, std: 13.767
+
+TEST #16 
+pair_wise distance using copy number values
+model_params: , 100 epochs, 4 fold, agg_layer 1, agg_hidden 32
+N nodes avg: 	1000.00
+N edges avg/std/min/max: 	153268.66/63786.96/66305/494525
+Node degree avg/std/min/max: 	306.54/203.16/0/994
+accuracy: 66.5725, std: 24.484
+
+##############################################
+
+TEST #16 
+pair_wise distance using copy number values
+model_params: , 100 epochs, 10 fold, agg_layer , agg_hidden 32
+N nodes avg: 	1000.00
+N edges avg/std/min/max: 	153268.66/63786.96/66305/494525
+Node degree avg/std/min/max: 	306.54/203.16/0/994
+accuracy: , std:
+
+TEST #16 
+pair_wise distance using copy number values
+model_params: , 100 epochs, 10 fold, agg_layer , agg_hidden 32
+N nodes avg: 	1000.00
+N edges avg/std/min/max: 	153268.66/63786.96/66305/494525
+Node degree avg/std/min/max: 	306.54/203.16/0/994
+accuracy: , std:
+
+TEST #16 
+pair_wise distance using copy number values
+model_params: , 100 epochs, 10 fold, agg_layer , agg_hidden 32
+N nodes avg: 	1000.00
+N edges avg/std/min/max: 	153268.66/63786.96/66305/494525
+Node degree avg/std/min/max: 	306.54/203.16/0/994
+accuracy: , std:

@@ -1,2 +1,0 @@
-/var/lib/slurm/slurmd/job2551710/slurm_script: line 16: 3312631 Killed                  python3 train.py --epoch 10 --n_folds 10 --model_list GCN --dataset_list COPY_NUMBER --readout_list avg --n_agg_layer 1 --agg_hidden 32
-slurmstepd: error: Detected 1 oom_kill event in StepId=2551710.batch. Some of the step tasks have been OOM Killed.

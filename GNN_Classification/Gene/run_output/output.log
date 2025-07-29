@@ -1,0 +1,117 @@
+Read GTF file	
+	Intersection dim: 500
+		Execution time: 		33.0s
+Start preprocessing		77.0s
+Create the Graph
+	Average num of edges: 644.8761061946902
+	Variance num of edges: 7878.365181298456
+	Median num of edges: 648.0
+	Max num of edges: 866
+	Min num of edges: 410
+		Execution time: 		1.0s
+Start graph labeling		0.0s
+Program terminated successfully
+Read GTF file	
+	Intersection dim: 200
+		Execution time: 		24.0s
+Start preprocessing		26.0s
+Create the Graph
+	Average num of edges: 107.78761061946902
+	Variance num of edges: 421.97258986608193
+	Median num of edges: 106.0
+	Max num of edges: 162
+	Min num of edges: 46
+		Execution time: 		0.0s
+Start graph labeling		0.0s
+Program terminated successfully
+Read GTF file	
+	Intersection dim: 100
+		Execution time: 		25.0s
+Start preprocessing		26.0s
+Create the Graph
+	Average num of edges: 29.283185840707965
+	Variance num of edges: 65.9463544521889
+	Median num of edges: 29.0
+	Max num of edges: 52
+	Min num of edges: 10
+		Execution time: 		0.0s
+Start graph labeling		0.0s
+Program terminated successfully
+Read GTF file	
+	Intersection dim: 500
+		Execution time: 		25.0s
+Start preprocessing		26.0s
+Create the Graph
+	Average num of edges: 1603.7787610619469
+	Variance num of edges: 43334.72981439424
+	Median num of edges: 1604.0
+	Max num of edges: 2072
+	Min num of edges: 1070
+		Execution time: 		1.0s
+Start graph labeling		0.0s
+Program terminated successfully
+Read GTF file	
+	Intersection dim: 200
+		Execution time: 		28.0s
+Start preprocessing		27.0s
+Create the Graph
+	Average num of edges: 266.0088495575221
+	Variance num of edges: 1920.0530190304642
+	Median num of edges: 266.0
+	Max num of edges: 388
+	Min num of edges: 156
+		Execution time: 		0.0s
+Start graph labeling		0.0s
+Program terminated successfully
+Read GTF file	
+	Intersection dim: 100
+		Execution time: 		29.0s
+Start preprocessing		26.0s
+Create the Graph
+	Average num of edges: 73.98230088495575
+	Variance num of edges: 219.6811026705302
+	Median num of edges: 73.0
+	Max num of edges: 116
+	Min num of edges: 38
+		Execution time: 		0.0s
+Start graph labeling		0.0s
+Program terminated successfully
+Read GTF file	
+	Intersection dim: 500
+		Execution time: 		28.0s
+Start preprocessing		27.0s
+Create the Graph
+	Average num of edges: 163.63716814159292
+	Variance num of edges: 752.0984415381001
+	Median num of edges: 164.0
+	Max num of edges: 276
+	Min num of edges: 102
+		Execution time: 		1.0s
+Start graph labeling		0.0s
+Program terminated successfully
+Read GTF file	
+	Intersection dim: 200
+		Execution time: 		28.0s
+Start preprocessing		26.0s
+Create the Graph
+	Average num of edges: 28.513274336283185
+	Variance num of edges: 71.3471689247396
+	Median num of edges: 28.0
+	Max num of edges: 68
+	Min num of edges: 10
+		Execution time: 		0.0s
+Start graph labeling		0.0s
+Program terminated successfully
+Read GTF file	
+	Intersection dim: 100
+		Execution time: 		26.0s
+Start preprocessing		29.0s
+Create the Graph
+	Average num of edges: 7.265486725663717
+	Variance num of edges: 14.168454851593703
+	Median num of edges: 8.0
+	Max num of edges: 20
+	Min num of edges: 0
+		Execution time: 		0.0s
+Start graph labeling		0.0s
+Program terminated successfully

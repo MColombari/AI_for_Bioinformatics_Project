@@ -1,0 +1,12 @@
+/homes/mcolombari/AI_for_Bioinformatics_Project/Models_GitHub_davide/models/GCN.py:51: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  x = F.softmax(self.fc2(x))
+Traceback (most recent call last):
+  File "/homes/mcolombari/AI_for_Bioinformatics_Project/Models_GitHub_davide/train.py", line 196, in <module>
+    datareader = DataReader(data_dir='./datasets/%s/' % dataset_name.upper(),
+  File "/homes/mcolombari/AI_for_Bioinformatics_Project/Models_GitHub_davide/datasets/graph_data_reader.py", line 45, in __init__
+    data['adj_list'] = self.read_graph_adj(list(filter(lambda f: f.find('_A') >= 0, files))[0], nodes, graphs)        
+  File "/homes/mcolombari/AI_for_Bioinformatics_Project/Models_GitHub_davide/datasets/graph_data_reader.py", line 219, in read_graph_adj
+    adj_list = [adj_dict[graph_id] for graph_id in sorted(list(graphs.keys()))]
+  File "/homes/mcolombari/AI_for_Bioinformatics_Project/Models_GitHub_davide/datasets/graph_data_reader.py", line 219, in <listcomp>
+    adj_list = [adj_dict[graph_id] for graph_id in sorted(list(graphs.keys()))]
+KeyError: 3
