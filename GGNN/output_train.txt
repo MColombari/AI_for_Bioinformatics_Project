@@ -1,0 +1,768 @@
+
+
+ ---------------- Start round: 1 / 1 ----------------
+
+Train event rate: 0.603448275862069
+Test event rate: 0.5517241379310345
+Validation event rate: 0.6724137931034483
+Gene AGXT c-index= 0.6146289706230164
+Gene TPH1 c-index= 0.6073499917984009
+Gene BTRC c-index= 0.6031482815742493
+Gene RAB11FIP5 c-index= 0.6005444526672363
+Gene SEMA4F c-index= 0.5978222489356995
+Gene RHOA c-index= 0.5952183604240417
+Gene NF1 c-index= 0.5939164161682129
+Gene SEMA3F c-index= 0.5935613811016083
+Gene AGT c-index= 0.5910758376121521
+Gene PYGB c-index= 0.5900106430053711
+Curv_Net RNA  start training:
+Epoch 0 :
+ Train Loss 4.177518367767334 , Train Cindex: 0.5856314301490784 ,
+ Test Loss 3.1667022705078125 , Test Cindex: 0.5109890103340149
+Epoch 100 :
+ Train Loss 4.174961090087891 , Train Cindex: 0.621375322341919 ,
+ Test Loss 3.1657004356384277 , Test Cindex: 0.5219780206680298
+Epoch 200 :
+ Train Loss 4.172270774841309 , Train Cindex: 0.6396023035049438 ,
+ Test Loss 3.164576292037964 , Test Cindex: 0.5351648330688477
+Epoch 300 :
+ Train Loss 4.169395446777344 , Train Cindex: 0.6514380574226379 ,
+ Test Loss 3.163409471511841 , Test Cindex: 0.5417582392692566
+Epoch 400 :
+ Train Loss 4.166331768035889 , Train Cindex: 0.6620901823043823 ,
+ Test Loss 3.1622374057769775 , Test Cindex: 0.5472527742385864
+Gene_invmea AGXT c-index= 0.6083327531814575
+Gene_invmea NF1 c-index= 0.5956466794013977
+Gene_invmea ABCB8 c-index= 0.5867663621902466
+Gene_invmea RHOA c-index= 0.5866328477859497
+Gene_invmea SEPHS1 c-index= 0.5845629870891571
+Gene_invmea B4GALT3 c-index= 0.5837617814540863
+Gene_invmea EPHA4 c-index= 0.5823596119880676
+Gene_invmea ARHGDIA c-index= 0.5818922221660614
+Gene_invmea CD6 c-index= 0.581825464963913
+Gene_invmea UNC5A c-index= 0.5810910165309906
+Edge  CAV1 - FLNA  c-index= 0.6070641577243805
+Edge  ARHGDIB - CASP3  c-index= 0.6035921573638916
+Edge  NEDD4L - NTRK1  c-index= 0.6015891134738922
+Edge  AP1M1 - EHD2  c-index= 0.6005207896232605
+Edge  AP1M1 - LAMP1  c-index= 0.6001869440078735
+Edge  PEX26 - PEX6  c-index= 0.6001201868057251
+Edge  STAM2 - USP8  c-index= 0.5998530983924866
+Edge  AP2M1 - RALBP1  c-index= 0.5973158776760101
+Edge  CCL13 - CCR3  c-index= 0.5959805250167847
+Edge  SAT1 - UBE2D3  c-index= 0.5935768187046051
+Path  20  c-index= 0.5901048183441162
+Path  76  c-index= 0.5674033463001251
+Path  43  c-index= 0.5655338168144226
+Path  150  c-index= 0.5632636547088623
+Path  149  c-index= 0.5629965662956238
+Path  79  c-index= 0.5589236617088318
+Path  95  c-index= 0.5577218532562256
+Path  133  c-index= 0.5559190511703491
+Path  140  c-index= 0.5554516911506653
+Path  87  c-index= 0.5539159774780273
+Epoch 500 :
+ Train Loss 4.14411735534668 , Train Cindex: 0.68173748254776 ,
+ Test Loss 3.146745204925537 , Test Cindex: 0.5978022217750549
+Epoch 600 :
+ Train Loss 4.1355204582214355 , Train Cindex: 0.6845780611038208 ,
+ Test Loss 3.1412174701690674 , Test Cindex: 0.6164835095405579
+Epoch 700 :
+ Train Loss 4.127798080444336 , Train Cindex: 0.6854065656661987 ,
+ Test Loss 3.13677978515625 , Test Cindex: 0.6285714507102966
+Epoch 800 :
+ Train Loss 4.120606422424316 , Train Cindex: 0.6874186396598816 ,
+ Test Loss 3.13311767578125 , Test Cindex: 0.6329670548439026
+Gene_invmea AGXT c-index= 0.6078653931617737
+Gene_invmea NF1 c-index= 0.5954463481903076
+Gene_invmea RHOA c-index= 0.5867663621902466
+Gene_invmea ABCB8 c-index= 0.5866996049880981
+Gene_invmea SEPHS1 c-index= 0.5844962298870087
+Gene_invmea B4GALT3 c-index= 0.583962082862854
+Gene_invmea EPHA4 c-index= 0.5821593403816223
+Gene_invmea ARHGDIA c-index= 0.5817587077617645
+Gene_invmea CD6 c-index= 0.5816919207572937
+Gene_invmea UNC5A c-index= 0.5814248621463776
+Edge  CAV1 - FLNA  c-index= 0.6083995401859283
+Edge  ARHGDIB - CASP3  c-index= 0.6038592457771301
+Edge  NEDD4L - NTRK1  c-index= 0.6016558706760406
+Edge  AP1M1 - EHD2  c-index= 0.6010549664497375
+Edge  AP1M1 - LAMP1  c-index= 0.6001201868057251
+Edge  STAM2 - USP8  c-index= 0.599919855594635
+Edge  PEX26 - PEX6  c-index= 0.5998530983924866
+Edge  CCL13 - CCR3  c-index= 0.597382664680481
+Edge  AP2M1 - RALBP1  c-index= 0.5971823334693909
+Edge  CD82 - ERBB3  c-index= 0.5937771201133728
+Path  20  c-index= 0.5885357558727264
+Path  76  c-index= 0.5660679638385773
+Path  43  c-index= 0.5654336810112
+Path  95  c-index= 0.5649328827857971
+Path  149  c-index= 0.5647326111793518
+Path  150  c-index= 0.5613941550254822
+Path  140  c-index= 0.5588569045066833
+Path  79  c-index= 0.558122456073761
+Path  87  c-index= 0.5565199851989746
+Path  133  c-index= 0.5551846027374268
+Epoch 900 :
+ Train Loss 4.108644485473633 , Train Cindex: 0.6857616305351257 ,
+ Test Loss 3.1337313652038574 , Test Cindex: 0.6098901033401489
+Epoch 1000 :
+ Train Loss 4.102503299713135 , Train Cindex: 0.6873002648353577 ,
+ Test Loss 3.1323790550231934 , Test Cindex: 0.6131868362426758
+Epoch 1100 :
+ Train Loss 4.096776008605957 , Train Cindex: 0.6884838342666626 ,
+ Test Loss 3.131598472595215 , Test Cindex: 0.6241758465766907
+Epoch 1200 :
+ Train Loss 4.091404438018799 , Train Cindex: 0.6895490884780884 ,
+ Test Loss 3.131352186203003 , Test Cindex: 0.6296703219413757
+Gene_invmea AGXT c-index= 0.6081992387771606
+Gene_invmea NF1 c-index= 0.5953128337860107
+Gene_invmea RHOA c-index= 0.5868999063968658
+Gene_invmea ABCB8 c-index= 0.5866996049880981
+Gene_invmea SEPHS1 c-index= 0.5844962298870087
+Gene_invmea B4GALT3 c-index= 0.5841623842716217
+Gene_invmea EPHA4 c-index= 0.5825599431991577
+Gene_invmea CCL13 c-index= 0.5819590091705322
+Gene_invmea CD6 c-index= 0.581825464963913
+Gene_invmea ARHGDIA c-index= 0.5817587077617645
+Edge  CAV1 - FLNA  c-index= 0.6088669300079346
+Edge  ARHGDIB - CASP3  c-index= 0.6034586429595947
+Edge  NEDD4L - NTRK1  c-index= 0.6017226278781891
+Edge  AP1M1 - EHD2  c-index= 0.6009882092475891
+Edge  STAM2 - USP8  c-index= 0.6009882092475891
+Edge  PEX26 - PEX6  c-index= 0.6000534296035767
+Edge  AP1M1 - LAMP1  c-index= 0.5997863411903381
+Edge  AP2M1 - RALBP1  c-index= 0.5974494218826294
+Edge  CCL13 - CCR3  c-index= 0.597048819065094
+Edge  LCK - PLCG1  c-index= 0.5963811278343201
+Path  20  c-index= 0.5876677632331848
+Path  95  c-index= 0.568738728761673
+Path  76  c-index= 0.5670027434825897
+Path  43  c-index= 0.5654670596122742
+Path  149  c-index= 0.563397228717804
+Path  87  c-index= 0.5619282722473145
+Path  150  c-index= 0.5617280006408691
+Path  140  c-index= 0.5592575073242188
+Path  79  c-index= 0.5578553676605225
+Path  91  c-index= 0.5556520223617554
+Epoch 1300 :
+ Train Loss 4.077235698699951 , Train Cindex: 0.695111870765686 ,
+ Test Loss 3.1255757808685303 , Test Cindex: 0.6274725198745728
+Epoch 1400 :
+ Train Loss 4.072780132293701 , Train Cindex: 0.6953485608100891 ,
+ Test Loss 3.126960277557373 , Test Cindex: 0.6307692527770996
+Epoch 1500 :
+ Train Loss 4.068595886230469 , Train Cindex: 0.69582200050354 ,
+ Test Loss 3.1287312507629395 , Test Cindex: 0.6340659260749817
+Epoch 1600 :
+ Train Loss 4.064630031585693 , Train Cindex: 0.696295440196991 ,
+ Test Loss 3.130812168121338 , Test Cindex: 0.6351648569107056
+Gene_invmea AGXT c-index= 0.6083995699882507
+Gene_invmea NF1 c-index= 0.5952460169792175
+Gene_invmea RHOA c-index= 0.5868999063968658
+Gene_invmea ABCB8 c-index= 0.5866996049880981
+Gene_invmea SEPHS1 c-index= 0.5845629870891571
+Gene_invmea B4GALT3 c-index= 0.5842291414737701
+Gene_invmea EPHA4 c-index= 0.5824263691902161
+Gene_invmea ARHGDIA c-index= 0.5818922221660614
+Gene_invmea CD6 c-index= 0.5817587077617645
+Gene_invmea CCL13 c-index= 0.5816251635551453
+Edge  CAV1 - FLNA  c-index= 0.6063964664936066
+Edge  ARHGDIB - CASP3  c-index= 0.601455569267273
+Edge  STAM2 - USP8  c-index= 0.6013888120651245
+Edge  NEDD4L - NTRK1  c-index= 0.6009214222431183
+Edge  AP1M1 - EHD2  c-index= 0.6007211208343506
+Edge  PEX26 - PEX6  c-index= 0.60002002120018
+Edge  AP1M1 - LAMP1  c-index= 0.5998530983924866
+Edge  LCK - PLCG1  c-index= 0.5985844731330872
+Edge  AP2M1 - RALBP1  c-index= 0.5975829660892487
+Edge  CCL13 - CCR3  c-index= 0.5971155762672424
+Path  20  c-index= 0.5861988365650177
+Path  95  c-index= 0.5742805600166321
+Path  87  c-index= 0.5714095234870911
+Path  76  c-index= 0.5667690336704254
+Path  43  c-index= 0.5655004382133484
+Path  150  c-index= 0.561527669429779
+Path  91  c-index= 0.5614609122276306
+Path  149  c-index= 0.5611270666122437
+Path  79  c-index= 0.5608599781990051
+Path  116  c-index= 0.5595245957374573
+Epoch 1700 :
+ Train Loss 4.059389114379883 , Train Cindex: 0.696295440196991 ,
+ Test Loss 3.14534854888916 , Test Cindex: 0.6230769157409668
+Epoch 1800 :
+ Train Loss 4.056056499481201 , Train Cindex: 0.698070764541626 ,
+ Test Loss 3.1480283737182617 , Test Cindex: 0.6241758465766907
+RNA  net:
+<lifelines.StatisticalResult: logrank_test>
+               t_0 = 60
+ null_distribution = chi squared
+degrees_of_freedom = 1
+         test_name = logrank_test
+
+---
+ test_statistic      p  -log2(p)
+          24.97 <0.005     20.71
+<lifelines.StatisticalResult: logrank_test>
+               t_0 = 60
+ null_distribution = chi squared
+degrees_of_freedom = 1
+         test_name = logrank_test
+
+---
+ test_statistic    p  -log2(p)
+           1.78 0.18      2.46
+Data summary
+Train event rate: 0.603448275862069 , average time: 36.56316375732422
+Test event rate: 0.5517241379310345 , average time: 39.07569122314453
+Validation event rate: 0.6724137931034483 , average time: 35.638275146484375
+Optimal Net at epoch 1545 :
+ Train Loss 4.066786766052246 , Train Cindex: 0.696650505065918 ,
+ Test Loss 3.1296329498291016 , Test Cindex: 0.6362637281417847
+<lifelines.StatisticalResult: logrank_test>
+               t_0 = 60
+ null_distribution = chi squared
+degrees_of_freedom = 1
+         test_name = logrank_test
+
+---
+ test_statistic    p  -log2(p)
+           0.46 0.50      1.01
+Validation:
+ Validation Loss 3.0849030017852783 , Validation Cindex: 0.5598417520523071
+Gene GUSB c-index= 0.6246301531791687
+Gene UBA7 c-index= 0.6183572113513947
+Gene DAG1 c-index= 0.6117883920669556
+Gene RHOA c-index= 0.6056337952613831
+Gene GPX1 c-index= 0.6044502258300781
+Gene MAPKAPK3 c-index= 0.6020830869674683
+Gene CISH c-index= 0.6020830869674683
+Gene PARP3 c-index= 0.6014321148395538
+Gene SEMA3F c-index= 0.5987690985202789
+Gene GRM2 c-index= 0.598295658826828
+Curv_Net CNA  start training:
+Epoch 0 :
+ Train Loss 4.206849098205566 , Train Cindex: 0.3390933871269226 ,
+ Test Loss 3.18149471282959 , Test Cindex: 0.4373626410961151
+Epoch 100 :
+ Train Loss 4.197829246520996 , Train Cindex: 0.33459579944610596 ,
+ Test Loss 3.176138401031494 , Test Cindex: 0.4373626410961151
+Epoch 200 :
+ Train Loss 4.189596176147461 , Train Cindex: 0.34927210211753845 ,
+ Test Loss 3.1713814735412598 , Test Cindex: 0.45604395866394043
+Epoch 300 :
+ Train Loss 4.182045936584473 , Train Cindex: 0.45697715878486633 ,
+ Test Loss 3.167179584503174 , Test Cindex: 0.5626373887062073
+Epoch 400 :
+ Train Loss 4.1750993728637695 , Train Cindex: 0.5511894822120667 ,
+ Test Loss 3.163480520248413 , Test Cindex: 0.5417582392692566
+Gene_invmea UQCRC2 c-index= 0.608933687210083
+Gene_invmea DAG1 c-index= 0.6051278710365295
+Gene_invmea CISH c-index= 0.5946451127529144
+Gene_invmea UBA7 c-index= 0.5921746790409088
+Gene_invmea LAMP2 c-index= 0.5913734436035156
+Gene_invmea GRM2 c-index= 0.5892368257045746
+Gene_invmea SMAD7 c-index= 0.5889697670936584
+Gene_invmea UBE2E1 c-index= 0.5886359214782715
+Gene_invmea RARB c-index= 0.5885023772716522
+Gene_invmea EDNRA c-index= 0.5870334506034851
+Edge  LCK - PTK2  c-index= 0.6296321153640747
+Edge  LYN - PTK2  c-index= 0.6102023124694824
+Edge  OCRL - RAC1  c-index= 0.6084663271903992
+Edge  CISH - SMAD2  c-index= 0.6084663271903992
+Edge  DVL1 - SMAD4  c-index= 0.6056620180606842
+Edge  CDC42 - OCRL  c-index= 0.6055952310562134
+Edge  TCEB1 - TCEB2  c-index= 0.6052614152431488
+Edge  SMAD3 - TGFBR1  c-index= 0.6050610840320587
+Edge  EP300 - NFATC2  c-index= 0.6047940254211426
+Edge  SLC2A4 - UBE2I  c-index= 0.6043266355991364
+Path  105  c-index= 0.5899045169353485
+Path  162  c-index= 0.587701141834259
+Path  90  c-index= 0.5868331491947174
+Path  144  c-index= 0.5750150084495544
+Path  76  c-index= 0.5699405670166016
+Path  130  c-index= 0.5667356550693512
+Path  165  c-index= 0.5656673610210419
+Path  164  c-index= 0.5631301403045654
+Path  120  c-index= 0.5627962946891785
+Path  184  c-index= 0.5615944266319275
+Epoch 500 :
+ Train Loss 4.142218112945557 , Train Cindex: 0.6562907099723816 ,
+ Test Loss 3.1369857788085938 , Test Cindex: 0.6208791136741638
+Epoch 600 :
+ Train Loss 4.133634090423584 , Train Cindex: 0.665049135684967 ,
+ Test Loss 3.1315410137176514 , Test Cindex: 0.6263736486434937
+Epoch 700 :
+ Train Loss 4.126760482788086 , Train Cindex: 0.6702568531036377 ,
+ Test Loss 3.1280670166015625 , Test Cindex: 0.6307692527770996
+Epoch 800 :
+ Train Loss 4.120792865753174 , Train Cindex: 0.6758196353912354 ,
+ Test Loss 3.1258420944213867 , Test Cindex: 0.6307692527770996
+Gene_invmea UQCRC2 c-index= 0.6090004742145538
+Gene_invmea DAG1 c-index= 0.6049943268299103
+Gene_invmea CISH c-index= 0.594912201166153
+Gene_invmea UBA7 c-index= 0.5922414362430573
+Gene_invmea LAMP2 c-index= 0.5913066864013672
+Gene_invmea SMAD7 c-index= 0.5894371271133423
+Gene_invmea GRM2 c-index= 0.5891700685024261
+Gene_invmea RARB c-index= 0.5886359214782715
+Gene_invmea UBE2E1 c-index= 0.5885023772716522
+Gene_invmea EDNRA c-index= 0.5873005390167236
+Edge  LCK - PTK2  c-index= 0.62889763712883
+Edge  LYN - PTK2  c-index= 0.6112038493156433
+Edge  CISH - SMAD2  c-index= 0.6091340184211731
+Edge  OCRL - RAC1  c-index= 0.6088001728057861
+Edge  SMAD3 - TGFBR1  c-index= 0.6067970991134644
+Edge  DVL1 - SMAD4  c-index= 0.6053949296474457
+Edge  TCEB1 - TCEB2  c-index= 0.605194628238678
+Edge  CDC42 - OCRL  c-index= 0.604526937007904
+Edge  EP300 - NFATC2  c-index= 0.6040595471858978
+Edge  SLC2A4 - UBE2I  c-index= 0.603592187166214
+Path  105  c-index= 0.5926420390605927
+Path  90  c-index= 0.5905722081661224
+Path  162  c-index= 0.5881017446517944
+Path  76  c-index= 0.5817587077617645
+Path  126  c-index= 0.5778861045837402
+Path  144  c-index= 0.5758162438869476
+Path  130  c-index= 0.5700073540210724
+Path  165  c-index= 0.5689390301704407
+Path  163  c-index= 0.5681378245353699
+Path  120  c-index= 0.5660011768341064
+Epoch 900 :
+ Train Loss 4.110660552978516 , Train Cindex: 0.6768848299980164 ,
+ Test Loss 3.1274325847625732 , Test Cindex: 0.6285714507102966
+Epoch 1000 :
+ Train Loss 4.106190204620361 , Train Cindex: 0.6804355382919312 ,
+ Test Loss 3.126749038696289 , Test Cindex: 0.6285714507102966
+Epoch 1100 :
+ Train Loss 4.101819038391113 , Train Cindex: 0.6838679313659668 ,
+ Test Loss 3.126373767852783 , Test Cindex: 0.6285714507102966
+Epoch 1200 :
+ Train Loss 4.097304344177246 , Train Cindex: 0.6871818900108337 ,
+ Test Loss 3.1261582374572754 , Test Cindex: 0.6274725198745728
+Gene_invmea UQCRC2 c-index= 0.608933687210083
+Gene_invmea DAG1 c-index= 0.6047272384166718
+Gene_invmea CISH c-index= 0.5950457453727722
+Gene_invmea UBA7 c-index= 0.5923081934452057
+Gene_invmea LAMP2 c-index= 0.5913066864013672
+Gene_invmea SMAD7 c-index= 0.5897042155265808
+Gene_invmea GRM2 c-index= 0.5889029800891876
+Gene_invmea UBE2E1 c-index= 0.5887026786804199
+Gene_invmea RARB c-index= 0.5887026786804199
+Gene_invmea EDNRA c-index= 0.5875008404254913
+Edge  LCK - PTK2  c-index= 0.6286305785179138
+Edge  LYN - PTK2  c-index= 0.6119382977485657
+Edge  CISH - SMAD2  c-index= 0.6091340184211731
+Edge  OCRL - RAC1  c-index= 0.6086665987968445
+Edge  SMAD3 - TGFBR1  c-index= 0.6065300107002258
+Edge  DVL1 - SMAD4  c-index= 0.6050610840320587
+Edge  SLC2A4 - UBE2I  c-index= 0.6045937240123749
+Edge  CDC42 - OCRL  c-index= 0.604326605796814
+Edge  TCEB1 - TCEB2  c-index= 0.6040595471858978
+Edge  EP300 - NFATC2  c-index= 0.603926032781601
+Path  105  c-index= 0.628563791513443
+Path  163  c-index= 0.6226881146430969
+Path  113  c-index= 0.6091340184211731
+Path  141  c-index= 0.6081992387771606
+Path  173  c-index= 0.6077318489551544
+Path  175  c-index= 0.6074647903442383
+Path  86  c-index= 0.607331246137619
+Path  144  c-index= 0.6066635549068451
+Path  111  c-index= 0.6029912531375885
+Path  99  c-index= 0.5996527969837189
+Epoch 1300 :
+ Train Loss 4.084485054016113 , Train Cindex: 0.6904959082603455 ,
+ Test Loss 3.125696897506714 , Test Cindex: 0.6263736486434937
+Epoch 1400 :
+ Train Loss 4.077512741088867 , Train Cindex: 0.6944016814231873 ,
+ Test Loss 3.1255645751953125 , Test Cindex: 0.6285714507102966
+Epoch 1500 :
+ Train Loss 4.069114685058594 , Train Cindex: 0.7003195881843567 ,
+ Test Loss 3.125351905822754 , Test Cindex: 0.6274725198745728
+Epoch 1600 :
+ Train Loss 4.058684825897217 , Train Cindex: 0.7057639956474304 ,
+ Test Loss 3.124990463256836 , Test Cindex: 0.6241758465766907
+Gene_invmea UQCRC2 c-index= 0.608933687210083
+Gene_invmea DAG1 c-index= 0.6047940254211426
+Gene_invmea CISH c-index= 0.5949789583683014
+Gene_invmea UBA7 c-index= 0.5923081934452057
+Gene_invmea LAMP2 c-index= 0.5913734436035156
+Gene_invmea SMAD7 c-index= 0.5898377597332001
+Gene_invmea GRM2 c-index= 0.5888362228870392
+Gene_invmea RARB c-index= 0.5887694358825684
+Gene_invmea UBE2E1 c-index= 0.5887026786804199
+Gene_invmea EDNRA c-index= 0.5875008404254913
+Edge  LCK - PTK2  c-index= 0.6277625560760498
+Edge  LYN - PTK2  c-index= 0.6123389303684235
+Edge  CISH - SMAD2  c-index= 0.6091340184211731
+Edge  OCRL - RAC1  c-index= 0.6086665987968445
+Edge  SMAD3 - TGFBR1  c-index= 0.6063964664936066
+Edge  DVL1 - SMAD4  c-index= 0.6049943268299103
+Edge  SLC2A4 - UBE2I  c-index= 0.6049275696277618
+Edge  TCEB1 - TCEB2  c-index= 0.603926032781601
+Edge  CDC42 - OCRL  c-index= 0.6039260029792786
+Edge  EP300 - NFATC2  c-index= 0.6033250987529755
+Path  112  c-index= 0.6427188515663147
+Path  113  c-index= 0.6418508291244507
+Path  163  c-index= 0.6350404024124146
+Path  140  c-index= 0.6313013434410095
+Path  129  c-index= 0.6304333209991455
+Path  141  c-index= 0.6253588795661926
+Path  86  c-index= 0.624490886926651
+Path  130  c-index= 0.6222207248210907
+Path  85  c-index= 0.6200173497200012
+Path  115  c-index= 0.6198170781135559
+Epoch 1700 :
+ Train Loss 4.063838481903076 , Train Cindex: 0.6979524493217468 ,
+ Test Loss 3.128386974334717 , Test Cindex: 0.6186813116073608
+Epoch 1800 :
+ Train Loss 4.0491623878479 , Train Cindex: 0.7086045742034912 ,
+ Test Loss 3.127354383468628 , Test Cindex: 0.6186813116073608
+CNA  net:
+<lifelines.StatisticalResult: logrank_test>
+               t_0 = 60
+ null_distribution = chi squared
+degrees_of_freedom = 1
+         test_name = logrank_test
+
+---
+ test_statistic      p  -log2(p)
+          10.30 <0.005      9.55
+<lifelines.StatisticalResult: logrank_test>
+               t_0 = 60
+ null_distribution = chi squared
+degrees_of_freedom = 1
+         test_name = logrank_test
+
+---
+ test_statistic    p  -log2(p)
+           2.10 0.15      2.76
+Data summary
+Train event rate: 0.603448275862069 , average time: 36.56316375732422
+Test event rate: 0.5517241379310345 , average time: 39.07569122314453
+Validation event rate: 0.6724137931034483 , average time: 35.638275146484375
+Optimal Net at epoch 816 :
+ Train Loss 4.114834785461426 , Train Cindex: 0.6716771125793457 ,
+ Test Loss 3.1284828186035156 , Test Cindex: 0.6329670548439026
+<lifelines.StatisticalResult: logrank_test>
+               t_0 = 60
+ null_distribution = chi squared
+degrees_of_freedom = 1
+         test_name = logrank_test
+
+---
+ test_statistic    p  -log2(p)
+           2.41 0.12      3.05
+Validation:
+ Validation Loss 3.019878625869751 , Validation Cindex: 0.5776458978652954
+Gene LAMA2 c-index= 0.620546817779541
+Gene MAPKAPK5 c-index= 0.6087110638618469
+Gene HMOX1 c-index= 0.603858470916748
+Gene COX17 c-index= 0.6012545824050903
+Gene ARPC1A c-index= 0.5994792580604553
+Gene NEDD4 c-index= 0.5992425084114075
+Gene FLOT2 c-index= 0.5982956290245056
+Gene UBE2Q1 c-index= 0.5975854992866516
+Gene RASA2 c-index= 0.5955734252929688
+Gene IGF2R c-index= 0.5950999855995178
+Curv_Net Methyl  start training:
+Epoch 0 :
+ Train Loss 4.1843719482421875 , Train Cindex: 0.41661736369132996 ,
+ Test Loss 3.173100471496582 , Test Cindex: 0.43296703696250916
+Epoch 100 :
+ Train Loss 4.1804327964782715 , Train Cindex: 0.45674043893814087 ,
+ Test Loss 3.166633367538452 , Test Cindex: 0.48571428656578064
+Epoch 200 :
+ Train Loss 4.176784992218018 , Train Cindex: 0.49923068284988403 ,
+ Test Loss 3.160651922225952 , Test Cindex: 0.5
+Epoch 300 :
+ Train Loss 4.173362731933594 , Train Cindex: 0.5358030796051025 ,
+ Test Loss 3.1550488471984863 , Test Cindex: 0.5175824165344238
+Epoch 400 :
+ Train Loss 4.170126914978027 , Train Cindex: 0.5610131621360779 ,
+ Test Loss 3.149782419204712 , Test Cindex: 0.5142857432365417
+Gene_invmea SGCB c-index= 0.6087334156036377
+Gene_invmea SGCD c-index= 0.60365891456604
+Gene_invmea ATP2B2 c-index= 0.5949789881706238
+Gene_invmea CHMP4B c-index= 0.5925752818584442
+Gene_invmea NFYC c-index= 0.5915069878101349
+Gene_invmea PTH2R c-index= 0.5897709727287292
+Gene_invmea IL12A c-index= 0.5896374583244324
+Gene_invmea EIF4A3 c-index= 0.5895706713199615
+Gene_invmea VPS4A c-index= 0.5882352888584137
+Gene_invmea BLVRB c-index= 0.5881685018539429
+Edge  FZD5 - LRP6  c-index= 0.610135555267334
+Edge  CCNB1 - CDKN1B  c-index= 0.6075983047485352
+Edge  CCNA2 - SKP2  c-index= 0.605194628238678
+Edge  CD5 - PIK3R1  c-index= 0.6051278710365295
+Edge  GTF2E1 - GTF2E2  c-index= 0.6004540324211121
+Edge  DLG1 - PAX6  c-index= 0.5999866425991058
+Edge  CCND1 - CDKN1B  c-index= 0.5998530983924866
+Edge  ITPR2 - TRPC1  c-index= 0.5995192527770996
+Edge  TUBB - YWHAZ  c-index= 0.5985177159309387
+Edge  PTEN - STK11  c-index= 0.5977832674980164
+Path  89  c-index= 0.5748147070407867
+Path  135  c-index= 0.5690058171749115
+Path  97  c-index= 0.5678039789199829
+Path  185  c-index= 0.5663350522518158
+Path  99  c-index= 0.5660012066364288
+Path  101  c-index= 0.5658676624298096
+Path  40  c-index= 0.5632302761077881
+Path  132  c-index= 0.5604593753814697
+Path  130  c-index= 0.5597916841506958
+Path  127  c-index= 0.5583895444869995
+Epoch 500 :
+ Train Loss 4.146303653717041 , Train Cindex: 0.6414960622787476 ,
+ Test Loss 3.1331844329833984 , Test Cindex: 0.5901098847389221
+Epoch 600 :
+ Train Loss 4.137957572937012 , Train Cindex: 0.6475322246551514 ,
+ Test Loss 3.1258480548858643 , Test Cindex: 0.6109890341758728
+Epoch 700 :
+ Train Loss 4.131174087524414 , Train Cindex: 0.651674747467041 ,
+ Test Loss 3.12011981010437 , Test Cindex: 0.6318681240081787
+Epoch 800 :
+ Train Loss 4.125300884246826 , Train Cindex: 0.6574742794036865 ,
+ Test Loss 3.115506172180176 , Test Cindex: 0.6406593322753906
+Gene_invmea SGCB c-index= 0.6086665987968445
+Gene_invmea SGCD c-index= 0.60365891456604
+Gene_invmea ATP2B2 c-index= 0.5947786569595337
+Gene_invmea CHMP4B c-index= 0.5926420390605927
+Gene_invmea NFYC c-index= 0.5915069878101349
+Gene_invmea PTH2R c-index= 0.5902383625507355
+Gene_invmea EIF4A3 c-index= 0.5896374583244324
+Gene_invmea IL12A c-index= 0.5895039141178131
+Gene_invmea VPS4A c-index= 0.5881017446517944
+Gene_invmea BLVRB c-index= 0.588034987449646
+Edge  GTF2E1 - GTF2E2  c-index= 0.6100020110607147
+Edge  FZD5 - LRP6  c-index= 0.6094678640365601
+Edge  MAP3K7 - SMAD7  c-index= 0.6050610840320587
+Edge  CCNA2 - SKP2  c-index= 0.604860782623291
+Edge  ATM - EIF4EBP1  c-index= 0.6034586429595947
+Edge  FBXW7 - MYC  c-index= 0.6003204882144928
+Edge  ITPR2 - TRPC1  c-index= 0.6001869440078735
+Edge  CD5 - PIK3R1  c-index= 0.5994524955749512
+Edge  CREB1 - SGK1  c-index= 0.598317414522171
+Edge  IKBKG - PPM1B  c-index= 0.5979167819023132
+Path  108  c-index= 0.576650857925415
+Path  99  c-index= 0.5700073540210724
+Path  135  c-index= 0.5677371919155121
+Path  101  c-index= 0.5663016736507416
+Path  74  c-index= 0.5657341480255127
+Path  172  c-index= 0.5643987357616425
+Path  97  c-index= 0.5641984343528748
+Path  89  c-index= 0.5640648901462555
+Path  132  c-index= 0.5636642873287201
+Path  127  c-index= 0.5634639859199524
+Epoch 900 :
+ Train Loss 4.112354278564453 , Train Cindex: 0.6610249876976013 ,
+ Test Loss 3.1046667098999023 , Test Cindex: 0.6582417488098145
+Epoch 1000 :
+ Train Loss 4.108206748962402 , Train Cindex: 0.6638655662536621 ,
+ Test Loss 3.103325605392456 , Test Cindex: 0.6615384817123413
+Epoch 1100 :
+ Train Loss 4.104372501373291 , Train Cindex: 0.6644573211669922 ,
+ Test Loss 3.102323532104492 , Test Cindex: 0.6593406796455383
+Epoch 1200 :
+ Train Loss 4.100767135620117 , Train Cindex: 0.6663510203361511 ,
+ Test Loss 3.1016688346862793 , Test Cindex: 0.6604395508766174
+Gene_invmea SGCB c-index= 0.6086665987968445
+Gene_invmea SGCD c-index= 0.6035921573638916
+Gene_invmea ATP2B2 c-index= 0.5947786569595337
+Gene_invmea CHMP4B c-index= 0.5927755832672119
+Gene_invmea NFYC c-index= 0.5915069878101349
+Gene_invmea PTH2R c-index= 0.5903051197528839
+Gene_invmea EIF4A3 c-index= 0.5896374583244324
+Gene_invmea IL12A c-index= 0.5894371271133423
+Gene_invmea VPS4A c-index= 0.5882352888584137
+Gene_invmea BLVRB c-index= 0.588034987449646
+Edge  GTF2E1 - GTF2E2  c-index= 0.6114709079265594
+Edge  FZD5 - LRP6  c-index= 0.6098684668540955
+Edge  MAP3K7 - SMAD7  c-index= 0.6095346212387085
+Edge  AKT1 - EIF4EBP1  c-index= 0.6043933928012848
+Edge  FOXO3 - SMAD4  c-index= 0.6031915545463562
+Edge  FBXW7 - MYC  c-index= 0.6031915545463562
+Edge  CCNA2 - SKP2  c-index= 0.6026574075222015
+Edge  HGS - SMAD3  c-index= 0.6023235619068146
+Edge  CREB1 - SGK1  c-index= 0.6012552678585052
+Edge  ITPR2 - TRPC1  c-index= 0.6001869440078735
+Path  108  c-index= 0.5878680348396301
+Path  74  c-index= 0.5784870386123657
+Path  99  c-index= 0.5715764164924622
+Path  172  c-index= 0.5688722729682922
+Path  135  c-index= 0.5670361220836639
+Path  101  c-index= 0.5665687322616577
+Path  97  c-index= 0.5643653571605682
+Path  132  c-index= 0.5628630518913269
+Path  111  c-index= 0.5627295076847076
+Path  127  c-index= 0.5619283020496368
+Epoch 1300 :
+ Train Loss 4.090234279632568 , Train Cindex: 0.6729790568351746 ,
+ Test Loss 3.102260112762451 , Test Cindex: 0.6659340858459473
+Epoch 1400 :
+ Train Loss 4.087180137634277 , Train Cindex: 0.6748727560043335 ,
+ Test Loss 3.102653980255127 , Test Cindex: 0.6681318879127502
+Epoch 1500 :
+ Train Loss 4.084188461303711 , Train Cindex: 0.6772398948669434 ,
+ Test Loss 3.1031482219696045 , Test Cindex: 0.6692307591438293
+Epoch 1600 :
+ Train Loss 4.08125114440918 , Train Cindex: 0.6790152788162231 ,
+ Test Loss 3.1037437915802 , Test Cindex: 0.6758241653442383
+Gene_invmea SGCB c-index= 0.6086665987968445
+Gene_invmea SGCD c-index= 0.60365891456604
+Gene_invmea ATP2B2 c-index= 0.5947118997573853
+Gene_invmea CHMP4B c-index= 0.5927755832672119
+Gene_invmea NFYC c-index= 0.5915737450122833
+Gene_invmea PTH2R c-index= 0.5902383625507355
+Gene_invmea EIF4A3 c-index= 0.5895706713199615
+Gene_invmea IL12A c-index= 0.5893703699111938
+Gene_invmea VPS4A c-index= 0.5882352888584137
+Gene_invmea BLVRB c-index= 0.588034987449646
+Edge  FOXO3 - SMAD4  c-index= 0.6124724447727203
+Edge  GTF2E1 - GTF2E2  c-index= 0.6112706065177917
+Edge  FZD5 - LRP6  c-index= 0.6098684668540955
+Edge  MAP3K7 - SMAD7  c-index= 0.6096681654453278
+Edge  HGS - SMAD3  c-index= 0.6090672314167023
+Edge  AKT1 - EIF4EBP1  c-index= 0.6060292422771454
+Edge  BMPR1B - TRAF6  c-index= 0.6045937240123749
+Edge  CREB1 - SGK1  c-index= 0.6019229590892792
+Edge  CCNA2 - SKP2  c-index= 0.6009214222431183
+Edge  ITPR2 - TRPC1  c-index= 0.6004540324211121
+Path  108  c-index= 0.588535726070404
+Path  74  c-index= 0.5847632884979248
+Path  99  c-index= 0.5696735084056854
+Path  135  c-index= 0.5693730413913727
+Path  172  c-index= 0.5688722729682922
+Path  127  c-index= 0.5645322799682617
+Path  101  c-index= 0.564231812953949
+Path  97  c-index= 0.5635307431221008
+Path  111  c-index= 0.5631635189056396
+Path  132  c-index= 0.5616278350353241
+Epoch 1700 :
+ Train Loss 4.072501182556152 , Train Cindex: 0.6788969039916992 ,
+ Test Loss 3.1082117557525635 , Test Cindex: 0.6670329570770264
+Epoch 1800 :
+ Train Loss 4.069830417633057 , Train Cindex: 0.6815007925033569 ,
+ Test Loss 3.1088974475860596 , Test Cindex: 0.6670329570770264
+Methyl  net:
+<lifelines.StatisticalResult: logrank_test>
+               t_0 = 60
+ null_distribution = chi squared
+degrees_of_freedom = 1
+         test_name = logrank_test
+
+---
+ test_statistic      p  -log2(p)
+          17.96 <0.005     15.44
+<lifelines.StatisticalResult: logrank_test>
+               t_0 = 60
+ null_distribution = chi squared
+degrees_of_freedom = 1
+         test_name = logrank_test
+
+---
+ test_statistic    p  -log2(p)
+           4.45 0.03      4.84
+Data summary
+Train event rate: 0.603448275862069 , average time: 36.56316375732422
+Test event rate: 0.5517241379310345 , average time: 39.07569122314453
+Validation event rate: 0.6724137931034483 , average time: 35.638275146484375
+Optimal Net at epoch 1597 :
+ Train Loss 4.081338405609131 , Train Cindex: 0.6788969039916992 ,
+ Test Loss 3.103724479675293 , Test Cindex: 0.6758241653442383
+<lifelines.StatisticalResult: logrank_test>
+               t_0 = 60
+ null_distribution = chi squared
+degrees_of_freedom = 1
+         test_name = logrank_test
+
+---
+ test_statistic    p  -log2(p)
+           6.46 0.01      6.50
+Validation:
+ Validation Loss 3.0065693855285645 , Validation Cindex: 0.6112759709358215
+Epoch 0 :
+ Train Loss 4.179771900177002 , Train Cindex: 0.5247958302497864 ,
+ Test Loss 3.168731689453125 , Test Cindex: 0.5857142806053162
+Epoch 50 :
+ Train Loss 4.178086280822754 , Train Cindex: 0.7016214728355408 ,
+ Test Loss 3.167527198791504 , Test Cindex: 0.6615384817123413
+Epoch 100 :
+ Train Loss 4.175683498382568 , Train Cindex: 0.727423369884491 ,
+ Test Loss 3.1658310890197754 , Test Cindex: 0.6505494713783264
+Epoch 150 :
+ Train Loss 4.172114849090576 , Train Cindex: 0.7361817955970764 ,
+ Test Loss 3.1633822917938232 , Test Cindex: 0.6450549364089966
+Epoch 200 :
+ Train Loss 4.167093753814697 , Train Cindex: 0.7390223741531372 ,
+ Test Loss 3.160039186477661 , Test Cindex: 0.6384615302085876
+Epoch 250 :
+ Train Loss 4.160455226898193 , Train Cindex: 0.7412711381912231 ,
+ Test Loss 3.155775547027588 , Test Cindex: 0.6340659260749817
+Epoch 300 :
+ Train Loss 4.152151107788086 , Train Cindex: 0.7426914572715759 ,
+ Test Loss 3.1506614685058594 , Test Cindex: 0.6318681240081787
+Epoch 350 :
+ Train Loss 4.142248153686523 , Train Cindex: 0.743638277053833 ,
+ Test Loss 3.1448378562927246 , Test Cindex: 0.6263736486434937
+Epoch 400 :
+ Train Loss 4.130917549133301 , Train Cindex: 0.7438750267028809 ,
+ Test Loss 3.138519763946533 , Test Cindex: 0.6252747178077698
+Epoch 450 :
+ Train Loss 4.1184210777282715 , Train Cindex: 0.7441117167472839 ,
+ Test Loss 3.13199520111084 , Test Cindex: 0.6219780445098877
+Epoch 500 :
+ Train Loss 4.105071067810059 , Train Cindex: 0.7438750267028809 ,
+ Test Loss 3.125622510910034 , Test Cindex: 0.6219780445098877
+Final net:
+<lifelines.StatisticalResult: logrank_test>
+               t_0 = 60
+ null_distribution = chi squared
+degrees_of_freedom = 1
+         test_name = logrank_test
+
+---
+ test_statistic      p  -log2(p)
+          21.58 <0.005     18.17
+<lifelines.StatisticalResult: logrank_test>
+               t_0 = 60
+ null_distribution = chi squared
+degrees_of_freedom = 1
+         test_name = logrank_test
+
+---
+ test_statistic    p  -log2(p)
+           3.98 0.05      4.44
+Data summary
+Train event rate: 0.603448275862069 , average time: 36.56316375732422
+Test event rate: 0.5517241379310345 , average time: 39.07569122314453
+Validation event rate: 0.6724137931034483 , average time: 35.638275146484375
+Optimal Net at epoch 27 :
+ Train Loss 4.1789116859436035 , Train Cindex: 0.6684814691543579 ,
+ Test Loss 3.1681175231933594 , Test Cindex: 0.6802197694778442
+<lifelines.StatisticalResult: logrank_test>
+               t_0 = 60
+ null_distribution = chi squared
+degrees_of_freedom = 1
+         test_name = logrank_test
+
+---
+ test_statistic    p  -log2(p)
+           0.23 0.63      0.66
+Validation:
+ Validation Loss 2.9986960887908936 , Validation Cindex: 0.5093966126441956
+TestC_ RNA = [0.6362637281417847]
+ValiC_ RNA = [0.5598417520523071]
+mean= 0.5598417520523071 
+
+TestC_ CNA = [0.6329670548439026]
+ValiC_ CNA = [0.5776458978652954]
+mean= 0.5776458978652954 
+
+TestC_ Methyl = [0.6758241653442383]
+ValiC_ Methyl = [0.6112759709358215]
+mean= 0.6112759709358215 
+
+FinalTestC= [0.6802197694778442]
+FinalValiC= [0.5093966126441956]
+mean= 0.5093966126441956 
+

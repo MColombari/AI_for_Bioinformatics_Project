@@ -79,6 +79,8 @@ Preprocessing/Final/Gene/Gene_sbatch/output_divide_dataset.log
 Training/Final/run_output/
 Training/Final/Train_output
 Training/Final/config.yaml
+Training/Final/config.yaml
+/homes/dlupo/Progetto_BioInformatics/AI_for_Bioinformatics_Project/Training/Final/config.yaml
 Training/Final/__pycache__/
 Preprocessing/Final/Gene/Gene_sbatch/error_gene_variance_regression.log
 Preprocessing/Final/Gene/Gene_sbatch/error_divide_dataset_regression.log

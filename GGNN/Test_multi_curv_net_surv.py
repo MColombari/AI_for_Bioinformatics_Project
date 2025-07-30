@@ -22,7 +22,7 @@ dtype = torch.FloatTensor
 Out_Nodes = 10 # number of hidden nodes in the last hidden layer
 Num_EPOCHS = 1800  # for training
 N_keep = 10
-N_Round = 1
+N_Round = 10
 
 ''' load data '''
 ## Load HPRD network
@@ -39,17 +39,10 @@ adj.index=hprd_genes
 ### For TCGA
 study="ov"
 omic_to_use=["RNA","CNA","Methyl"]
-input_folder="./data/"+study+"_tcga/out/"
+input_folder="./data/"+study+"_tcga5/out/"
 
-### For Commpass multiple myeloma
-#study="mm"
-#input_folder="./data/"+study+"_CoMMpass/out/"
-#omic_to_use=["RNA","CNA"]
-
-
-clinn_file=input_folder+"clinn.csv"
-
-
+clinn_file=input_folder+"case_id_os_status_dead.csv"
+# clinn_file=input_folder+"clinn.csv"
 
 c_test={"RNA":[],"CNA":[],"Methyl":[]}
 c_vali={"RNA":[],"CNA":[],"Methyl":[]}
@@ -62,7 +55,8 @@ for r in range(N_Round):
     if r>0:
         print("t=",tm.strftime("%H:%M:%S", tm.gmtime(end - start)),"/",tm.strftime("%H:%M:%S", tm.gmtime((end - start)/r*N_Round)),"\n")
     tbc=pd.read_csv(clinn_file,header=0,index_col=0)
-    temp=tbc[:]['OS_MONTHS'].tolist()
+    # temp=tbc[:]['OS_MONTHS'].tolist()
+    temp=tbc[:]['OS'].tolist()
     Nsample=len(temp)
     time=np.zeros([Nsample,1])
     for i in range(Nsample):
