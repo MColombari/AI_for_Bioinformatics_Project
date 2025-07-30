@@ -20,9 +20,9 @@ from km import plot_KM
 dtype = torch.FloatTensor
 ''' Net Settings'''
 Out_Nodes = 10 # number of hidden nodes in the last hidden layer
-Num_EPOCHS = 2000  # for training
+Num_EPOCHS = 1800  # for training
 N_keep = 10
-N_Round = 30
+N_Round = 10
 
 ''' load data '''
 ## Load HPRD network
