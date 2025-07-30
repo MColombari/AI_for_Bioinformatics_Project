@@ -4,14 +4,14 @@ Generic:
 
 Conditions:
   Start_from_checkpoint: False
-  Load_dataset: False
+  Load_dataset: True
   Save_dataset: True
-  Dont_train: True
+  Dont_train: False
 
 PATH:
   Test_folder_path: "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output"
   Checkpoint_path: "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train_Gene_54/model_checkpoints/Train_Gene_epoch_100.pth"
-  Dataset_from_folder_path: "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train Final Regression_52"
+  Dataset_from_folder_path: "/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Train_output/Train Final Regression_57"
 
 Generic_PATH:
   pathGtfFile: "/work/h2020deciderficarra_shared/TCGA/OV/project_n16_data/gencode.v47.annotation.gtf"
@@ -33,11 +33,11 @@ hyperparameter:
   num_classes: 1
   num_nodes: 10000
   epochs: 500
-  batch_size: 4
+  batch_size: 2
   seed: 123456
   num_workers: 6
   lr: 0.001
-  alpha_loss: 0.2
+  alpha_loss: 0.5
   save_model_period: 100 # How many epoch to wait before save the next model.
   feature_to_save:
     gene: ['unstranded', 'tpm_unstranded', 'fpkm_unstranded', 'fpkm_uq_unstranded']
