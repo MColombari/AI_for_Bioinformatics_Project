@@ -1,0 +1,12 @@
+dataset,readout,fold 1,fold 2,fold 3,fold 4,fold 5,fold 6,fold 7,fold 8,fold 9,fold 10,mean of acc,std of acc,time per epochs
+GENE_EXP,avg,52.17,43.48,47.83,47.83,47.83,39.13,30.43,34.78,39.13,42.11,42.472,6.731661178507294,0.155
+dataset,readout,fold 1,fold 2,fold 3,fold 4,fold 5,fold 6,fold 7,fold 8,fold 9,fold 10,mean of acc,std of acc,time per epochs
+GENE_EXP,avg,49.56,49.56,49.56,0.0,0.045
+dataset,readout,fold 1,fold 2,fold 3,fold 4,fold 5,fold 6,fold 7,fold 8,fold 9,fold 10,mean of acc,std of acc,time per epochs
+GENE_EXP_200_001,avg,47.83,43.48,47.83,47.83,47.83,39.13,30.43,34.78,39.13,42.11,42.038,6.151881013153618,0.061
+dataset,readout,fold 1,fold 2,fold 3,fold 4,fold 5,fold 6,fold 7,fold 8,fold 9,fold 10,mean of acc,std of acc,time per epochs
+GENE_EXP_200_0001,avg,47.83,43.48,47.83,47.83,47.83,39.13,30.43,34.78,39.13,42.11,42.038,6.151881013153618,0.06
+dataset,readout,fold 1,fold 2,fold 3,fold 4,fold 5,fold 6,fold 7,fold 8,fold 9,fold 10,mean of acc,std of acc,time per epochs
+GENE_EXP_200_0004,avg,47.83,43.48,56.52,47.83,52.17,39.13,30.43,34.78,39.13,42.11,43.341,7.950708493936598,0.06
+dataset,readout,fold 1,fold 2,fold 3,fold 4,fold 5,fold 6,fold 7,fold 8,fold 9,fold 10,mean of acc,std of acc,time per epochs
+GENE_EXP_100_001,avg,47.83,43.48,47.83,47.83,47.83,39.13,30.43,34.78,39.13,42.11,42.038,6.151881013153618,0.03

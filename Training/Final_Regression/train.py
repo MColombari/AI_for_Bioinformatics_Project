@@ -6,6 +6,7 @@ from torch_geometric.loader import DataLoader
 from sklearn.metrics import accuracy_score
 import yaml
 import numpy as np
+import sys
 
 # So we have a structure of folder where we have a main folder containig all the test for
 # each subgroup (Methylation, Gene, Copy number), and in each of these folder we have
@@ -31,6 +32,9 @@ CHECKPOINT_PATH = data_yaml['PATH']['Checkpoint_path']
 LOAD_DATASET = data_yaml['Conditions']['Load_dataset']
 DATASET_FROM_FOLDER_PATH = data_yaml['PATH']['Dataset_from_folder_path']
 SAVE_DATASET = data_yaml['Conditions']['Save_dataset']
+
+# Train or not
+DONT_TRAIN = data_yaml['Conditions']['Dont_train']
 
 # Load data path
 PATH_GTF_FILE = data_yaml['Generic_PATH']['pathGtfFile']
@@ -101,14 +105,18 @@ else:
     # data_train_list = [T.ToSparseTensor()(data) for data in data_train_list]
     # data_test_list = [T.ToSparseTensor()(data) for data in data_test_list]
 
+    # Why pin memory set to true? Answer -> https://discuss.pytorch.org/t/when-to-set-pin-memory-to-true/19723
     train_loader = DataLoader(data_train_list, batch_size=hyperparameter['batch_size'], shuffle=True, num_workers=hyperparameter['num_workers'], pin_memory=True)
-    test_loader = DataLoader(data_test_list, batch_size=hyperparameter['batch_size'], shuffle=False, num_workers=hyperparameter['num_workers'], pin_memory=True)
+    test_loader = DataLoader(data_test_list, batch_size=hyperparameter['batch_size'], shuffle=True, num_workers=hyperparameter['num_workers'], pin_memory=True)
 
     if SAVE_DATASET:
         sm.save_dataset(train_loader, test_loader)
 # pin_memory=True will automatically put the fetched data Tensors in pinned memory, and thus enables faster data transfer to CUDA-enabled GPUs.
 # https://pytorch.org/docs/stable/data.html.
 
+# This flag is used to just create the dataset and dont train the model.
+if DONT_TRAIN:
+    sys.exit(0)
 
 node_feature_number = 0
 for k in hyperparameter['feature_to_save'].keys():
@@ -119,7 +127,7 @@ sm.print(f"\nNumber of input feature: {node_feature_number}")
 # model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
 # model = bigger_GCN(node_feature_number, hyperparameter['num_classes'])
 # model = small_GCN(node_feature_number, 750, hyperparameter['num_classes'])
-model = EdgeAttrGNN(node_feature_number, 128, hyperparameter['num_classes'])
+model = EdgeAttrGNN(node_feature_number, 64, hyperparameter['num_classes'])
 # model = EdgeAttrGNNLight(node_feature_number, 128, hyperparameter['num_classes'])
 # model = EdgeAttrGAT(node_feature_number, 15, hyperparameter['num_classes'], num_layers=1, heads=7)
 # model = GAT(node_feature_number, 1000, 30, hyperparameter['num_classes'], 0.2)
@@ -155,7 +163,7 @@ scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
     factor=0.5,         # reduce LR by half
     patience=5,         # wait 5 epochs before reducing
 )
-criterion = torch.nn.MSELoss()
+loss_mse = torch.nn.MSELoss()
 # Here you could also use a scheduler to validate the model.
 
 def range_accuracy(labels: list, predictions: list, margin:int=120)->float:
@@ -176,21 +184,21 @@ def check_c_index_metrix(labels: list, predictions: list)->bool:
     p_indexs = np.argsort(predictions)
     return np.array_equal(l_indexs, p_indexs)
 
-def cindex_loss(pred, y):
-    n = 0
-    loss = 0.0
-    if y.dim() == 0:
-        dim = 1
-    else:
-        dim = pred.shape[0]
-    # print(pred)
-    for i in range(dim):
-        for j in range(dim):
-            if y[i] < y[j]:
-                diff = pred[j] - pred[i]
-                loss += torch.sigmoid(diff)
-                n += 1
-    return loss if n > 0 else torch.tensor(0.0, device=device)
+# def cindex_loss(pred, y):
+#     n = 0
+#     loss = 0.0
+#     if y.dim() == 0:
+#         dim = 1
+#     else:
+#         dim = pred.shape[0]
+#     # print(pred)
+#     for i in range(dim):
+#         for j in range(dim):
+#             if y[i] < y[j]:
+#                 diff = pred[j] - pred[i]
+#                 loss += torch.sigmoid(diff)
+#                 n += 1
+#     return loss if n > 0 else torch.tensor(0.0, device=device)
 
 def cindex_loss_vectorized(pred, y):
     pred = pred.view(-1)
@@ -255,7 +263,7 @@ def train(loader):
 
         # Compute the loss
         # print(f"Labels: {labels}")
-        loss = cindex_loss_vectorized(outputs, labels)
+        loss = cindex_loss_vectorized(outputs, labels) * hyperparameter['alpha_loss'] + loss_mse(outputs, labels)
 
         # print(f"Loss: {loss}")
         
@@ -303,7 +311,7 @@ def test(loader):
             # print(f"Output: {outputs}")
 
             # compute the loss
-            loss = cindex_loss(outputs, labels)
+            loss = cindex_loss_vectorized(outputs, labels) * hyperparameter['alpha_loss'] + loss_mse(outputs, labels)
             losses.append(loss.item())
             
             # print(f"Loss: {loss}")
