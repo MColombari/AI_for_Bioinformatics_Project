@@ -4,7 +4,7 @@
 #SBATCH --job-name=final_regression_training
 #SBATCH --partition=all_usr_prod
 #SBATCH --mem=32G
-#SBATCH --time=12:00:00
+#SBATCH --time=8:00:00
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=270396@studenti.unimore.it
 
