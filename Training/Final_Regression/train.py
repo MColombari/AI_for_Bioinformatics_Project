@@ -9,10 +9,6 @@ import numpy as np
 import sys
 from batch_loader import RandomBatchSampler, DeterministicDistantBatchSampler
 
-# So we have a structure of folder where we have a main folder containig all the test for
-# each subgroup (Methylation, Gene, Copy number), and in each of these folder we have
-# a folder for each test, inside all the results and checkpoint are saved.
-
 #   Data Parameter loaded from YAML file.
 
 with open("/homes/mcolombari/AI_for_Bioinformatics_Project/Training/Final_Regression/config.yaml", "r") as yamlfile:
@@ -75,21 +71,6 @@ sm = SM(TEST_FOLDER_PATH, TEST_NAME)
 if LOAD_DATASET:
     train_loader = torch.load(f"{DATASET_FROM_FOLDER_PATH}/datasets/train.pkl", weights_only=False)
     test_loader = torch.load(f"{DATASET_FROM_FOLDER_PATH}/datasets/test.pkl", weights_only=False)
-
-    # first_batch = next(iter(train_loader))
-
-    # # If it's a batch of graphs, take the first one only
-    # if hasattr(first_batch, 'num_graphs') and first_batch.num_graphs > 1:
-    #     data = first_batch.to_data_list()[0]
-    # else:
-    #     data = first_batch
-
-    # # Repeat it `repeat` times
-    # repeated_data = [data.clone() for _ in range(100)]
-
-    # # Create new DataLoader with just this repeated graph
-    # # DataLoader(repeated_data, batch_size=batch_size, shuffle=True)
-    # train_loader = DataLoader(repeated_data, batch_size=hyperparameter['batch_size'], shuffle=True, num_workers=hyperparameter['num_workers'], pin_memory=True)
 
 else:
     # https://pytorch-geometric.readthedocs.io/en/2.5.3/notes/create_dataset.html
@@ -190,21 +171,6 @@ def check_c_index_metrix(labels: list, predictions: list)->bool:
     p_indexs = np.argsort(predictions)
     return np.array_equal(l_indexs, p_indexs)
 
-# def cindex_loss(pred, y):
-#     n = 0
-#     loss = 0.0
-#     if y.dim() == 0:
-#         dim = 1
-#     else:
-#         dim = pred.shape[0]
-#     # print(pred)
-#     for i in range(dim):
-#         for j in range(dim):
-#             if y[i] < y[j]:
-#                 diff = pred[j] - pred[i]
-#                 loss += torch.sigmoid(diff)
-#                 n += 1
-#     return loss if n > 0 else torch.tensor(0.0, device=device)
 
 def cindex_loss_vectorized(pred, y):
     pred = pred.view(-1)
@@ -233,14 +199,11 @@ def train(loader):
     for data in loader:
         # print(f"\tBatch: {index_batch + 1}")
         index_batch += 1
-        # Get the inputs and labels
-        # https://github.com/pyg-team/pytorch_geometric/issues/1702
-        # data = T.ToSparseTensor()(data)
         if torch.isnan(data.x).any() or torch.isnan(data.y).any():
             raise Exception("NaN detected in inputs!")
         
+        # Get the inputs and labels
         inputs, labels = data.x.to(device), data.y.to(device)
-        # edge_adj, batch = data.adj_t.to(device), data.batch.to(device)
         edge_index, batch = data.edge_index.to(device), data.batch.to(device)
         edge_attr = data.edge_attr.to(device)
 
@@ -250,35 +213,21 @@ def train(loader):
         if (edge_index >= num_nodes).any() or (edge_index < 0).any():
             raise Exception("Invalid edge_index detected!")
 
-        # print(f"Inputs:\t{inputs}")
-        # print(f"Inputs size:\t{inputs.size()}")
-        # print(f"Labels:\t{labels}")
-        # print(f"Batch:\t{batch}")
-        # print(f"Batch size:\t{batch.size()}")
-
         optimizer.zero_grad()
 
         # Forward
-        # outputs = model(inputs, edge_index, batch)
         outputs = model(inputs, edge_index, edge_attr, batch)
-        # if isinstance(outputs, list):
-        #     outputs = outputs[0] #check the model gets back only one output
-        # print(f"Output: {outputs}")
+
         if torch.isnan(outputs).any():
             raise Exception("NaN detected in model output!")
 
         # Compute the loss
-        # print(f"Labels: {labels}")
         loss = cindex_loss_vectorized(outputs, labels) * hyperparameter['alpha_loss'] + loss_mse(outputs, labels)
 
         # print(f"Loss: {loss}")
         
         # Backward & optimize
         loss.backward()
-        for name, param in model.named_parameters():
-            if param.grad is None:
-                pass
-                # raise Exception(f"{name} has no gradient!")
         for name, param in model.named_parameters():
             if param.grad is not None and (torch.isnan(param.grad).any() or torch.isinf(param.grad).any()):
                 raise Exception(f"NaN or Inf detected in gradients: {name}")
@@ -297,36 +246,20 @@ def test(loader):
     with torch.no_grad():
         for data in loader:
             # get the inputs and labels
-            # data = T.ToSparseTensor()(data)
             inputs, labels = data.x.to(device), data.y.to(device)
-            # edge_adj, batch = data.adj_t.to(device), data.batch.to(device)
             edge_index, batch = data.edge_index.to(device), data.batch.to(device)
             edge_attr = data.edge_attr.to(device)
 
-            # print(f"Inputs:\t{inputs}")
-            # print(f"Inputs size:\t{inputs.size()}")
-            # print(f"Labels:\t{labels}")
-            # print(f"Batch:\t{batch}")
-            # print(f"Batch size:\t{batch.size()}")
-
             # forward
             outputs = model(inputs, edge_index, edge_attr, batch)
-            # if isinstance(outputs, list):
-            #     outputs = outputs[0] #check the model gets back only one output
-
-            # print(f"Output: {outputs}")
 
             # compute the loss
             loss = cindex_loss_vectorized(outputs, labels) * hyperparameter['alpha_loss'] + loss_mse(outputs, labels)
             losses.append(loss.item())
             
-            # print(f"Loss: {loss}")
 
             # collect labels & prediction
             prediction = outputs
-            # print(prediction)
-            # print(prediction[0])
-            # print(prediction[1])
             all_label.extend(labels)
             all_pred.extend(prediction)
 
@@ -336,7 +269,6 @@ def test(loader):
         test_loss = sum(losses)/len(losses)
         all_label = torch.stack(all_label, dim=0)
         all_pred = torch.stack(all_pred, dim=0)
-        # test_acc = accuracy_score(all_label.squeeze().cpu().data.squeeze().numpy(), all_pred.cpu().data.squeeze().numpy())
         test_acc = range_accuracy(all_label.cpu().tolist(), all_pred.squeeze().cpu().tolist())
         test_c_index = sum(c_index_result) / len(c_index_result)
 
@@ -348,8 +280,6 @@ for epoch_index in range(s_epoch, hyperparameter['epochs']):
     sm.print(f"\nEpoch {epoch_index + 1}")
     train(train_loader)
     sm.print("\tAfter train")
-    # sm.print(f"\t\tFree memory usage:      {torch.cuda.mem_get_info()[0]}")
-    # sm.print(f"\t\tTotal available memory: {torch.cuda.mem_get_info()[1]}")
     train_loss, train_acc, train_c_index = test(train_loader)
     test_loss, test_acc, test_c_index = test(test_loader)
 
