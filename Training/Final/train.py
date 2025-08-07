@@ -69,21 +69,6 @@ if LOAD_DATASET:
     train_loader = torch.load(f"{DATASET_FROM_FOLDER_PATH}/datasets/train.pkl", weights_only=False)
     test_loader = torch.load(f"{DATASET_FROM_FOLDER_PATH}/datasets/test.pkl", weights_only=False)
 
-    # first_batch = next(iter(train_loader))
-
-    # # If it's a batch of graphs, take the first one only
-    # if hasattr(first_batch, 'num_graphs') and first_batch.num_graphs > 1:
-    #     data = first_batch.to_data_list()[0]
-    # else:
-    #     data = first_batch
-
-    # # Repeat it `repeat` times
-    # repeated_data = [data.clone() for _ in range(100)]
-
-    # # Create new DataLoader with just this repeated graph
-    # # DataLoader(repeated_data, batch_size=batch_size, shuffle=True)
-    # train_loader = DataLoader(repeated_data, batch_size=hyperparameter['batch_size'], shuffle=True, num_workers=hyperparameter['num_workers'], pin_memory=True)
-
 else:
     # https://pytorch-geometric.readthedocs.io/en/2.5.3/notes/create_dataset.html
     lpd = LPDEdgeKnowledgeBased(PATH_GTF_FILE, PATH_FOLDER_GENE, PATH_FOLDER_METHYLATION,
@@ -93,12 +78,6 @@ else:
                                 hyperparameter['feature_to_save'], hyperparameter['num_nodes'],
                                 sm)
     data_train_list, data_test_list = lpd.get_data()  # List of Data.
-    # Inside of data we need to specify which y we have.
-
-    # Transform in sparse tensor.
-    # https://github.com/pyg-team/pytorch_geometric/issues/1702
-    # data_train_list = [T.ToSparseTensor()(data) for data in data_train_list]
-    # data_test_list = [T.ToSparseTensor()(data) for data in data_test_list]
 
     train_loader = DataLoader(data_train_list, batch_size=hyperparameter['batch_size'], shuffle=True, num_workers=hyperparameter['num_workers'], pin_memory=True)
     test_loader = DataLoader(data_test_list, batch_size=hyperparameter['batch_size'], shuffle=False, num_workers=hyperparameter['num_workers'], pin_memory=True)
@@ -115,7 +94,7 @@ for k in hyperparameter['feature_to_save'].keys():
 
 sm.print(f"\nNumber of input feature: {node_feature_number}")
     
-#model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
+# model = simple_GCN(node_feature_number, hyperparameter['num_classes'])
 # model = small_GCN(node_feature_number, 750, hyperparameter['num_classes'])
 # model = EdgeAttrGNN(node_feature_number, 128, hyperparameter['num_classes'])
 # model = EdgeAttrGNNLight(node_feature_number, 128, hyperparameter['num_classes'])
@@ -161,16 +140,12 @@ def train(loader):
     model.train()
     index_batch = 0
     for data in loader:
-        # print(f"\tBatch: {index_batch + 1}")
         index_batch += 1
         # Get the inputs and labels
-        # https://github.com/pyg-team/pytorch_geometric/issues/1702
-        # data = T.ToSparseTensor()(data)
         if torch.isnan(data.x).any() or torch.isnan(data.y).any():
             raise Exception("NaN detected in inputs!")
         
         inputs, labels = data.x.to(device), data.y.to(device)
-        # edge_adj, batch = data.adj_t.to(device), data.batch.to(device)
         edge_index, batch = data.edge_index.to(device), data.batch.to(device)
         edge_attr = data.edge_attr.to(device)
 
@@ -180,28 +155,15 @@ def train(loader):
         if (edge_index >= num_nodes).any() or (edge_index < 0).any():
             raise Exception("Invalid edge_index detected!")
 
-        # print(f"Inputs:\t{inputs}")
-        # print(f"Inputs size:\t{inputs.size()}")
-        # print(f"Labels:\t{labels}")
-        # print(f"Batch:\t{batch}")
-        # print(f"Batch size:\t{batch.size()}")
-
         optimizer.zero_grad()
 
         # Forward
-        # outputs = model(inputs, edge_index, batch)
         outputs = model(inputs, edge_index, edge_attr, batch)
-        # if isinstance(outputs, list):
-        #     outputs = outputs[0] #check the model gets back only one output
-        # print(f"Output: {outputs}")
         if torch.isnan(outputs).any():
             raise Exception("NaN detected in model output!")
 
         # Compute the loss
-        # print(f"Labels: {labels}")
         loss = criterion(outputs, labels)
-
-        # print(f"Loss: {loss}")
         
         # Backward & optimize
         loss.backward()
@@ -211,9 +173,7 @@ def train(loader):
         for name, param in model.named_parameters():
             if param.grad is not None and (torch.isnan(param.grad).any() or torch.isinf(param.grad).any()):
                 raise Exception(f"NaN or Inf detected in gradients: {name}")
-        # torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=0.1)
         optimizer.step()
-        # raise Exception("Stop")
     
 
 def test(loader):
@@ -225,36 +185,19 @@ def test(loader):
     with torch.no_grad():
         for data in loader:
             # get the inputs and labels
-            # data = T.ToSparseTensor()(data)
             inputs, labels = data.x.to(device), data.y.to(device)
-            # edge_adj, batch = data.adj_t.to(device), data.batch.to(device)
             edge_index, batch = data.edge_index.to(device), data.batch.to(device)
             edge_attr = data.edge_attr.to(device)
 
-            # print(f"Inputs:\t{inputs}")
-            # print(f"Inputs size:\t{inputs.size()}")
-            # print(f"Labels:\t{labels}")
-            # print(f"Batch:\t{batch}")
-            # print(f"Batch size:\t{batch.size()}")
-
             # forward
             outputs = model(inputs, edge_index, edge_attr, batch)
-            # if isinstance(outputs, list):
-            #     outputs = outputs[0] #check the model gets back only one output
-
-            # print(f"Output: {outputs}")
 
             # compute the loss
             loss = criterion(outputs, labels)
             losses.append(loss.item())
-            
-            # print(f"Loss: {loss}")
 
             # collect labels & prediction
             prediction = torch.argmax(outputs, 1)
-            # print(prediction)
-            # print(prediction[0])
-            # print(prediction[1])
             all_label.extend(labels.squeeze())
             all_pred.extend(prediction)
 
