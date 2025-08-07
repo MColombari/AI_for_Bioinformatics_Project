@@ -7,6 +7,7 @@ from sklearn.metrics import accuracy_score
 import yaml
 import numpy as np
 import sys
+from batch_loader import RandomBatchSampler, DeterministicDistantBatchSampler
 
 # So we have a structure of folder where we have a main folder containig all the test for
 # each subgroup (Methylation, Gene, Copy number), and in each of these folder we have
@@ -70,6 +71,7 @@ print("Start code")
 
 sm = SM(TEST_FOLDER_PATH, TEST_NAME)
 
+
 if LOAD_DATASET:
     train_loader = torch.load(f"{DATASET_FROM_FOLDER_PATH}/datasets/train.pkl", weights_only=False)
     test_loader = torch.load(f"{DATASET_FROM_FOLDER_PATH}/datasets/test.pkl", weights_only=False)
@@ -106,8 +108,12 @@ else:
     # data_test_list = [T.ToSparseTensor()(data) for data in data_test_list]
 
     # Why pin memory set to true? Answer -> https://discuss.pytorch.org/t/when-to-set-pin-memory-to-true/19723
-    train_loader = DataLoader(data_train_list, batch_size=hyperparameter['batch_size'], shuffle=True, num_workers=hyperparameter['num_workers'], pin_memory=True)
-    test_loader = DataLoader(data_test_list, batch_size=hyperparameter['batch_size'], shuffle=True, num_workers=hyperparameter['num_workers'], pin_memory=True)
+    # batch_sampler_train = DeterministicDistantBatchSampler(data_train_list, hyperparameter['batch_size'])
+    batch_sampler_train = RandomBatchSampler(hyperparameter['seed'], data_train_list, hyperparameter['batch_size'], 600)
+    train_loader = DataLoader(data_train_list, batch_sampler=batch_sampler_train)
+    # batch_sampler_test = DeterministicDistantBatchSampler(data_test_list, hyperparameter['batch_size'])
+    batch_sampler_test = RandomBatchSampler(hyperparameter['seed'], data_test_list, hyperparameter['batch_size'], 600)
+    test_loader = DataLoader(data_test_list, batch_sampler=batch_sampler_test)
 
     if SAVE_DATASET:
         sm.save_dataset(train_loader, test_loader)
