@@ -4,7 +4,7 @@ Generic:
 
 Conditions:
   Start_from_checkpoint: False
-  Load_dataset: True
+  Load_dataset: False
   Save_dataset: True
   Dont_train: False
 
@@ -37,7 +37,7 @@ hyperparameter:
   seed: 123456
   num_workers: 6
   lr: 0.001
-  alpha_loss: 0.5
+  alpha_loss: 0.1
   save_model_period: 100 # How many epoch to wait before save the next model.
   feature_to_save:
     gene: ['unstranded', 'tpm_unstranded', 'fpkm_unstranded', 'fpkm_uq_unstranded']
