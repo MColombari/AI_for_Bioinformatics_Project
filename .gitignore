@@ -11,8 +11,6 @@ Preprocessing/Final/Gene_sbatch/error_test.log
 Preprocessing/Final/Gene_sbatch/output_test.log
 Models_GitHub_davide/__pycache__
 Models_GitHub_davide/datasets/__pycache__
-Models_GitHub_davide/datasets/COPY_NUMBER
-Models_GitHub_davide/datasets/MUTAG
 Models_GitHub_davide/layers/__pycache__
 Models_GitHub_davide/models/__pycache__
 Models_GitHub_davide/readouts/__pycache__
@@ -89,3 +87,13 @@ Preprocessing/Final/Gene/Gene_sbatch/output_divide_dataset_regression.log
 Training/Final_Regression/run_output/error_train.log
 Training/Final_Regression/run_output/output_train.log
 Training/Final_Regression/__pycache__/
+
+graph-neural-networks-for-graph-classification-master/datasets
+graph-neural-networks-for-graph-classification-master/__pycache__
+graph-neural-networks-for-graph-classification-master/run_files
+graph-neural-networks-for-graph-classification-master/run_output
+graph-neural-networks-for-graph-classification-master/save_model
+graph-neural-networks-for-graph-classification-master/test_result
+graph-neural-networks-for-graph-classification-master/models/__pycache__
+graph-neural-networks-for-graph-classification-master/layers/__pycache__
+graph-neural-networks-for-graph-classification-master/readouts/__pycache__
