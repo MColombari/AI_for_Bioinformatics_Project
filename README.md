@@ -14,4 +14,5 @@ More information about this project and its results are available in the followi
 - **GNN_Classification**: External repository from [link](https://github.com/bknyaz/graph_nn).
 - **Preprocessing**: preprocessing of input data and creation of relevant files used during training, in this folder we tested different methods to apply the preproces, a final version for the preprocessing can be observed in the "Training" folder.
 - **Training**: actual training.
+- _requirements.txt_: library requirements to run the repository (some might not be necessary, since they may have been used for testing some functionality not used in training).
 

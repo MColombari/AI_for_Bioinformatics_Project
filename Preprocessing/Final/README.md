@@ -1,6 +1,5 @@
 ### Repository structure
 
-- **CNV_preprocessing**: Preprocessing of copy number.
 - **Methylation**: Preprocessing of Methylation.
 - **Gene**: Preprocessing of Gene, and script to generate essential files for the training, more information is provided in the README file inside.
 - **_preprocessing.ipynb_**: jupyter notebook used to create essential json file for the Train, such as:
