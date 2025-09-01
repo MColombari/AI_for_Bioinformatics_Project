@@ -28,6 +28,41 @@ class RandomBatchSampler(BatchSampler):
     def __len__(self):
         return len(self.dataset) // self.batch_size
 
+class RandomBatchSamplerFix(BatchSampler):
+    def __init__(self, seed, dataset, batch_size, threshold):
+        random.seed(seed)
+        self.dataset = dataset
+        self.batch_size = batch_size
+        self.threshold = threshold
+
+        self.labels = [int(dataset[i].y) for i in range(len(dataset))]
+        self.indices = list(range(len(self.labels)))
+
+        self.batches = self._create_batches()
+
+    def _create_batches(self):
+        indices = self.indices.copy()
+        random.shuffle(indices)
+        batches = []
+        batch = []
+        for idx in indices:
+            label = self.labels[idx]
+            # True for batch = [].
+            if all(abs(label - self.labels[other]) >= self.threshold for other in batch):
+                batch.append(idx)
+                if len(batch) == self.batch_size:
+                    batches.append(batch)
+                    batch = []
+        
+        print(len(batches))
+        return batches
+    
+    def __iter__(self):
+        return iter(self.batches)
+
+    def __len__(self):
+        return len(self.dataset) // self.batch_size
+
 
 class DeterministicDistantBatchSampler(BatchSampler):
     # The drowback of this approach is that is we are not sure to use all the data, and the way

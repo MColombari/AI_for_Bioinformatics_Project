@@ -7,7 +7,7 @@ from sklearn.metrics import accuracy_score
 import yaml
 import numpy as np
 import sys
-from batch_loader import RandomBatchSampler, DeterministicDistantBatchSampler
+from batch_loader import RandomBatchSampler, DeterministicDistantBatchSampler, RandomBatchSamplerFix
 
 #   Data Parameter loaded from YAML file.
 
@@ -83,18 +83,16 @@ else:
     data_train_list, data_test_list = lpd.get_data()  # List of Data.
     # Inside of data we need to specify which y we have.
 
-    # Transform in sparse tensor.
-    # https://github.com/pyg-team/pytorch_geometric/issues/1702
-    # data_train_list = [T.ToSparseTensor()(data) for data in data_train_list]
-    # data_test_list = [T.ToSparseTensor()(data) for data in data_test_list]
-
     # Why pin memory set to true? Answer -> https://discuss.pytorch.org/t/when-to-set-pin-memory-to-true/19723
     # batch_sampler_train = DeterministicDistantBatchSampler(data_train_list, hyperparameter['batch_size'])
-    batch_sampler_train = RandomBatchSampler(hyperparameter['seed'], data_train_list, hyperparameter['batch_size'], 600)
+    batch_sampler_train = RandomBatchSamplerFix(hyperparameter['seed'], data_train_list, hyperparameter['batch_size'], 100)
     train_loader = DataLoader(data_train_list, batch_sampler=batch_sampler_train)
+    # train_loader = DataLoader(data_train_list, batch_size=hyperparameter['batch_size'], shuffle=True, num_workers=hyperparameter['num_workers'], pin_memory=True)
     # batch_sampler_test = DeterministicDistantBatchSampler(data_test_list, hyperparameter['batch_size'])
-    batch_sampler_test = RandomBatchSampler(hyperparameter['seed'], data_test_list, hyperparameter['batch_size'], 600)
+    # batch_sampler_test = RandomBatchSampler(hyperparameter['seed'], data_test_list, hyperparameter['batch_size'], 600)
+    batch_sampler_test = RandomBatchSamplerFix(hyperparameter['seed'], data_test_list, hyperparameter['batch_size'], 100)
     test_loader = DataLoader(data_test_list, batch_sampler=batch_sampler_test)
+    # test_loader = DataLoader(data_test_list, batch_size=hyperparameter['batch_size'], shuffle=True, num_workers=hyperparameter['num_workers'], pin_memory=True)
 
     if SAVE_DATASET:
         sm.save_dataset(train_loader, test_loader)
