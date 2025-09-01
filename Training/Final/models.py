@@ -83,9 +83,9 @@ class EdgeAttrGAT(torch.nn.Module):
 
         # Accumulate edge_attr_emb for each source node
         edge_attr_to_node = torch.zeros(x.size(0), edge_attr_emb.size(1), device=x.device)
-        edge_attr_to_node.index_add_(0, row, edge_attr_emb)
+        edge_attr_to_node.index_add_(0, row, edge_attr_emb) # aggregate (sum) the embeddings of all outgoing edges for each node [num_nodes, hidden_channels].
 
-        x = torch.cat([x, edge_attr_to_node], dim=1)
+        x = torch.cat([x, edge_attr_to_node], dim=1) # num_nodes, input_feature + hidden_channels].
 
         for conv in self.convs:
             x = conv(x, edge_index)
