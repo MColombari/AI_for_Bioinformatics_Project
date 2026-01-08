@@ -1,4 +1,4 @@
-# AI_for_Bioinformatics_Project
+# AI for Bioinformatics Project
 
 ### Objective
 This repository explores the correlation between gene expression, methylation and copy number with respect to the OS (Overall Survival) of a cancer patient, more specifically an ovarian cancer patient.
