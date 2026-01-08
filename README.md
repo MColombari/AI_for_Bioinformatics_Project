@@ -7,7 +7,7 @@ This repository explores the correlation between gene expression, methylation an
 To explore this we use different types of Deep Learning model, and we represent the data with a graph structure.
 
 
-More information about this project and its results are available in the following [paper].
+More information about this project and its results are available in the following [paper](FinalReport.pdf).
 
 ### Repository structure
 - **GGNN**: External repository from the following paper, [A Gemetric informed Graph neural network based model for Cancer survival prediction](https://doi.org/10.1016/j.compbiomed.2023.107117).
