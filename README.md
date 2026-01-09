@@ -1,4 +1,4 @@
-# AI for Bioinformatics Project
+# Multi-GNN for ovarian cancer survival prediction
 
 ### Objective
 This repository explores the correlation between gene expression, methylation and copy number with respect to the OS (Overall Survival) of a cancer patient, more specifically an ovarian cancer patient.
